@@ -41,3 +41,6 @@ feature=功能、capability=功能包、driver=驱动程序、provisioning=预�
 但本地化提交中该文件被排除，导致 CI 中 `packages/` 为空、`CheckMissingDlls.ps1` 复制
 `System.Net.Http` 等 DLL 时失败。已将 CI 改为在 `create-nightly-installer.yaml` 中通过
 `nuget restore packages.config` 直接从 NuGet 还原依赖，构建不再依赖 LFS 压缩包，可复现且更标准。
+
+> 构建诊断：若 `Generate installer` 步骤失败，工作流会把 `CheckMissingDlls.ps1` 的异常与
+> `msbuild` 的错误行以 `::error::` 注解输出，便于定位是依赖缺失还是 VB 编译错误。
