@@ -34,3 +34,10 @@ feature=功能、capability=功能包、driver=驱动程序、provisioning=预�
   可在各面板语言例程顶部仿照 `ChangeLangs` 增加 `CHS → 6` 重映射以补全。
 - 仓库根目录 `lang_work/` 下保留翻译字典（`translations.json`）与抽取/注入脚本，便于后续维护与扩展其他语言。
 - 构建（CI）会编译本地化后的代码，验证 `Case 6` 注入未破坏原有结构。
+
+## CI 构建依赖的修复
+
+原 `nugetpkgprep.bat` 依赖仓库内的 `pkgsrc.zip`（LFS 大文件）来填充 `packages/` 目录，
+但本地化提交中该文件被排除，导致 CI 中 `packages/` 为空、`CheckMissingDlls.ps1` 复制
+`System.Net.Http` 等 DLL 时失败。已将 CI 改为在 `create-nightly-installer.yaml` 中通过
+`nuget restore packages.config` 直接从 NuGet 还原依赖，构建不再依赖 LFS 压缩包，可复现且更标准。
