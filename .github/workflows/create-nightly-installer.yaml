@@ -24,8 +24,12 @@ jobs:
         submodules: 'true'
     - name: Set up MSBuild
       uses: microsoft/Setup-MSBuild@v2
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v2
     - name: Prepare NuGet packages
-      run: .\nugetpkgprep.bat
+      run: |
+        .\nugetpkgprep.bat
+        nuget restore packages.config -PackagesDirectory packages
       continue-on-error: false
     - name: Generate installer
       run: |
