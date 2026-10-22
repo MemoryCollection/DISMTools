@@ -60,6 +60,10 @@ VB 编译器（Roslyn）把 **U+201C/U+201D（全角引号）也视为字符串�
 ## 构建结果
 
 `Create Nightly Installer` 的 `build-runspace` 作业已在 GitHub Actions 上**编译成功**，
-证明中文 `Case 6` 注入未破坏 VB 语法结构。`upload-installer` 作业仅母仓库执行（需要
-`SSH_DEPLOY_KEY` / `API_TOKEN_GITHUB` 才能推送 installer 到 `dt-nightly-installers`），
-fork 中会自动跳过。
+证明中文 `Case 6` 注入未破坏 VB 语法结构。
+
+`upload-installer` 作业已改为**发布到本仓库**：使用仓库自带的 `GITHUB_TOKEN`
+（`permissions: contents: write`）创建/覆盖 `nightly-<分支名>` 的 GitHub Release 并附上
+`dt_setup.exe`，不再依赖外部仓库 `dt-nightly-installers` 与 `SSH_DEPLOY_KEY`/`API_TOKEN_GITHUB`。
+若仓库的 Actions 工作流权限为只读，需在 Settings → Actions → General → Workflow permissions
+中改为 "Read and write permissions"。

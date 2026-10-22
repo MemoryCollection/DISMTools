@@ -61,34 +61,28 @@ jobs:
   upload-installer:
     runs-on: ubuntu-latest
     needs: build-runspace
-    # 仅母仓库具备发布 installer 的密钥（SSH_DEPLOY_KEY / API_TOKEN_GITHUB），
-    # fork 中跳过该作业，避免因缺少密钥导致整条流水线失败。
-    if: github.repository == 'CodingWonders/DISMTools'
+    # 构建产物直接发布到当前仓库的 GitHub Release（使用仓库自带 GITHUB_TOKEN，
+    # 不依赖任何外部仓库或部署密钥）。
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v4
       - name: Grab Artifacts
         uses: actions/download-artifact@v4
         with:
           name: build-result
           path: ./downloaded_artifacts
-      - name: Prepare directory
-        run: |
-          mkdir -p "./${{ GITHUB.REF_NAME }}"
-          mv -f "./downloaded_artifacts/dt_setup.exe" "./${{ GITHUB.REF_NAME }}/dt_setup.exe"
-          rm -rf "./downloaded_artifacts"
-      - name: Fix OpenSSL Issues
-        run: |
-          sudo apt remove openssh-server openssh-client
-          sudo apt install openssh-server openssh-client
-      - name: Upload Installer
+      - name: Publish installer to this repository
         env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        uses: cpina/github-action-push-to-another-repository@main
-        with:
-          source-directory: '${{ GITHUB.REF_NAME }}'
-          destination-github-username: 'CodingWonders'
-          destination-repository-name: 'dt-nightly-installers'
-          user-email: '101426328+CodingWonders@users.noreply.github.com'
-          target-directory: '${{ GITHUB.REF_NAME }}'
-          target-branch: main
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: nightly-${{ github.ref_name }}
+        run: |
+          set -e
+          ls -l ./downloaded_artifacts
+          # 覆盖发布：先删除同名 release 与 tag（不存在时忽略）
+          gh release delete "$TAG" --repo "${{ github.repository }}" --yes --cleanup-tag || true
+          gh release create "$TAG" ./downloaded_artifacts/dt_setup.exe \
+            --repo "${{ github.repository }}" \
+            --title "Nightly build (${{ github.ref_name }})" \
+            --notes "自动构建产物 | 分支: ${{ github.ref_name }} | 提交: ${{ github.sha }}" \
+            --prerelease
+          echo "::notice::Installer 已发布到 https://github.com/${{ github.repository }}/releases/tag/$TAG"
