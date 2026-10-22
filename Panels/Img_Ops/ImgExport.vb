@@ -1,0 +1,676 @@
+﻿Imports System.Windows.Forms
+Imports Microsoft.Dism
+Imports System.IO
+Imports System.Threading
+Imports Microsoft.VisualBasic.ControlChars
+
+Public Class ImgExport
+
+    Dim CompressionTypeStrings() As String = New String(3) {"No compression will be applied to the destination image.", "Fast compression will be applied. This is the default option.", "Maximum compression will be applied. This will take the most time, but will result in a smaller image.", "The compression level for push-button reset images will be applied. This requires exporting the image as an ESD file."}
+    Dim originalFileFilters As String = "WIM files|*.wim|ESD files|*.esd"
+
+    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+        DynaLog.LogMessage("Disposing of progress panel if not disposed of previously...")
+        If Not ProgressPanel.IsDisposed Then ProgressPanel.Dispose()
+        DynaLog.LogMessage("Checking source image...")
+        If TextBox1.Text <> "" And File.Exists(TextBox1.Text) Then
+            DynaLog.LogMessage("A source image has been specified and exists in the file system.")
+            DynaLog.LogMessage("Extension of source image file: " & Path.GetExtension(TextBox1.Text))
+            If Path.GetExtension(TextBox1.Text).EndsWith("swm", StringComparison.OrdinalIgnoreCase) Then
+                DynaLog.LogMessage("A split WIM (SWM) file has been detected. Tweaking export source...")
+                ProgressPanel.imgExportSourceImage = TextBox1.Text.Replace(Path.GetFileNameWithoutExtension(TextBox1.Text), _
+                                                                           Path.GetFileNameWithoutExtension(TextBox1.Text) & "*")
+            Else
+                ProgressPanel.imgExportSourceImage = TextBox1.Text
+            End If
+        Else
+            DynaLog.LogMessage("Either no source image has been specified or it does not exist in the file system.")
+            Dim msg As String = ""
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            msg = "Please specify a source image file to export and try again"
+                        Case "ESN"
+                            msg = "Por favor, especifique un archivo de imagen de origen e inténtelo de nuevo"
+                        Case "FRA"
+                            msg = "Veuillez indiquer un fichier d'image source à exporter et réessayez."
+                        Case "PTB", "PTG"
+                            msg = "Especifique um ficheiro de imagem de origem para exportar e tente novamente"
+                        Case "ITA"
+                            msg = "Specificare un file immagine di origine da esportare e riprovare."
+                    End Select
+                Case 1
+                    msg = "Please specify a source image file to export and try again"
+                Case 2
+                    msg = "Por favor, especifique un archivo de imagen de origen e inténtelo de nuevo"
+                Case 3
+                    msg = "Veuillez indiquer un fichier d'image source à exporter et réessayez."
+                Case 4
+                    msg = "Especifique um ficheiro de imagem de origem para exportar e tente novamente"
+                Case 5
+                    msg = "Specificare un file immagine di origine da esportare e riprovare."
+            End Select
+            MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+            Exit Sub
+        End If
+        If TextBox2.Text <> "" Then
+            DynaLog.LogMessage("A destination image has been specified.")
+            ProgressPanel.imgExportDestinationImage = TextBox2.Text
+        Else
+            DynaLog.LogMessage("A destination image has not been specified.")
+            Dim msg As String = ""
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            msg = "Please specify a destination image file and try again"
+                        Case "ESN"
+                            msg = "Por favor, especifique un archivo de imagen de destino e intente de nuevo"
+                        Case "FRA"
+                            msg = "Veuillez spécifier un fichier d'image de destination et réessayer"
+                        Case "PTB", "PTG"
+                            msg = "Especifique um ficheiro de imagem de destino e tente novamente"
+                        Case "ITA"
+                            msg = "Specificare un file immagine di destinazione e riprovare"
+                    End Select
+                Case 1
+                    msg = "Please specify a destination image file and try again"
+                Case 2
+                    msg = "Por favor, especifique un archivo de imagen de destino e intente de nuevo"
+                Case 3
+                    msg = "Veuillez spécifier un fichier d'image de destination et réessayer"
+                Case 4
+                    msg = "Especifique um ficheiro de imagem de destino e tente novamente"
+                Case 5
+                    msg = "Specificare un file immagine di destinazione e riprovare"
+            End Select
+            MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+            Exit Sub
+        End If
+        ProgressPanel.imgExportSourceIndex = NumericUpDown1.Value
+        ProgressPanel.imgExportDestinationUseCustomName = CheckBox2.Checked
+        If CheckBox2.Checked Then
+            DynaLog.LogMessage("A custom name is expected to be used for the destination image. Checking name...")
+            If TextBox3.Text <> "" Then
+                ProgressPanel.imgExportDestinationName = TextBox3.Text
+            Else
+                DynaLog.LogMessage("No name has been specified. Falling back to using the default name of the source Windows image to export...")
+                ProgressPanel.imgExportDestinationName = ""
+                ProgressPanel.imgExportDestinationUseCustomName = False
+            End If
+        End If
+        ProgressPanel.imgExportCompressType = ComboBox1.SelectedIndex
+        ProgressPanel.imgExportMarkBootable = CheckBox3.Checked
+        ProgressPanel.imgExportUseWimBoot = CheckBox4.Checked
+        ProgressPanel.imgExportCheckIntegrity = CheckBox5.Checked
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
+        ProgressPanel.OperationNum = 10
+        Visible = False
+        ProgressPanel.ShowDialog(Me)
+        Me.Close()
+    End Sub
+
+    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.Close()
+    End Sub
+
+    Private Sub SaveFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SaveFileDialog1.FileOk
+        DynaLog.LogMessage("Export target: " & Quote & SaveFileDialog1.FileName & Quote)
+        TextBox2.Text = SaveFileDialog1.FileName
+    End Sub
+
+    Private Sub OpenFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
+        DynaLog.LogMessage("Source image: " & Quote & OpenFileDialog1.FileName & Quote)
+        TextBox1.Text = OpenFileDialog1.FileName
+    End Sub
+
+    Private Sub ImgExport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = "Export an image"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Destination image file:"
+                        Label3.Text = "Source image file:"
+                        Label4.Text = "Naming pattern:"
+                        Label5.Text = "Destination image compression type:"
+                        Label7.Text = "Source image index:"
+                        CheckBox1.Text = "Reference SWM files"
+                        CheckBox2.Text = "Specify a custom name for the destination image"
+                        CheckBox3.Text = "Make image bootable (Windows PE only)"
+                        CheckBox4.Text = "Append image with WIMBoot configuration"
+                        CheckBox5.Text = "Check integrity before exporting image"
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Cancel"
+                        Button1.Text = "Browse..."
+                        Button2.Text = "Browse..."
+                        Button4.Text = "Use name of the image"
+                        Button5.Text = "Scan pattern"
+                        GroupBox1.Text = "Sources and destinations"
+                        GroupBox2.Text = "Options"
+                        OpenFileDialog1.Title = "Specify a source image file to export"
+                        ListView1.Columns(0).Text = "Index"
+                        ListView1.Columns(1).Text = "Image name"
+                        ListView1.Columns(2).Text = "Image description"
+                        ListView1.Columns(3).Text = "Image version"
+                        CompressionTypeStrings(0) = "No compression will be applied to the destination image."
+                        CompressionTypeStrings(1) = "Fast compression will be applied. This is the default option."
+                        CompressionTypeStrings(2) = "Maximum compression will be applied. This will take the most time, but will result in a smaller image."
+                        CompressionTypeStrings(3) = "The compression level for push-button reset images will be applied. This requires exporting the image as an ESD file."
+                    Case "ESN"
+                        Text = "Exportar una imagen"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Archivo de imagen de destino:"
+                        Label3.Text = "Archivo de imagen de origen:"
+                        Label4.Text = "Patrón de nomenclatura:"
+                        Label5.Text = "Tipo de compresión de la imagen de destino:"
+                        Label7.Text = "Índice de imagen de origen:"
+                        CheckBox1.Text = "Hacer referencia a archivos SWM"
+                        CheckBox2.Text = "Especificar un nombre personalizado para la imagen de destino"
+                        CheckBox3.Text = "Hacer imagen arrancable (solo Windows PE)"
+                        CheckBox4.Text = "Exportar la imagen con configuración WIMBoot"
+                        CheckBox5.Text = "Comprobar integridad antes de exportar la imagen"
+                        OK_Button.Text = "Aceptar"
+                        Cancel_Button.Text = "Cancelar"
+                        Button1.Text = "Examinar..."
+                        Button2.Text = "Examinar..."
+                        Button4.Text = "Usar nombre de imagen"
+                        Button5.Text = "Escanear patrón"
+                        GroupBox1.Text = "Orígenes y destinos"
+                        GroupBox2.Text = "Opciones"
+                        OpenFileDialog1.Title = "Especifique un archivo de imagen de origen a exportar"
+                        ListView1.Columns(0).Text = "Índice"
+                        ListView1.Columns(1).Text = "Nombre de imagen"
+                        ListView1.Columns(2).Text = "Descripción de imagen"
+                        ListView1.Columns(3).Text = "Versión de imagen"
+                        CompressionTypeStrings(0) = "No se aplicará compresión a la imagen de destino."
+                        CompressionTypeStrings(1) = "Se aplicará compresión rápida. Esta es la opción predeterminada."
+                        CompressionTypeStrings(2) = "Se aplicará compresión máxima. Esto tardará más tiempo, pero resultará en una imagen más pequeña."
+                        CompressionTypeStrings(3) = "Se aplicará el nivel de compresión de imágenes de restablecimiento por botón. Esto requiere exportar la imagen como un archivo ESD."
+                    Case "FRA"
+                        Text = "Exporter une image"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Fichier d'image de destination :"
+                        Label3.Text = "Fichier d'image source :"
+                        Label4.Text = "Modèle de dénomination :"
+                        Label5.Text = "Type de compression de l'image de destination :"
+                        Label7.Text = "Index de l'image source :"
+                        CheckBox1.Text = "Référence aux fichiers SWM"
+                        CheckBox2.Text = "Spécifier un nom personnalisé pour l'image de destination"
+                        CheckBox3.Text = "Rendre l'image démarrable (Windows PE uniquement)"
+                        CheckBox4.Text = "Ajouter la configuration WIMBoot à l'image"
+                        CheckBox5.Text = "Vérifier l'intégrité avant d'exporter l'image"
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Annuler"
+                        Button1.Text = "Parcourir..."
+                        Button2.Text = "Parcourir..."
+                        Button4.Text = "Utiliser le nom de l'image"
+                        Button5.Text = "Scanner modèle"
+                        GroupBox1.Text = "Sources et destinations"
+                        GroupBox2.Text = "Paramètres"
+                        OpenFileDialog1.Title = "Spécifier un fichier image source à exporter"
+                        ListView1.Columns(0).Text = "Index"
+                        ListView1.Columns(1).Text = "Nom de l'image"
+                        ListView1.Columns(2).Text = "Description de l'image"
+                        ListView1.Columns(3).Text = "Version de l'image"
+                        CompressionTypeStrings(0) = "Aucune compression ne sera appliquée à l'image de destination."
+                        CompressionTypeStrings(1) = "Une compression rapide sera appliquée. C'est l'option par défaut."
+                        CompressionTypeStrings(2) = "Une compression maximale sera appliquée. Cette option prend le plus de temps, mais permet d'obtenir une image plus petite."
+                        CompressionTypeStrings(3) = "Le niveau de compression des images réinitialisées par bouton-poussoir sera appliqué. Cela nécessite l'exportation de l'image en tant que fichier ESD."
+                    Case "PTB", "PTG"
+                        Text = "Exportar uma imagem"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Ficheiro de imagem de destino:"
+                        Label3.Text = "Ficheiro de imagem de origem:"
+                        Label4.Text = "Padrão de nomenclatura:"
+                        Label5.Text = "Tipo de compressão da imagem de destino:"
+                        Label7.Text = "Índice da imagem de origem:"
+                        CheckBox1.Text = "Ficheiros SWM de referência"
+                        CheckBox2.Text = "Especificar um nome personalizado para a imagem de destino"
+                        CheckBox3.Text = "Tornar a imagem de arranque (só para Windows PE)"
+                        CheckBox4.Text = "Anexar imagem com a configuração WIMBoot"
+                        CheckBox5.Text = "Verificar a integridade antes de exportar a imagem"
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Cancelar"
+                        Button1.Text = "Procurar..."
+                        Button2.Text = "Procurar..."
+                        Button4.Text = "Utilizar nome da imagem"
+                        Button5.Text = "Examinar padrão"
+                        GroupBox1.Text = "Origens e destinos"
+                        GroupBox2.Text = "Configurações"
+                        OpenFileDialog1.Title = "Especificar um ficheiro de imagem de origem para exportar"
+                        ListView1.Columns(0).Text = "Índice"
+                        ListView1.Columns(1).Text = "Nome da imagem"
+                        ListView1.Columns(2).Text = "Descrição da imagem"
+                        ListView1.Columns(3).Text = "Versão da imagem"
+                        CompressionTypeStrings(0) = "Não será aplicada qualquer compressão à imagem de destino."
+                        CompressionTypeStrings(1) = "Será aplicada uma compressão rápida. Esta é a opção predefinida."
+                        CompressionTypeStrings(2) = "Será aplicada a compressão máxima. Esta opção demora mais tempo, mas resulta numa imagem mais pequena."
+                        CompressionTypeStrings(3) = "Será aplicado o nível de compressão para imagens reiniciadas por botão de pressão. Para tal, é necessário exportar a imagem como um ficheiro ESD."
+                    Case "ITA"
+                        Text = "Esportazione di un'immagine"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "File immagine di destinazione:"
+                        Label3.Text = "File immagine di origine:"
+                        Label4.Text = "Modello di denominazione:"
+                        Label5.Text = "Tipo di compressione dell'immagine di destinazione:"
+                        Label7.Text = "Indice immagine sorgente:"
+                        CheckBox1.Text = "File SWM di riferimento"
+                        CheckBox2.Text = "Specificare un nome personalizzato per l'immagine di destinazione"
+                        CheckBox3.Text = "Rendi l'immagine avviabile (solo Windows PE)"
+                        CheckBox4.Text = "Aggiungi all'immagine la configurazione WIMBoot"
+                        CheckBox5.Text = "Controlla l'integrità prima di esportare l'immagine"
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Annullare"
+                        Button1.Text = "Sfoglia..."
+                        Button2.Text = "Sfoglia..."
+                        Button4.Text = "Usa il nome dell'immagine"
+                        Button5.Text = "Scansiona modello"
+                        GroupBox1.Text = "Sorgenti e destinazioni"
+                        GroupBox2.Text = "Opzioni"
+                        OpenFileDialog1.Title = "Specificare un file immagine di origine da esportare"
+                        ListView1.Columns(0).Text = "Indice"
+                        ListView1.Columns(1).Text = "Nome dell'immagine"
+                        ListView1.Columns(2).Text = "Descrizione dell'immagine"
+                        ListView1.Columns(3).Text = "Versione immagine"
+                        CompressionTypeStrings(0) = "All'immagine di destinazione non verrà applicata alcuna compressione"
+                        CompressionTypeStrings(1) = "Verrà applicata la compressione veloce. È l'opzione predefinita"
+                        CompressionTypeStrings(2) = "Verrà applicata la compressione massima. Questa opzione richiede più tempo, ma produce un'immagine più piccola"
+                        CompressionTypeStrings(3) = "Verrà applicato il livello di compressione per le immagini con reset a pulsante. Ciò richiede l'esportazione dell'immagine come file ESD"
+                End Select
+            Case 1
+                Text = "Export an image"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Destination image file:"
+                Label3.Text = "Source image file:"
+                Label4.Text = "Naming pattern:"
+                Label5.Text = "Destination image compression type:"
+                Label7.Text = "Source image index:"
+                CheckBox1.Text = "Reference SWM files"
+                CheckBox2.Text = "Specify a custom name for the destination image"
+                CheckBox3.Text = "Make image bootable (Windows PE only)"
+                CheckBox4.Text = "Append image with WIMBoot configuration"
+                CheckBox5.Text = "Check integrity before exporting image"
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Cancel"
+                Button1.Text = "Browse..."
+                Button2.Text = "Browse..."
+                Button4.Text = "Use name of the image"
+                Button5.Text = "Scan pattern"
+                GroupBox1.Text = "Sources and destinations"
+                GroupBox2.Text = "Options"
+                OpenFileDialog1.Title = "Specify a source image file to export"
+                ListView1.Columns(0).Text = "Index"
+                ListView1.Columns(1).Text = "Image name"
+                ListView1.Columns(2).Text = "Image description"
+                ListView1.Columns(3).Text = "Image version"
+                CompressionTypeStrings(0) = "No compression will be applied to the destination image."
+                CompressionTypeStrings(1) = "Fast compression will be applied. This is the default option."
+                CompressionTypeStrings(2) = "Maximum compression will be applied. This will take the most time, but will result in a smaller image."
+                CompressionTypeStrings(3) = "The compression level for push-button reset images will be applied. This requires exporting the image as an ESD file."
+            Case 2
+                Text = "Exportar una imagen"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Archivo de imagen de destino:"
+                Label3.Text = "Archivo de imagen de origen:"
+                Label4.Text = "Patrón de nomenclatura:"
+                Label5.Text = "Tipo de compresión de la imagen de destino:"
+                Label7.Text = "Índice de imagen de origen:"
+                CheckBox1.Text = "Hacer referencia a archivos SWM"
+                CheckBox2.Text = "Especificar un nombre personalizado para la imagen de destino"
+                CheckBox3.Text = "Hacer imagen arrancable (solo Windows PE)"
+                CheckBox4.Text = "Exportar la imagen con configuración WIMBoot"
+                CheckBox5.Text = "Comprobar integridad antes de exportar la imagen"
+                OK_Button.Text = "Aceptar"
+                Cancel_Button.Text = "Cancelar"
+                Button1.Text = "Examinar..."
+                Button2.Text = "Examinar..."
+                Button4.Text = "Usar nombre de imagen"
+                Button5.Text = "Escanear patrón"
+                GroupBox1.Text = "Orígenes y destinos"
+                GroupBox2.Text = "Opciones"
+                OpenFileDialog1.Title = "Especifique un archivo de imagen de origen a exportar"
+                ListView1.Columns(0).Text = "Índice"
+                ListView1.Columns(1).Text = "Nombre de imagen"
+                ListView1.Columns(2).Text = "Descripción de imagen"
+                ListView1.Columns(3).Text = "Versión de imagen"
+                CompressionTypeStrings(0) = "No se aplicará compresión a la imagen de destino."
+                CompressionTypeStrings(1) = "Se aplicará compresión rápida. Esta es la opción predeterminada."
+                CompressionTypeStrings(2) = "Se aplicará compresión máxima. Esto tardará más tiempo, pero resultará en una imagen más pequeña."
+                CompressionTypeStrings(3) = "Se aplicará el nivel de compresión de imágenes de restablecimiento por botón. Esto requiere exportar la imagen como un archivo ESD."
+            Case 3
+                Text = "Exporter une image"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Fichier d'image de destination :"
+                Label3.Text = "Fichier d'image source :"
+                Label4.Text = "Modèle de dénomination :"
+                Label5.Text = "Type de compression de l'image de destination :"
+                Label7.Text = "Index de l'image source :"
+                CheckBox1.Text = "Référence aux fichiers SWM"
+                CheckBox2.Text = "Spécifier un nom personnalisé pour l'image de destination"
+                CheckBox3.Text = "Rendre l'image démarrable (Windows PE uniquement)"
+                CheckBox4.Text = "Ajouter la configuration WIMBoot à l'image"
+                CheckBox5.Text = "Vérifier l'intégrité avant d'exporter l'image"
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Annuler"
+                Button1.Text = "Parcourir..."
+                Button2.Text = "Parcourir..."
+                Button4.Text = "Utiliser le nom de l'image"
+                Button5.Text = "Scanner modèle"
+                GroupBox1.Text = "Sources et destinations"
+                GroupBox2.Text = "Paramètres"
+                OpenFileDialog1.Title = "Spécifier un fichier image source à exporter"
+                ListView1.Columns(0).Text = "Index"
+                ListView1.Columns(1).Text = "Nom de l'image"
+                ListView1.Columns(2).Text = "Description de l'image"
+                ListView1.Columns(3).Text = "Version de l'image"
+                CompressionTypeStrings(0) = "Aucune compression ne sera appliquée à l'image de destination."
+                CompressionTypeStrings(1) = "Une compression rapide sera appliquée. C'est l'option par défaut."
+                CompressionTypeStrings(2) = "Une compression maximale sera appliquée. Cette option prend le plus de temps, mais permet d'obtenir une image plus petite."
+                CompressionTypeStrings(3) = "Le niveau de compression des images réinitialisées par bouton-poussoir sera appliqué. Cela nécessite l'exportation de l'image en tant que fichier ESD."
+            Case 4
+                Text = "Exportar uma imagem"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Ficheiro de imagem de destino:"
+                Label3.Text = "Ficheiro de imagem de origem:"
+                Label4.Text = "Padrão de nomenclatura:"
+                Label5.Text = "Tipo de compressão da imagem de destino:"
+                Label7.Text = "Índice da imagem de origem:"
+                CheckBox1.Text = "Ficheiros SWM de referência"
+                CheckBox2.Text = "Especificar um nome personalizado para a imagem de destino"
+                CheckBox3.Text = "Tornar a imagem de arranque (só para Windows PE)"
+                CheckBox4.Text = "Anexar imagem com a configuração WIMBoot"
+                CheckBox5.Text = "Verificar a integridade antes de exportar a imagem"
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Cancelar"
+                Button1.Text = "Procurar..."
+                Button2.Text = "Procurar..."
+                Button4.Text = "Utilizar nome da imagem"
+                Button5.Text = "Examinar padrão"
+                GroupBox1.Text = "Origens e destinos"
+                GroupBox2.Text = "Configurações"
+                OpenFileDialog1.Title = "Especificar um ficheiro de imagem de origem para exportar"
+                ListView1.Columns(0).Text = "Índice"
+                ListView1.Columns(1).Text = "Nome da imagem"
+                ListView1.Columns(2).Text = "Descrição da imagem"
+                ListView1.Columns(3).Text = "Versão da imagem"
+                CompressionTypeStrings(0) = "Não será aplicada qualquer compressão à imagem de destino."
+                CompressionTypeStrings(1) = "Será aplicada uma compressão rápida. Esta é a opção predefinida."
+                CompressionTypeStrings(2) = "Será aplicada a compressão máxima. Esta opção demora mais tempo, mas resulta numa imagem mais pequena."
+                CompressionTypeStrings(3) = "Será aplicado o nível de compressão para imagens reiniciadas por botão de pressão. Para tal, é necessário exportar a imagem como um ficheiro ESD."
+            Case 5
+                Text = "Esportazione di un'immagine"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "File immagine di destinazione:"
+                Label3.Text = "File immagine di origine:"
+                Label4.Text = "Modello di denominazione:"
+                Label5.Text = "Tipo di compressione dell'immagine di destinazione:"
+                Label7.Text = "Indice immagine sorgente:"
+                CheckBox1.Text = "File SWM di riferimento"
+                CheckBox2.Text = "Specificare un nome personalizzato per l'immagine di destinazione"
+                CheckBox3.Text = "Rendi l'immagine avviabile (solo Windows PE)"
+                CheckBox4.Text = "Aggiungi all'immagine la configurazione WIMBoot"
+                CheckBox5.Text = "Controlla l'integrità prima di esportare l'immagine"
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Annullare"
+                Button1.Text = "Sfoglia..."
+                Button2.Text = "Sfoglia..."
+                Button4.Text = "Usa il nome dell'immagine"
+                Button5.Text = "Scansiona modello"
+                GroupBox1.Text = "Sorgenti e destinazioni"
+                GroupBox2.Text = "Opzioni"
+                OpenFileDialog1.Title = "Specificare un file immagine di origine da esportare"
+                ListView1.Columns(0).Text = "Indice"
+                ListView1.Columns(1).Text = "Nome dell'immagine"
+                ListView1.Columns(2).Text = "Descrizione dell'immagine"
+                ListView1.Columns(3).Text = "Versione immagine"
+                CompressionTypeStrings(0) = "All'immagine di destinazione non verrà applicata alcuna compressione"
+                CompressionTypeStrings(1) = "Verrà applicata la compressione veloce. È l'opzione predefinita"
+                CompressionTypeStrings(2) = "Verrà applicata la compressione massima. Questa opzione richiede più tempo, ma produce un'immagine più piccola"
+                CompressionTypeStrings(3) = "Verrà applicato il livello di compressione per le immagini con reset a pulsante. Ciò richiede l'esportazione dell'immagine come file ESD"
+        End Select
+        ImageTaskHeader1.SetColors()
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+        GroupBox1.ForeColor = CurrentTheme.ForegroundColor
+        GroupBox2.ForeColor = CurrentTheme.ForegroundColor
+        TextBox1.BackColor = CurrentTheme.SectionBackgroundColor
+        TextBox2.BackColor = CurrentTheme.SectionBackgroundColor
+        TextBox3.BackColor = CurrentTheme.SectionBackgroundColor
+        TextBox4.BackColor = CurrentTheme.SectionBackgroundColor
+        ComboBox1.BackColor = CurrentTheme.SectionBackgroundColor
+        NumericUpDown1.BackColor = CurrentTheme.SectionBackgroundColor
+        ListBox1.BackColor = CurrentTheme.SectionBackgroundColor
+        StatusStrip1.BackColor = CurrentTheme.SectionBackgroundColor
+        ListView1.BackColor = CurrentTheme.SectionBackgroundColor
+        TextBox1.ForeColor = ForeColor
+        TextBox2.ForeColor = ForeColor
+        TextBox3.ForeColor = ForeColor
+        TextBox4.ForeColor = ForeColor
+        ComboBox1.ForeColor = ForeColor
+        NumericUpDown1.ForeColor = ForeColor
+        ListView1.ForeColor = ForeColor
+        ListBox1.ForeColor = ForeColor
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        ToolStripStatusLabel1.Text = "Please specify the naming pattern of the SWM files"
+                    Case "ESN"
+                        ToolStripStatusLabel1.Text = "Especifique la nomenclatura del patrón de los archivos SWM"
+                    Case "FRA"
+                        ToolStripStatusLabel1.Text = "Veuillez spécifier le modèle de dénomination des fichiers SWM"
+                    Case "PTB", "PTG"
+                        ToolStripStatusLabel1.Text = "Especifique o padrão de nomenclatura dos ficheiros SWM"
+                    Case "ITA"
+                        ToolStripStatusLabel1.Text = "Specificare il modello di denominazione dei file SWM"
+                End Select
+            Case 1
+                ToolStripStatusLabel1.Text = "Please specify the naming pattern of the SWM files"
+            Case 2
+                ToolStripStatusLabel1.Text = "Especifique la nomenclatura del patrón de los archivos SWM"
+            Case 3
+                ToolStripStatusLabel1.Text = "Veuillez spécifier le modèle de dénomination des fichiers SWM"
+            Case 4
+                ToolStripStatusLabel1.Text = "Especifique o padrão de nomenclatura dos ficheiros SWM"
+            Case 5
+                ToolStripStatusLabel1.Text = "Specificare il modello di denominazione dei file SWM"
+        End Select
+        Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
+        WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
+        ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))
+        Try
+            ' WIMBoot is only compatible with Windows 8.1
+            DynaLog.LogMessage("Detecting if the Windows image that is being serviced supports WIMBoot...")
+            If MainForm.CurrentImage.ImageVersion IsNot Nothing And MainForm.CurrentImage.ImageVersion.Build = 9600 Then
+                ' We are dealing with Windows 8.1
+                DynaLog.LogMessage("The image that is being serviced contains Windows 8.1. It supports WIMBoot.")
+                CheckBox4.Enabled = True
+            Else
+                DynaLog.LogMessage("The image that is being serviced does not contain Windows 8.1. It does not support WIMBoot.")
+                CheckBox4.Enabled = False
+            End If
+        Catch ex As Exception
+            DynaLog.LogMessage("Could not detect WIMBoot compatibility. Error Message: " & ex.Message)
+            CheckBox4.Enabled = False
+        End Try
+
+        ColumnHeader1.Width = WindowHelper.ScaleLogical(44)
+        ColumnHeader2.Width = WindowHelper.ScaleLogical(256)
+        ColumnHeader3.Width = WindowHelper.ScaleLogical(256)
+        ColumnHeader4.Width = WindowHelper.ScaleLogical(128)
+        ImageTaskHeader1.HideWindowTitle(handle)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        OpenFileDialog1.ShowDialog(Me)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        SaveFileDialog1.ShowDialog(Me)
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        If TextBox1.Text <> "" And File.Exists(TextBox1.Text) Then
+            DynaLog.LogMessage("An image file has been specified and it exists in the file system. Getting information...")
+            DynaLog.LogMessage("Checking if mounted image detector is busy...")
+            MainForm.StopMountedImageDetector()
+            Try
+                ListView1.Items.Clear()
+                DismApi.Initialize(DismLogLevel.LogErrors)
+                Dim imgInfoCollection As DismImageInfoCollection = DismApi.GetImageInfo(TextBox1.Text)
+                NumericUpDown1.Maximum = imgInfoCollection.Count
+                For Each imgInfo As DismImageInfo In imgInfoCollection
+                    ListView1.Items.Add(New ListViewItem(New String() {imgInfo.ImageIndex, imgInfo.ImageName, imgInfo.ImageDescription, imgInfo.ProductVersion.ToString()}))
+                Next
+            Catch ex As Exception
+                DynaLog.LogMessage("Could not get image file information. Error message: " & ex.Message)
+                MsgBox("Could not get index information for this image file", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+            Finally
+                Try
+                    DynaLog.LogMessage("Shutting down API...")
+                    DismApi.Shutdown()
+                Catch ex As Exception
+
+                End Try
+            End Try
+            If File.Exists(TextBox1.Text) And Path.GetExtension(TextBox1.Text).EndsWith("swm", StringComparison.OrdinalIgnoreCase) Then
+                CheckBox1.Checked = True
+                Button4.PerformClick()
+            End If
+        End If
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        SWMFilePanel.Enabled = CheckBox1.Checked = True
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+        TextBox3.Enabled = CheckBox2.Checked = True
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        SaveFileDialog1.Filter = originalFileFilters
+        If ComboBox1.SelectedItem = "none" Then
+            Label8.Text = CompressionTypeStrings(0)
+        ElseIf ComboBox1.SelectedItem = "fast" Then
+            Label8.Text = CompressionTypeStrings(1)
+        ElseIf ComboBox1.SelectedItem = "maximum" Then
+            Label8.Text = CompressionTypeStrings(2)
+        ElseIf ComboBox1.SelectedItem = "recovery" Then
+            Label8.Text = CompressionTypeStrings(3)
+            ' If recovery is specified, the target image must be an ESD file
+            SaveFileDialog1.Filter = "ESD files|*.esd"
+            If TextBox2.Text <> "" Then
+                ' Switch the extension of the target image file
+                TextBox2.Text = TextBox2.Text.Replace(Path.GetExtension(TextBox2.Text), ".esd").Trim()
+            End If
+        End If
+    End Sub
+
+    Private Sub ImgExport_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        SaveFileDialog1.Filter = originalFileFilters
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        TextBox4.Text = Path.GetFileNameWithoutExtension(TextBox1.Text)
+        ScanSwmPattern(TextBox4.Text)
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        ScanSwmPattern(TextBox4.Text)
+    End Sub
+
+    Sub ScanSwmPattern(PatternName As String)
+        DynaLog.LogMessage("Preparing to scan files with the specified pattern...")
+        DynaLog.LogMessage("- Scan pattern: " & PatternName)
+        ListBox1.Items.Clear()
+        If TextBox1.Text = "" Or PatternName = "" Then
+            DynaLog.LogMessage("Either no source image file has been specified or no pattern has been specified.")
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            MsgBox("Please specify a source WIM file. This will let you use the SWM files for later image application", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            ToolStripStatusLabel1.Text = "This naming pattern returns " & ListBox1.Items.Count & " SWM files"
+                        Case "ESN"
+                            MsgBox("Especifique el arhivo WIM de origen. Esto le permitirá usar los archivos SWM para la aplicación posterior de la imagen", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            ToolStripStatusLabel1.Text = "Esta nomenclatura de patrón devuelve " & ListBox1.Items.Count & " archivos SWM"
+                        Case "FRA"
+                            MsgBox("Veuillez indiquer un fichier WIM original. Cela vous permettra d'utiliser les fichiers SWM pour une application d'image ultérieure.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            ToolStripStatusLabel1.Text = "Ce modèle de dénomination renvoie " & ListBox1.Items.Count & " fichiers SWM"
+                        Case "PTB", "PTG"
+                            MsgBox("Especifique um ficheiro WIM de origem. Isto permitir-lhe-á utilizar os ficheiros SWM para uma aplicação de imagem posterior", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SWM"
+                        Case "ITA"
+                            MsgBox("Specificare un file WIM di origine. In questo modo sarà possibile utilizzare i file SWM per una successiva applicazione di immagini", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+                    End Select
+                Case 1
+                    MsgBox("Please specify a source WIM file. This will let you use the SWM files for later image application", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                    ToolStripStatusLabel1.Text = "This naming pattern returns " & ListBox1.Items.Count & " SWM files"
+                Case 2
+                    MsgBox("Especifique el arhivo WIM de origen. Esto le permitirá usar los archivos SWM para la aplicación posterior de la imagen", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                    ToolStripStatusLabel1.Text = "Esta nomenclatura de patrón devuelve " & ListBox1.Items.Count & " archivos SWM"
+                Case 3
+                    MsgBox("Veuillez indiquer un fichier WIM original. Cela vous permettra d'utiliser les fichiers SWM pour une application d'image ultérieure.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                    ToolStripStatusLabel1.Text = "Ce modèle de dénomination renvoie " & ListBox1.Items.Count & " fichiers SWM"
+                Case 4
+                    MsgBox("Especifique um ficheiro WIM de origem. Isto permitir-lhe-á utilizar os ficheiros SWM para uma aplicação de imagem posterior", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                    ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SWM"
+                Case 5
+                    MsgBox("Specificare un file WIM di origine. In questo modo sarà possibile utilizzare i file SWM per una successiva applicazione di immagini", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                    ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+            End Select
+            Beep()
+            Exit Sub
+        End If
+        DynaLog.LogMessage("Scanning SWM files with given pattern...")
+        For Each swmFile In My.Computer.FileSystem.GetFiles(Path.GetDirectoryName(TextBox1.Text), FileIO.SearchOption.SearchTopLevelOnly, "*.swm")
+            If Path.GetFileNameWithoutExtension(swmFile).StartsWith(PatternName) Then
+                ListBox1.Items.Add(Path.GetFileName(swmFile))
+            End If
+        Next
+        DynaLog.LogMessage("Pattern search results: " & ListBox1.Items.Count)
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        ToolStripStatusLabel1.Text = "This naming pattern returns " & ListBox1.Items.Count & " SWM files"
+                    Case "ESN"
+                        ToolStripStatusLabel1.Text = "Esta nomenclatura de patrón devuelve " & ListBox1.Items.Count & " archivos SWM"
+                    Case "FRA"
+                        ToolStripStatusLabel1.Text = "Ce modèle de dénomination renvoie " & ListBox1.Items.Count & " fichiers SWM"
+                    Case "PTB", "PTG"
+                        ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SWM"
+                    Case "ITA"
+                        ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+                End Select
+            Case 1
+                ToolStripStatusLabel1.Text = "This naming pattern returns " & ListBox1.Items.Count & " SWM files"
+            Case 2
+                ToolStripStatusLabel1.Text = "Esta nomenclatura de patrón devuelve " & ListBox1.Items.Count & " archivos SWM"
+            Case 3
+                ToolStripStatusLabel1.Text = "Ce modèle de dénomination renvoie " & ListBox1.Items.Count & " fichiers SWM"
+            Case 4
+                ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SWM"
+            Case 5
+                ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+        End Select
+        If ListBox1.Items.Count <= 0 Then Beep()
+    End Sub
+
+    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+        Try
+            If ListView1.SelectedItems.Count = 1 Then
+                NumericUpDown1.Value = ListView1.FocusedItem.Index + 1
+            End If
+        Catch ex As Exception
+            NumericUpDown1.Value = 1
+            NumericUpDown1.Maximum = 1
+        End Try
+    End Sub
+End Class

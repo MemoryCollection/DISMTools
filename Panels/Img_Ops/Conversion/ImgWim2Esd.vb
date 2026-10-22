@@ -1,0 +1,329 @@
+﻿Imports System.Windows.Forms
+Imports Microsoft.Dism
+Imports System.IO
+Imports System.Threading
+
+Public Class ImgWim2Esd
+
+    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+        If Not ProgressPanel.IsDisposed Then ProgressPanel.Dispose()
+        ProgressPanel.imgSrcFile = TextBox1.Text
+        ProgressPanel.imgConversionIndex = NumericUpDown1.Value
+        ProgressPanel.imgDestFile = TextBox2.Text
+        If ComboBox1.SelectedIndex = 0 Then
+            ProgressPanel.imgConversionMode = 1
+        ElseIf ComboBox1.SelectedIndex = 1 Then
+            ProgressPanel.imgConversionMode = 0
+        End If
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
+        ProgressPanel.OperationNum = 991
+        Visible = False
+        ProgressPanel.ShowDialog(MainForm)
+        Me.Close()
+    End Sub
+
+    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.Close()
+    End Sub
+
+    Private Sub SaveFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SaveFileDialog1.FileOk
+        TextBox2.Text = SaveFileDialog1.FileName
+    End Sub
+
+    Private Sub OpenFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
+        TextBox1.Text = OpenFileDialog1.FileName
+        DynaLog.LogMessage("Source image file to convert: " & OpenFileDialog1.FileName)
+        If OpenFileDialog1.FileName.EndsWith("wim", StringComparison.OrdinalIgnoreCase) Then
+            ComboBox1.SelectedIndex = 1
+        ElseIf OpenFileDialog1.FileName.EndsWith("esd", StringComparison.OrdinalIgnoreCase) Then
+            ComboBox1.SelectedIndex = 0
+        End If
+    End Sub
+
+    Private Sub ImgWim2Esd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = "Convert image"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Source image file:"
+                        Label3.Text = "Format of converted image:"
+                        Label5.Text = "Destination image file:"
+                        Label7.Text = "Index:"
+                        LinkLabel1.Text = "Which format do I choose?"
+                        Button1.Text = "Browse..."
+                        Button2.Text = "Browse..."
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Cancel"
+                        ListView1.Columns(0).Text = "Index"
+                        ListView1.Columns(1).Text = "Image name"
+                        ListView1.Columns(2).Text = "Image description"
+                        ListView1.Columns(3).Text = "Image version"
+                        GroupBox1.Text = "Source"
+                        GroupBox2.Text = "Options"
+                        GroupBox3.Text = "Destination"
+                        OpenFileDialog1.Title = "Specify the source image file you want to convert"
+                        SaveFileDialog1.Title = "Where will the target image be stored?"
+                    Case "ESN"
+                        Text = "Convertir imagen"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Archivo de imagen de origen:"
+                        Label3.Text = "Formato de imagen convertida:"
+                        Label5.Text = "Archivo de imagen de destino:"
+                        Label7.Text = "Índice:"
+                        LinkLabel1.Text = "¿Qué formato escojo?"
+                        Button1.Text = "Examinar..."
+                        Button2.Text = "Examinar..."
+                        OK_Button.Text = "Aceptar"
+                        Cancel_Button.Text = "Cancelar"
+                        ListView1.Columns(0).Text = "Índice"
+                        ListView1.Columns(1).Text = "Nombre de imagen"
+                        ListView1.Columns(2).Text = "Descripción de imagen"
+                        ListView1.Columns(3).Text = "Versión de imagen"
+                        GroupBox1.Text = "Origen"
+                        GroupBox2.Text = "Opciones"
+                        GroupBox3.Text = "Destino"
+                        OpenFileDialog1.Title = "Especifique el archivo de imagen de origen que desea convertir"
+                        SaveFileDialog1.Title = "¿Dónde se almacenará el archivo de imagen de destino?"
+                    Case "FRA"
+                        Text = "Convertir l'image"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Fichier de l'image source :"
+                        Label3.Text = "Format de l'image convertie :"
+                        Label5.Text = "Fichier de l'image de destination :"
+                        Label7.Text = "Index :"
+                        LinkLabel1.Text = "Quel format dois-je choisir ?"
+                        Button1.Text = "Parcourir..."
+                        Button2.Text = "Parcourir..."
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Annuler"
+                        ListView1.Columns(0).Text = "Index"
+                        ListView1.Columns(1).Text = "Nom de l'image"
+                        ListView1.Columns(2).Text = "Description de l'image"
+                        ListView1.Columns(3).Text = "Version de l'image"
+                        GroupBox1.Text = "Source"
+                        GroupBox2.Text = "Paramètres"
+                        GroupBox3.Text = "Destination"
+                        OpenFileDialog1.Title = "Spécifiez le fichier de l'image source que vous souhaitez convertir"
+                        SaveFileDialog1.Title = "Où l'image cible sera-t-elle stockée ?"
+                    Case "PTB", "PTG"
+                        Text = "Converter imagem"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Ficheiro de imagem de origem:"
+                        Label3.Text = "Formato da imagem convertida:"
+                        Label5.Text = "Ficheiro de imagem de destino:"
+                        Label7.Text = "Índice:"
+                        LinkLabel1.Text = "Qual o formato que devo escolher?"
+                        Button1.Text = "Navegar..."
+                        Button2.Text = "Navegar..."
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Cancelar"
+                        ListView1.Columns(0).Text = "Índice"
+                        ListView1.Columns(1).Text = "Nome da imagem"
+                        ListView1.Columns(2).Text = "Descrição da imagem"
+                        ListView1.Columns(3).Text = "Versão da imagem"
+                        GroupBox1.Text = "Fonte"
+                        GroupBox2.Text = "Opções"
+                        GroupBox3.Text = "Destino"
+                        OpenFileDialog1.Title = "Especifique o ficheiro de imagem de origem que pretende converter"
+                        SaveFileDialog1.Title = "Onde será guardada a imagem de destino?"
+                    Case "ITA"
+                        Text = "Convertire immagine"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "File immagine di origine:"
+                        Label3.Text = "Formato dell'immagine convertita:"
+                        Label5.Text = "File immagine di destinazione:"
+                        Label7.Text = "Indice:"
+                        LinkLabel1.Text = "Quale formato devo scegliere?"
+                        Button1.Text = "Sfoglia..."
+                        Button2.Text = "Sfoglia..."
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Annullare"
+                        ListView1.Columns(0).Text = "Indice"
+                        ListView1.Columns(1).Text = "Nome dell'immagine"
+                        ListView1.Columns(2).Text = "Descrizione dell'immagine"
+                        ListView1.Columns(3).Text = "Versione dell'immagine"
+                        GroupBox1.Text = "Sorgente"
+                        GroupBox2.Text = "Opzioni"
+                        GroupBox3.Text = "Destinazione"
+                        OpenFileDialog1.Title = "Specificare il file immagine di origine che si desidera convertire"
+                        SaveFileDialog1.Title = "Dove verrà memorizzata l'immagine di destinazione?"
+                End Select
+            Case 1
+                Text = "Convert image"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Source image file:"
+                Label3.Text = "Format of converted image:"
+                Label5.Text = "Destination image file:"
+                Label7.Text = "Index:"
+                LinkLabel1.Text = "Which format do I choose?"
+                Button1.Text = "Browse..."
+                Button2.Text = "Browse..."
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Cancel"
+                ListView1.Columns(0).Text = "Index"
+                ListView1.Columns(1).Text = "Image name"
+                ListView1.Columns(2).Text = "Image description"
+                ListView1.Columns(3).Text = "Image version"
+                GroupBox1.Text = "Source"
+                GroupBox2.Text = "Options"
+                GroupBox3.Text = "Destination"
+                OpenFileDialog1.Title = "Specify the source image file you want to convert"
+                SaveFileDialog1.Title = "Where will the target image be stored?"
+            Case 2
+                Text = "Convertir imagen"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Archivo de imagen de origen:"
+                Label3.Text = "Formato de imagen convertida:"
+                Label5.Text = "Archivo de imagen de destino:"
+                Label7.Text = "Índice:"
+                LinkLabel1.Text = "¿Qué formato escojo?"
+                Button1.Text = "Examinar..."
+                Button2.Text = "Examinar..."
+                OK_Button.Text = "Aceptar"
+                Cancel_Button.Text = "Cancelar"
+                ListView1.Columns(0).Text = "Índice"
+                ListView1.Columns(1).Text = "Nombre de imagen"
+                ListView1.Columns(2).Text = "Descripción de imagen"
+                ListView1.Columns(3).Text = "Versión de imagen"
+                GroupBox1.Text = "Origen"
+                GroupBox2.Text = "Opciones"
+                GroupBox3.Text = "Destino"
+                OpenFileDialog1.Title = "Especifique el archivo de imagen de origen que desea convertir"
+                SaveFileDialog1.Title = "¿Dónde se almacenará el archivo de imagen de destino?"
+            Case 3
+                Text = "Convertir l'image"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Fichier de l'image source :"
+                Label3.Text = "Format de l'image convertie :"
+                Label5.Text = "Fichier de l'image de destination :"
+                Label7.Text = "Index :"
+                LinkLabel1.Text = "Quel format dois-je choisir ?"
+                Button1.Text = "Parcourir..."
+                Button2.Text = "Parcourir..."
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Annuler"
+                ListView1.Columns(0).Text = "Index"
+                ListView1.Columns(1).Text = "Nom de l'image"
+                ListView1.Columns(2).Text = "Description de l'image"
+                ListView1.Columns(3).Text = "Version de l'image"
+                GroupBox1.Text = "Source"
+                GroupBox2.Text = "Paramètres"
+                GroupBox3.Text = "Destination"
+                OpenFileDialog1.Title = "Spécifiez le fichier de l'image source que vous souhaitez convertir"
+                SaveFileDialog1.Title = "Où l'image cible sera-t-elle stockée ?"
+            Case 4
+                Text = "Converter imagem"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Ficheiro de imagem de origem:"
+                Label3.Text = "Formato da imagem convertida:"
+                Label5.Text = "Ficheiro de imagem de destino:"
+                Label7.Text = "Índice:"
+                LinkLabel1.Text = "Qual o formato que devo escolher?"
+                Button1.Text = "Navegar..."
+                Button2.Text = "Navegar..."
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Cancelar"
+                ListView1.Columns(0).Text = "Índice"
+                ListView1.Columns(1).Text = "Nome da imagem"
+                ListView1.Columns(2).Text = "Descrição da imagem"
+                ListView1.Columns(3).Text = "Versão da imagem"
+                GroupBox1.Text = "Fonte"
+                GroupBox2.Text = "Opções"
+                GroupBox3.Text = "Destino"
+                OpenFileDialog1.Title = "Especifique o ficheiro de imagem de origem que pretende converter"
+                SaveFileDialog1.Title = "Onde será guardada a imagem de destino?"
+            Case 5
+                Text = "Convertire immagine"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "File immagine di origine:"
+                Label3.Text = "Formato dell'immagine convertita:"
+                Label5.Text = "File immagine di destinazione:"
+                Label7.Text = "Indice:"
+                LinkLabel1.Text = "Quale formato devo scegliere?"
+                Button1.Text = "Sfoglia..."
+                Button2.Text = "Sfoglia..."
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Annullare"
+                ListView1.Columns(0).Text = "Indice"
+                ListView1.Columns(1).Text = "Nome dell'immagine"
+                ListView1.Columns(2).Text = "Descrizione dell'immagine"
+                ListView1.Columns(3).Text = "Versione dell'immagine"
+                GroupBox1.Text = "Sorgente"
+                GroupBox2.Text = "Opzioni"
+                GroupBox3.Text = "Destinazione"
+                OpenFileDialog1.Title = "Specificare il file immagine di origine che si desidera convertire"
+                SaveFileDialog1.Title = "Dove verrà memorizzata l'immagine di destinazione?"
+        End Select
+        ImageTaskHeader1.SetColors()
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+        GroupBox1.ForeColor = CurrentTheme.ForegroundColor
+        GroupBox2.ForeColor = CurrentTheme.ForegroundColor
+        GroupBox3.ForeColor = CurrentTheme.ForegroundColor
+        TextBox1.BackColor = CurrentTheme.SectionBackgroundColor
+        TextBox2.BackColor = CurrentTheme.SectionBackgroundColor
+        ComboBox1.BackColor = CurrentTheme.SectionBackgroundColor
+        NumericUpDown1.BackColor = CurrentTheme.SectionBackgroundColor
+        ListView1.BackColor = CurrentTheme.SectionBackgroundColor
+        TextBox1.ForeColor = ForeColor
+        TextBox2.ForeColor = ForeColor
+        ComboBox1.ForeColor = ForeColor
+        NumericUpDown1.ForeColor = ForeColor
+        ListView1.ForeColor = ForeColor
+        Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
+        WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
+        ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))
+        ColumnHeader1.Width = WindowHelper.ScaleLogical(44)
+        ColumnHeader2.Width = WindowHelper.ScaleLogical(256)
+        ColumnHeader3.Width = WindowHelper.ScaleLogical(256)
+        ColumnHeader4.Width = WindowHelper.ScaleLogical(128)
+        ImageTaskHeader1.HideWindowTitle(handle)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        OpenFileDialog1.ShowDialog(Me)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        SaveFileDialog1.ShowDialog(Me)
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        SaveFileDialog1.Filter = UCase(ComboBox1.SelectedItem) & " files|*." & LCase(ComboBox1.SelectedItem)
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        If TextBox1.Text <> "" And File.Exists(TextBox1.Text) Then
+            DynaLog.LogMessage("Getting image file information...")
+            MainForm.StopMountedImageDetector()
+            Try
+                ListView1.Items.Clear()
+                DynaLog.LogMessage("Initializing API...")
+                DismApi.Initialize(DismLogLevel.LogErrors)
+                Dim imgInfoCollection As DismImageInfoCollection = DismApi.GetImageInfo(TextBox1.Text)
+                NumericUpDown1.Maximum = imgInfoCollection.Count
+                DynaLog.LogMessage("Information collection count: " & imgInfoCollection.Count)
+                For Each imgInfo As DismImageInfo In imgInfoCollection
+                    ListView1.Items.Add(New ListViewItem(New String() {imgInfo.ImageIndex, imgInfo.ImageName, imgInfo.ImageDescription, imgInfo.ProductVersion.ToString()}))
+                Next
+            Catch ex As Exception
+                MsgBox("Could not get index information for this image file", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+            Finally
+                DynaLog.LogMessage("Shutting down API...")
+                Try
+                    DismApi.Shutdown()
+                Catch ex As Exception
+
+                End Try
+            End Try
+        End If
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Dim qhMessage As String = "Choose the WIM format to work with the broadest range of Windows images and to modify them. Choose the ESD format if you prefer a smaller Windows image, with the disadvantage of not being modifiable."
+        QuickHelpModule.ShowQuickHelp(qhMessage)
+    End Sub
+End Class

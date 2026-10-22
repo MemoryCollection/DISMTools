@@ -1,0 +1,399 @@
+﻿Imports System.IO
+Imports System.Threading
+Imports Microsoft.VisualBasic.ControlChars
+
+Public Class NewTestingEnv
+
+    Dim progressMessages() As String = New String(2) {"Status", "Creating project. This can take some time. Please wait...", "The project has been created"}
+    Dim success As Boolean
+    Dim architectures() As String = New String(2) {"x86", "amd64", "arm64"}
+
+    Private Sub NewTestingEnv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        progressMessages(0) = "Status"
+                        progressMessages(1) = "Creating project. This can take some time. Please wait..."
+                        progressMessages(2) = "The project has been created"
+                        Text = "Create a testing environment"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "This wizard will create an environment that will help you test your applications on Windows Preinstallation Environments." & CrLf & CrLf &
+                                      "The project that will be created contains a template solution compatible with all environments and resources for the creation of applications for Windows Preinstallation Environments. You can learn more about these projects in the included README file."
+                        Label3.Text = "Once you're ready, click the Create button."
+                        Label5.Text = "Environment architecture:"
+                        Label6.Text = "Architecture:"
+                        Label7.Text = "Target project location:"
+                        Label8.Text = progressMessages(0)
+                        Label9.Text = "You can do other things while the project is being created. Come back here anytime for an updated status."
+                        Button3.Text = "Browse..."
+                        OK_Button.Text = "Create"
+                        Cancel_Button.Text = "Cancel"
+                        GroupBox2.Text = "Progress"
+                        LinkLabel1.Text = "Download the Windows ADK"
+                    Case "ESN"
+                        progressMessages(0) = "Estado"
+                        progressMessages(1) = "Creando proyecto. Esto puede llevar algo de tiempo. Espere..."
+                        progressMessages(2) = "El proyecto ha sido creado"
+                        Text = "Crear un entorno de pruebas"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Este asistente le creará un entorno que le ayudará a probar sus aplicaciones en entornos de preinstalación de Windows." & CrLf & CrLf &
+                                      "El proyecto que será creado contiene una plantilla de solución compatible con todos los entornos, y recursos para crear aplicaciones para entornos de preinstalación de Windows. Puede aprender más acerca de estos proyectos en el archivo LÉAME incluido."
+                        Label3.Text = "Cuando esté listo, haga clic en Crear."
+                        Label5.Text = "Arquitectura del entorno:"
+                        Label6.Text = "Arquitectura:"
+                        Label7.Text = "Ubicación del proyecto:"
+                        Label8.Text = progressMessages(0)
+                        Label9.Text = "Puede hacer otras cosas mientras se crea el proyecto. Vuelva aquí para ver un estado actualizado."
+                        Button3.Text = "Examinar..."
+                        OK_Button.Text = "Crear"
+                        Cancel_Button.Text = "Cancelar"
+                        GroupBox2.Text = "Progreso"
+                        LinkLabel1.Text = "Descargar el ADK de Windows"
+                    Case "FRA"
+                        progressMessages(0) = "Statut"
+                        progressMessages(1) = "Création du projet. Cela peut prendre un certain temps. Veuillez patienter..."
+                        progressMessages(2) = "Le projet a été créé"
+                        Text = "Créer un environnement de test"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Cet assistant va créer un environnement qui vous aidera à tester vos applications sur les environnements de préinstallation Windows." & CrLf & CrLf &
+                                      "Le projet qui sera créé contient une solution modèle compatible avec tous les environnements et ressources pour la création d'applications pour les environnements de préinstallation Windows. Vous pouvez en savoir plus sur ces projets dans le fichier LISEZMOI inclus."
+                        Label3.Text = "Lorsque vous êtes prêt, cliquez sur le bouton Créer."
+                        Label5.Text = "Architecture de l'environnement :"
+                        Label6.Text = "Architecture :"
+                        Label7.Text = "Emplacement du projet cible :"
+                        Label8.Text = progressMessages(0)
+                        Label9.Text = "Vous pouvez faire d'autres choses pendant la création du projet. Revenez ici à tout moment pour connaître l'état d'avancement du projet."
+                        Button3.Text = "Parcourir..."
+                        OK_Button.Text = "Créer"
+                        Cancel_Button.Text = "Annuler"
+                        GroupBox2.Text = "Progrès"
+                        LinkLabel1.Text = "Télécharger l'ADK Windows"
+                    Case "PTB", "PTG"
+                        progressMessages(0) = "Estado"
+                        progressMessages(1) = "A criar projeto. Isto pode demorar algum tempo. Por favor, aguarde..."
+                        progressMessages(2) = "O projeto foi criado"
+                        Text = "Criar um ambiente de teste"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Este assistente irá criar um ambiente que o ajudará a testar as suas aplicações em ambientes de pré-instalação do Windows." & CrLf & CrLf &
+                                      "O projeto que será criado contém uma solução modelo compatível com todos os ambientes e recursos para a criação de aplicações para Ambientes de Pré-instalação do Windows. Pode obter mais informações sobre estes projectos no ficheiro LEIAME incluído."
+                        Label3.Text = "Quando estiver pronto, clique no botão Criar."
+                        Label5.Text = "Arquitetura do ambiente:"
+                        Label6.Text = "Arquitetura:"
+                        Label7.Text = "Localização do projeto alvo:"
+                        Label8.Text = progressMessages(0)
+                        Label9.Text = "Pode fazer outras coisas enquanto o projeto está a ser criado. Volte aqui em qualquer altura para obter um estado atualizado."
+                        Button3.Text = "Navegar..."
+                        OK_Button.Text = "Criar"
+                        Cancel_Button.Text = "Cancelar"
+                        GroupBox2.Text = "Progresso"
+                        LinkLabel1.Text = "Baixar o Windows ADK"
+                    Case "ITA"
+                        progressMessages(0) = "Stato"
+                        progressMessages(1) = "Creazione del progetto. L'operazione può richiedere del tempo. Attendere..."
+                        progressMessages(2) = "Il progetto è stato creato"
+                        Text = "Creare un ambiente di test"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Questa procedura guidata creerà un ambiente che vi aiuterà a testare le vostre applicazioni sugli ambienti di preinstallazione di Windows." & CrLf & CrLf &
+                                      "Il progetto che verrà creato contiene una soluzione modello compatibile con tutti gli ambienti e le risorse per la creazione di applicazioni per gli ambienti di preinstallazione di Windows. Per ulteriori informazioni su questi progetti, consultare il file LEGGIMI incluso."
+                        Label3.Text = "Una volta pronti, fate clic sul pulsante Crea."
+                        Label5.Text = "Architettura dell'ambiente:"
+                        Label6.Text = "Architettura:"
+                        Label7.Text = "Posizione del progetto di destinazione:"
+                        Label8.Text = progressMessages(0)
+                        Label9.Text = "Potete fare altre cose mentre il progetto viene creato. Tornate qui in qualsiasi momento per avere uno stato aggiornato."
+                        Button3.Text = "Sfoglia..."
+                        OK_Button.Text = "Crea"
+                        Cancel_Button.Text = "Annullare"
+                        GroupBox2.Text = "Stato di avanzamento"
+                        LinkLabel1.Text = "Scarica l'ADK di Windows"
+                End Select
+            Case 1
+                progressMessages(0) = "Status"
+                progressMessages(1) = "Creating project. This can take some time. Please wait..."
+                progressMessages(2) = "The project has been created"
+                Text = "Create a testing environment"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "This wizard will create an environment that will help you test your applications on Windows Preinstallation Environments." & CrLf & CrLf &
+                              "The project that will be created contains a template solution compatible with all environments and resources for the creation of applications for Windows Preinstallation Environments. You can learn more about these projects in the included README file."
+                Label3.Text = "Once you're ready, click the Create button."
+                Label5.Text = "Environment architecture:"
+                Label6.Text = "Architecture:"
+                Label7.Text = "Target project location:"
+                Label8.Text = progressMessages(0)
+                Label9.Text = "You can do other things while the project is being created. Come back here anytime for an updated status."
+                Button3.Text = "Browse..."
+                OK_Button.Text = "Create"
+                Cancel_Button.Text = "Cancel"
+                GroupBox2.Text = "Progress"
+                LinkLabel1.Text = "Download the Windows ADK"
+            Case 2
+                progressMessages(0) = "Estado"
+                progressMessages(1) = "Creando proyecto. Esto puede llevar algo de tiempo. Espere..."
+                progressMessages(2) = "El proyecto ha sido creado"
+                Text = "Crear un entorno de pruebas"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Este asistente le creará un entorno que le ayudará a probar sus aplicaciones en entornos de preinstalación de Windows." & CrLf & CrLf &
+                              "El proyecto que será creado contiene una plantilla de solución compatible con todos los entornos, y recursos para crear aplicaciones para entornos de preinstalación de Windows. Puede aprender más acerca de estos proyectos en el archivo LÉAME incluido."
+                Label3.Text = "Cuando esté listo, haga clic en Crear."
+                Label5.Text = "Arquitectura del entorno:"
+                Label6.Text = "Arquitectura:"
+                Label7.Text = "Ubicación del proyecto:"
+                Label8.Text = progressMessages(0)
+                Label9.Text = "Puede hacer otras cosas mientras se crea el proyecto. Vuelva aquí para ver un estado actualizado."
+                Button3.Text = "Examinar..."
+                OK_Button.Text = "Crear"
+                Cancel_Button.Text = "Cancelar"
+                GroupBox2.Text = "Progreso"
+                LinkLabel1.Text = "Descargar el ADK de Windows"
+            Case 3
+                progressMessages(0) = "Statut"
+                progressMessages(1) = "Création du projet. Cela peut prendre un certain temps. Veuillez patienter..."
+                progressMessages(2) = "Le projet a été créé"
+                Text = "Créer un environnement de test"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Cet assistant va créer un environnement qui vous aidera à tester vos applications sur les environnements de préinstallation Windows." & CrLf & CrLf &
+                              "Le projet qui sera créé contient une solution modèle compatible avec tous les environnements et ressources pour la création d'applications pour les environnements de préinstallation Windows. Vous pouvez en savoir plus sur ces projets dans le fichier LISEZMOI inclus."
+                Label3.Text = "Lorsque vous êtes prêt, cliquez sur le bouton Créer."
+                Label5.Text = "Architecture de l'environnement :"
+                Label6.Text = "Architecture :"
+                Label7.Text = "Emplacement du projet cible :"
+                Label8.Text = progressMessages(0)
+                Label9.Text = "Vous pouvez faire d'autres choses pendant la création du projet. Revenez ici à tout moment pour connaître l'état d'avancement du projet."
+                Button3.Text = "Parcourir..."
+                OK_Button.Text = "Créer"
+                Cancel_Button.Text = "Annuler"
+                GroupBox2.Text = "Progrès"
+                LinkLabel1.Text = "Télécharger l'ADK Windows"
+            Case 4
+                progressMessages(0) = "Estado"
+                progressMessages(1) = "A criar projeto. Isto pode demorar algum tempo. Por favor, aguarde..."
+                progressMessages(2) = "O projeto foi criado"
+                Text = "Criar um ambiente de teste"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Este assistente irá criar um ambiente que o ajudará a testar as suas aplicações em ambientes de pré-instalação do Windows." & CrLf & CrLf &
+                              "O projeto que será criado contém uma solução modelo compatível com todos os ambientes e recursos para a criação de aplicações para Ambientes de Pré-instalação do Windows. Pode obter mais informações sobre estes projectos no ficheiro LEIAME incluído."
+                Label3.Text = "Quando estiver pronto, clique no botão Criar."
+                Label5.Text = "Arquitetura do ambiente:"
+                Label6.Text = "Arquitetura:"
+                Label7.Text = "Localização do projeto alvo:"
+                Label8.Text = progressMessages(0)
+                Label9.Text = "Pode fazer outras coisas enquanto o projeto está a ser criado. Volte aqui em qualquer altura para obter um estado atualizado."
+                Button3.Text = "Navegar..."
+                OK_Button.Text = "Criar"
+                Cancel_Button.Text = "Cancelar"
+                GroupBox2.Text = "Progresso"
+                LinkLabel1.Text = "Baixar o Windows ADK"
+            Case 5
+                progressMessages(0) = "Stato"
+                progressMessages(1) = "Creazione del progetto. L'operazione può richiedere del tempo. Attendere..."
+                progressMessages(2) = "Il progetto è stato creato"
+                Text = "Creare un ambiente di test"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Questa procedura guidata creerà un ambiente che vi aiuterà a testare le vostre applicazioni sugli ambienti di preinstallazione di Windows." & CrLf & CrLf &
+                              "Il progetto che verrà creato contiene una soluzione modello compatibile con tutti gli ambienti e le risorse per la creazione di applicazioni per gli ambienti di preinstallazione di Windows. Per ulteriori informazioni su questi progetti, consultare il file LEGGIMI incluso."
+                Label3.Text = "Una volta pronti, fate clic sul pulsante Crea."
+                Label5.Text = "Architettura dell'ambiente:"
+                Label6.Text = "Architettura:"
+                Label7.Text = "Posizione del progetto di destinazione:"
+                Label8.Text = progressMessages(0)
+                Label9.Text = "Potete fare altre cose mentre il progetto viene creato. Tornate qui in qualsiasi momento per avere uno stato aggiornato."
+                Button3.Text = "Sfoglia..."
+                OK_Button.Text = "Crea"
+                Cancel_Button.Text = "Annullare"
+                GroupBox2.Text = "Stato di avanzamento"
+                LinkLabel1.Text = "Scarica l'ADK di Windows"
+        End Select
+        ImageTaskHeader1.SetColors()
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+        TextBox3.BackColor = CurrentTheme.SectionBackgroundColor
+        ComboBox1.BackColor = CurrentTheme.SectionBackgroundColor
+        TextBox3.ForeColor = ForeColor
+        GroupBox2.ForeColor = ForeColor
+        ComboBox1.ForeColor = ForeColor
+        Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
+        WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
+        ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))
+
+        ' Declare path constant for Windows ADK
+        Dim ADKPath As String = Path.Combine(If(Environment.Is64BitOperatingSystem,
+                                                    Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                                                    Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)), "Windows Kits", "10",
+                                                "Assessment and Deployment Kit")
+        ' Check ADK status
+        If Not Directory.Exists(ADKPath) Then
+            DynaLog.LogMessage("ADK installation directory " & Quote & ADKPath & Quote & " is not found in this system. Either it has not been installed or it has been installed somewhere else.")
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            Process.Start("https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install")
+                        Case "ESN"
+                            Process.Start("https://learn.microsoft.com/es-es/windows-hardware/get-started/adk-install")
+                        Case "FRA"
+                            Process.Start("https://learn.microsoft.com/fr-fr/windows-hardware/get-started/adk-install")
+                        Case "PTB", "PTG"
+                            Process.Start("https://learn.microsoft.com/pt-pt/windows-hardware/get-started/adk-install")
+                        Case "ITA"
+                            Process.Start("https://learn.microsoft.com/it-it/windows-hardware/get-started/adk-install")
+                    End Select
+                Case 1
+                    Process.Start("https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install")
+                Case 2
+                    Process.Start("https://learn.microsoft.com/es-es/windows-hardware/get-started/adk-install")
+                Case 3
+                    Process.Start("https://learn.microsoft.com/fr-fr/windows-hardware/get-started/adk-install")
+                Case 4
+                    Process.Start("https://learn.microsoft.com/pt-pt/windows-hardware/get-started/adk-install")
+                Case 5
+                    Process.Start("https://learn.microsoft.com/it-it/windows-hardware/get-started/adk-install")
+            End Select
+            Close()
+        End If
+
+        ' Restore combobox architecture items
+        ComboBox1.Items.Clear()
+        ComboBox1.Items.AddRange(architectures)
+        ' Remove architectures incompatible with the system ADK
+        For Each architecture In architectures
+            Dim WimPath As String = Path.Combine(ADKPath, "Windows Preinstallation Environment", architecture, "en-us", "winpe.wim")
+            DynaLog.LogMessage("Testing if architecture " & architecture & " is supported by the ADK installed in this system...")
+            If Not File.Exists(WimPath) Then
+                DynaLog.LogMessage("- Windows PE WIM " & Quote & WimPath & Quote & " is not present. Removing architecture option...")
+                ComboBox1.Items.Remove(architecture)
+            End If
+        Next
+        ' If we are left with no architectures, add them back
+        If ComboBox1.Items.Count = 0 Then
+            DynaLog.LogMessage("For some reason we excluded all of them. This could be because of incorrect detections. Adding back...")
+            ComboBox1.Items.AddRange(architectures)
+        End If
+        ComboBox1.SelectedIndex = 0
+        ImageTaskHeader1.HideWindowTitle(handle)
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        If FolderBrowserDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            DynaLog.LogMessage("Target location of testing environment files: " & Quote & FolderBrowserDialog1.SelectedPath & Quote)
+            TextBox3.Text = FolderBrowserDialog1.SelectedPath
+        End If
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Process.Start("https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install")
+                    Case "ESN"
+                        Process.Start("https://learn.microsoft.com/es-es/windows-hardware/get-started/adk-install")
+                    Case "FRA"
+                        Process.Start("https://learn.microsoft.com/fr-fr/windows-hardware/get-started/adk-install")
+                    Case "PTB", "PTG"
+                        Process.Start("https://learn.microsoft.com/pt-pt/windows-hardware/get-started/adk-install")
+                    Case "ITA"
+                        Process.Start("https://learn.microsoft.com/it-it/windows-hardware/get-started/adk-install")
+                End Select
+            Case 1
+                Process.Start("https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install")
+            Case 2
+                Process.Start("https://learn.microsoft.com/es-es/windows-hardware/get-started/adk-install")
+            Case 3
+                Process.Start("https://learn.microsoft.com/fr-fr/windows-hardware/get-started/adk-install")
+            Case 4
+                Process.Start("https://learn.microsoft.com/pt-pt/windows-hardware/get-started/adk-install")
+            Case 5
+                Process.Start("https://learn.microsoft.com/it-it/windows-hardware/get-started/adk-install")
+        End Select
+    End Sub
+
+    Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
+        Close()
+    End Sub
+
+    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
+        OK_Button.Enabled = False
+        Cancel_Button.Enabled = False
+        OptionsPanel.Enabled = False
+        BackgroundWorker1.RunWorkerAsync()
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        BackgroundWorker1.ReportProgress(0)
+        DynaLog.LogMessage("Starting PE Helper...")
+        DynaLog.LogMessage("- Task: generate testing environment")
+        DynaLog.LogMessage("- Architecture: " & ComboBox1.SelectedItem)
+        DynaLog.LogMessage("- Destination folder for testing environment: " & Quote & TextBox3.Text & Quote)
+        Dim ISOCreator As New Process()
+        ISOCreator.StartInfo.FileName = Environment.GetFolderPath(Environment.SpecialFolder.Windows) & "\system32\WindowsPowerShell\v1.0\powershell.exe"
+        ISOCreator.StartInfo.WorkingDirectory = Application.StartupPath & "\bin\extps1\PE_Helper"
+        ISOCreator.StartInfo.Arguments = "-noprofile -nologo -executionpolicy unrestricted -file " & Quote & Application.StartupPath & "\bin\extps1\PE_Helper\PE_Helper.ps1" & Quote & " -cmd StartDevelopment -testArch " & ComboBox1.SelectedItem & " -targetPath " & Quote & TextBox3.Text & Quote
+        ISOCreator.Start()
+        ISOCreator.WaitForExit()
+        DynaLog.LogMessage("The PE Helper process finished with exit code " & Hex(ISOCreator.ExitCode))
+        success = (ISOCreator.ExitCode = 0)
+        BackgroundWorker1.ReportProgress(100)
+    End Sub
+
+    Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+        IdlePanel.Visible = False
+        ISOProgressPanel.Visible = True
+        If e.ProgressPercentage < 100 Then
+            WindowHelper.DisableCloseCapability(Handle)
+            Label8.Text = progressMessages(1)
+            ProgressBar1.Style = ProgressBarStyle.Marquee
+            TaskbarHelper.SetIndicatorState(0, Windows.Shell.TaskbarItemProgressState.Indeterminate, MainForm.Handle)
+        Else
+            WindowHelper.EnableCloseCapability(Handle)
+            If success Then Label8.Text = progressMessages(2)
+            ProgressBar1.Style = ProgressBarStyle.Blocks
+            TaskbarHelper.SetIndicatorState(100, Windows.Shell.TaskbarItemProgressState.None, MainForm.Handle)
+        End If
+        ProgressBar1.Value = e.ProgressPercentage
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        DynaLog.LogMessage("The PE Helper has finished.")
+        DynaLog.LogMessage("- Did it succeed? " & If(success, "Yes", "No"))
+        Dim msg As String = ""
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        msg = If(success, "The project has been created successfully", "Failed to create the project")
+                    Case "ESN"
+                        msg = If(success, "El proyecto ha sido creado satisfactoriamente", "No pudimos crear el proyecto")
+                    Case "FRA"
+                        msg = If(success, "Le projet a été créé avec succès", "Le processus de création de le projet a échoué")
+                    Case "PTB", "PTG"
+                        msg = If(success, "O projeto ISO foi criado com êxito", "O processo de criação do projeto falhou")
+                    Case "ITA"
+                        msg = If(success, "Il progetto è stato creato con successo", "La creazione del progetto non è riuscita")
+                End Select
+            Case 1
+                msg = If(success, "The project has been created successfully", "Failed to create the project")
+            Case 2
+                msg = If(success, "El proyecto ha sido creado satisfactoriamente", "No pudimos crear el proyecto")
+            Case 3
+                msg = If(success, "Le projet a été créé avec succès", "Le processus de création de le projet a échoué")
+            Case 4
+                msg = If(success, "O projeto ISO foi criado com êxito", "O processo de criação do projeto falhou")
+            Case 5
+                msg = If(success, "Il progetto è stato creato con successo", "La creazione del progetto non è riuscita")
+        End Select
+        MsgBox(msg, vbOKOnly + vbInformation, ImageTaskHeader1.ItemText)
+        OK_Button.Enabled = True
+        Cancel_Button.Enabled = True
+        OptionsPanel.Enabled = True
+        IdlePanel.Visible = True
+        ISOProgressPanel.Visible = False
+    End Sub
+
+    Private Sub NewTestingEnv_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If BackgroundWorker1.IsBusy Then
+            e.Cancel = True
+            Beep()
+        End If
+    End Sub
+End Class

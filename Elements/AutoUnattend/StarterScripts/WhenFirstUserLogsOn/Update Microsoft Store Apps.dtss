@@ -1,0 +1,10 @@
+﻿Language: Batch
+Name: Update Microsoft Store Apps
+Description: This script invokes an update of all Microsoft Store applications. A network is required for this to work.
+Customizable: No
+
+@echo off
+echo Updating all Microsoft Store applications. This could take a while...
+powershell -command Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" ^| Invoke-CimMethod -MethodName UpdateScanMethod >nul 2>&1
+echo Showing updates page...
+start ms-windows-store://downloadsandupdates

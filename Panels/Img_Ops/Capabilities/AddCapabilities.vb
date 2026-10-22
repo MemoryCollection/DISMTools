@@ -1,0 +1,518 @@
+﻿Imports System.Windows.Forms
+Imports Microsoft.Win32
+Imports System.IO
+Imports Microsoft.VisualBasic.ControlChars
+Imports Microsoft.Dism
+Imports DISMTools.Utilities
+Imports System.Text.RegularExpressions
+
+Public Class AddCapabilities
+    Implements IImageTaskDialog
+
+    Dim capCount As Integer
+    Dim capIds(65535) As String
+
+    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+        DynaLog.LogMessage("Disposing of progress panel if not disposed of previously...")
+        If Not ProgressPanel.IsDisposed Then ProgressPanel.Dispose()
+        Dim capIdList As New List(Of String)
+        ProgressPanel.MountDir = MainForm.MountDir
+        capCount = ListView1.CheckedItems.Count
+        DynaLog.LogMessage("Detecting capabilities to add...")
+        If ListView1.CheckedItems.Count >= 1 Then
+            For x = 0 To capCount - 1
+                capIdList.Add(ListView1.CheckedItems(x).SubItems(0).Text)
+            Next
+            capIds = capIdList.ToArray()
+            For x = 0 To capIds.Length - 1
+                ProgressPanel.capAdditionIds(x) = capIds(x)
+            Next
+            DynaLog.LogMessage("Getting states of capabilities for any missing sources...")
+            For x = 0 To capCount - 1
+                If MainForm.OnlineManagement And Not CheckBox2.Checked Then Exit For
+                If ListView1.CheckedItems(x).SubItems(1).Text = "Not present" Then
+                    If CheckBox1.Checked And RichTextBox1.Text = "" Or Not Directory.Exists(RichTextBox1.Text) Then
+                        DynaLog.LogMessage("No source has been specified or it does not exist.")
+                        Select Case MainForm.Language
+                            Case 0
+                                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                    Case "ENU", "ENG"
+                                        If MsgBox("Some capabilities in this image require specifying a source for them to be enabled. The specified source is not valid for this operation." & CrLf & CrLf & If(RichTextBox1.Text = "", "Please specify a valid source and try again.", "Please make sure the source exists in the file system and try again."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                            CheckBox1.Checked = True
+                                            Button1.PerformClick()
+                                        End If
+                                    Case "ESN"
+                                        If MsgBox("Algunas funcionalidades en esta imagen requieren especificar un origen para ser habilitadas. El origen especificado no es válido para esta operación" & CrLf & CrLf & If(RichTextBox1.Text = "", "Especifique un origen válido e inténtelo de nuevo.", "Asegúrese de que el origen exista en el sistema de archivos e inténtelo de nuevo."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                            CheckBox1.Checked = True
+                                            Button1.PerformClick()
+                                        End If
+                                    Case "FRA"
+                                        If MsgBox("Certaines capacités de cette image nécessitent la spécification d'une source pour être activées. La source spécifiée n'est pas valide pour cette opération." & CrLf & CrLf & If(RichTextBox1.Text = "", "Veuillez indiquer une source valide et réessayer.", "Assurez-vous que la source existe dans le système de fichiers et réessayez."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                            CheckBox1.Checked = True
+                                            Button1.PerformClick()
+                                        End If
+                                    Case "PTB", "PTG"
+                                        If MsgBox("Algumas capacidades nesta imagem requerem a especificação de uma fonte para serem activadas. A fonte especificada não é válida para esta operação." & CrLf & CrLf & If(RichTextBox1.Text = "", "Especifique uma fonte válida e tente novamente.", "Certifique-se de que a fonte existe no sistema de ficheiros e tente novamente."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                            CheckBox1.Checked = True
+                                            Button1.PerformClick()
+                                        End If
+                                    Case "ITA"
+                                        If MsgBox("Alcune capacità di questa immagine richiedono l'indicazione di un'origine per essere abilitate. L'origine specificata non è valida per questa operazione." & CrLf & CrLf & If(RichTextBox1.Text = "", "Specificare un'origine valida e riprovare.", "Assicurarsi che l'origine esista nel file system e riprovare."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                            CheckBox1.Checked = True
+                                            Button1.PerformClick()
+                                        End If
+                                End Select
+                            Case 1
+                                If MsgBox("Some capabilities in this image require specifying a source for them to be enabled. The specified source is not valid for this operation." & CrLf & CrLf & If(RichTextBox1.Text = "", "Please specify a valid source and try again.", "Please make sure the source exists in the file system and try again."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                    CheckBox1.Checked = True
+                                    Button1.PerformClick()
+                                End If
+                            Case 2
+                                If MsgBox("Algunas funcionalidades en esta imagen requieren especificar un origen para ser habilitadas. El origen especificado no es válido para esta operación" & CrLf & CrLf & If(RichTextBox1.Text = "", "Especifique un origen válido e inténtelo de nuevo.", "Asegúrese de que el origen exista en el sistema de archivos e inténtelo de nuevo."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                    CheckBox1.Checked = True
+                                    Button1.PerformClick()
+                                End If
+                            Case 3
+                                If MsgBox("Certaines capacités de cette image nécessitent la spécification d'une source pour être activées. La source spécifiée n'est pas valide pour cette opération." & CrLf & CrLf & If(RichTextBox1.Text = "", "Veuillez indiquer une source valide et réessayer.", "Assurez-vous que la source existe dans le système de fichiers et réessayez."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                    CheckBox1.Checked = True
+                                    Button1.PerformClick()
+                                End If
+                            Case 4
+                                If MsgBox("Algumas capacidades nesta imagem requerem a especificação de uma fonte para serem activadas. A fonte especificada não é válida para esta operação." & CrLf & CrLf & If(RichTextBox1.Text = "", "Especifique uma fonte válida e tente novamente.", "Certifique-se de que a fonte existe no sistema de ficheiros e tente novamente."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                    CheckBox1.Checked = True
+                                    Button1.PerformClick()
+                                End If
+                            Case 5
+                                If MsgBox("Alcune capacità di questa immagine richiedono l'indicazione di un'origine per essere abilitate. L'origine specificata non è valida per questa operazione." & CrLf & CrLf & If(RichTextBox1.Text = "", "Specificare un'origine valida e riprovare.", "Assicurarsi che l'origine esista nel file system e riprovare."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                    CheckBox1.Checked = True
+                                    Button1.PerformClick()
+                                End If
+                        End Select
+                    End If
+                End If
+            Next
+            ProgressPanel.capAdditionLastId = ListView1.CheckedItems(capCount - 1).SubItems(0).Text
+            If CheckBox1.Checked Then
+                DynaLog.LogMessage("Specified source: " & Quote & RichTextBox1.Text & Quote)
+                If RichTextBox1.Text <> "" Then
+                    If Directory.Exists(RichTextBox1.Text) Then
+                        DynaLog.LogMessage("The specified source exists in the file system.")
+                        ProgressPanel.capAdditionUseSource = True
+                        ProgressPanel.capAdditionSource = RichTextBox1.Text         ' Don't know if it would work on cases where it begins with "wim:\"
+                    Else
+                        DynaLog.LogMessage("The specified source does not exist in the file system.")
+                        Select Case MainForm.Language
+                            Case 0
+                                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                    Case "ENU", "ENG"
+                                        MsgBox("The specified source does not exist in the file system. Make sure it exists and try again.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                    Case "ESN"
+                                        MsgBox("El origen especificado no existe en el sistema de archivos. Asegúrese de que existe e inténtelo de nuevo.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                    Case "FRA"
+                                        MsgBox("La source spécifiée n'existe pas dans le système de fichiers. Assurez-vous qu'elle existe et réessayez.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                    Case "PTB", "PTG"
+                                        MsgBox("A origem especificada não existe no sistema de ficheiros. Certifique-se de que existe e tente novamente.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                    Case "ITA"
+                                        MsgBox("L'origine specificata non esiste nel file system. Assicurarsi che esista e riprovare", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                End Select
+                            Case 1
+                                MsgBox("The specified source does not exist in the file system. Make sure it exists and try again.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            Case 2
+                                MsgBox("El origen especificado no existe en el sistema de archivos. Asegúrese de que existe e inténtelo de nuevo.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            Case 3
+                                MsgBox("La source spécifiée n'existe pas dans le système de fichiers. Assurez-vous qu'elle existe et réessayez.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            Case 4
+                                MsgBox("A origem especificada não existe no sistema de ficheiros. Certifique-se de que existe e tente novamente.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            Case 5
+                                MsgBox("L'origine specificata non esiste nel file system. Assicurarsi che esista e riprovare", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        End Select
+                        Exit Sub
+                    End If
+                Else
+                    DynaLog.LogMessage("No source has been specified.")
+                    Select Case MainForm.Language
+                        Case 0
+                            Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                Case "ENU", "ENG"
+                                    MsgBox("There is no source specified. Specify a source and try again.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                Case "ESN"
+                                    MsgBox("No se ha especificado un origen. Especifique un origen e inténtelo de nuevo.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                Case "FRA"
+                                    MsgBox("Aucune source n'est spécifiée. Indiquez une source et réessayez.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                Case "PTB", "PTG"
+                                    MsgBox("Não existe uma origem especificada. Especifique uma fonte e tente novamente.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                                Case "ITA"
+                                    MsgBox("Non è stata specificata un'origine. Specificare un'origine e riprovare.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            End Select
+                        Case 1
+                            MsgBox("There is no source specified. Specify a source and try again.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        Case 2
+                            MsgBox("No se ha especificado un origen. Especifique un origen e inténtelo de nuevo.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        Case 3
+                            MsgBox("Aucune source n'est spécifiée. Indiquez une source et réessayez.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        Case 4
+                            MsgBox("Não existe uma origem especificada. Especifique uma fonte e tente novamente.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        Case 5
+                            MsgBox("Non è stata specificata un'origine. Specificare un'origine e riprovare.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                    End Select
+                    Exit Sub
+                End If
+            End If
+            If CheckBox2.Checked Then
+                ProgressPanel.capAdditionLimitWUAccess = True
+            Else
+                ProgressPanel.capAdditionLimitWUAccess = False
+            End If
+            If CheckBox3.Checked And Not MainForm.OnlineManagement Then
+                ProgressPanel.capAdditionCommit = True
+            Else
+                ProgressPanel.capAdditionCommit = False
+            End If
+        Else
+            DynaLog.LogMessage("No items have been added to the queue.")
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            MsgBox("There aren't any selected capabilities to install. Please select some capabilities and try again.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        Case "ESN"
+                            MsgBox("No hay funcionalidades seleccionadas para instalar. Seleccione algunas de ellas e inténtelo de nuevo.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        Case "FRA"
+                            MsgBox("Il n'y a pas de capacités sélectionnées à installer. Veuillez sélectionner des capacités et réessayer.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        Case "PTB", "PTG"
+                            MsgBox("Não existem quaisquer capacidades seleccionadas para instalar. Por favor, seleccione algumas capacidades e tente novamente.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                        Case "ITA"
+                            MsgBox("Non sono state selezionate capacità da installare. Selezionare alcune capacità e riprovare.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                    End Select
+                Case 1
+                    MsgBox("There aren't any selected capabilities to install. Please select some capabilities and try again.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                Case 2
+                    MsgBox("No hay funcionalidades seleccionadas para instalar. Seleccione algunas de ellas e inténtelo de nuevo.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                Case 3
+                    MsgBox("Il n'y a pas de capacités sélectionnées à installer. Veuillez sélectionner des capacités et réessayer.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                Case 4
+                    MsgBox("Não existem quaisquer capacidades seleccionadas para instalar. Por favor, seleccione algumas capacidades e tente novamente.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                Case 5
+                    MsgBox("Non sono state selezionate capacità da installare. Selezionare alcune capacità e riprovare.", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+            End Select
+            Exit Sub
+        End If
+        ProgressPanel.capAdditionCount = capCount
+        ProgressPanel.OperationNum = 64
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
+        Visible = False
+        ProgressPanel.ShowDialog(MainForm)
+        Me.Close()
+    End Sub
+
+    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.Close()
+    End Sub
+
+    Function Initialize() As Boolean Implements IImageTaskDialog.Initialize
+        DynaLog.LogMessage("Checking edition and version information for any unmet requirements...")
+        If MainForm.CurrentImage.ImageEditionId.Equals("WindowsPE", StringComparison.OrdinalIgnoreCase) Or Not MainForm.IsWindows10OrHigher(MainForm.MountDir & "\Windows\system32\ntoskrnl.exe") Then
+            DynaLog.LogMessage("The image is not supported")
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            MsgBox("This action is not supported on this image", vbOKOnly + vbCritical, Text)
+                        Case "ESN"
+                            MsgBox("Esta acción no está soportada en esta imagen", vbOKOnly + vbCritical, Text)
+                        Case "FRA"
+                            MsgBox("Cette action n'est pas prise en charge sur cette image", vbOKOnly + vbCritical, Text)
+                        Case "PTB", "PTG"
+                            MsgBox("Esta ação não é suportada nesta imagem", vbOKOnly + vbCritical, Text)
+                        Case "ITA"
+                            MsgBox("Questa azione non è supportata su questa immagine", vbOKOnly + vbCritical, Text)
+                    End Select
+                Case 1
+                    MsgBox("This action is not supported on this image", vbOKOnly + vbCritical, Text)
+                Case 2
+                    MsgBox("Esta acción no está soportada en esta imagen", vbOKOnly + vbCritical, Text)
+                Case 3
+                    MsgBox("Cette action n'est pas prise en charge sur cette image", vbOKOnly + vbCritical, Text)
+                Case 4
+                    MsgBox("Esta ação não é suportada nesta imagem", vbOKOnly + vbCritical, Text)
+                Case 5
+                    MsgBox("Questa azione non è supportata su questa immagine", vbOKOnly + vbCritical, Text)
+            End Select
+            Return False
+        End If
+        DynaLog.LogMessage("All requirements are met. Continuing with the task...")
+        ListView1.Items.Clear()
+        If Not MainForm.CompletedTasks(3) Then
+            DynaLog.LogMessage("Capability background processes haven't completed.")
+            BGProcsBusyDialog.ShowDialog(Me)
+            Return False
+        End If
+        DynaLog.LogMessage("Adding capabilities to arrays...")
+        If MainForm.CurrentImage.ImageCapabilities IsNot Nothing AndAlso MainForm.CurrentImage.ImageCapabilities.Count > 0 Then
+            ListView1.Items.AddRange(MainForm.CurrentImage.ImageCapabilities.Where(Function(capability) Not New DismPackageFeatureState() {DismPackageFeatureState.Installed, DismPackageFeatureState.InstallPending}.Contains(capability.State)).Select(Function(capability) New ListViewItem(New String() {capability.Name, Casters.CastDismFeatureState(capability.State, True)})).ToArray())
+        Else
+            ListView1.Items.AddRange(MainForm.CurrentImage.ImageCapabilities_Backup.Where(Function(capability) Not New DismPackageFeatureState() {DismPackageFeatureState.Installed, DismPackageFeatureState.InstallPending}.Contains(capability.CapabilityState)).Select(Function(capability) New ListViewItem(New String() {capability.CapabilityName, Casters.CastDismFeatureState(capability.CapabilityState, True)})).ToArray())
+        End If
+        Return True
+    End Function
+
+    Private Sub AddCapability_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not Initialize() Then
+            Close()
+        End If
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = "Add capabilities"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Source:"
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Cancel"
+                        Button1.Text = "Browse..."
+                        Button2.Text = "Select all"
+                        Button3.Text = "Select none"
+                        Button4.Text = "Detect from group policy"
+                        GroupBox1.Text = "Capabilities"
+                        GroupBox2.Text = "Options"
+                        CheckBox1.Text = "Specify different source for capability installs"
+                        CheckBox2.Text = "Limit access to Windows Update"
+                        CheckBox3.Text = "Commit image after adding capabilities"
+                        ListView1.Columns(0).Text = "Capability"
+                        ListView1.Columns(1).Text = "State"
+                    Case "ESN"
+                        Text = "Añadir funcionalidades"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Origen:"
+                        OK_Button.Text = "Aceptar"
+                        Cancel_Button.Text = "Cancelar"
+                        Button1.Text = "Examinar..."
+                        Button2.Text = "Seleccionar todas"
+                        Button3.Text = "Seleccionar ninguna"
+                        Button4.Text = "Detectar políticas de grupo"
+                        GroupBox1.Text = "Funcionalidades"
+                        GroupBox2.Text = "Opciones"
+                        CheckBox1.Text = "Especificar un origen diferente para la instalación de funcionalidades"
+                        CheckBox2.Text = "Limitar acceso a Windows Update"
+                        CheckBox3.Text = "Guardar imagen tras añadir funcionalidades"
+                        ListView1.Columns(0).Text = "Funcionalidad"
+                        ListView1.Columns(1).Text = "Estado"
+                    Case "FRA"
+                        Text = "Ajouter des capacités"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Source :"
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Annuler"
+                        Button1.Text = "Parcourir..."
+                        Button2.Text = "Sélectionner tout"
+                        Button3.Text = "Sélectionner aucun"
+                        Button4.Text = "Détecter à partir des politiques de groupe"
+                        GroupBox1.Text = "Capacités"
+                        GroupBox2.Text = "Paramètres"
+                        CheckBox1.Text = "Spécifier une source différente pour l'installation des capacités"
+                        CheckBox2.Text = "Limiter l'accès à Windows Update"
+                        CheckBox3.Text = "Sauvegarder l'image après l'ajout de capacités"
+                        ListView1.Columns(0).Text = "Capacité"
+                        ListView1.Columns(1).Text = "État"
+                    Case "PTB", "PTG"
+                        Text = "Adicionar capacidades"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = " Origem:"
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Cancelar"
+                        Button1.Text = "Navegar..."
+                        Button2.Text = "Selecionar tudo"
+                        Button3.Text = "Não selecionar nenhum"
+                        Button4.Text = "Detetar a partir da política de grupo"
+                        GroupBox1.Text = "Capacidades"
+                        GroupBox2.Text = "Opções"
+                        CheckBox1.Text = "Especificar uma origem diferente para as instalações de capacidades"
+                        CheckBox2.Text = "Limitar o acesso ao Windows Update"
+                        CheckBox3.Text = "Confirmar imagem depois de adicionar capacidades"
+                        ListView1.Columns(0).Text = "Capacidade"
+                        ListView1.Columns(1).Text = "Estado"
+                    Case "ITA"
+                        Text = "Aggiungi capacità"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Origine:"
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Annullare"
+                        Button1.Text = "Sfoglia..."
+                        Button2.Text = "Seleziona tutto"
+                        Button3.Text = "Seleziona nessuno"
+                        Button4.Text = "Rileva da criteri di gruppo"
+                        GroupBox1.Text = "Capacità"
+                        GroupBox2.Text = "Opzioni"
+                        CheckBox1.Text = "Specifica un'origine diversa per l'installazione delle capacità"
+                        CheckBox2.Text = "Limita l'accesso a Windows Update"
+                        CheckBox3.Text = "Applica l'immagine dopo l'aggiunta delle funzionalità"
+                        ListView1.Columns(0).Text = "Capacità"
+                        ListView1.Columns(1).Text = "Stato"
+                End Select
+            Case 1
+                Text = "Add capabilities"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Source:"
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Cancel"
+                Button1.Text = "Browse..."
+                Button2.Text = "Select all"
+                Button3.Text = "Select none"
+                Button4.Text = "Detect from group policy"
+                GroupBox1.Text = "Capabilities"
+                GroupBox2.Text = "Options"
+                CheckBox1.Text = "Specify different source for capability installs"
+                CheckBox2.Text = "Limit access to Windows Update"
+                CheckBox3.Text = "Commit image after adding capabilities"
+                ListView1.Columns(0).Text = "Capability"
+                ListView1.Columns(1).Text = "State"
+            Case 2
+                Text = "Añadir funcionalidades"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Origen:"
+                OK_Button.Text = "Aceptar"
+                Cancel_Button.Text = "Cancelar"
+                Button1.Text = "Examinar..."
+                Button2.Text = "Seleccionar todas"
+                Button3.Text = "Seleccionar ninguna"
+                Button4.Text = "Detectar políticas de grupo"
+                GroupBox1.Text = "Funcionalidades"
+                GroupBox2.Text = "Opciones"
+                CheckBox1.Text = "Especificar un origen diferente para la instalación de funcionalidades"
+                CheckBox2.Text = "Limitar acceso a Windows Update"
+                CheckBox3.Text = "Guardar imagen tras añadir funcionalidades"
+                ListView1.Columns(0).Text = "Funcionalidad"
+                ListView1.Columns(1).Text = "Estado"
+            Case 3
+                Text = "Ajouter des capacités"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Source :"
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Annuler"
+                Button1.Text = "Parcourir..."
+                Button2.Text = "Sélectionner tout"
+                Button3.Text = "Sélectionner aucun"
+                Button4.Text = "Détecter à partir des politiques de groupe"
+                GroupBox1.Text = "Capacités"
+                GroupBox2.Text = "Paramètres"
+                CheckBox1.Text = "Spécifier une source différente pour l'installation des capacités"
+                CheckBox2.Text = "Limiter l'accès à Windows Update"
+                CheckBox3.Text = "Sauvegarder l'image après l'ajout de capacités"
+                ListView1.Columns(0).Text = "Capacité"
+                ListView1.Columns(1).Text = "État"
+            Case 4
+                Text = "Adicionar capacidades"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = " Origem:"
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Cancelar"
+                Button1.Text = "Navegar..."
+                Button2.Text = "Selecionar tudo"
+                Button3.Text = "Não selecionar nenhum"
+                Button4.Text = "Detetar a partir da política de grupo"
+                GroupBox1.Text = "Capacidades"
+                GroupBox2.Text = "Opções"
+                CheckBox1.Text = "Especificar uma origem diferente para as instalações de capacidades"
+                CheckBox2.Text = "Limitar o acesso ao Windows Update"
+                CheckBox3.Text = "Confirmar imagem depois de adicionar capacidades"
+                ListView1.Columns(0).Text = "Capacidade"
+                ListView1.Columns(1).Text = "Estado"
+            Case 5
+                Text = "Aggiungi capacità"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Origine:"
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Annullare"
+                Button1.Text = "Sfoglia..."
+                Button2.Text = "Seleziona tutto"
+                Button3.Text = "Seleziona nessuno"
+                Button4.Text = "Rileva da criteri di gruppo"
+                GroupBox1.Text = "Capacità"
+                GroupBox2.Text = "Opzioni"
+                CheckBox1.Text = "Specifica un'origine diversa per l'installazione delle capacità"
+                CheckBox2.Text = "Limita l'accesso a Windows Update"
+                CheckBox3.Text = "Applica l'immagine dopo l'aggiunta delle funzionalità"
+                ListView1.Columns(0).Text = "Capacità"
+                ListView1.Columns(1).Text = "Stato"
+        End Select
+        ImageTaskHeader1.SetColors()
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+        GroupBox1.ForeColor = CurrentTheme.ForegroundColor
+        GroupBox2.ForeColor = CurrentTheme.ForegroundColor
+        ListView1.BackColor = CurrentTheme.SectionBackgroundColor
+        RichTextBox1.BackColor = CurrentTheme.SectionBackgroundColor
+        WimFileSourcePanel.SetColors()
+        CheckBox1.ForeColor = ForeColor
+        CheckBox2.ForeColor = ForeColor
+        CheckBox3.ForeColor = ForeColor
+        ListView1.ForeColor = ForeColor
+        RichTextBox1.ForeColor = ForeColor
+        If MainForm.OnlineManagement And (SystemInformation.BootMode = BootMode.Normal Or SystemInformation.BootMode = BootMode.FailSafeWithNetwork) Then
+            CheckBox2.Enabled = True
+        Else
+            CheckBox2.Checked = False
+            CheckBox2.Enabled = False
+        End If
+        CheckBox3.Enabled = If(MainForm.OnlineManagement Or MainForm.OfflineManagement, False, True)
+        Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
+        WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
+        ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))
+        ColumnHeader1.Width = WindowHelper.ScaleLogical(520)
+        ColumnHeader2.Width = WindowHelper.ScaleLogical(204)
+        ImageTaskHeader1.HideWindowTitle(handle)
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked Then
+            Label2.Enabled = True
+            RichTextBox1.Enabled = True
+            Button1.Enabled = True
+            Button4.Enabled = True
+        Else
+            Label2.Enabled = False
+            RichTextBox1.Enabled = False
+            Button1.Enabled = False
+            Button4.Enabled = False
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        DynaLog.LogMessage("Getting source established in the group policy...")
+        RichTextBox1.Text = ServicingGPOHelper.GetSrcFromGPO()
+        If Regex.IsMatch(RichTextBox1.Text, "(^wim:\\)(.*)(:\d+$)") Then
+            ' Divide the source to only grab image file and index
+            Dim ImageFileMatches As MatchCollection = Regex.Matches(RichTextBox1.Text, "(^wim:\\)(.*)(:\d+$)")
+            WimFileSourcePanel.ImageFile = ImageFileMatches(0).Groups(2).Value
+            WimFileSourcePanel.ImageIndex = CInt(ImageFileMatches(0).Groups(3).Value.Replace(":", ""))
+            WimFileSourcePanel.Visible = True
+        Else
+            WimFileSourcePanel.Visible = False
+        End If
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        For i As Integer = 0 To ListView1.Items.Count - 1
+            ListView1.Items(i).Checked = True
+        Next
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        For i As Integer = 0 To ListView1.Items.Count - 1
+            ListView1.Items(i).Checked = False
+        Next
+        DialogResult = Windows.Forms.DialogResult.None
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If FolderBrowserDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            RichTextBox1.Text = FolderBrowserDialog1.SelectedPath
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
+        TextBoxSourcePanel.Visible = True
+        WimFileSourcePanel.Visible = False
+    End Sub
+End Class

@@ -1,0 +1,95 @@
+﻿Imports Microsoft.Win32
+Public Class MigrationForm
+
+    Dim msg As String
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        DynaLog.LogMessage("Beginning migration...")
+        DynaLog.LogMessage("Loading old settings file...")
+        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+            Case "ENU", "ENG"
+                msg = "Loading old settings file..."
+            Case "ESN"
+                msg = "Cargando archivo antiguo de configuración..."
+            Case "FRA"
+                msg = "Chargement d'un ancien fichier de paramètres en cours..."
+            Case "PTB", "PTG"
+                msg = "Carregar ficheiro de configurações antigo..."
+            Case "ITA"
+                msg = "Caricamento vecchio file impostazioni..."
+        End Select
+        BackgroundWorker1.ReportProgress(33.299999999999997)
+        MainForm.LoadDTSettings(1)
+        Threading.Thread.Sleep(72)
+        DynaLog.LogMessage("Saving new settings...")
+        MainForm.Width = WindowHelper.ScaleLogical(1280)
+        MainForm.Height = WindowHelper.ScaleLogical(720)
+        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+            Case "ENU", "ENG"
+                msg = "Saving new settings file..."
+            Case "ESN"
+                msg = "Guardando archivo nuevo de configuración..."
+            Case "FRA"
+                msg = "Sauvegarder le fichier des nouveaux paramètres en cours..."
+            Case "PTB", "PTG"
+                msg = "Guardar o novo ficheiro de configurações..."
+            Case "ITA"
+                msg = "Salvataggio nuovo file impostazioni..."
+        End Select
+        BackgroundWorker1.ReportProgress(66.599999999999994)
+        MainForm.SaveDTSettings()
+        Threading.Thread.Sleep(72)
+        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+            Case "ENU", "ENG"
+                msg = "Done"
+            Case "ESN"
+                msg = "Terminado"
+            Case "FRA"
+                msg = "Terminé"
+            Case "PTB", "PTG"
+                msg = "Concluído"
+            Case "ITA"
+                msg = "Terminato"
+        End Select
+        BackgroundWorker1.ReportProgress(100)
+        Threading.Thread.Sleep(250)
+    End Sub
+
+    Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+        ProgressBar1.Style = ProgressBarStyle.Blocks
+        Label2.Text = msg
+        ProgressBar1.Value = e.ProgressPercentage
+    End Sub
+
+    Private Sub MigrationForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+            Case "ENU", "ENG"
+                Label1.Text = "Please wait while DISMTools migrates your old settings file to work on this version. This may take some time."
+                Label2.Text = "Please wait..."
+            Case "ESN"
+                Label1.Text = "Espere mientras DISMTools migra su archivo antiguo de configuración para que sea compatible con esta versión. Esto puede llevar un tiempo."
+                Label2.Text = "Espere..."
+            Case "FRA"
+                Label1.Text = "Veuillez patienter pendant que DISMTools migre votre ancien fichier de paramètres pour qu'il fonctionne avec cette version. Cela peut prendre un certain temps."
+                Label2.Text = "Veuillez patienter..."
+            Case "PTB", "PTG"
+                Label1.Text = "Aguarde enquanto o DISMTools migra o seu ficheiro de configurações antigo para funcionar nesta versão. Isso pode levar algum tempo"
+                Label2.Text = "Aguarde..."
+            Case "ITA"
+                Label1.Text = "Attendi mentre DISMTools converte il vecchio file impostazioni per farlo funzionare con questa versione. L'operazione potrebbe richiedere del tempo."
+                Label2.Text = "Attendi..."
+        End Select
+        Refresh()
+        BackgroundWorker1.RunWorkerAsync()
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        Close()
+    End Sub
+
+    Private Sub MigrationForm_Paint(sender As Object, e As PaintEventArgs) Handles MyBase.Paint
+        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(53, 153, 41), ButtonBorderStyle.Solid)
+    End Sub
+End Class

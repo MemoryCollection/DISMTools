@@ -1,0 +1,32 @@
+﻿Language: Batch
+Name: Change Windows PowerShell Execution Policies
+Description: This script configures Windows PowerShell to consider a different execution policy. Use this script if you plan on running PowerShell scripts on target devices at any given time.
+Customizable: Yes
+@ECHO OFF
+
+REM Change the Windows PowerShell execution policy to one of the following values:
+REM - Unrestricted (default option in this script for developers)
+REM - Undefined
+REM - Restricted
+REM - RemoteSigned
+REM - Bypass
+REM - AllSigned
+REM Note that this will only take effect on Windows PowerShell (version 5.1, or the
+REM built-in version of PowerShell), but not on PowerShell 7.
+
+SET "_PWSHExecutionPolicy=Unrestricted"
+
+REM To learn more about PowerShell execution policies for any version of PowerShell
+REM (not just Windows PowerShell), refer to the following Help documentation page:
+REM https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-5.1
+
+REM To configure policies at any time, run Set-ExecutionPolicy <policy> from within
+REM PowerShell as an administrator.
+
+IF NOT DEFINED _PWSHExecutionPolicy SET "_PWSHExecutionPolicy=Unrestricted"
+
+FOR %%A IN (Unrestricted Undefined Restricted RemoteSigned Bypass AllSigned) DO (
+    IF /I "%_PWSHExecutionPolicy%" == "%%A" (
+        REG ADD "HKLM\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell" /F /V "ExecutionPolicy" /T REG_SZ /D "%_PWSHExecutionPolicy%"
+    )
+)

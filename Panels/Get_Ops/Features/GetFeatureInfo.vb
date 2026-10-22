@@ -1,0 +1,705 @@
+﻿Imports System.Windows.Forms
+Imports System.Threading
+Imports Microsoft.VisualBasic.ControlChars
+Imports Microsoft.Dism
+Imports DISMTools.Utilities
+
+Public Class GetFeatureInfoDlg
+
+    Dim _lvwColumnSorter As New ListViewColumnSorter()
+
+    Private Sub GetFeatureInfoDlg_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ImageTaskHeader1.SetColors()
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+        ListView1.BackColor = CurrentTheme.SectionBackgroundColor
+        cPropPathView.BackColor = CurrentTheme.SectionBackgroundColor
+        cPropValue.BackColor = CurrentTheme.SectionBackgroundColor
+        SearchBox1.BackColor = BackColor
+        SearchBox1.ForeColor = ForeColor
+        ListView1.ForeColor = ForeColor
+        cPropPathView.ForeColor = ForeColor
+        cPropValue.ForeColor = ForeColor
+        cPropValue.Font = New Font(MainForm.LogFont, MainForm.LogFontSize, If(MainForm.LogFontIsBold, FontStyle.Bold, FontStyle.Regular))
+        SearchPic.Image = GetGlyphResource("search")
+        WizardBtn.Image = GetGlyphResource("assistant")
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = "Get feature information"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Ready"
+                        Label22.Text = "Feature name:"
+                        Label24.Text = "Display name:"
+                        Label26.Text = "Feature description:"
+                        Label31.Text = "Is a restart required?"
+                        Label36.Text = "Feature information"
+                        Label37.Text = "Select an installed feature on the left to view its information here"
+                        Label41.Text = "Feature state:"
+                        Label43.Text = "Custom properties:"
+                        ListView1.Columns(0).Text = "Feature name"
+                        ListView1.Columns(1).Text = "Feature state"
+                        Button2.Text = "Save..."
+                        SearchBox1.cueBanner = "Type here to search for a feature..."
+                    Case "ESN"
+                        Text = "Obtener información de características"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Listo"
+                        Label22.Text = "Nombre de característica:"
+                        Label24.Text = "Nombre para mostrar:"
+                        Label26.Text = "Descripción de la característica:"
+                        Label31.Text = "¿Se requiere un reinicio?"
+                        Label36.Text = "Información de la característica"
+                        Label37.Text = "Seleccione una característica instalada en la izquierda para ver su información aquí"
+                        Label41.Text = "Estado de la característica"
+                        Label43.Text = "Propiedades personalizadas:"
+                        ListView1.Columns(0).Text = "Nombre de característica"
+                        ListView1.Columns(1).Text = "Estado"
+                        Button2.Text = "Guardar..."
+                        SearchBox1.cueBanner = "Escriba aquí para buscar una característica..."
+                    Case "FRA"
+                        Text = "Obtenir des informations sur les caractéristiques"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Prêt"
+                        Label22.Text = "Nom de la caractéristique :"
+                        Label24.Text = "Nom d'affichage :"
+                        Label26.Text = "Description de la caractéristique :"
+                        Label31.Text = "Un redémarrage est-il nécessaire ?"
+                        Label36.Text = "Information sur la caractéristique"
+                        Label37.Text = "Sélectionnez une caractéristique installée sur la gauche pour afficher ses informations ici"
+                        Label41.Text = "État de la caractéristique :"
+                        Label43.Text = "Propriétés personnalisées :"
+                        ListView1.Columns(0).Text = "Nom de la caractéristique"
+                        ListView1.Columns(1).Text = "État de la caractéristique"
+                        Button2.Text = "Sauvegarder..."
+                        SearchBox1.cueBanner = "Tapez ici pour rechercher une caractéristique..."
+                    Case "PTB", "PTG"
+                        Text = "Obter informações sobre a caraterística"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Pronto"
+                        Label22.Text = "Nome da caraterística:"
+                        Label24.Text = "Nome do ecrã:"
+                        Label26.Text = "Descrição da caraterística:"
+                        Label31.Text = "É necessário reiniciar?"
+                        Label36.Text = "Informação sobre a caraterística"
+                        Label37.Text = "Seleccione uma caraterística instalada à esquerda para ver as suas informações aqui"
+                        Label41.Text = "Estado da funcionalidade:"
+                        Label43.Text = "Propriedades personalizadas:"
+                        ListView1.Columns(0).Text = "Nome da caraterística"
+                        ListView1.Columns(1).Text = "Estado da caraterística"
+                        Button2.Text = "Guardar..."
+                        SearchBox1.cueBanner = "Digite aqui para pesquisar uma caraterística..."
+                    Case "ITA"
+                        Text = "Verifica informazioni funzionalità"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Pronto"
+                        Label22.Text = "Nome funzionalità:"
+                        Label24.Text = "Nome visualizzato:"
+                        Label26.Text = "Descrizione funzionalità:"
+                        Label31.Text = "È necessario un riavvio?"
+                        Label36.Text = "Informazioni funzionalità"
+                        Label37.Text = "Per visualizzarne qui le informazioni seleziona a sinistra una funzionalità installata"
+                        Label41.Text = "Stato funzionalità:"
+                        Label43.Text = "Proprietà personalizzate:"
+                        ListView1.Columns(0).Text = "Nome funzionalità"
+                        ListView1.Columns(1).Text = "Stato funzionalità"
+                        Button2.Text = "Salva..."
+                        SearchBox1.cueBanner = "Digita qui per cercare una funzionalità..."
+                End Select
+            Case 1
+                Text = "Get feature information"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Ready"
+                Label22.Text = "Feature name:"
+                Label24.Text = "Display name:"
+                Label26.Text = "Feature description:"
+                Label31.Text = "Is a restart required?"
+                Label36.Text = "Feature information"
+                Label37.Text = "Select an installed feature on the left to view its information here"
+                Label41.Text = "Feature state:"
+                Label43.Text = "Custom properties:"
+                ListView1.Columns(0).Text = "Feature name"
+                ListView1.Columns(1).Text = "Feature state"
+                Button2.Text = "Save..."
+                SearchBox1.cueBanner = "Type here to search for a feature..."
+            Case 2
+                Text = "Obtener información de características"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Listo"
+                Label22.Text = "Nombre de característica:"
+                Label24.Text = "Nombre para mostrar:"
+                Label26.Text = "Descripción de la característica:"
+                Label31.Text = "¿Se requiere un reinicio?"
+                Label36.Text = "Información de la característica"
+                Label37.Text = "Seleccione una característica instalada en la izquierda para ver su información aquí"
+                Label41.Text = "Estado de la característica"
+                Label43.Text = "Propiedades personalizadas:"
+                ListView1.Columns(0).Text = "Nombre de característica"
+                ListView1.Columns(1).Text = "Estado"
+                Button2.Text = "Guardar..."
+                SearchBox1.cueBanner = "Escriba aquí para buscar una característica..."
+            Case 3
+                Text = "Obtenir des informations sur les caractéristiques"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Prêt"
+                Label22.Text = "Nom de la caractéristique :"
+                Label24.Text = "Nom d'affichage :"
+                Label26.Text = "Description de la caractéristique :"
+                Label31.Text = "Un redémarrage est-il nécessaire ?"
+                Label36.Text = "Information sur la caractéristique"
+                Label37.Text = "Sélectionnez une caractéristique installée sur la gauche pour afficher ses informations ici"
+                Label41.Text = "État de la caractéristique :"
+                Label43.Text = "Propriétés personnalisées :"
+                ListView1.Columns(0).Text = "Nom de la caractéristique"
+                ListView1.Columns(1).Text = "État de la caractéristique"
+                Button2.Text = "Sauvegarder..."
+                SearchBox1.cueBanner = "Tapez ici pour rechercher une caractéristique..."
+            Case 4
+                Text = "Obter informações sobre a caraterística"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Pronto"
+                Label22.Text = "Nome da caraterística:"
+                Label24.Text = "Nome do ecrã:"
+                Label26.Text = "Descrição da caraterística:"
+                Label31.Text = "É necessário reiniciar?"
+                Label36.Text = "Informação sobre a caraterística"
+                Label37.Text = "Seleccione uma caraterística instalada à esquerda para ver as suas informações aqui"
+                Label41.Text = "Estado da funcionalidade:"
+                Label43.Text = "Propriedades personalizadas:"
+                ListView1.Columns(0).Text = "Nome da caraterística"
+                ListView1.Columns(1).Text = "Estado da caraterística"
+                Button2.Text = "Guardar..."
+                SearchBox1.cueBanner = "Digite aqui para pesquisar uma caraterística..."
+            Case 5
+                Text = "Verifica informazioni funzionalità"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Pronto"
+                Label22.Text = "Nome funzionalità:"
+                Label24.Text = "Nome visualizzato:"
+                Label26.Text = "Descrizione funzionalità:"
+                Label31.Text = "È necessario un riavvio?"
+                Label36.Text = "Informazioni sulla funzionalità"
+                Label37.Text = "Per visualizzarne qui le informazioni seleziona  a sinistra una funzionalità installata"
+                Label41.Text = "Stato funzionalità:"
+                Label43.Text = "Proprietà personalizzate:"
+                ListView1.Columns(0).Text = "Nome funzionalità"
+                ListView1.Columns(1).Text = "Stato funzionalità"
+                Button2.Text = "Salva..."
+                SearchBox1.cueBanner = "Digita qui per cercare una funzionalità..."
+        End Select
+        If SplitContainer2.SplitterDistance = 440 Then
+            SplitContainer2.SplitterDistance = WindowHelper.ScaleLogical(SplitContainer2.SplitterDistance)
+        End If
+        Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
+        WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
+        ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))
+        ' Populate feature information list
+        Panel4.Visible = False
+        Panel7.Visible = True
+        Button1.Visible = False
+        DynaLog.LogMessage("Updating items in list...")
+        ListView1.Items.Clear()
+        DynaLog.LogMessage("Getting features...")
+        If MainForm.CurrentImage.ImageFeatures Is Nothing OrElse MainForm.CurrentImage.ImageFeatures.Count = 0 Then
+            ListView1.Items.AddRange(MainForm.CurrentImage.ImageFeatures_Backup.Select(Function(InstalledFeature) New ListViewItem(New String() {InstalledFeature.FeatureName, Casters.CastDismFeatureState(InstalledFeature.FeatureState, True)})).ToArray())
+        Else
+            ListView1.Items.AddRange(MainForm.CurrentImage.ImageFeatures.Select(Function(InstalledFeature) New ListViewItem(New String() {InstalledFeature.FeatureName, Casters.CastDismFeatureState(InstalledFeature.State, True)})).ToArray())
+        End If
+        SearchBox1.Text = ""
+        ColumnHeader1.Width = WindowHelper.ScaleLogical(298)
+        ColumnHeader2.Width = WindowHelper.ScaleLogical(118)
+        ImageTaskHeader1.HideWindowTitle(handle)
+    End Sub
+
+    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+        WindowHelper.DisableCloseCapability(Handle)
+        DynaLog.LogMessage("Selected items: " & ListView1.SelectedItems.Count)
+        Try
+            If ListView1.SelectedItems.Count = 1 Then
+                ' Background processes need to have completed before showing information
+                DynaLog.LogMessage("Checking if background processes are busy...")
+                If MainForm.ImgBW.IsBusy Then
+                    DynaLog.LogMessage("Background processes are busy. Stopping them...")
+                    Dim msg As String = ""
+                    Select Case MainForm.Language
+                        Case 0
+                            Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                Case "ENU", "ENG"
+                                    msg = "Background processes need to have completed before showing feature information. We'll wait until they have completed"
+                                Case "ESN"
+                                    msg = "Los procesos en segundo plano deben haber completado antes de obtener información de la característica. Esperaremos hasta que hayan completado"
+                                Case "FRA"
+                                    msg = "Les processus en plan doivent être terminés avant d'afficher les caractéristiques. Nous attendrons qu'ils soient terminés"
+                                Case "PTB", "PTG"
+                                    msg = "Os processos em segundo plano têm de estar concluídos antes de mostrar informações sobre as características. Vamos esperar até que estejam concluídos"
+                                Case "ITA"
+                                    msg = "Prima di poter visualizzare le informazioni sulle funzionalità i processi in background devono essere stati completati. Attendi che siano stati completati."
+                            End Select
+                        Case 1
+                            msg = "Background processes need to have completed before showing feature information. We'll wait until they have completed"
+                        Case 2
+                            msg = "Los procesos en segundo plano deben haber completado antes de obtener información de la característica. Esperaremos hasta que hayan completado"
+                        Case 3
+                            msg = "Les processus en plan doivent être terminés avant d'afficher les caractéristiques. Nous attendrons qu'ils soient terminés"
+                        Case 4
+                            msg = "Os processos em segundo plano têm de estar concluídos antes de mostrar informações sobre as características. Vamos esperar até que estejam concluídos"
+                        Case 5
+                            msg = "Prima di poter visualizzare le informazioni sulle funzionalità i processi in background devono essere stati completati. Attendi che siano stati completati."
+                    End Select
+                    MsgBox(msg, vbOKOnly + vbInformation, ImageTaskHeader1.ItemText)
+                    Select Case MainForm.Language
+                        Case 0
+                            Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                Case "ENU", "ENG"
+                                    Label2.Text = "Waiting for background processes to finish..."
+                                Case "ESN"
+                                    Label2.Text = "Esperando a que terminen los procesos en segundo plano..."
+                                Case "FRA"
+                                    Label2.Text = "Attente de la fin des processus en arrière plan..."
+                                Case "PTB", "PTG"
+                                    Label2.Text = "À espera que os processos em segundo plano terminem..."
+                                Case "ITA"
+                                    Label2.Text = "In attesa che i processi in background siano stati completati..."
+                            End Select
+                        Case 1
+                            Label2.Text = "Waiting for background processes to finish..."
+                        Case 2
+                            Label2.Text = "Esperando a que terminen los procesos en segundo plano..."
+                        Case 3
+                            Label2.Text = "Attente de la fin des processus en arrière plan..."
+                        Case 4
+                            Label2.Text = "À espera que os processos em segundo plano terminem..."
+                        Case 5
+                            Label2.Text = "In attesa che i processi in background siano stati completati..."
+                    End Select
+                    While MainForm.ImgBW.IsBusy
+                        Application.DoEvents()
+                        Thread.Sleep(500)
+                    End While
+                End If
+                MainForm.StopMountedImageDetector()
+                cPropPathView.Nodes.Clear()
+                cPropName.Text = ""
+                cPropValue.Text = ""
+                Select Case MainForm.Language
+                    Case 0
+                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                            Case "ENU", "ENG"
+                                Label2.Text = "Preparing to get feature information..."
+                            Case "ESN"
+                                Label2.Text = "Preparándonos para obtener información de la característica..."
+                            Case "FRA"
+                                Label2.Text = "Préparation de l'obtention des informations de la caractéristique en cours..."
+                            Case "PTB", "PTG"
+                                Label2.Text = "Preparar-se para obter informações sobre a característica..."
+                            Case "ITA"
+                                Label2.Text = "Preparazione verifica informazioni funzionalità..."
+                        End Select
+                    Case 1
+                        Label2.Text = "Preparing to get feature information..."
+                    Case 2
+                        Label2.Text = "Preparándonos para obtener información de la característica..."
+                    Case 3
+                        Label2.Text = "Préparation de l'obtention des informations de la caractéristique en cours..."
+                    Case 4
+                        Label2.Text = "Preparar-se para obter informações sobre a característica..."
+                    Case 5
+                        Label2.Text = "Preparazione verifica informazioni funzionalità..."
+                End Select
+                Application.DoEvents()
+                Try
+                    DynaLog.LogMessage("Initializing API...")
+                    DismApi.Initialize(DismLogLevel.LogErrors)
+                    DynaLog.LogMessage("Creating session...")
+                    Using imgSession As DismSession = If(MainForm.OnlineManagement, DismApi.OpenOnlineSession(), DismApi.OpenOfflineSession(MainForm.MountDir))
+                        Select Case MainForm.Language
+                            Case 0
+                                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                    Case "ENU", "ENG"
+                                        Label2.Text = "Getting information from " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & "..."
+                                    Case "ESN"
+                                        Label2.Text = "Obteniendo información de " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & "..."
+                                    Case "FRA"
+                                        Label2.Text = "Obtention des informations de " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & " en cours..."
+                                    Case "PTB", "PTG"
+                                        Label2.Text = "Obter informações de " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & "..."
+                                    Case "ITA"
+                                        Label2.Text = "Verifica informazioni da " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & "..."
+                                End Select
+                            Case 1
+                                Label2.Text = "Getting information from " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & "..."
+                            Case 2
+                                Label2.Text = "Obteniendo información de " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & "..."
+                            Case 3
+                                Label2.Text = "Obtention des informations de " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & " en cours..."
+                            Case 4
+                                Label2.Text = "Obter informações de " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & "..."
+                            Case 5
+                                Label2.Text = "Verifica informazioni da " & Quote & ListView1.FocusedItem.SubItems(0).Text & Quote & "..."
+                        End Select
+                        DynaLog.LogMessage("Feature to get information about: " & ListView1.FocusedItem.SubItems(0).Text)
+                        Application.DoEvents()
+                        Dim featInfo As DismFeatureInfo = DismApi.GetFeatureInfo(imgSession, ListView1.FocusedItem.SubItems(0).Text)
+                        Label23.Text = featInfo.FeatureName
+                        Label25.Text = featInfo.DisplayName
+                        Label35.Text = featInfo.Description
+                        Label32.Text = Casters.CastDismRestartType(featInfo.RestartRequired, True)
+                        Label40.Text = Casters.CastDismFeatureState(featInfo.FeatureState, True)
+                        Dim cProps As DismCustomPropertyCollection = featInfo.CustomProperties
+                        DynaLog.LogMessage("Custom property count: " & cProps.Count)
+                        If cProps.Count > 0 Then
+                            DynaLog.LogMessage("This feature has custom properties.")
+                            Label42.Visible = False
+                            CPropViewer.Visible = True
+                            Dim cPropContents As String = ""
+                            For Each cProp As DismCustomProperty In cProps
+                                cPropContents &= "- " & If(cProp.Path <> "", cProp.Path & "\", "") & cProp.Name & ": " & cProp.Value & CrLf
+                            Next
+                            PopulateTreeView(cPropPathView, cPropContents.Replace("- ", "").Trim())
+                            Select Case MainForm.Language
+                                Case 0
+                                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                        Case "ENU", "ENG"
+                                            cPropValue.Text = "Please select or expand an entry."
+                                        Case "ESN"
+                                            cPropValue.Text = "Por favor, seleccione o expanda una entrada."
+                                        Case "FRA"
+                                            cPropValue.Text = "Veuillez sélectionner ou étendre une entrée."
+                                        Case "PTB", "PTG"
+                                            cPropValue.Text = "Por favor, seleccione ou expanda uma entrada."
+                                        Case "ITA"
+                                            cPropValue.Text = "Seleziona o espandi un elemento."
+                                    End Select
+                                Case 1
+                                    cPropValue.Text = "Please select or expand an entry."
+                                Case 2
+                                    cPropValue.Text = "Por favor, seleccione o expanda una entrada."
+                                Case 3
+                                    cPropValue.Text = "Veuillez sélectionner ou étendre une entrée."
+                                Case 4
+                                    cPropValue.Text = "Por favor, seleccione ou expanda uma entrada."
+                                Case 5
+                                    cPropValue.Text = "Seleziona o espandi un elemento."
+                            End Select
+                        Else
+                            DynaLog.LogMessage("This feature does not have custom properties.")
+                            Select Case MainForm.Language
+                                Case 0
+                                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                        Case "ENU", "ENG"
+                                            Label42.Text = "None"
+                                        Case "ESN"
+                                            Label42.Text = "Ninguna"
+                                        Case "FRA"
+                                            Label42.Text = "Aucune"
+                                        Case "PTB", "PTG"
+                                            Label42.Text = "Nenhum"
+                                        Case "ITA"
+                                            Label42.Text = "Nessuno"
+                                    End Select
+                                Case 1
+                                    Label42.Text = "None"
+                                Case 2
+                                    Label42.Text = "Ninguna"
+                                Case 3
+                                    Label42.Text = "Aucune"
+                                Case 4
+                                    Label42.Text = "Nenhum"
+                                Case 5
+                                    Label42.Text = "Nessuno"
+                            End Select
+                            Label42.Visible = True
+                            CPropViewer.Visible = False
+                        End If
+                    End Using
+                Catch NRE As NullReferenceException
+                    Panel4.Visible = False
+                    Panel7.Visible = True
+                Catch ex As Exception
+                    DynaLog.LogMessage("Could not get feature information. Error message: " & ex.Message)
+                    Dim msg As String = ""
+                    Select Case MainForm.Language
+                        Case 0
+                            Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                Case "ENU", "ENG"
+                                    msg = "Could not get feature information. Reason: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                                Case "ESN"
+                                    msg = "No pudimos obtener información de la característica. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                                Case "FRA"
+                                    msg = "Impossible d'obtenir des informations sur les caractéristiques. Raison : " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                                Case "PTB", "PTG"
+                                    msg = "Não foi possível obter informações sobre a característica. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                                Case "ITA"
+                                    msg = "Impossibile verificare informazioni sulle funzionalità. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                            End Select
+                        Case 1
+                            msg = "Could not get feature information. Reason: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case 2
+                            msg = "No pudimos obtener información de la característica. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case 3
+                            msg = "Impossible d'obtenir des informations sur les caractéristiques. Raison : " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case 4
+                            msg = "Não foi possível obter informações sobre a característica. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case 5
+                            msg = "Impossibile verificare informazioni sulle funzionalità. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                    End Select
+                    MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                Finally
+                    DynaLog.LogMessage("Shutting down API...")
+                    Try
+                        DismApi.Shutdown()
+                    Catch ex As Exception
+
+                    End Try
+                End Try
+                Select Case MainForm.Language
+                    Case 0
+                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                            Case "ENU", "ENG"
+                                Label2.Text = "Ready"
+                            Case "ESN"
+                                Label2.Text = "Listo"
+                            Case "FRA"
+                                Label2.Text = "Prêt"
+                            Case "PTB", "PTG"
+                                Label2.Text = "Pronto"
+                            Case "ITA"
+                                Label2.Text = "Pronto"
+                        End Select
+                    Case 1
+                        Label2.Text = "Ready"
+                    Case 2
+                        Label2.Text = "Listo"
+                    Case 3
+                        Label2.Text = "Prêt"
+                    Case 4
+                        Label2.Text = "Pronto"
+                    Case 5
+                        Label2.Text = "Pronto"
+                End Select
+                Panel4.Visible = True
+                Panel7.Visible = False
+            Else
+                Panel4.Visible = False
+                Panel7.Visible = True
+            End If
+        Catch ex As Exception
+            Panel4.Visible = False
+            Panel7.Visible = True
+        End Try
+
+        _lvwColumnSorter = New ListViewColumnSorter()
+        ListView1.ListViewItemSorter = _lvwColumnSorter
+        WindowHelper.EnableCloseCapability(Handle)
+
+        Button1.Visible = (ListView1.SelectedItems.Count = 1)
+    End Sub
+
+    Private Sub PopulateTreeView(treeView As TreeView, input As String)
+        DynaLog.LogMessage("Populating items in custom property tree view...")
+        Dim lines As String() = input.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+        For Each line As String In lines
+            ' Split the line at the last colon to get the path and value
+            Dim colonIndex As Integer = line.LastIndexOf(": ")
+            If colonIndex = -1 Then Continue For ' Skip lines without a colon
+            Dim path As String = line.Substring(0, colonIndex).Trim()
+            Dim value As String = line.Substring(colonIndex + 1).Trim()
+            Dim pathParts As String() = path.Split("\"c)
+            AddNodeRecursive(treeView.Nodes, pathParts, 0, value)
+        Next
+    End Sub
+
+    Private Sub AddNodeRecursive(parentNodes As TreeNodeCollection, parts As String(), startIndex As Integer, value As String)
+        If startIndex >= parts.Length Then
+            Return
+        End If
+        Dim nodeName As String = parts(startIndex).Trim()
+        Dim existingNode As TreeNode = parentNodes.Cast(Of TreeNode)().FirstOrDefault(Function(n) n.Text = nodeName)
+        If existingNode Is Nothing Then
+            existingNode = New TreeNode(nodeName)
+            parentNodes.Add(existingNode)
+        Else
+            If startIndex = parts.Length - 1 Then
+                ' If the node already exists and we are at the last part, add a new node
+                Dim newNode As New TreeNode(nodeName)
+                newNode.Tag = value
+                parentNodes.Add(newNode)
+                Return
+            End If
+        End If
+        If startIndex = parts.Length - 1 Then
+            existingNode.Tag = value
+        Else
+            AddNodeRecursive(existingNode.Nodes, parts, startIndex + 1, value)
+        End If
+    End Sub
+
+    Private Sub cPropPathView_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles cPropPathView.AfterSelect
+        cPropName.Text = cPropPathView.SelectedNode.Text
+        Dim selectedNode As TreeNode = cPropPathView.SelectedNode
+        If selectedNode IsNot Nothing AndAlso selectedNode.Tag IsNot Nothing Then
+            DynaLog.LogMessage("Value of selected custom property: " & selectedNode.Tag.ToString())
+            cPropValue.Text = selectedNode.Tag.ToString()
+        Else
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            cPropValue.Text = "No value has been defined. If the selected item has subitems, expand it."
+                        Case "ESN"
+                            cPropValue.Text = "No se ha definido un valor. Si el elemento seleccionado tiene elementos secundarios, expándalo."
+                        Case "FRA"
+                            cPropValue.Text = "Aucune valeur n'a été définie. Si l'élément sélectionné a des sous-éléments, développez-le."
+                        Case "PTB", "PTG"
+                            cPropValue.Text = "Nenhum valor foi definido. Se o item selecionado tiver subitens, expanda-o."
+                        Case "ITA"
+                            cPropValue.Text = "Non è stato definito alcun valore. Se l'elemento selezionato ha delle sotto voci, espandilo."
+                    End Select
+                Case 1
+                    cPropValue.Text = "No value has been defined. If the selected item has subitems, expand it."
+                Case 2
+                    cPropValue.Text = "No se ha definido un valor. Si el elemento seleccionado tiene elementos secundarios, expándalo."
+                Case 3
+                    cPropValue.Text = "Aucune valeur n'a été définie. Si l'élément sélectionné a des sous-éléments, développez-le."
+                Case 4
+                    cPropValue.Text = "Nenhum valor foi definido. Se o item selecionado tiver subitens, expanda-o."
+                Case 5
+                    cPropValue.Text = "Non è stato definito alcun valore. Se l'elemento selezionato ha delle sotto voci, espandilo."
+            End Select
+        End If
+    End Sub
+
+    Private Sub GetFeatureInfoDlg_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        MainForm.StartMountedImageDetector()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If MainForm.ImgInfoSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            DynaLog.LogMessage("Saving feature information...")
+            If Not ImgInfoSaveDlg.IsDisposed Then ImgInfoSaveDlg.Dispose()
+            ImgInfoSaveDlg.SourceImage = MainForm.SourceImg
+            ImgInfoSaveDlg.ImgMountDir = If(Not MainForm.OnlineManagement, MainForm.MountDir, "")
+            ImgInfoSaveDlg.SaveTarget = MainForm.ImgInfoSFD.FileName
+            ImgInfoSaveDlg.OnlineMode = MainForm.OnlineManagement
+            ImgInfoSaveDlg.OfflineMode = MainForm.OfflineManagement
+            ImgInfoSaveDlg.SkipQuestions = MainForm.SkipQuestions
+            ImgInfoSaveDlg.AutoCompleteInfo = MainForm.AutoCompleteInfo
+            ImgInfoSaveDlg.ForceAppxApi = False
+            ImgInfoSaveDlg.SaveTask = 4
+            ImgInfoSaveDlg.ImageToGetInfoFrom = MainForm.CurrentImage
+            ImgInfoSaveDlg.ShowDialog(Me)
+            InfoSaveResults.Show()
+        End If
+    End Sub
+
+    Sub SearchFeatures(sQuery As String, Optional featureState As String = "")
+        DynaLog.LogMessage("Search query: " & sQuery)
+        Dim expectedFeatureState As DismPackageFeatureState = DismPackageFeatureState.NotPresent
+        If featureState <> "" Then
+            DynaLog.LogMessage("Feature state query is not nothing (" & Quote & featureState & Quote & ")")
+            Select Case featureState.ToLower()
+                Case "notpresent"
+                    expectedFeatureState = DismPackageFeatureState.NotPresent
+                Case "disablepending"
+                    expectedFeatureState = DismPackageFeatureState.UninstallPending
+                Case "disabled"
+                    expectedFeatureState = DismPackageFeatureState.Staged
+                Case "removed"
+                    expectedFeatureState = DismPackageFeatureState.Removed
+                Case "resolved"
+                    expectedFeatureState = DismPackageFeatureState.Resolved
+                Case "enabled"
+                    expectedFeatureState = DismPackageFeatureState.Installed
+                Case "enablepending"
+                    expectedFeatureState = DismPackageFeatureState.InstallPending
+                Case "superseded"
+                    expectedFeatureState = DismPackageFeatureState.Superseded
+                Case "partiallyinstalled"
+                    expectedFeatureState = DismPackageFeatureState.PartiallyInstalled
+            End Select
+        End If
+        If MainForm.CurrentImage.ImageFeatures Is Nothing OrElse MainForm.CurrentImage.ImageFeatures.Count = 0 Then
+            Dim finalFeatureLookup As IEnumerable(Of ImageFeature) = MainForm.CurrentImage.ImageFeatures_Backup.Where(Function(feature) feature.FeatureName.ToLowerInvariant().Contains(sQuery.ToLowerInvariant()))
+            If featureState <> "" Then      ' We filter them again based on the state
+                finalFeatureLookup = finalFeatureLookup.Where(Function(feature) feature.FeatureState = expectedFeatureState)
+            End If
+            ListView1.Items.AddRange(finalFeatureLookup.Select(Function(filteredFeature) New ListViewItem(New String() {filteredFeature.FeatureName, Casters.CastDismFeatureState(filteredFeature.FeatureState, True)})).ToArray())
+        Else
+            Dim finalFeatureLookup As IEnumerable(Of DismFeature) = MainForm.CurrentImage.ImageFeatures.Where(Function(feature) feature.FeatureName.ToLowerInvariant().Contains(sQuery.ToLowerInvariant()))
+            If featureState <> "" Then      ' We filter them again based on the state
+                finalFeatureLookup = finalFeatureLookup.Where(Function(feature) feature.State = expectedFeatureState)
+            End If
+            ListView1.Items.AddRange(finalFeatureLookup.Select(Function(filteredFeature) New ListViewItem(New String() {filteredFeature.FeatureName, Casters.CastDismFeatureState(filteredFeature.State, True)})).ToArray())
+        End If
+    End Sub
+
+    Private Sub SearchBox1_TextChanged(sender As Object, e As EventArgs) Handles SearchBox1.TextChanged
+        ListView1.Items.Clear()
+        If SearchBox1.Text <> "" Then
+            If SearchBox1.Text.ToLower().Contains("state:") Then
+                Dim state As String = SearchBox1.Text.Substring(SearchBox1.Text.IndexOf("state:") + "state:".Length).Trim()
+                SearchFeatures(SearchBox1.Text.Replace("state:" & state, "").Trim(), state)
+            Else
+                SearchFeatures(SearchBox1.Text)
+            End If
+        Else
+            DynaLog.LogMessage("No search query has been specified. Showing all items...")
+            If MainForm.CurrentImage.ImageFeatures Is Nothing OrElse MainForm.CurrentImage.ImageFeatures.Count = 0 Then
+                ListView1.Items.AddRange(MainForm.CurrentImage.ImageFeatures_Backup.Select(Function(InstalledFeature) New ListViewItem(New String() {InstalledFeature.FeatureName, Casters.CastDismFeatureState(InstalledFeature.FeatureState, True)})).ToArray())
+            Else
+                ListView1.Items.AddRange(MainForm.CurrentImage.ImageFeatures.Select(Function(InstalledFeature) New ListViewItem(New String() {InstalledFeature.FeatureName, Casters.CastDismFeatureState(InstalledFeature.State, True)})).ToArray())
+            End If
+        End If
+    End Sub
+
+    Private Sub ListView1_ColumnClick(sender As Object, e As ColumnClickEventArgs) Handles ListView1.ColumnClick
+        ' From Microsoft documentation: https://learn.microsoft.com/en-us/troubleshoot/developer/visualstudio/csharp/language-compilers/sort-listview-by-column
+        DynaLog.LogMessage("Sorting items...")
+        DynaLog.LogMessage("Column to sort: " & e.Column + 1)
+        DynaLog.LogMessage("Current sort order (may be modified): " & _lvwColumnSorter.Order)
+        If e.Column = _lvwColumnSorter.SortColumn Then
+            If _lvwColumnSorter.Order = SortOrder.Ascending Then
+                _lvwColumnSorter.Order = SortOrder.Descending
+            Else
+                _lvwColumnSorter.Order = SortOrder.Ascending
+            End If
+        Else
+            _lvwColumnSorter.SortColumn = e.Column
+            _lvwColumnSorter.Order = SortOrder.Ascending
+        End If
+
+        ' If we haven't selected items, force sorting
+        If ListView1.SelectedItems.Count < 1 Then ListView1.Sorting = _lvwColumnSorter.Order
+
+        ListView1.Sort()
+    End Sub
+
+    Private Sub SearchBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles SearchBox1.KeyDown
+        If e.KeyCode = Keys.Back And e.Control Then
+            Dim text As String = SearchBox1.Text
+            Dim lastSpaceIndex As Integer = text.LastIndexOf(" "c)
+            If lastSpaceIndex > 0 Then
+                SearchBox1.Text = text.Substring(0, lastSpaceIndex).TrimEnd()
+            Else
+                SearchBox1.Text = ""
+            End If
+            e.SuppressKeyPress = True
+            SearchBox1.SelectionStart = SearchBox1.TextLength
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        SearchEngineHelper.InvokeSearchQuery(MainForm.SearchEngineName, String.Format("microsoft windows {0}", Quote & Label23.Text & Quote))
+    End Sub
+
+    Private Sub WizardBtn_Click(sender As Object, e As EventArgs) Handles WizardBtn.Click
+        If FeatureFilterAssistantDialog.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            SearchBox1.Text = FeatureFilterAssistantDialog.AppliedQuery
+        End If
+    End Sub
+
+    Private Sub WizardBtn_MouseHover(sender As Object, e As EventArgs) Handles WizardBtn.MouseHover
+        WindowHelper.DisplayToolTip(sender, "Build query with the Assistant...")
+    End Sub
+End Class

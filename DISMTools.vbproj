@@ -1,0 +1,2475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{042ED465-C910-407A-93D1-736639FF0EA5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>DISMTools.My.MyApplication</StartupObject>
+    <RootNamespace>DISMTools</RootNamespace>
+    <AssemblyName>DISMTools</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publicar\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>DISMTools.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>DISMTools.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActiveDirectoryObjectPicker, Version=3.0.11.0, Culture=neutral, PublicKeyToken=515ab092c8839750, processorArchitecture=MSIL">
+      <HintPath>packages\Tulpep.ActiveDirectoryObjectPicker.3.0.11\lib\net48\ActiveDirectoryObjectPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="DarkUI, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DarkUI.2.0.2\lib\DarkUI.dll</HintPath>
+    </Reference>
+    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Markdig, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Markdig.1.4.0\lib\net462\Markdig.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.10.0.9\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dism, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5bba90053b345501, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Dism.6.1.0\lib\net472\Microsoft.Dism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Core, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Sensors, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.Sensors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=8.0.15.2, Culture=neutral, PublicKeyToken=8afb38e9204fc0a9, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAPICodePack.8.0.15.2\lib\net48\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Scintilla.NET, Version=6.1.2.0, Culture=neutral, PublicKeyToken=0221e70ba618311e, processorArchitecture=MSIL">
+      <HintPath>packages\Scintilla5.NET.6.1.2\lib\net462\Scintilla.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Design">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Pipelines, Version=10.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Pipelines.10.0.9\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.10.0.9\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=10.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.10.0.9\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.6.2\lib\net462\System.ValueTuple.dll</HintPath>
+      <SpecificVersion>True</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="DISMTools.Elements.Contemporaneus" />
+    <Import Include="DISMTools.Utilities" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="Microsoft.VisualBasic.ControlChars" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.IO" />
+    <Import Include="System.Management" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Elements\AppxPackage.vb" />
+    <Compile Include="Elements\AutoUnattend\ActiveDirectory\ADDSJoinDialog.Designer.vb">
+      <DependentUpon>ADDSJoinDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\AutoUnattend\ActiveDirectory\ADDSJoinDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Elements\AutoUnattend\ActiveDirectory\DnsZoneChooserDialog.Designer.vb">
+      <DependentUpon>DnsZoneChooserDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\AutoUnattend\ActiveDirectory\DnsZoneChooserDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Elements\AutoUnattend\ActiveDirectory\DomainRole.vb" />
+    <Compile Include="Elements\AutoUnattend\ActiveDirectory\DomainServicesModule.vb" />
+    <Compile Include="Elements\AutoUnattend\Components\Component.vb" />
+    <Compile Include="Elements\AutoUnattend\Components\Pass.vb" />
+    <Compile Include="Elements\AutoUnattend\DiskConfig\DiskConfiguration.vb" />
+    <Compile Include="Elements\AutoUnattend\Localization\GeoId.vb" />
+    <Compile Include="Elements\AutoUnattend\Localization\ImageLanguage.vb" />
+    <Compile Include="Elements\AutoUnattend\Localization\KeyboardIdentifier.vb" />
+    <Compile Include="Elements\AutoUnattend\Localization\TimeOffset.vb" />
+    <Compile Include="Elements\AutoUnattend\Localization\UserLocale.vb" />
+    <Compile Include="Elements\AutoUnattend\NetworkConnections\WirelessSettings.vb" />
+    <Compile Include="Elements\AutoUnattend\ProductKey\ProductKey.vb" />
+    <Compile Include="Elements\AutoUnattend\Scripts\PostInstallScript.vb" />
+    <Compile Include="Elements\AutoUnattend\StarterScripts\StarterScript.vb" />
+    <Compile Include="Elements\AutoUnattend\StarterScripts\StarterScriptLibraryItem.vb" />
+    <Compile Include="Elements\AutoUnattend\SysConfig\ComputerName.vb" />
+    <Compile Include="Elements\AutoUnattend\SysConfig\SVSettings.vb" />
+    <Compile Include="Elements\AutoUnattend\Telemetry\SystemTelemetry.vb" />
+    <Compile Include="Elements\AutoUnattend\UnattendedWizardPage.vb" />
+    <Compile Include="Elements\AutoUnattend\UserAccounts\AccountLockoutSettings.vb" />
+    <Compile Include="Elements\AutoUnattend\UserAccounts\AutoLogonSettings.vb" />
+    <Compile Include="Elements\AutoUnattend\UserAccounts\PasswordExpirationSettings.vb" />
+    <Compile Include="Elements\AutoUnattend\UserAccounts\User.vb" />
+    <Compile Include="Elements\AutoUnattend\VirtualMachines\VirtualMachineSettings.vb" />
+    <Compile Include="Elements\Contemporaneus\FullFlashUtilityImage.vb" />
+    <Compile Include="Elements\Contemporaneus\ImageAppxPackage.vb" />
+    <Compile Include="Elements\Contemporaneus\ImageCapability.vb" />
+    <Compile Include="Elements\Contemporaneus\ImageDriver.vb" />
+    <Compile Include="Elements\Contemporaneus\ImageOperations\ImageOperation.vb" />
+    <Compile Include="Elements\Contemporaneus\ImageOperations\MountImageIO.vb" />
+    <Compile Include="Elements\Contemporaneus\PSInterop\PSObjects.vb" />
+    <Compile Include="Elements\Contemporaneus\ImageFeature.vb" />
+    <Compile Include="Elements\Contemporaneus\WindowsImage.vb" />
+    <Compile Include="Elements\Contemporaneus\ImagePackage.vb" />
+    <Compile Include="Elements\EnvVarManagement\EnvironmentVariable.vb" />
+    <Compile Include="Elements\EnvVarManagement\EnvironmentVariableHelper.vb" />
+    <Compile Include="Elements\InfinityHome\InfinityFact.vb" />
+    <Compile Include="Elements\IniParserConfigurators\FfuIniParserConfiguration.vb" />
+    <Compile Include="Elements\IniParserConfigurators\SettingsParserConfiguration.vb" />
+    <Compile Include="Elements\ISOCreation\IsoCreationJobManager.vb" />
+    <Compile Include="Elements\ISOCreation\IsoCreationTask.vb" />
+    <Compile Include="Elements\KeyboardDrivers.vb" />
+    <Compile Include="Elements\Recents.vb" />
+    <Compile Include="Elements\SearchBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Elements\ServiceManagement\NTSecurityPrivilegeConstant.vb" />
+    <Compile Include="Elements\ServiceManagement\WindowsService.vb" />
+    <Compile Include="Elements\ServiceManagement\WindowsServiceHelper.vb" />
+    <Compile Include="Elements\ServiceManagement\WindowsServiceHostGroup.vb" />
+    <Compile Include="Elements\WindowsRegistry\RegistryItem.vb" />
+    <Compile Include="Help\HelpDocsModule.vb" />
+    <Compile Include="Help\QuickHelpModule.vb" />
+    <Compile Include="MainForm.Events.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Panels\BDE\LockVolumeDialog.Designer.vb">
+      <DependentUpon>LockVolumeDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BDE\LockVolumeDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BDE\UnlockVolumeDialog.Designer.vb">
+      <DependentUpon>UnlockVolumeDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BDE\UnlockVolumeDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ConfigLists\AddListEntryDlg.Designer.vb">
+      <DependentUpon>AddListEntryDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ConfigLists\AddListEntryDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ConfigLists\Tools\OneDriveExclusionDlg.Designer.vb">
+      <DependentUpon>OneDriveExclusionDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ConfigLists\Tools\OneDriveExclusionDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ConfigLists\WimScriptEditor.Designer.vb">
+      <DependentUpon>WimScriptEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ConfigLists\WimScriptEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoWork\ProgressPanel.Designer.vb">
+      <DependentUpon>ProgressPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoWork\ProgressPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoWork\ProgressReporter.vb" />
+    <Compile Include="Panels\Exceptions\ExceptionForm.Designer.vb">
+      <DependentUpon>ExceptionForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Exceptions\ExceptionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\BGProcs\BGProcsAdvSettings.Designer.vb">
+      <DependentUpon>BGProcsAdvSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\BGProcs\BGProcsAdvSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\DismComponents.Designer.vb">
+      <DependentUpon>DismComponents.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\DismComponents.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\InvalidSettings\InvalidSettingsDialog.Designer.vb">
+      <DependentUpon>InvalidSettingsDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\InvalidSettings\InvalidSettingsDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\Migration\MigrationForm.Designer.vb">
+      <DependentUpon>MigrationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\Migration\MigrationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\PrgAbout.Designer.vb">
+      <DependentUpon>PrgAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\PrgAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\SettingsResetDlg.Designer.vb">
+      <DependentUpon>SettingsResetDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\SettingsResetDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\FirstUse\IncompleteSetupDlg.Designer.vb">
+      <DependentUpon>IncompleteSetupDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\FirstUse\IncompleteSetupDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\FirstUse\PrgSetup.Designer.vb">
+      <DependentUpon>PrgSetup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\FirstUse\PrgSetup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\AppxPkgs\GetAppxPkgInfo.Designer.vb">
+      <DependentUpon>GetAppxPkgInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\AppxPkgs\GetAppxPkgInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Capabilities\GetCapabilityInfo.Designer.vb">
+      <DependentUpon>GetCapabilityInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Capabilities\GetCapabilityInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Drivers\DriverFileInfoDlg.Designer.vb">
+      <DependentUpon>DriverFileInfoDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Drivers\DriverFileInfoDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Drivers\GetDriverInfo.Designer.vb">
+      <DependentUpon>GetDriverInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Drivers\GetDriverInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Features\GetFeatureInfo.Designer.vb">
+      <DependentUpon>GetFeatureInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Features\GetFeatureInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\FilterAssistants\AppxFilterAssistantDialog.Designer.vb">
+      <DependentUpon>AppxFilterAssistantDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\FilterAssistants\AppxFilterAssistantDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\FilterAssistants\CapabilityFilterAssistantDialog.Designer.vb">
+      <DependentUpon>CapabilityFilterAssistantDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\FilterAssistants\CapabilityFilterAssistantDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\FilterAssistants\DriverFilterAssistantDialog.Designer.vb">
+      <DependentUpon>DriverFilterAssistantDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\FilterAssistants\DriverFilterAssistantDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\FilterAssistants\FeatureFilterAssistantDialog.Designer.vb">
+      <DependentUpon>FeatureFilterAssistantDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\FilterAssistants\FeatureFilterAssistantDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\GetImgInfoDlg.Designer.vb">
+      <DependentUpon>GetImgInfoDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\GetImgInfoDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\InfoSave\ImgInfoSaveDlg.Designer.vb">
+      <DependentUpon>ImgInfoSaveDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\InfoSave\ImgInfoSaveDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\InfoSave\InfoSaveResults.Designer.vb">
+      <DependentUpon>InfoSaveResults.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\InfoSave\InfoSaveResults.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Pkgs\GetPkgInfo.Designer.vb">
+      <DependentUpon>GetPkgInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\Pkgs\GetPkgInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\WinPE\GetWinPESettings.Designer.vb">
+      <DependentUpon>GetWinPESettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Get_Ops\WinPE\GetWinPESettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\IImageTaskDialog.vb" />
+    <Compile Include="Panels\ImageTaskHeader.Designer.vb">
+      <DependentUpon>ImageTaskHeader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ImageTaskHeader.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ActiveInstAccessWarn.Designer.vb">
+      <DependentUpon>ActiveInstAccessWarn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ActiveInstAccessWarn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\ApplicationDriveSpecifier.Designer.vb">
+      <DependentUpon>ApplicationDriveSpecifier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\ApplicationDriveSpecifier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\AppxPkgs\AddProvAppxPackage.Designer.vb">
+      <DependentUpon>AddProvAppxPackage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\AppxPkgs\AddProvAppxPackage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\AppxPkgs\AppInstallerDownloader.Designer.vb">
+      <DependentUpon>AppInstallerDownloader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\AppxPkgs\AppInstallerDownloader.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\AppxPkgs\RemProvAppxPackage.Designer.vb">
+      <DependentUpon>RemProvAppxPackage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\AppxPkgs\RemProvAppxPackage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Bg_Processes\BGProcDetails.Designer.vb">
+      <DependentUpon>BGProcDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Bg_Processes\BGProcDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Bg_Processes\BGProcFailureDialog.Designer.vb">
+      <DependentUpon>BGProcFailureDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Bg_Processes\BGProcFailureDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Bg_Processes\BGProcNotify.Designer.vb">
+      <DependentUpon>BGProcNotify.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Bg_Processes\BGProcNotify.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Bg_Processes\BGProcsBusyDialog.Designer.vb">
+      <DependentUpon>BGProcsBusyDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Bg_Processes\BGProcsBusyDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Capabilities\AddCapabilities.Designer.vb">
+      <DependentUpon>AddCapabilities.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Capabilities\AddCapabilities.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Capabilities\RemCapabilities.Designer.vb">
+      <DependentUpon>RemCapabilities.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Capabilities\RemCapabilities.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\CompClean\ImgCleanup.Designer.vb">
+      <DependentUpon>ImgCleanup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\CompClean\ImgCleanup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Conversion\ImgWim2Esd.Designer.vb">
+      <DependentUpon>ImgWim2Esd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Conversion\ImgWim2Esd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\AddDrivers.Designer.vb">
+      <DependentUpon>AddDrivers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\AddDrivers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\DriverManualFilePicker.Designer.vb">
+      <DependentUpon>DriverManualFilePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\DriverManualFilePicker.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\ExportDrivers.Designer.vb">
+      <DependentUpon>ExportDrivers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\ExportDrivers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\ImportDrivers.Designer.vb">
+      <DependentUpon>ImportDrivers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\ImportDrivers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\RemDrivers.Designer.vb">
+      <DependentUpon>RemDrivers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Drivers\RemDrivers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Editions\SetImageEdition.Designer.vb">
+      <DependentUpon>SetImageEdition.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Editions\SetImageEdition.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Editions\SetProductKey.Designer.vb">
+      <DependentUpon>SetProductKey.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Editions\SetProductKey.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\EnvironmentVariables\EnvVarManagementForm.Designer.vb">
+      <DependentUpon>EnvVarManagementForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\EnvironmentVariables\EnvVarManagementForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Features\DisableFeat.Designer.vb">
+      <DependentUpon>DisableFeat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Features\DisableFeat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Features\EnableFeat.Designer.vb">
+      <DependentUpon>EnableFeat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Features\EnableFeat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Features\PkgParentNames\PkgParentNameLookupDlg.Designer.vb">
+      <DependentUpon>PkgParentNameLookupDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Features\PkgParentNames\PkgParentNameLookupDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuApply.Designer.vb">
+      <DependentUpon>FfuApply.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuApply.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuCapture.Designer.vb">
+      <DependentUpon>FfuCapture.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuCapture.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuInfoDialog.Designer.vb">
+      <DependentUpon>FfuInfoDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuInfoDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuOptimize.Designer.vb">
+      <DependentUpon>FfuOptimize.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuOptimize.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuSplit.Designer.vb">
+      <DependentUpon>FfuSplit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\FFU\FfuSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImageFilePickerDialog.Designer.vb">
+      <DependentUpon>ImageFilePickerDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImageFilePickerDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgAppend.Designer.vb">
+      <DependentUpon>ImgAppend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgAppend.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgApply.Designer.vb">
+      <DependentUpon>ImgApply.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgApply.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgCapture.Designer.vb">
+      <DependentUpon>ImgCapture.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgCapture.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgExport.Designer.vb">
+      <DependentUpon>ImgExport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgExport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgIndexDelete.Designer.vb">
+      <DependentUpon>ImgIndexDelete.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgIndexDelete.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgOptimize.Designer.vb">
+      <DependentUpon>ImgOptimize.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgOptimize.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgSplit.Designer.vb">
+      <DependentUpon>ImgSplit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgSplit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgUMount.Designer.vb">
+      <DependentUpon>ImgUMount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgUMount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgMount.Designer.vb">
+      <DependentUpon>ImgMount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ImgMount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Langs\SetLayeredDriver.Designer.vb">
+      <DependentUpon>SetLayeredDriver.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Langs\SetLayeredDriver.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Merger\ImgSwmToWim.Designer.vb">
+      <DependentUpon>ImgSwmToWim.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Merger\ImgSwmToWim.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\MountedImgMgr.Designer.vb">
+      <DependentUpon>MountedImgMgr.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\MountedImgMgr.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\OfflineInstDriveLister.Designer.vb">
+      <DependentUpon>OfflineInstDriveLister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\OfflineInstDriveLister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Pkgs\AddPackage.Designer.vb">
+      <DependentUpon>AddPackage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Pkgs\AddPackage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Pkgs\MUMAdditionDialog.Designer.vb">
+      <DependentUpon>MUMAdditionDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Pkgs\MUMAdditionDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Pkgs\RemPackage.Designer.vb">
+      <DependentUpon>RemPackage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Pkgs\RemPackage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ProvisioningPkgs\AddProvisioningPkg.Designer.vb">
+      <DependentUpon>AddProvisioningPkg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\ProvisioningPkgs\AddProvisioningPkg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Registry\RegistryControlPanel.Designer.vb">
+      <DependentUpon>RegistryControlPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Registry\RegistryControlPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Services\RegisteredServiceHostGroupsDialog.Designer.vb">
+      <DependentUpon>RegisteredServiceHostGroupsDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Services\RegisteredServiceHostGroupsDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Services\ServiceManagementForm.Designer.vb">
+      <DependentUpon>ServiceManagementForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Services\ServiceManagementForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Switch\ImgIndexSwitch.Designer.vb">
+      <DependentUpon>ImgIndexSwitch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Switch\ImgIndexSwitch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Switch\SingleImageIndexError.Designer.vb">
+      <DependentUpon>SingleImageIndexError.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Switch\SingleImageIndexError.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Unattend\ApplyUnattendFile.Designer.vb">
+      <DependentUpon>ApplyUnattendFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\Unattend\ApplyUnattendFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\WinPE\SetScratchSpace.Designer.vb">
+      <DependentUpon>SetScratchSpace.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\WinPE\SetScratchSpace.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\WinPE\SetTargetPath.Designer.vb">
+      <DependentUpon>SetTargetPath.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\WinPE\SetTargetPath.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Internal\ProjectValueLoadForm.Designer.vb">
+      <DependentUpon>ProjectValueLoadForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Internal\ProjectValueLoadForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\ISOCreator.Designer.vb">
+      <DependentUpon>ISOCreator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\ISOCreator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\NewTestingEnv.Designer.vb">
+      <DependentUpon>NewTestingEnv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\NewTestingEnv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\PECustomizerDialog.Designer.vb">
+      <DependentUpon>PECustomizerDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\PECustomizerDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\PxeServerPortSpecifier.Designer.vb">
+      <DependentUpon>PxeServerPortSpecifier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\PxeServerPortSpecifier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\WDSImageGroupSpecifier.Designer.vb">
+      <DependentUpon>WDSImageGroupSpecifier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\WDSImageGroupSpecifier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\WDSInstallImageCopy.Designer.vb">
+      <DependentUpon>WDSInstallImageCopy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ISOFiles\WDSInstallImageCopy.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\MSEdge\AddEdgeBrowser.Designer.vb">
+      <DependentUpon>AddEdgeBrowser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\MSEdge\AddEdgeBrowser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\MSEdge\AddEdgeFull.Designer.vb">
+      <DependentUpon>AddEdgeFull.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\MSEdge\AddEdgeFull.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\MSEdge\AddEdgeWebView.Designer.vb">
+      <DependentUpon>AddEdgeWebView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\MSEdge\AddEdgeWebView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\OSUninst\OSNoRollbackErrorDlg.Designer.vb">
+      <DependentUpon>OSNoRollbackErrorDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\OSUninst\OSNoRollbackErrorDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\OSUninst\SetOSUninstWindow.Designer.vb">
+      <DependentUpon>SetOSUninstWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Img_Ops\OSUninst\SetOSUninstWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\PopupDlgs\PopupMountedImagePicker.vb" />
+    <Compile Include="Panels\Prj_Ops\NewProj.Designer.vb">
+      <DependentUpon>NewProj.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Prj_Ops\NewProj.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\Options.Designer.vb">
+      <DependentUpon>Options.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Exe_Ops\Options.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Questions\ImgConversionSuccessDialog.Designer.vb">
+      <DependentUpon>ImgConversionSuccessDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Questions\ImgConversionSuccessDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Questions\ImgWinVistaIncompatibilityDialog.Designer.vb">
+      <DependentUpon>ImgWinVistaIncompatibilityDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Questions\ImgWinVistaIncompatibilityDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Questions\MountOpDirCreationDialog.Designer.vb">
+      <DependentUpon>MountOpDirCreationDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Questions\MountOpDirCreationDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Questions\OrphanedMountedImgDialog.Designer.vb">
+      <DependentUpon>OrphanedMountedImgDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Questions\OrphanedMountedImgDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\DoWork\PleaseWaitDialog.Designer.vb">
+      <DependentUpon>PleaseWaitDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DoWork\PleaseWaitDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Prj_Ops\ProjProperties.Designer.vb">
+      <DependentUpon>ProjProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Prj_Ops\ProjProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Questions\ReloadProjectQuestionDialog.Designer.vb">
+      <DependentUpon>ReloadProjectQuestionDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Questions\ReloadProjectQuestionDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Questions\SaveProjectQuestionDialog.Designer.vb">
+      <DependentUpon>SaveProjectQuestionDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Questions\SaveProjectQuestionDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Startup\AutoReload\AutoReloadForm.Designer.vb">
+      <DependentUpon>AutoReloadForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Startup\AutoReload\AutoReloadForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Startup\SplashScreen.Designer.vb">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Startup\SplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Unattend_Files\Addition\NewUnattendWiz.Designer.vb">
+      <DependentUpon>NewUnattendWiz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Unattend_Files\Addition\NewUnattendWiz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Unattend_Files\Addition\SampleScriptBrowser.Designer.vb">
+      <DependentUpon>SampleScriptBrowser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Unattend_Files\Addition\SampleScriptBrowser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Unattend_Files\Addition\ScriptManagement\ScriptReorderDialog.Designer.vb">
+      <DependentUpon>ScriptReorderDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Unattend_Files\Addition\ScriptManagement\ScriptReorderDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\Unattend_Files\Management\UnattendMgr.Designer.vb">
+      <DependentUpon>UnattendMgr.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Unattend_Files\Management\UnattendMgr.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\ConsoleControl.Designer.vb">
+      <DependentUpon>ConsoleControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ConsoleControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\NewsFeedItemCard.Designer.vb">
+      <DependentUpon>NewsFeedItemCard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewsFeedItemCard.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\WimFileSourceControl.Designer.vb">
+      <DependentUpon>WimFileSourceControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WimFileSourceControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utilities\AppxUtilities\AppxHelper.vb" />
+    <Compile Include="Utilities\BuildGetter.vb" />
+    <Compile Include="Utilities\DriverSignerViewer.vb" />
+    <Compile Include="Utilities\DT_Utils.vb" />
+    <Compile Include="Utilities\DynaLog.vb" />
+    <Compile Include="Utilities\FileAssociations\FileAssociationHelper.vb" />
+    <Compile Include="Utilities\GroupPolicy\ServicingGPOHelper.vb" />
+    <Compile Include="Utilities\ImageWatcher.vb" />
+    <Compile Include="Utilities\IsoFileUtilities\IsoHelper.vb" />
+    <Compile Include="Utilities\LanguageUtilities\LanguageHelper.vb" />
+    <Compile Include="Utilities\ListViewColumnSorter.vb" />
+    <Compile Include="Utilities\MarkdownHelper.vb" />
+    <Compile Include="Utilities\PhysicalDiskUtilities\WMIDiskHelper.vb" />
+    <Compile Include="Utilities\PlaybookDetector.vb" />
+    <Compile Include="Utilities\PowerManagement\PowerManagementHelper.vb" />
+    <Compile Include="Utilities\PriReader.vb" />
+    <Compile Include="Utilities\RegistryHelper.vb" />
+    <Compile Include="Utilities\SamHelper.vb" />
+    <Compile Include="Utilities\TaskbarHelper.vb" />
+    <Compile Include="Utilities\ThemeUtilities\ColorModeRenderers\DarkModeRenderer.vb" />
+    <Compile Include="Utilities\ThemeUtilities\ColorModeRenderers\LightModeRenderer.vb" />
+    <Compile Include="Utilities\ThemeUtilities\ColorTables\DarkModeColorTable.vb" />
+    <Compile Include="Utilities\ThemeUtilities\ColorTables\LightModeColorTable.vb" />
+    <Compile Include="Utilities\ThemeUtilities\Theme.vb" />
+    <Compile Include="Utilities\ThemeUtilities\ThemeHelper.vb" />
+    <Compile Include="Utilities\HttpServer.vb" />
+    <Compile Include="Utilities\UserDataManagerModule.vb" />
+    <Compile Include="Utilities\WebSearchUtilities\SearchEngine.vb" />
+    <Compile Include="Utilities\WebSearchUtilities\SearchEngineHelper.vb" />
+    <Compile Include="Utilities\WindowHelper.vb" />
+    <Compile Include="Utilities\WMIHelper.vb" />
+    <Compile Include="Videos\Video.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Elements\AutoUnattend\ActiveDirectory\ADDSJoinDialog.resx">
+      <DependentUpon>ADDSJoinDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Elements\AutoUnattend\ActiveDirectory\DnsZoneChooserDialog.resx">
+      <DependentUpon>DnsZoneChooserDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BDE\LockVolumeDialog.resx">
+      <DependentUpon>LockVolumeDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\BDE\UnlockVolumeDialog.resx">
+      <DependentUpon>UnlockVolumeDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ConfigLists\AddListEntryDlg.resx">
+      <DependentUpon>AddListEntryDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ConfigLists\Tools\OneDriveExclusionDlg.resx">
+      <DependentUpon>OneDriveExclusionDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ConfigLists\WimScriptEditor.resx">
+      <DependentUpon>WimScriptEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoWork\ProgressPanel.resx">
+      <DependentUpon>ProgressPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Exceptions\ExceptionForm.resx">
+      <DependentUpon>ExceptionForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Exe_Ops\BGProcs\BGProcsAdvSettings.resx">
+      <DependentUpon>BGProcsAdvSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Exe_Ops\DismComponents.resx">
+      <DependentUpon>DismComponents.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Exe_Ops\InvalidSettings\InvalidSettingsDialog.resx">
+      <DependentUpon>InvalidSettingsDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Exe_Ops\Migration\MigrationForm.resx">
+      <DependentUpon>MigrationForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Exe_Ops\PrgAbout.resx">
+      <DependentUpon>PrgAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Exe_Ops\SettingsResetDlg.resx">
+      <DependentUpon>SettingsResetDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\FirstUse\IncompleteSetupDlg.resx">
+      <DependentUpon>IncompleteSetupDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\FirstUse\PrgSetup.resx">
+      <DependentUpon>PrgSetup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\AppxPkgs\GetAppxPkgInfo.resx">
+      <DependentUpon>GetAppxPkgInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\Capabilities\GetCapabilityInfo.resx">
+      <DependentUpon>GetCapabilityInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\Drivers\DriverFileInfoDlg.resx">
+      <DependentUpon>DriverFileInfoDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\Drivers\GetDriverInfo.resx">
+      <DependentUpon>GetDriverInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\Features\GetFeatureInfo.resx">
+      <DependentUpon>GetFeatureInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\FilterAssistants\AppxFilterAssistantDialog.resx">
+      <DependentUpon>AppxFilterAssistantDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\FilterAssistants\CapabilityFilterAssistantDialog.resx">
+      <DependentUpon>CapabilityFilterAssistantDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\FilterAssistants\DriverFilterAssistantDialog.resx">
+      <DependentUpon>DriverFilterAssistantDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\FilterAssistants\FeatureFilterAssistantDialog.resx">
+      <DependentUpon>FeatureFilterAssistantDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\GetImgInfoDlg.resx">
+      <DependentUpon>GetImgInfoDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\InfoSave\ImgInfoSaveDlg.resx">
+      <DependentUpon>ImgInfoSaveDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\InfoSave\InfoSaveResults.resx">
+      <DependentUpon>InfoSaveResults.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\Pkgs\GetPkgInfo.resx">
+      <DependentUpon>GetPkgInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Get_Ops\WinPE\GetWinPESettings.resx">
+      <DependentUpon>GetWinPESettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ImageTaskHeader.resx">
+      <DependentUpon>ImageTaskHeader.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ActiveInstAccessWarn.resx">
+      <DependentUpon>ActiveInstAccessWarn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\FFU\ApplicationDriveSpecifier.resx">
+      <DependentUpon>ApplicationDriveSpecifier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\AppxPkgs\AddProvAppxPackage.resx">
+      <DependentUpon>AddProvAppxPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\AppxPkgs\AppInstallerDownloader.resx">
+      <DependentUpon>AppInstallerDownloader.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\AppxPkgs\RemProvAppxPackage.resx">
+      <DependentUpon>RemProvAppxPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Bg_Processes\BGProcDetails.resx">
+      <DependentUpon>BGProcDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Bg_Processes\BGProcFailureDialog.resx">
+      <DependentUpon>BGProcFailureDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Bg_Processes\BGProcNotify.resx">
+      <DependentUpon>BGProcNotify.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Bg_Processes\BGProcsBusyDialog.resx">
+      <DependentUpon>BGProcsBusyDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Capabilities\AddCapabilities.resx">
+      <DependentUpon>AddCapabilities.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Capabilities\RemCapabilities.resx">
+      <DependentUpon>RemCapabilities.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\CompClean\ImgCleanup.resx">
+      <DependentUpon>ImgCleanup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Conversion\ImgWim2Esd.resx">
+      <DependentUpon>ImgWim2Esd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Drivers\AddDrivers.resx">
+      <DependentUpon>AddDrivers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Drivers\DriverManualFilePicker.resx">
+      <DependentUpon>DriverManualFilePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Drivers\ExportDrivers.resx">
+      <DependentUpon>ExportDrivers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Drivers\ImportDrivers.resx">
+      <DependentUpon>ImportDrivers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Drivers\RemDrivers.resx">
+      <DependentUpon>RemDrivers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Editions\SetImageEdition.resx">
+      <DependentUpon>SetImageEdition.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Editions\SetProductKey.resx">
+      <DependentUpon>SetProductKey.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\EnvironmentVariables\EnvVarManagementForm.resx">
+      <DependentUpon>EnvVarManagementForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Features\DisableFeat.resx">
+      <DependentUpon>DisableFeat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Features\EnableFeat.resx">
+      <DependentUpon>EnableFeat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Features\PkgParentNames\PkgParentNameLookupDlg.resx">
+      <DependentUpon>PkgParentNameLookupDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\FFU\FfuApply.resx">
+      <DependentUpon>FfuApply.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\FFU\FfuCapture.resx">
+      <DependentUpon>FfuCapture.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\FFU\FfuInfoDialog.resx">
+      <DependentUpon>FfuInfoDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\FFU\FfuOptimize.resx">
+      <DependentUpon>FfuOptimize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\FFU\FfuSplit.resx">
+      <DependentUpon>FfuSplit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImageFilePickerDialog.resx">
+      <DependentUpon>ImageFilePickerDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgAppend.resx">
+      <DependentUpon>ImgAppend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgApply.resx">
+      <DependentUpon>ImgApply.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgCapture.resx">
+      <DependentUpon>ImgCapture.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgExport.resx">
+      <DependentUpon>ImgExport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgIndexDelete.resx">
+      <DependentUpon>ImgIndexDelete.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgOptimize.resx">
+      <DependentUpon>ImgOptimize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgSplit.resx">
+      <DependentUpon>ImgSplit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgUMount.resx">
+      <DependentUpon>ImgUMount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ImgMount.resx">
+      <DependentUpon>ImgMount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Langs\SetLayeredDriver.resx">
+      <DependentUpon>SetLayeredDriver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Merger\ImgSwmToWim.resx">
+      <DependentUpon>ImgSwmToWim.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\MountedImgMgr.resx">
+      <DependentUpon>MountedImgMgr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\OfflineInstDriveLister.resx">
+      <DependentUpon>OfflineInstDriveLister.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Pkgs\AddPackage.resx">
+      <DependentUpon>AddPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Pkgs\MUMAdditionDialog.resx">
+      <DependentUpon>MUMAdditionDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Pkgs\RemPackage.resx">
+      <DependentUpon>RemPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\ProvisioningPkgs\AddProvisioningPkg.resx">
+      <DependentUpon>AddProvisioningPkg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Registry\RegistryControlPanel.resx">
+      <DependentUpon>RegistryControlPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Services\RegisteredServiceHostGroupsDialog.resx">
+      <DependentUpon>RegisteredServiceHostGroupsDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Services\ServiceManagementForm.resx">
+      <DependentUpon>ServiceManagementForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Switch\ImgIndexSwitch.resx">
+      <DependentUpon>ImgIndexSwitch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Switch\SingleImageIndexError.resx">
+      <DependentUpon>SingleImageIndexError.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\Unattend\ApplyUnattendFile.resx">
+      <DependentUpon>ApplyUnattendFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\WinPE\SetScratchSpace.resx">
+      <DependentUpon>SetScratchSpace.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\WinPE\SetTargetPath.resx">
+      <DependentUpon>SetTargetPath.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Internal\ProjectValueLoadForm.resx">
+      <DependentUpon>ProjectValueLoadForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ISOFiles\ISOCreator.resx">
+      <DependentUpon>ISOCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ISOFiles\NewTestingEnv.resx">
+      <DependentUpon>NewTestingEnv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ISOFiles\PECustomizerDialog.resx">
+      <DependentUpon>PECustomizerDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ISOFiles\PxeServerPortSpecifier.resx">
+      <DependentUpon>PxeServerPortSpecifier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ISOFiles\WDSImageGroupSpecifier.resx">
+      <DependentUpon>WDSImageGroupSpecifier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ISOFiles\WDSInstallImageCopy.resx">
+      <DependentUpon>WDSInstallImageCopy.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\MSEdge\AddEdgeBrowser.resx">
+      <DependentUpon>AddEdgeBrowser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\MSEdge\AddEdgeFull.resx">
+      <DependentUpon>AddEdgeFull.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\MSEdge\AddEdgeWebView.resx">
+      <DependentUpon>AddEdgeWebView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\OSUninst\OSNoRollbackErrorDlg.resx">
+      <DependentUpon>OSNoRollbackErrorDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Img_Ops\OSUninst\SetOSUninstWindow.resx">
+      <DependentUpon>SetOSUninstWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Prj_Ops\NewProj.resx">
+      <DependentUpon>NewProj.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Exe_Ops\Options.resx">
+      <DependentUpon>Options.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Questions\ImgConversionSuccessDialog.resx">
+      <DependentUpon>ImgConversionSuccessDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Questions\ImgWinVistaIncompatibilityDialog.resx">
+      <DependentUpon>ImgWinVistaIncompatibilityDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Questions\MountOpDirCreationDialog.resx">
+      <DependentUpon>MountOpDirCreationDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Questions\OrphanedMountedImgDialog.resx">
+      <DependentUpon>OrphanedMountedImgDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\DoWork\PleaseWaitDialog.resx">
+      <DependentUpon>PleaseWaitDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Prj_Ops\ProjProperties.resx">
+      <DependentUpon>ProjProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Questions\ReloadProjectQuestionDialog.resx">
+      <DependentUpon>ReloadProjectQuestionDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Questions\SaveProjectQuestionDialog.resx">
+      <DependentUpon>SaveProjectQuestionDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Startup\AutoReload\AutoReloadForm.resx">
+      <DependentUpon>AutoReloadForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Startup\SplashScreen.resx">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Unattend_Files\Addition\NewUnattendWiz.resx">
+      <DependentUpon>NewUnattendWiz.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Unattend_Files\Addition\SampleScriptBrowser.resx">
+      <DependentUpon>SampleScriptBrowser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Unattend_Files\Addition\ScriptManagement\ScriptReorderDialog.resx">
+      <DependentUpon>ScriptReorderDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\Unattend_Files\Management\UnattendMgr.resx">
+      <DependentUpon>UnattendMgr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ConsoleControl.resx">
+      <DependentUpon>ConsoleControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\NewsFeedItemCard.resx">
+      <DependentUpon>NewsFeedItemCard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\WimFileSourceControl.resx">
+      <DependentUpon>WimFileSourceControl.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="app.config" />
+    <None Include="docs\css\fonts\fontawesome-webfont.eot" />
+    <None Include="docs\css\fonts\fontawesome-webfont.ttf" />
+    <None Include="docs\css\fonts\fontawesome-webfont.woff" />
+    <None Include="docs\css\fonts\fontawesome-webfont.woff2" />
+    <None Include="docs\css\fonts\lato-bold-italic.woff" />
+    <None Include="docs\css\fonts\lato-bold-italic.woff2" />
+    <None Include="docs\css\fonts\lato-bold.woff" />
+    <None Include="docs\css\fonts\lato-bold.woff2" />
+    <None Include="docs\css\fonts\lato-normal-italic.woff" />
+    <None Include="docs\css\fonts\lato-normal-italic.woff2" />
+    <None Include="docs\css\fonts\lato-normal.woff" />
+    <None Include="docs\css\fonts\lato-normal.woff2" />
+    <None Include="docs\css\fonts\Roboto-Slab-Bold.woff" />
+    <None Include="docs\css\fonts\Roboto-Slab-Bold.woff2" />
+    <None Include="docs\css\fonts\Roboto-Slab-Regular.woff" />
+    <None Include="docs\css\fonts\Roboto-Slab-Regular.woff2" />
+    <None Include="docs\search\search_index.json" />
+    <None Include="docs\sitemap.xml.gz" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Change PowerShell Execution Policy.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Close First Logon Animation.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Configure Current Power Plan Timeout Values.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Configure Server Processor Scheduling.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Control Terminal Services Settings.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Disable Automatic BitLocker Encryption.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Disable Fast Startup.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Disable Shutdown Event Tracker.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Disable Unsigned RDP Warnings.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Disable Windows Admin Center banner.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Disable Windows Plaform Binary Table.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Display Bugcheck Parameters.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Empty Start Menu Pins.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Enable Batch script file locks.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Enable Verbose Status Messages.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Prevent Installation of Expedited Device Applications.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Remove File System MAX_PATH length limit.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Set a custom lock screen image.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Set Quick Machine Recovery Settings.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\DuringSystemConfiguration\Set OEM Information.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Configure Git folders for File Explorer.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Configure Start Menu Appearance.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Refresh Explorer.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Set Registered Owner and Organization Information.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Set Personalization Settings.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Show and Hide System Desktop icons.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Update Microsoft Store Apps.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Invoke WinUtil configuration.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenFirstUserLogsOn\Set up a custom wallpaper.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenUsersLogOnForFirstTime\Disable Drag Tray.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenUsersLogOnForFirstTime\Restore Context Menu for Windows 11.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenUsersLogOnForFirstTime\Set File Explorer Launch Folder.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenUsersLogOnForFirstTime\Show Extensions for Known File Types.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenUsersLogOnForFirstTime\Disable Second Chance OOBE.dtss" />
+    <None Include="Elements\AutoUnattend\StarterScripts\WhenUsersLogOnForFirstTime\Disable Windows Notification Sources.dtss" />
+    <None Include="Helpers\dthelper.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extbatch\cmdhelp.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extbatch\copy_cur_wallpaper_to_userdata.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extbatch\nt6_online_pnputil_recurse.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extbatch\options.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\extappx.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\mImgMgr.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\online_appx_removal.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\boot_image_to_wds.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\dim_start\dimstart.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\DISMTools-PE.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\HotInstall.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\install_image_to_wds.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\scripts\createbootfiles.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\scripts\fullcopy.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\scripts\imagecapture.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\scripts\initializenetwork.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\changekeyboardlayout.designer.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\ChangeKeyboardLayout.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\changekeyboardlayout.resources.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\DTPE.PolicyHelper.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\DTPE_Inventory.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\menu.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\ShowWatermark.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\StartInstall.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\startup\startnet.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\start_foghs_unix.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\files\SysprepPreparator.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\PE_Helper.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\common\PXEHelpers.Common.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\fog\foghelper.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\fog\foghelper_server.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\fog\foghelper_server_unix.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\fog\__ModuleSetup.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\PXEHelpers.Startup.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\wds\GraphoView\wdshcGraphoView.designer.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\wds\GraphoView\wdshcGraphoView.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\wds\GraphoView\wdshcGraphoView.resources.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\wds\wdshelper.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Helpers\extps1\PE_Helper\pxehelpers\wds\wdshelper_server.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Installer\Setup.e32" />
+    <None Include="Installer\SetupLdr.e32" />
+    <None Include="LICENSE">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="My Project\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="settings.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tools\DT_IEConfig.reg" />
+    <None Include="Tools\UnattendGen\UnattendGen-arm64-Linux.zip" />
+    <None Include="Tools\UnattendGen\UnattendGen-arm64-MacOS.zip" />
+    <None Include="Tools\UnattendGen\UnattendGen-x64-Linux.zip" />
+    <None Include="Tools\UnattendGen\UnattendGen-x64-MacOS.zip" />
+    <None Include="Tools\UnattendGen\win-arm64\publish\UnattendGen.deps.json" />
+    <None Include="Tools\UnattendGen\win-arm64\publish\UnattendGen.runtimeconfig.json" />
+    <None Include="Tools\UnattendGen\win-arm64\UnattendGen.deps.json" />
+    <None Include="Tools\UnattendGen\win-arm64\UnattendGen.runtimeconfig.json" />
+    <None Include="Tools\UnattendGen\win-x64\publish\UnattendGen.deps.json" />
+    <None Include="Tools\UnattendGen\win-x64\publish\UnattendGen.runtimeconfig.json" />
+    <None Include="Tools\UnattendGen\win-x64\UnattendGen.deps.json" />
+    <None Include="Tools\UnattendGen\win-x64\UnattendGen.runtimeconfig.json" />
+    <None Include="Tools\UnattendGen\win-x86\publish\UnattendGen.deps.json" />
+    <None Include="Tools\UnattendGen\win-x86\publish\UnattendGen.runtimeconfig.json" />
+    <None Include="Tools\UnattendGen\win-x86\UnattendGen.deps.json" />
+    <None Include="Tools\UnattendGen\win-x86\UnattendGen.runtimeconfig.json" />
+    <None Include="Utilities\ThemeUtilities\ThemeFiles\default_dark.ini" />
+    <None Include="Utilities\ThemeUtilities\ThemeFiles\default_light.ini" />
+    <None Include="Utilities\ThemeUtilities\ThemeFiles\DT04Dark.ini" />
+    <None Include="Utilities\ThemeUtilities\ThemeFiles\DT04Light.ini" />
+    <None Include="Utilities\ThemeUtilities\ThemeFiles\DT05Dark.ini" />
+    <None Include="Utilities\ThemeUtilities\ThemeFiles\DT05Light.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Panels\readme.md" />
+    <None Include="Resources\project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\proj_name_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\proj_name_set.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\progress\imgoperation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menus\save_glyph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menus\show_glyph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menus\hide_glyph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menus\clear_glyph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mount_img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\append_img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_info_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_event_log_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_output_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_code_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="7z\amd64\7z.dll" />
+    <Content Include="7z\amd64\7z.exe" />
+    <Content Include="7z\i386\7z.dll" />
+    <Content Include="7z\i386\7z.exe" />
+    <Content Include="docs\404.html" />
+    <Content Include="docs\css\fonts\fontawesome-webfont.svg" />
+    <Content Include="docs\css\theme.css" />
+    <Content Include="docs\css\theme_extra.css" />
+    <Content Include="docs\getting_started\msmg_migration\index.html" />
+    <Content Include="docs\getting_started\new_to_servicing\index.html" />
+    <Content Include="docs\getting_started\ntlite_migration\index.html" />
+    <Content Include="docs\getting_started\start\index.html" />
+    <Content Include="docs\img\favicon.ico" />
+    <Content Include="docs\img_tasks\appx\add_provisionedappxpackage\index.html" />
+    <Content Include="docs\img_tasks\appx\appx\index.html" />
+    <Content Include="docs\img_tasks\appx\remove_provisionedappxpackage\index.html" />
+    <Content Include="docs\img_tasks\capabilities\add_capability\index.html" />
+    <Content Include="docs\img_tasks\capabilities\capabilities\index.html" />
+    <Content Include="docs\img_tasks\capabilities\remove_capability\index.html" />
+    <Content Include="docs\img_tasks\drivers\add_driver\index.html" />
+    <Content Include="docs\img_tasks\drivers\drivers\index.html" />
+    <Content Include="docs\img_tasks\drivers\remove_driver\index.html" />
+    <Content Include="docs\img_tasks\features\disable_feature\index.html" />
+    <Content Include="docs\img_tasks\features\enable_feature\index.html" />
+    <Content Include="docs\img_tasks\features\features\index.html" />
+    <Content Include="docs\img_tasks\img_tasks\index.html" />
+    <Content Include="docs\img_tasks\info\appxpkg_info\index.html" />
+    <Content Include="docs\img_tasks\info\cap_info\index.html" />
+    <Content Include="docs\img_tasks\info\drv_info\index.html" />
+    <Content Include="docs\img_tasks\info\feat_info\index.html" />
+    <Content Include="docs\img_tasks\info\img_info\index.html" />
+    <Content Include="docs\img_tasks\info\infodlgs\index.html" />
+    <Content Include="docs\img_tasks\info\pkg_info\index.html" />
+    <Content Include="docs\img_tasks\info\winpe_info\index.html" />
+    <Content Include="docs\img_tasks\packages\add_package\index.html" />
+    <Content Include="docs\img_tasks\packages\packages\index.html" />
+    <Content Include="docs\img_tasks\packages\remove_package\index.html" />
+    <Content Include="docs\img_tasks\tools\mimgmgr\index.html" />
+    <Content Include="docs\index.html" />
+    <Content Include="docs\js\html5shiv.min.js" />
+    <Content Include="docs\js\jquery-3.6.0.min.js" />
+    <Content Include="docs\js\theme.js" />
+    <Content Include="docs\js\theme_extra.js" />
+    <Content Include="docs\res\getting_started\create_a_project.png" />
+    <Content Include="docs\res\getting_started\load_mount_directory.png" />
+    <Content Include="docs\res\getting_started\load_mount_directory_new.png" />
+    <Content Include="docs\res\getting_started\mount_an_image.png" />
+    <Content Include="docs\res\getting_started\msmg_toolkit.png" />
+    <Content Include="docs\res\getting_started\project_view.png" />
+    <Content Include="docs\res\img_tasks\appx\add_provisionedappxpackage.png" />
+    <Content Include="docs\res\img_tasks\appx\appxbundlemanifest.png" />
+    <Content Include="docs\res\img_tasks\appx\appxmanifest.png" />
+    <Content Include="docs\res\img_tasks\appx\appx_checkyouraccount.png" />
+    <Content Include="docs\res\img_tasks\appx\app_info.png" />
+    <Content Include="docs\res\img_tasks\appx\inside_manifest.png" />
+    <Content Include="docs\res\img_tasks\appx\logoasset.png" />
+    <Content Include="docs\res\img_tasks\appx\microsoft_apps.png" />
+    <Content Include="docs\res\img_tasks\appx\remove_provisionedappxpackage.png" />
+    <Content Include="docs\res\img_tasks\appx\store_rg-adguard.png" />
+    <Content Include="docs\res\img_tasks\capabilities\add_capability.png" />
+    <Content Include="docs\res\img_tasks\capabilities\remove_capability.png" />
+    <Content Include="docs\res\img_tasks\cmd_menu.png" />
+    <Content Include="docs\res\img_tasks\drivers\add_driver.png" />
+    <Content Include="docs\res\img_tasks\drivers\remove_driver.png" />
+    <Content Include="docs\res\img_tasks\drivers\remove_driver_inbox_bc.png" />
+    <Content Include="docs\res\img_tasks\drivers\remove_driver_noinbox_bc.png" />
+    <Content Include="docs\res\img_tasks\drivers\remove_driver_noinbox_nobc.png" />
+    <Content Include="docs\res\img_tasks\features\disable_feature.png" />
+    <Content Include="docs\res\img_tasks\features\enable_feature.png" />
+    <Content Include="docs\res\img_tasks\features\pkg_lookup.png" />
+    <Content Include="docs\res\img_tasks\info\appxpkg_info.png" />
+    <Content Include="docs\res\img_tasks\info\cap_info.png" />
+    <Content Include="docs\res\img_tasks\info\drvpkg_hw_target_controls.png" />
+    <Content Include="docs\res\img_tasks\info\drv_info.png" />
+    <Content Include="docs\res\img_tasks\info\feat_info.png" />
+    <Content Include="docs\res\img_tasks\info\get_drvfileinfo.png" />
+    <Content Include="docs\res\img_tasks\info\get_instdrvinfo.png" />
+    <Content Include="docs\res\img_tasks\info\get_instpkginfo.png" />
+    <Content Include="docs\res\img_tasks\info\get_pkgfileinfo.png" />
+    <Content Include="docs\res\img_tasks\info\img_info.png" />
+    <Content Include="docs\res\img_tasks\info\info_dlgs.png" />
+    <Content Include="docs\res\img_tasks\info\info_save.png" />
+    <Content Include="docs\res\img_tasks\info\pkg_info.png" />
+    <Content Include="docs\res\img_tasks\info\winpe_info.png" />
+    <Content Include="docs\res\img_tasks\mgmt\img_properties.png" />
+    <Content Include="docs\res\img_tasks\mgmt\prj_properties.png" />
+    <Content Include="docs\res\img_tasks\packages\add_package.png" />
+    <Content Include="docs\res\img_tasks\packages\remove_package.png" />
+    <Content Include="docs\res\img_tasks\quick_actions.png" />
+    <Content Include="docs\res\img_tasks\tools\mimgmgr\img_unmount.png" />
+    <Content Include="docs\res\img_tasks\tools\mimgmgr\mimgmgr.png" />
+    <Content Include="docs\res\product.png" />
+    <Content Include="docs\search.html" />
+    <Content Include="docs\search\lunr.js" />
+    <Content Include="docs\search\main.js" />
+    <Content Include="docs\search\worker.js" />
+    <Content Include="docs\sitemap.xml" />
+    <Content Include="Helpers\extps1\PE_Helper\backgrounds\winpe_amd64.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\extps1\PE_Helper\backgrounds\winpe_arm64.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\extps1\PE_Helper\backgrounds\winpe_x86.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\extps1\PE_Helper\files\README1ST.TXT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\extps1\PE_Helper\pxehelpers\fog\foghs_unix_notes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\extps1\PE_Helper\tools\DIM\aarch64\DT-DIM.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\extps1\PE_Helper\tools\DIM\amd64\DT-DIM.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\extps1\PE_Helper\tools\DIM\i386\DT-DIM.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Installer\dt.iss" />
+    <Content Include="Installer\ISCC.exe" />
+    <Content Include="Installer\ISCmplr.dll" />
+    <Content Include="Installer\islzma.dll" />
+    <Content Include="Installer\islzma32.exe" />
+    <Content Include="Installer\islzma64.exe" />
+    <Content Include="Installer\ISPP.dll" />
+    <Content Include="Installer\ISPPBuiltins.iss" />
+    <Content Include="Installer\license.txt" />
+    <Content Include="logo.ico" />
+    <None Include="Resources\menus\exit_full_screen_glyph.png" />
+    <None Include="Resources\menus\exit_full_screen_glyph_dark.png" />
+    <None Include="Resources\startup\dt_branding_preview.png" />
+    <None Include="Resources\progress\bg_ops_gif\bg_ops_light.gif" />
+    <None Include="Resources\progress\bg_ops_gif\bg_ops_complete_light.png" />
+    <None Include="Resources\glyphs\cmps_addfirstcomponent_dark.png" />
+    <None Include="Resources\glyphs\cmps_addfirstcomponent_light.png" />
+    <None Include="Resources\first_element.png" />
+    <None Include="Resources\last_element.png" />
+    <None Include="Resources\add_element.png" />
+    <None Include="Resources\remove_element.png" />
+    <None Include="Resources\ad_ds.png" />
+    <None Include="Resources\envvar_pic_32px.png" />
+    <None Include="Resources\about\cws_discord.png" />
+    <Content Include="Resources\assistant_dark.png" />
+    <Content Include="Resources\assistant_light.png" />
+    <None Include="Resources\copy_img_to_wds.png" />
+    <None Include="Resources\first_element_upward.png" />
+    <Content Include="Resources\glyphs\scripts_addfirstscript_dark.png" />
+    <Content Include="Resources\glyphs\scripts_addfirstscript_light.png" />
+    <None Include="Resources\service_pic_32px.png" />
+    <None Include="Resources\menus\tour_glyph_dark.png" />
+    <None Include="Resources\menus\tour_glyph_light.png" />
+    <None Include="Resources\optimize_img.png" />
+    <None Include="Resources\rearrange_elements.png" />
+    <None Include="Resources\prev_element_upward.png" />
+    <None Include="Resources\last_element_downward.png" />
+    <None Include="Resources\next_element_downward.png" />
+    <None Include="Resources\infinityhome_admin_tools.png" />
+    <None Include="Resources\infinityhome_change_network_config.png" />
+    <Content Include="Tools\UnattendGen\win-arm64\Library-License.txt" />
+    <Content Include="Tools\UnattendGen\win-arm64\LICENSE.txt" />
+    <Content Include="Tools\UnattendGen\win-arm64\Newtonsoft.Json.dll" />
+    <Content Include="Tools\UnattendGen\win-arm64\publish\Newtonsoft.Json.dll" />
+    <Content Include="Tools\UnattendGen\win-arm64\publish\UnattendGen.dll" />
+    <Content Include="Tools\UnattendGen\win-arm64\publish\UnattendGen.exe" />
+    <Content Include="Tools\UnattendGen\win-arm64\publish\UnattendGen.pdb" />
+    <Content Include="Tools\UnattendGen\win-arm64\publish\UnattendGenerator.dll" />
+    <Content Include="Tools\UnattendGen\win-arm64\publish\UnattendGenerator.pdb" />
+    <Content Include="Tools\UnattendGen\win-arm64\UnattendGen.dll" />
+    <Content Include="Tools\UnattendGen\win-arm64\UnattendGen.exe" />
+    <Content Include="Tools\UnattendGen\win-arm64\UnattendGen.pdb" />
+    <Content Include="Tools\UnattendGen\win-arm64\UnattendGenerator.dll" />
+    <Content Include="Tools\UnattendGen\win-arm64\UnattendGenerator.pdb" />
+    <Content Include="Tools\UnattendGen\win-x64\Library-License.txt" />
+    <Content Include="Tools\UnattendGen\win-x64\LICENSE.txt" />
+    <Content Include="Tools\UnattendGen\win-x64\Newtonsoft.Json.dll" />
+    <Content Include="Tools\UnattendGen\win-x64\publish\Newtonsoft.Json.dll" />
+    <Content Include="Tools\UnattendGen\win-x64\publish\UnattendGen.dll" />
+    <Content Include="Tools\UnattendGen\win-x64\publish\UnattendGen.exe" />
+    <Content Include="Tools\UnattendGen\win-x64\publish\UnattendGen.pdb" />
+    <Content Include="Tools\UnattendGen\win-x64\publish\UnattendGenerator.dll" />
+    <Content Include="Tools\UnattendGen\win-x64\publish\UnattendGenerator.pdb" />
+    <Content Include="Tools\UnattendGen\win-x64\UnattendGen.dll" />
+    <Content Include="Tools\UnattendGen\win-x64\UnattendGen.exe" />
+    <Content Include="Tools\UnattendGen\win-x64\UnattendGen.pdb" />
+    <Content Include="Tools\UnattendGen\win-x64\UnattendGenerator.dll" />
+    <Content Include="Tools\UnattendGen\win-x64\UnattendGenerator.pdb" />
+    <Content Include="Tools\UnattendGen\win-x86\Library-License.txt" />
+    <Content Include="Tools\UnattendGen\win-x86\LICENSE.txt" />
+    <Content Include="Tools\UnattendGen\win-x86\Newtonsoft.Json.dll" />
+    <Content Include="Tools\UnattendGen\win-x86\publish\Newtonsoft.Json.dll" />
+    <Content Include="Tools\UnattendGen\win-x86\publish\UnattendGen.dll" />
+    <Content Include="Tools\UnattendGen\win-x86\publish\UnattendGen.exe" />
+    <Content Include="Tools\UnattendGen\win-x86\publish\UnattendGen.pdb" />
+    <Content Include="Tools\UnattendGen\win-x86\publish\UnattendGenerator.dll" />
+    <Content Include="Tools\UnattendGen\win-x86\publish\UnattendGenerator.pdb" />
+    <Content Include="Tools\UnattendGen\win-x86\UnattendGen.dll" />
+    <Content Include="Tools\UnattendGen\win-x86\UnattendGen.exe" />
+    <Content Include="Tools\UnattendGen\win-x86\UnattendGen.pdb" />
+    <Content Include="Tools\UnattendGen\win-x86\UnattendGenerator.dll" />
+    <Content Include="Tools\UnattendGen\win-x86\UnattendGenerator.pdb" />
+    <Content Include="Tools\UnpEax-Bin\UnpEax.exe" />
+    <None Include="Resources\actions\validation.png" />
+    <None Include="Resources\setting_migration.ico" />
+    <None Include="Resources\secprogress_classic.png" />
+    <None Include="Resources\secprogress_modern.png" />
+    <None Include="Resources\menus\menu_light.png" />
+    <None Include="Resources\menus\menu_dark.png" />
+    <None Include="portable">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\startup\dt_branding.png" />
+    <None Include="Resources\get_drv_info.png" />
+    <None Include="Resources\drv_info_from_image.png" />
+    <None Include="Resources\info_from_drv_file.png" />
+    <None Include="Resources\next_element.png" />
+    <None Include="Resources\next_element_dark.png" />
+    <None Include="Resources\prev_element.png" />
+    <None Include="Resources\prev_element_dark.png" />
+    <None Include="Resources\jumpto_dark.png" />
+    <None Include="Resources\jumpto.png" />
+    <None Include="Resources\pkg_info_from_image.png" />
+    <None Include="Resources\info_from_pkg_file.png" />
+    <None Include="Resources\get_appxpkg_info.png" />
+    <None Include="Resources\split_img.png" />
+    <None Include="Resources\export_driver.png" />
+    <None Include="Resources\about\mdl_discussion.png" />
+    <None Include="Resources\FirstUse\backbox.png" />
+    <None Include="Resources\FirstUse\backbox_down.png" />
+    <None Include="Resources\FirstUse\backbox_focus.png" />
+    <None Include="Resources\menus\explorer_view_glyph.png" />
+    <None Include="Resources\menus\explorer_view_glyph_dark.png" />
+    <None Include="Resources\menus\info_glyph.png" />
+    <None Include="Resources\menus\info_glyph_dark.png" />
+    <None Include="Resources\settings\options_bgprocs_dark.png" />
+    <None Include="Resources\settings\options_bgprocs_light.png" />
+    <None Include="Resources\settings\options_imgdetect_dark.png" />
+    <None Include="Resources\settings\options_imgdetect_light.png" />
+    <None Include="Resources\settings\options_logs_dark.png" />
+    <None Include="Resources\settings\options_logs_light.png" />
+    <None Include="Resources\settings\options_output_dark.png" />
+    <None Include="Resources\settings\options_output_light.png" />
+    <None Include="Resources\settings\options_personalization_dark.png" />
+    <None Include="Resources\settings\options_personalization_light.png" />
+    <None Include="Resources\settings\options_program_dark.png" />
+    <None Include="Resources\settings\options_program_light.png" />
+    <None Include="Resources\settings\options_scratch_dark.png" />
+    <None Include="Resources\settings\options_scratch_light.png" />
+    <None Include="Resources\import_driver.png" />
+    <None Include="Resources\onedrive_exclusion.png" />
+    <None Include="Resources\color_schemes\CS_Idle_Blue.png" />
+    <None Include="Resources\color_schemes\CS_Idle_Green.png" />
+    <None Include="Resources\color_schemes\CS_Ops_Blue.png" />
+    <None Include="Resources\color_schemes\CS_Ops_Green.png" />
+    <None Include="Resources\color_schemes\CS_ProgressPanel_Blue.png" />
+    <None Include="Resources\color_schemes\CS_ProgressPanel_Green.png" />
+    <None Include="Resources\error_32px.png" />
+    <None Include="Resources\search_dark.png" />
+    <None Include="Resources\search_light.png" />
+    <None Include="Resources\video_play.png" />
+    <None Include="Resources\progresspanel_logview_hidden.png" />
+    <None Include="Resources\progresspanel_logview_shown.png" />
+    <None Include="Resources\create_iso.png" />
+    <None Include="Resources\set_layeredkeyboarddriver.png" />
+    <None Include="Resources\startup\version.png" />
+    <None Include="Resources\startup\preview_flag.png" />
+    <None Include="Resources\startup\startup_bg.png" />
+    <EmbeddedResource Include="Resources\dtproj.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Resources\rem_drv.png" />
+    <None Include="Resources\add_drv.png" />
+    <None Include="Resources\image_light.png" />
+    <None Include="Resources\image_dark.png" />
+    <None Include="Resources\FirstUse\product_overview.png" />
+    <None Include="Resources\FirstUse\closebox_focus.png" />
+    <None Include="Resources\FirstUse\closebox_down.png" />
+    <None Include="Resources\menus\edit_action_props_dark.png" />
+    <None Include="Resources\menus\edit_action_props_light.png" />
+    <None Include="Resources\menus\action_testing_light.png" />
+    <None Include="Resources\menus\action_testing_dark.png" />
+    <None Include="Resources\about\subreddit.png" />
+    <None Include="Resources\about\gh_repo.png" />
+    <None Include="Resources\logo_preview.png" />
+    <None Include="Resources\StoreLogoAssetPreviewer\preview_unavail_dark.png" />
+    <None Include="Resources\StoreLogoAssetPreviewer\preview_unavail_light.png" />
+    <None Include="Resources\menus\clear_glyph_dark.png" />
+    <None Include="Resources\aboutscr_bg.png" />
+    <None Include="Resources\FirstUse\minBox_focus.png" />
+    <None Include="Resources\FirstUse\minBox_down.png" />
+    <None Include="Resources\FirstUse\minBox.png" />
+    <None Include="Resources\FirstUse\closebox.png" />
+    <None Include="Resources\FirstUse\wndPanel_Backdrop.png" />
+    <None Include="Resources\dt_bgbranding.jpg" />
+    <None Include="Resources\cleanup_img.png" />
+    <None Include="Resources\copytoclip.png" />
+    <None Include="Resources\preview_light.png" />
+    <None Include="Resources\preview_dark.png" />
+    <None Include="Resources\delete_imgindex.png" />
+    <None Include="Resources\menus\wordwrap_dark.png" />
+    <None Include="Resources\menus\wordwrap.png" />
+    <None Include="Resources\menus\openfile_dark.png" />
+    <None Include="Resources\menus\openfile.png" />
+    <None Include="Resources\menus\newfile_dark.png" />
+    <None Include="Resources\menus\newfile.png" />
+    <None Include="Resources\menus\help_glyph_dark.png" />
+    <None Include="Resources\menus\help_glyph.png" />
+    <None Include="Resources\rem_appxpkg.png" />
+    <None Include="Resources\add_appxpkg.png" />
+    <None Include="Resources\menus\dlg_unpin_dark.png" />
+    <None Include="Resources\menus\dlg_unpin.png" />
+    <None Include="Resources\menus\dlg_pin_dark.png" />
+    <None Include="Resources\menus\dlg_pin.png" />
+    <None Include="Resources\bgproc_notify.png" />
+    <None Include="Resources\progress\bg_ops_gif\bg_ops_complete.png" />
+    <None Include="Resources\progress\bg_ops_gif\bg_ops.gif" />
+    <None Include="Resources\menus\close_glyph_dark.png" />
+    <None Include="Resources\bold_font.png" />
+    <None Include="Resources\warning_16px.png" />
+    <None Include="Resources\error_16px.png" />
+    <None Include="Resources\prg_logo_32px.png" />
+    <None Include="Resources\sqlserver_32px.png" />
+    <None Include="Resources\vs_32px.png" />
+    <None Include="Resources\menus\branch_dark.png" />
+    <None Include="Resources\menus\branch.png" />
+    <None Include="Resources\menus\setting_error_glyph_dark.png" />
+    <None Include="Resources\menus\setting_error_glyph.png" />
+    <None Include="Resources\menus\hide_glyph_dark.png" />
+    <None Include="Resources\menus\show_glyph_dark.png" />
+    <None Include="Resources\menus\refresh_glyph_dark.png" />
+    <None Include="Resources\menus\expand_glyph_dark.png" />
+    <None Include="Resources\menus\collapse_glyph_dark.png" />
+    <None Include="Resources\menus\save_glyph_dark.png" />
+    <None Include="Resources\menus\progress_window_dark.png" />
+    <None Include="Resources\menus\prj_unload_glyph_dark.png" />
+    <None Include="Resources\merge_swm.png" />
+    <None Include="Resources\capture_img.png" />
+    <None Include="Resources\apply_img.png" />
+    <None Include="Resources\uninst_os.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_9_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_8_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_7_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_6_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_5_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_4_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_3_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_24_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_23_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_22_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_21_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_20_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_2_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_19_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_18_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_17_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_16_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_15_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_14_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_13_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_12_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_11_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_10_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_1_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win81\win81_0_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_9_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_8_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_7_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_6_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_5_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_4_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_3_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_24_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_23_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_22_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_21_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_20_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_2_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_19_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_18_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_17_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_16_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_15_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_14_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_13_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_12_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_11_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_10_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_1_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\btn_previews\win8\win8_0_previews.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_9.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_8.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_7.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_6.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_5.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_4.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_3.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_24.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_23.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_22.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_21.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_20.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_2.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_19.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_18.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_17.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_16.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_15.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_14.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_13.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_12.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_11.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_10.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_1.png" />
+    <None Include="Resources\ua_creation\win8_accents\win81\win81_0.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_9.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_8.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_7.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_6.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_5.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_4.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_3.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_24.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_23.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_22.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_21.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_20.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_2.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_19.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_18.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_17.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_16.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_15.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_14.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_13.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_12.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_11.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_10.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_1.png" />
+    <None Include="Resources\ua_creation\win8_accents\win8\win8_0.png" />
+    <None Include="Resources\ua_creation\usr_pic.png" />
+    <None Include="Resources\ua_creation\cpl_classic_smallview.png" />
+    <None Include="Resources\ua_creation\cpl_classic_largeview.png" />
+    <None Include="Resources\ua_creation\cpl_catview.png" />
+    <None Include="Resources\ua_creation\windows_update.png" />
+    <None Include="Resources\ua_creation\eula_scr_disabled.png" />
+    <None Include="Resources\ua_creation\work_net.png" />
+    <None Include="Resources\ua_creation\public_net.png" />
+    <None Include="Resources\ua_creation\home_net.png" />
+    <None Include="Resources\ua_creation\eula_scr.png" />
+    <None Include="Resources\ua_creation\usr_personalization.png" />
+    <None Include="Resources\ua_creation\wireless.png" />
+    <None Include="Resources\ua_creation\usr_security.png" />
+    <None Include="Resources\ua_creation\usr_ceip.png" />
+    <None Include="Resources\ua_creation\unattend_progress.png" />
+    <None Include="Resources\ua_creation\unattend_prep.png" />
+    <None Include="Resources\ua_creation\unattend_finish.png" />
+    <None Include="Resources\ua_creation\regional_settings.png" />
+    <None Include="Resources\ua_creation\oobe_skip.png" />
+    <None Include="Resources\ua_creation\partitioning.png" />
+    <None Include="Resources\ua_creation\net_security.png" />
+    <None Include="Resources\ua_creation\cpl.png" />
+    <None Include="Resources\ua_creation\comp_protection.png" />
+    <None Include="Resources\ua_creation\comp_personalization.png" />
+    <None Include="Resources\ua_creation\eula.png" />
+    <None Include="Resources\ua_creation\activation.png" />
+    <None Include="Resources\glyphs\express_mode_select.png" />
+    <None Include="Resources\glyphs\editor_mode_select.png" />
+    <None Include="Resources\ua_creation\targetos.png" />
+    <None Include="Resources\express_mode_fc.png" />
+    <None Include="Resources\editor_mode_fc.png" />
+    <None Include="Resources\glyphs\express_mode.png" />
+    <None Include="Resources\glyphs\editor_mode.png" />
+    <None Include="Resources\menus\progress_window.png" />
+    <None Include="Resources\sedition_pic.png" />
+    <None Include="Resources\prg_logo.png" />
+    <None Include="Resources\logo_aboutdlg_light.png" />
+    <None Include="Resources\logo_aboutdlg_dark.png" />
+    <None Include="Resources\reports\success_pic.png" />
+    <None Include="Resources\reports\failure_pic.png" />
+    <None Include="Resources\menus\refresh_glyph.png" />
+    <None Include="Resources\menus\expand_glyph.png" />
+    <None Include="Resources\menus\collapse_glyph.png" />
+    <None Include="Resources\op_report_header.png" />
+    <None Include="Panels\MSEdge\dlg_cat_desc" />
+    <None Include="Resources\add_edgewebview.png" />
+    <None Include="Resources\add_edgebrowser.png" />
+    <None Include="Resources\img_info.png" />
+    <None Include="Resources\umount_img.png" />
+    <None Include="Resources\commit_img_dlg.png" />
+    <None Include="Resources\menus\report_glyph.png" />
+    <None Include="Resources\menus\prj_unload_glyph.png" />
+    <None Include="Resources\logo_mainscr_light.png" />
+    <None Include="Resources\logo_mainscr_dark.png" />
+    <None Include="Resources\getting_started.png" />
+    <None Include="Resources\caution.png" />
+    <None Include="Resources\ver_stability.png" />
+    <None Include="Resources\please_wait.png" />
+    <None Include="Resources\new_proj.png" />
+    <None Include="Resources\menus\close_glyph.png" />
+    <None Include="Resources\switch_indexes.png" />
+    <None Include="Resources\servsession_reload.png" />
+    <None Include="Resources\get_feat_info.png" />
+    <None Include="Resources\enable_feature.png" />
+    <None Include="Resources\disable_feature.png" />
+    <None Include="Resources\rem_pkg.png" />
+    <None Include="Resources\get_pkg_info.png" />
+    <None Include="Resources\add_pkg.png" />
+    <None Include="Resources\commit_img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="Helpers\extps1\PE_Helper\files\diskpart\" />
+    <Folder Include="Helpers\extps1\PE_Helper\tools\HotInstall\" />
+    <Folder Include="Panels\Set_Ops\" />
+    <Folder Include="Tools\UnpEax\" />
+    <Folder Include="Updater\" />
+    <Folder Include="Utilities\LanguageUtilities\LanguageFiles\" />
+    <Folder Include="wimlib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Tools\BDELib\BDELib.vbproj">
+      <Project>{4f91e8cd-220b-4882-9228-b30b7f32c4a9}</Project>
+      <Name>BDELib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>SET DELETELOGDIR="Yes"
+SET ISPREVIEW="No"
+SET GEN_INSTALLER="Yes"
+SET COPY_DOCS="Yes"
+SET CREATE_SAMPLE_USERDATA="Yes"
+ECHO Generating program structure...
+IF EXIST "$(SolutionDir)portable" (
+	COPY "$(SolutionDir)portable" . /Y
+)
+IF EXIST "$(SolutionDir)Helpers\extps1\PE_Helper\Compile.ps1" (
+	"\Windows\system32\WindowsPowerShell\v1.0\powershell.exe" -executionpolicy bypass -noprofile -nologo -file "$(SolutionDir)Helpers\extps1\PE_Helper\Compile.ps1"
+)
+IF NOT EXIST bin (
+	md "bin"
+	md "bin\exthelpers"
+	md "bin\extbatch"
+	md "bin\utils"
+	md "bin\extps1"
+	move "helpers\extbatch\*.*" "bin\extbatch"
+	move "helpers\dthelper.bat" "bin"
+	move "helpers\extps1\*.*" "bin\extps1"
+	md "bin\extps1\PE_Helper"
+	xcopy "helpers\extps1\PE_Helper\*.*" "bin\extps1\PE_Helper" /cehyi
+	IF EXIST "$(SolutionDir)helpers\extps1\PE_Helper\Compile.ps1" (
+		:: Compile the script with CTT's compilation script (license in source code and About section)
+		ECHO Invoking pre-processing...
+		COPY "$(SolutionDir)helpers\extps1\PE_Helper\Compile.ps1" "$(TargetDir)bin\extps1\PE_Helper\Compile.ps1"
+		COPY "$(SolutionDir)helpers\extps1\PE_Helper\tools\Invoke-Preprocessing.ps1" "$(TargetDir)bin\extps1\PE_Helper\tools\Invoke-Preprocessing.ps1"
+		"\Windows\system32\WindowsPowerShell\v1.0\powershell.exe" -executionpolicy bypass -noprofile -nologo -file "$(TargetDir)bin\extps1\PE_Helper\Compile.ps1"
+		DEL "$(TargetDir)bin\extps1\PE_Helper\Compile.ps1" /F /Q
+		DEL "$(TargetDir)bin\extps1\PE_Helper\tools\Invoke-Preprocessing.ps1" /F /Q
+	)
+	IF EXIST HELPERS (
+		rd HELPERS /s /q
+	)
+) ELSE (
+	echo A bin folder already exists
+)
+IF EXIST "$(SolutionDir)7z" (
+	XCOPY "$(SolutionDir)7z\amd64\*" "$(TargetDir)bin\utils\x64" /cehyi
+	XCOPY "$(SolutionDir)7z\i386\*" "$(TargetDir)bin\utils\x86" /cehyi
+)
+IF NOT EXIST logs (
+	md logs
+) ELSE (
+	IF %25DELETELOGDIR%25=="Yes" (
+		echo A log directory already exists. Deleting log files...
+		del logs\* /f /q
+	) ELSE (
+		echo A log directory already exists
+		echo If you want to delete log files, set the DELETELOGDIR post-build variable to "Yes"
+	)
+)
+IF NOT EXIST scratch (
+	md scratch
+)
+:: Copy the Internet Explorer browser emulation registry file to the program directory
+copy /y "$(SolutionDir)Tools\DT_IEConfig.reg" "DT_IEConfig.reg"
+
+:: Copy registry file for ADK installations
+copy /y "$(SolutionDir)Tools\DT_WinADK.reg" "DT_WinADK.reg"
+
+IF EXIST "$(SolutionDir)Tools\UnpEax-Bin\UnpEax.exe" (
+	md "Tools\UnpEax"
+	copy /y "$(SolutionDir)Tools\UnpEax-Bin\UnpEax.exe" "Tools\UnpEax\UnpEax.exe"
+)
+
+:: Copy UnattendGen
+IF EXIST "$(SolutionDir)Tools\UnattendGen" (
+	md "Tools\UnattendGen"
+	xcopy "$(SolutionDir)Tools\UnattendGen\*" "Tools\UnattendGen" /cehyi
+)
+
+:: Copy DynaViewer
+IF EXIST "$(SolutionDir)Tools\DynaViewer\out\*.exe" (
+	md "Tools\DynaViewer"
+	xcopy "$(SolutionDir)Tools\DynaViewer\out\*.exe" "Tools\DynaViewer" /cehyi
+)
+
+:: Copy themes over to bin directory
+IF EXIST "$(SolutionDir)Utilities\ThemeUtilities\ThemeFiles\*.ini" (
+	md "bin\themes"
+	xcopy "$(SolutionDir)Utilities\ThemeUtilities\ThemeFiles\*.ini" "bin\themes" /cehyi
+)
+
+:: Copy Theme Designer
+IF EXIST "$(SolutionDir)Tools\DT_ThemeDesigner\out\*.exe" (
+	xcopy "$(SolutionDir)Tools\DT_ThemeDesigner\out\*.*" "Tools\ThemeDesigner" /cehyi
+	del "Tools\ThemeDesigner\*.zip" /F /S /Q
+)
+
+:: Copy Starter Script Editor
+IF EXIST "$(SolutionDir)Tools\StarterScriptEditor\out\*.exe" (
+	xcopy "$(SolutionDir)Tools\StarterScriptEditor\out\*.*" "Tools\StarterScriptEditor" /cehyi
+	del "Tools\StarterScriptEditor\*.zip" /F /S /Q
+)
+
+:: Copy PE Helper Main Menu
+IF EXIST "$(SolutionDir)Helpers\extps1\PE_Helper\tools\PEHelperMainMenu\out\*.exe" (
+	xcopy "$(SolutionDir)Helpers\extps1\PE_Helper\tools\PEHelperMainMenu\out\*.*" "bin\extps1\PE_Helper\tools\MainMenu" /CEHYI
+)
+
+:: Copy BDE-GUI utilities
+IF EXIST "$(SolutionDir)Helpers\extps1\PE_Helper\tools\BDE-GUI" (
+	MD "bin\extps1\PE_Helper\tools\BDE-GUI"
+	FOR %25%25A IN (ps1 bat cmd png) DO xcopy "$(SolutionDir)Helpers\extps1\PE_Helper\tools\BDE-GUI\*.%25%25A" "bin\extps1\PE_Helper\tools\BDE-GUI" /CEHYI
+)
+
+:: Copy Tour
+IF EXIST "$(SolutionDir)tour" (
+	xcopy "$(SolutionDir)tour\*.*" "$(TargetDir)docs\tour" /cehyi
+	IF EXIST "$(TargetDir)docs\tour\.git" (rd "$(TargetDir)docs\tour\.git" /s /q)
+	IF EXIST "$(TargetDir)docs\tour\.vscode" (rd "$(TargetDir)docstour\.vscode" /s /q)
+	IF EXIST "$(TargetDir)docs\tour\.git*" (del "$(TargetDir)docs\tour\.git*" /f /s /q)
+)
+
+IF NOT EXIST AutoUnattend (
+	md AutoUnattend
+	copy /y "$(SolutionDir)Elements\AutoUnattend\*.xml" AutoUnattend
+	IF EXIST "$(ProjectDir)Elements\AutoUnattend\StarterScripts" (
+		xcopy "$(ProjectDir)Elements\AutoUnattend\StarterScripts\*.dtss" AutoUnattend\StarterScripts /cehyi
+	)
+)
+
+:: Copy our cool facts
+IF EXIST "$(SolutionDir)Elements\InfinityHome\facts.xml" (
+	copy /y "$(SolutionDir)Elements\InfinityHome\facts.xml" bin\facts.xml
+)
+
+IF %25ISPREVIEW%25=="Yes" (
+	echo You will be running a preview release, which may not be ready for production. You may experience more bugs and less stability. Please switch to a stable release whenever possible.
+)
+IF NOT EXIST videos (
+	md videos
+	copy /y "$(SolutionDir)Videos\videoplay.html" "videos\videoplay_tmp.html"
+)
+IF %25COPY_DOCS%25=="Yes" (
+	echo Copying help documentation...
+	xcopy "$(ProjectDir)docs\*" "$(TargetDir)docs" /cehyi
+)
+IF %25CREATE_SAMPLE_USERDATA%25=="Yes" (
+	echo Creating sample userdata structure...
+	IF NOT EXIST "userdata" (md "userdata")
+	FOR %25%25A IN (dtpe_backgrounds themes starter_scripts sse_config_rules) DO (
+		IF NOT EXIST "userdata\%25%25A" (md "userdata\%25%25A")
+	)
+)
+IF EXIST "$(SolutionDir)Tools\AutoReloadService\out" (
+	echo Copying AutoReloadService...
+	IF NOT EXIST "AutoReload" MD "AutoReload"
+	copy /y "$(SolutionDir)Tools\AutoReloadService\out\*.*" "AutoReload"
+)
+IF %25GEN_INSTALLER%25=="Yes" (
+	echo The technology used for creating the installer is subject to a license. Refer to the "LICENSE.TXT" file in the "$(SolutionDir)Installer" directory for more information
+	:: Workaround for DLLs not copying
+	"\Windows\system32\WindowsPowerShell\v1.0\powershell.exe" -executionpolicy bypass -noprofile -nologo -file "$(SolutionDir)CheckMissingDLLs.ps1"
+	echo Copying program files...
+	IF EXIST "$(SolutionDir)Installer\files" (rd "$(SolutionDir)Installer\files" /s /q)
+	IF NOT EXIST "$(SolutionDir)Installer\files" (md "$(SolutionDir)Installer\files")
+	XCOPY "$(TargetDir)*.*" "$(SolutionDir)Installer\files" /cehyi
+	IF EXIST "$(SolutionDir)Installer\files\VS*.tmp" (del "$(SolutionDir)Installer\files\VS*.tmp" /f /q)
+	IF EXIST "$(SolutionDir)Installer\iscc.exe" (
+		echo Building the installer...
+		"$(SolutionDir)Installer\iscc.exe" "$(SolutionDir)Installer\dt.iss"
+	) ELSE (
+		echo Warning: the installer compiler could not be found. Deleting temporary setup files...
+		rd "$(SolutionDir)Installer\files" /s /q
+	)
+)</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>ECHO Deleting bin folder...
+IF EXIST "portable" (
+	ATTRIB portable -h
+	DEL portable
+)
+IF EXIST bin (
+	rd bin /s /q
+)
+IF EXIST temp (
+	rd temp /s /q
+)
+IF EXIST scratch (
+	rd scratch /s /q
+)
+IF EXIST docs (
+	rd docs /s /q
+)
+
+IF EXIST videos (
+	rd videos /s /q
+)
+
+IF EXIST AutoUnattend (
+	rd AutoUnattend /s /q
+)
+
+IF EXIST videos.xml (del videos.xml)
+IF EXIST videos.xml.old (del videos.xml.old)
+
+IF EXIST tools (
+	rd tools /s /q
+)
+
+IF EXIST "report.html" (del "report.html")</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="packages\Scintilla5.NET.6.1.2\build\scintilla5.net.targets" Condition="Exists('packages\Scintilla5.NET.6.1.2\build\scintilla5.net.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Scintilla5.NET.6.1.2\build\scintilla5.net.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Scintilla5.NET.6.1.2\build\scintilla5.net.targets'))" />
+  </Target>
+</Project>

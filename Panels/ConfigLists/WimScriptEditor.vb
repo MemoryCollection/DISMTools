@@ -1,0 +1,1563 @@
+﻿Imports System.IO
+Imports Microsoft.VisualBasic.ControlChars
+Imports ScintillaNET
+Imports System.Text.Encoding
+
+Public Class WimScriptEditor
+
+    Public ConfigListFile As String
+    Dim EditedLVI As String
+    Dim scaled As Boolean
+
+    Private Sub WimScriptEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = "DISM Configuration List Editor"
+                        Label1.Text = "The Configuration List Editor allows you to exclude files and/or folders during actions that let you specify these files, like capturing an image. You can either specify the settings from the graphical interface, or you can create the configuration file manually. When you've finished, click the Save icon."
+                        GroupBox1.Text = "Exclusion list"
+                        GroupBox2.Text = "Exclusion exception list"
+                        GroupBox3.Text = "Compression exclusion list"
+                        Button1.Text = "Add..."
+                        Button2.Text = "Edit..."
+                        Button3.Text = "Remove"
+                        Button5.Text = "Add..."
+                        Button6.Text = "Edit..."
+                        Button7.Text = "Remove"
+                        Button9.Text = "Add..."
+                        Button10.Text = "Edit..."
+                        Button11.Text = "Remove"
+                        WimScriptOFD.Title = "Specify the configuration list to load"
+                        WimScriptSFD.Title = "Specify the location to save the configuration list to"
+                        ToolStripButton2.ToolTipText = "New"
+                        ToolStripButton3.ToolTipText = "Open..."
+                        ToolStripButton4.ToolTipText = "Save..."
+                        ToolStripButton5.ToolTipText = "Toggle word wrap"
+                        ToolStripButton6.ToolTipText = "Help"
+                        ToolStripDropDownButton1.Text = "Tools"
+                        NoOneDriveToolStripMenuItem.Text = "Exclude user OneDrive folders..."
+                    Case "ESN"
+                        Text = "Editor de lista de configuraciones de DISM"
+                        Label1.Text = "El Editor de Lista de configuraciones le permite excluir archivos y/o carpetas durante acciones que le permiten especificar estos archivos, como capturar una imagen. Puede especificar las configuraciones desde la interfaz gráfica, o puede crear el archivo de configuración manualmente. Cuando haya acabado, haga clic en el icono de Guardar."
+                        GroupBox1.Text = "Lista de exclusiones"
+                        GroupBox2.Text = "Lista de excepción de exclusiones"
+                        GroupBox3.Text = "Lista de exclusión de compresión"
+                        Button1.Text = "Añadir..."
+                        Button2.Text = "Editar..."
+                        Button3.Text = "Eliminar"
+                        Button5.Text = "Añadir..."
+                        Button6.Text = "Editar..."
+                        Button7.Text = "Eliminar"
+                        Button9.Text = "Añadir..."
+                        Button10.Text = "Editar..."
+                        Button11.Text = "Eliminar"
+                        WimScriptOFD.Title = "Especifique el archivo de configuración a cargar"
+                        WimScriptSFD.Title = "Especifique la ubicación donde guardar el archivo de configuración"
+                        ToolStripButton2.ToolTipText = "Nuevo"
+                        ToolStripButton3.ToolTipText = "Abrir..."
+                        ToolStripButton4.ToolTipText = "Guardar..."
+                        ToolStripButton5.ToolTipText = "Cambiar ajuste de línea"
+                        ToolStripButton6.ToolTipText = "Ayuda"
+                        ToolStripDropDownButton1.Text = "Herramientas"
+                        NoOneDriveToolStripMenuItem.Text = "Excluir carpetas de OneDrive del usuario..."
+                    Case "FRA"
+                        Text = "Éditeur de liste de configuration DISM"
+                        Label1.Text = "L'éditeur de liste de configuration vous permet d'exclure des fichiers et/ou des dossiers lors d'actions qui vous permettent de spécifier ces fichiers, comme la capture d'une image. Vous pouvez soit spécifier les paramètres à partir de l'interface graphique, soit créer le fichier de configuration manuellement. Lorsque vous avez terminé, cliquez sur l'icône Sauvegarder."
+                        GroupBox1.Text = "Liste d'exclusion"
+                        GroupBox2.Text = "Liste des exceptions d'exclusion"
+                        GroupBox3.Text = "Liste d'exclusion de la compression"
+                        Button1.Text = "Ajouter..."
+                        Button2.Text = "Modifier..."
+                        Button3.Text = "Supprimer"
+                        Button5.Text = "Ajouter..."
+                        Button6.Text = "Modifier..."
+                        Button7.Text = "Supprimer"
+                        Button9.Text = "Ajouter..."
+                        Button10.Text = "Modifier..."
+                        Button11.Text = "Supprimer"
+                        WimScriptOFD.Title = "Spécifier la liste de configuration à charger"
+                        WimScriptSFD.Title = "Spécifiez l'emplacement où sauvegarder la liste de configuration"
+                        ToolStripButton2.ToolTipText = "Nouveau"
+                        ToolStripButton3.ToolTipText = "Ouvrir..."
+                        ToolStripButton4.ToolTipText = "Sauvegarder..."
+                        ToolStripButton5.ToolTipText = "Basculer l'habillage des mots"
+                        ToolStripButton6.ToolTipText = "Aide"
+                        ToolStripDropDownButton1.Text = "Outils"
+                        NoOneDriveToolStripMenuItem.Text = "Exclure les répertoires OneDrive de l'utilisateur..."
+                    Case "PTB", "PTG"
+                        Text = "Editor de Lista de Configuração DISM"
+                        Label1.Text = "O Configuration List Editor permite-lhe excluir ficheiros e/ou pastas durante acções que lhe permitem especificar esses ficheiros, como a captura de uma imagem. Pode especificar as definições a partir da interface gráfica ou pode criar o ficheiro de configuração manualmente. Quando tiver terminado, clique no ícone Guardar."
+                        GroupBox1.Text = "Lista de exclusão"
+                        GroupBox2.Text = "Lista de excepções de exclusão"
+                        GroupBox3.Text = "Lista de exclusão de compressão"
+                        Button1.Text = "Adicionar..."
+                        Button2.Text = "Editar..."
+                        Button3.Text = "Remover"
+                        Button5.Text = "Adicionar..."
+                        Button6.Text = "Editar..."
+                        Button7.Text = "Remover"
+                        Button9.Text = "Adicionar..."
+                        Button10.Text = "Editar..."
+                        Button11.Text = "Remover"
+                        WimScriptOFD.Title = "Especificar a lista de configuração a carregar"
+                        WimScriptSFD.Title = "Especificar a localização para guardar a lista de configuração"
+                        ToolStripButton2.ToolTipText = "Novo"
+                        ToolStripButton3.ToolTipText = "Abrir..."
+                        ToolStripButton4.ToolTipText = "Guardar..."
+                        ToolStripButton5.ToolTipText = "Alternar quebra de linha"
+                        ToolStripButton6.ToolTipText = "Ajuda"
+                        ToolStripDropDownButton1.Text = "Ferramentas"
+                        NoOneDriveToolStripMenuItem.Text = "Excluir pastas do OneDrive dos utilizadores..."
+                    Case "ITA"
+                        Text = "Editor elenco configurazione DISM"
+                        Label1.Text = "L'editor elenco configurazione consente di escludere file e/o cartelle durante le azioni che consentono di specificare tali file, come l'acquisizione di un'immagine. È possibile specificare le impostazioni dall'interfaccia grafica oppure creare manualmente il file di configurazione. Al termine, seleziona l'icona Salva"
+                        GroupBox1.Text = "Elenco esclusioni"
+                        GroupBox2.Text = "Elenco eccezioni esclusione"
+                        GroupBox3.Text = "Elenco esclusione compressione"
+                        Button1.Text = "Aggiungi..."
+                        Button2.Text = "Modifica..."
+                        Button3.Text = "Rimuovi"
+                        Button5.Text = "Aggiungi..."
+                        Button6.Text = "Modifica..."
+                        Button7.Text = "Rimuovi"
+                        Button9.Text = "Aggiungi..."
+                        Button10.Text = "Modifica..."
+                        Button11.Text = "Rimuovi"
+                        WimScriptOFD.Title = "Specifica l'elenco configurazione da caricare"
+                        WimScriptSFD.Title = "Specifica il percorso in cui salvare l'elenco di configurazione"
+                        ToolStripButton2.ToolTipText = "Nuovo"
+                        ToolStripButton3.ToolTipText = "Apri..."
+                        ToolStripButton4.ToolTipText = "Salva..."
+                        ToolStripButton5.ToolTipText = "Attiva/disattiva a capo automatico"
+                        ToolStripButton6.ToolTipText = "Aiuto"
+                        ToolStripDropDownButton1.Text = "Strumenti"
+                        NoOneDriveToolStripMenuItem.Text = "Escludi cartelle OneDrive utente..."
+                End Select
+            Case 1
+                Text = "DISM Configuration List Editor"
+                Label1.Text = "The Configuration List Editor allows you to exclude files and/or folders during actions that let you specify these files, like capturing an image. You can either specify the settings from the graphical interface, or you can create the configuration file manually. When you've finished, click the Save icon."
+                GroupBox1.Text = "Exclusion list"
+                GroupBox2.Text = "Exclusion exception list"
+                GroupBox3.Text = "Compression exclusion list"
+                Button1.Text = "Add..."
+                Button2.Text = "Edit..."
+                Button3.Text = "Remove"
+                Button5.Text = "Add..."
+                Button6.Text = "Edit..."
+                Button7.Text = "Remove"
+                Button9.Text = "Add..."
+                Button10.Text = "Edit..."
+                Button11.Text = "Remove"
+                WimScriptOFD.Title = "Specify the configuration list to load"
+                WimScriptSFD.Title = "Specify the location to save the configuration list to"
+                ToolStripButton2.ToolTipText = "New"
+                ToolStripButton3.ToolTipText = "Open..."
+                ToolStripButton4.ToolTipText = "Save..."
+                ToolStripButton5.ToolTipText = "Toggle word wrap"
+                ToolStripButton6.ToolTipText = "Help"
+                ToolStripDropDownButton1.Text = "Tools"
+                NoOneDriveToolStripMenuItem.Text = "Exclude user OneDrive folders..."
+            Case 2
+                Text = "Editor de lista de configuraciones de DISM"
+                Label1.Text = "El Editor de Lista de configuraciones le permite excluir archivos y/o carpetas durante acciones que le permiten especificar estos archivos, como capturar una imagen. Puede especificar las configuraciones desde la interfaz gráfica, o puede crear el archivo de configuración manualmente. Cuando haya acabado, haga clic en el icono de Guardar."
+                GroupBox1.Text = "Lista de exclusiones"
+                GroupBox2.Text = "Lista de excepción de exclusiones"
+                GroupBox3.Text = "Lista de exclusión de compresión"
+                Button1.Text = "Añadir..."
+                Button2.Text = "Editar..."
+                Button3.Text = "Eliminar"
+                Button5.Text = "Añadir..."
+                Button6.Text = "Editar..."
+                Button7.Text = "Eliminar"
+                Button9.Text = "Añadir..."
+                Button10.Text = "Editar..."
+                Button11.Text = "Eliminar"
+                WimScriptOFD.Title = "Especifique el archivo de configuración a cargar"
+                WimScriptSFD.Title = "Especifique la ubicación donde guardar el archivo de configuración"
+                ToolStripButton2.ToolTipText = "Nuevo"
+                ToolStripButton3.ToolTipText = "Abrir..."
+                ToolStripButton4.ToolTipText = "Guardar..."
+                ToolStripButton5.ToolTipText = "Cambiar ajuste de línea"
+                ToolStripButton6.ToolTipText = "Ayuda"
+                ToolStripDropDownButton1.Text = "Herramientas"
+                NoOneDriveToolStripMenuItem.Text = "Excluir carpetas de OneDrive del usuario..."
+            Case 3
+                Text = "Éditeur de liste de configuration DISM"
+                Label1.Text = "L'éditeur de liste de configuration vous permet d'exclure des fichiers et/ou des dossiers lors d'actions qui vous permettent de spécifier ces fichiers, comme la capture d'une image. Vous pouvez soit spécifier les paramètres à partir de l'interface graphique, soit créer le fichier de configuration manuellement. Lorsque vous avez terminé, cliquez sur l'icône Sauvegarder."
+                GroupBox1.Text = "Liste d'exclusion"
+                GroupBox2.Text = "Liste des exceptions d'exclusion"
+                GroupBox3.Text = "Liste d'exclusion de la compression"
+                Button1.Text = "Ajouter..."
+                Button2.Text = "Modifier..."
+                Button3.Text = "Supprimer"
+                Button5.Text = "Ajouter..."
+                Button6.Text = "Modifier..."
+                Button7.Text = "Supprimer"
+                Button9.Text = "Ajouter..."
+                Button10.Text = "Modifier..."
+                Button11.Text = "Supprimer"
+                WimScriptOFD.Title = "Spécifier la liste de configuration à charger"
+                WimScriptSFD.Title = "Spécifiez l'emplacement où sauvegarder la liste de configuration"
+                ToolStripButton2.ToolTipText = "Nouveau"
+                ToolStripButton3.ToolTipText = "Ouvrir..."
+                ToolStripButton4.ToolTipText = "Sauvegarder..."
+                ToolStripButton5.ToolTipText = "Basculer l'habillage des mots"
+                ToolStripButton6.ToolTipText = "Aide"
+                ToolStripDropDownButton1.Text = "Outils"
+                NoOneDriveToolStripMenuItem.Text = "Exclure les répertoires OneDrive de l'utilisateur..."
+            Case 4
+                Text = "Editor de Lista de Configuração DISM"
+                Label1.Text = "O Configuration List Editor permite-lhe excluir ficheiros e/ou pastas durante acções que lhe permitem especificar esses ficheiros, como a captura de uma imagem. Pode especificar as definições a partir da interface gráfica ou pode criar o ficheiro de configuração manualmente. Quando tiver terminado, clique no ícone Guardar."
+                GroupBox1.Text = "Lista de exclusão"
+                GroupBox2.Text = "Lista de excepções de exclusão"
+                GroupBox3.Text = "Lista de exclusão de compressão"
+                Button1.Text = "Adicionar..."
+                Button2.Text = "Editar..."
+                Button3.Text = "Remover"
+                Button5.Text = "Adicionar..."
+                Button6.Text = "Editar..."
+                Button7.Text = "Remover"
+                Button9.Text = "Adicionar..."
+                Button10.Text = "Editar..."
+                Button11.Text = "Remover"
+                WimScriptOFD.Title = "Especificar a lista de configuração a carregar"
+                WimScriptSFD.Title = "Especificar a localização para guardar a lista de configuração"
+                ToolStripButton2.ToolTipText = "Novo"
+                ToolStripButton3.ToolTipText = "Abrir..."
+                ToolStripButton4.ToolTipText = "Guardar..."
+                ToolStripButton5.ToolTipText = "Alternar quebra de linha"
+                ToolStripButton6.ToolTipText = "Ajuda"
+                ToolStripDropDownButton1.Text = "Ferramentas"
+                NoOneDriveToolStripMenuItem.Text = "Excluir pastas do OneDrive dos utilizadores..."
+            Case 5
+                Text = "Editor elenco configurazione DISM"
+                Label1.Text = "L'Editor elenco configurazione consente di escludere file e/o cartelle durante le azioni che consentono di specificare tali file, come l'acquisizione di un'immagine. È possibile specificare le impostazioni dall'interfaccia grafica oppure creare manualmente il file di configurazione. Al termine, selezionare l'icona Salva"
+                GroupBox1.Text = "Elenco esclusioni"
+                GroupBox2.Text = "Elenco eccezioni esclusione"
+                GroupBox3.Text = "Elenco esclusione compressione"
+                Button1.Text = "Aggiungi..."
+                Button2.Text = "Modifica..."
+                Button3.Text = "Rimuovi"
+                Button5.Text = "Aggiungi..."
+                Button6.Text = "Modifica..."
+                Button7.Text = "Rimuovi"
+                Button9.Text = "Aggiungi..."
+                Button10.Text = "Modifica..."
+                Button11.Text = "Rimuovi"
+                WimScriptOFD.Title = "Specifica l'elenco configurazione da caricare"
+                WimScriptSFD.Title = "Specifica il percorso in cui salvare l'elenco configurazione"
+                ToolStripButton2.ToolTipText = "Nuovo"
+                ToolStripButton3.ToolTipText = "Apri..."
+                ToolStripButton4.ToolTipText = "Salva..."
+                ToolStripButton5.ToolTipText = "Attiva/disattiva a capo automatico"
+                ToolStripButton6.ToolTipText = "Aiuto"
+                ToolStripDropDownButton1.Text = "Strumenti"
+                NoOneDriveToolStripMenuItem.Text = "Escludi cartelle OneDrive utente..."
+        End Select
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+        ListView1.BackColor = CurrentTheme.BackgroundColor
+        ListView1.ForeColor = CurrentTheme.ForegroundColor
+        ListView2.BackColor = CurrentTheme.BackgroundColor
+        ListView2.ForeColor = CurrentTheme.ForegroundColor
+        ListView3.BackColor = CurrentTheme.BackgroundColor
+        ListView3.ForeColor = CurrentTheme.ForegroundColor
+        GroupBox1.ForeColor = CurrentTheme.ForegroundColor
+        GroupBox2.ForeColor = CurrentTheme.ForegroundColor
+        GroupBox3.ForeColor = CurrentTheme.ForegroundColor
+        ' Fill in font combinations
+        FontFamilyTSCB.Items.Clear()
+        For Each fntFamily As FontFamily In FontFamily.Families
+            FontFamilyTSCB.Items.Add(fntFamily.Name)
+        Next
+        If Not scaled Then
+            SplitContainer1.SplitterDistance = WindowHelper.ScaleLogical(SplitContainer1.SplitterDistance)
+            scaled = True
+        End If
+        InitScintilla("Consolas", 11)
+        FontFamilyTSCB.SelectedItem = "Consolas"
+    End Sub
+
+    ''' <summary>
+    ''' Initializes the Scintilla editor for WimScript.ini editing
+    ''' </summary>
+    ''' <param name="fntName">The name of the font used in the Scintilla editor</param>
+    ''' <param name="fntSize">The size of the font used in the Scintilla editor</param>
+    ''' <remarks></remarks>
+    Sub InitScintilla(fntName As String, fntSize As Integer)
+        DynaLog.LogMessage("Initializing the Scintilla Editor...")
+        DynaLog.LogMessage("- Font name: " & fntName)
+        DynaLog.LogMessage("- Font size: " & fntSize)
+        ' Initialize Scintilla editor
+        DynaLog.LogMessage("Resetting styles...")
+        Scintilla1.StyleResetDefault()
+        ' Use VS's selection color, as I find it the most natural
+        DynaLog.LogMessage("Setting colors for selection...")
+        If CurrentTheme.IsDark Then
+            Scintilla1.SelectionBackColor = Color.FromArgb(38, 79, 120)
+        ElseIf MainForm.BackColor = Color.FromArgb(239, 239, 242) Then
+            Scintilla1.SelectionBackColor = Color.FromArgb(153, 201, 239)
+        End If
+        Scintilla1.Styles(Style.Default).Font = fntName
+        Scintilla1.Styles(Style.Default).Size = fntSize
+
+        ' Set background and foreground colors (from Visual Studio)
+        DynaLog.LogMessage("Setting colors for styles...")
+        Scintilla1.Styles(Style.Default).BackColor = CurrentTheme.SectionBackgroundColor
+        Scintilla1.Styles(Style.Default).ForeColor = CurrentTheme.ForegroundColor
+        Scintilla1.Styles(Style.LineNumber).BackColor = CurrentTheme.SectionBackgroundColor
+        Scintilla1.StyleClearAll()
+
+        ' Use Notepad++'s lexer style colors
+        DynaLog.LogMessage("Setting colors for INI lexer...")
+        If CurrentTheme.IsDark Then
+            Scintilla1.Styles(Style.Properties.Default).ForeColor = Color.FromArgb(220, 220, 204)
+            Scintilla1.Styles(Style.Properties.Comment).ForeColor = Color.FromArgb(127, 159, 127)
+            Scintilla1.Styles(Style.Properties.Section).ForeColor = Color.FromArgb(140, 208, 211)
+            Scintilla1.Styles(Style.Properties.Assignment).ForeColor = Color.FromArgb(159, 157, 109)
+            Scintilla1.Styles(Style.Properties.DefVal).ForeColor = Color.FromArgb(255, 207, 175)
+            Scintilla1.Styles(Style.Properties.Key).ForeColor = Color.FromArgb(223, 196, 125)
+        ElseIf MainForm.BackColor = Color.FromArgb(239, 239, 242) Then
+            Scintilla1.Styles(Style.Properties.Default).ForeColor = Color.Black
+            Scintilla1.Styles(Style.Properties.Comment).ForeColor = Color.FromArgb(0, 128, 0)
+            Scintilla1.Styles(Style.Properties.Section).ForeColor = Color.FromArgb(128, 0, 255)
+            Scintilla1.Styles(Style.Properties.Assignment).ForeColor = Color.Red
+            Scintilla1.Styles(Style.Properties.DefVal).ForeColor = Color.Red
+            Scintilla1.Styles(Style.Properties.Key).ForeColor = Color.Blue
+        End If
+
+
+        ' Set lexer
+        Scintilla1.LexerName = "props"
+
+        ' Set line number margin properties
+        DynaLog.LogMessage("Setting colors for line margin...")
+        Scintilla1.Styles(Style.LineNumber).BackColor = CurrentTheme.SectionBackgroundColor
+        Scintilla1.Styles(Style.LineNumber).ForeColor = CurrentTheme.ForegroundColor
+        Dim Margin = Scintilla1.Margins(1)
+        Margin.Width = 30
+        Margin.Type = MarginType.Number
+        Margin.Sensitive = True
+        Margin.Mask = 0
+
+        ' Initialize code folding
+        DynaLog.LogMessage("Setting code folding...")
+        Scintilla1.SetFoldMarginColor(True, Scintilla1.Styles(Style.Default).BackColor)
+        Scintilla1.SetFoldMarginColor(True, Scintilla1.Styles(Style.Default).BackColor)
+        Scintilla1.SetProperty("fold", "1")
+        Scintilla1.SetProperty("fold.compact", "1")
+
+        ' Configure bookmark margins
+        DynaLog.LogMessage("Seting bookmark margins...")
+        Dim Bookmarks = Scintilla1.Margins(2)
+        Bookmarks.Width = 20
+        Bookmarks.Sensitive = True
+        Bookmarks.Type = MarginType.Symbol
+        Bookmarks.Mask = (1 << 2)
+        Dim Marker = Scintilla1.Markers(2)
+        Marker.Symbol = MarkerSymbol.Circle
+        Marker.SetBackColor(Color.FromArgb(255, 0, 59))
+        Marker.SetForeColor(Color.Black)
+        Marker.SetAlpha(100)
+
+        ' Set editor caret settings
+        DynaLog.LogMessage("Setting colors for editor caret...")
+        Scintilla1.CaretForeColor = CurrentTheme.ForegroundColor
+
+
+        ' Configure code folding margins
+        DynaLog.LogMessage("Setting margins for code folding...")
+        Scintilla1.Margins(3).Type = MarginType.Symbol
+        Scintilla1.Margins(3).Mask = Marker.MaskFolders
+        Scintilla1.Margins(3).Sensitive = True
+        Scintilla1.Margins(3).Width = 1
+
+        ' Set colors for all folding markers
+        DynaLog.LogMessage("Setting colors for folding markers...")
+        For x = 25 To 31
+            Scintilla1.Markers(x).SetForeColor(Scintilla1.Styles(Style.Default).BackColor)
+            Scintilla1.Markers(x).SetBackColor(Scintilla1.Styles(Style.Default).ForeColor)
+        Next
+
+        ' Folding marker configuration
+        DynaLog.LogMessage("Setting folding marker...")
+        Scintilla1.Markers(Marker.Folder).Symbol = MarkerSymbol.BoxPlus
+        Scintilla1.Markers(Marker.FolderOpen).Symbol = MarkerSymbol.BoxMinus
+        Scintilla1.Markers(Marker.FolderEnd).Symbol = MarkerSymbol.BoxPlusConnected
+        Scintilla1.Markers(Marker.FolderMidTail).Symbol = MarkerSymbol.TCorner
+        Scintilla1.Markers(Marker.FolderOpenMid).Symbol = MarkerSymbol.BoxMinusConnected
+        Scintilla1.Markers(Marker.FolderSub).Symbol = MarkerSymbol.VLine
+        Scintilla1.Markers(Marker.FolderTail).Symbol = MarkerSymbol.LCorner
+
+        ' Enable folding
+        DynaLog.LogMessage("Enabling folding...")
+        Scintilla1.AutomaticFold = (AutomaticFold.Show Or AutomaticFold.Click Or AutomaticFold.Show)
+
+        DynaLog.LogMessage("Scintilla editor initialization complete.")
+    End Sub
+
+    Private Sub Scintilla1_TextChanged(sender As Object, e As EventArgs) Handles Scintilla1.TextChanged
+        ' Clear list views for updated listings
+        ListView1.Items.Clear()
+        ListView2.Items.Clear()
+        ListView3.Items.Clear()
+
+        Dim nextLine As Integer = 0
+
+        ' Go through the configuration file to fill in the entries
+        For Each TextLine In Scintilla1.Lines
+            nextLine = 0
+            If TextLine.Text.Contains("[ExclusionList]") Then
+                While Not Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[CompressionExclusionList]") Or Not Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[ExclusionException]")
+                    If (TextLine.Index + 1) + nextLine >= Scintilla1.Lines.Count Then Exit While
+                    If Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[CompressionExclusionList]") Or Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[ExclusionException]") Then Exit While
+                    nextLine += 1
+                    If String.IsNullOrWhiteSpace(Scintilla1.Lines(TextLine.Index + nextLine).Text) Then Continue While
+                    DynaLog.LogMessage("Adding item to exclusion list...")
+                    ListView1.Items.Add(Scintilla1.Lines(TextLine.Index + nextLine).Text)
+                End While
+            ElseIf TextLine.Text.Contains("[ExclusionException]") Then
+                While Not Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[CompressionExclusionList]") Or Not Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[ExclusionList]")
+                    If (TextLine.Index + 1) + nextLine >= Scintilla1.Lines.Count Then Exit While
+                    If Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[CompressionExclusionList]") Or Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[ExclusionList]") Then Exit While
+                    nextLine += 1
+                    If String.IsNullOrWhiteSpace(Scintilla1.Lines(TextLine.Index + nextLine).Text) Then Continue While
+                    DynaLog.LogMessage("Adding item to exclusion exception list...")
+                    ListView2.Items.Add(Scintilla1.Lines(TextLine.Index + nextLine).Text)
+                End While
+            ElseIf TextLine.Text.Contains("[CompressionExclusionList]") Then
+                While Not Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[ExclusionList]") Or Not Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[ExclusionException]")
+                    If (TextLine.Index + 1) + nextLine >= Scintilla1.Lines.Count Then Exit While
+                    If Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[ExclusionList]") Or Scintilla1.Lines(TextLine.Index + nextLine).Text.Contains("[ExclusionException]") Then Exit While
+                    nextLine += 1
+                    If String.IsNullOrWhiteSpace(Scintilla1.Lines(TextLine.Index + nextLine).Text) Then Continue While
+                    DynaLog.LogMessage("Adding item to compression exclusion list...")
+                    ListView3.Items.Add(Scintilla1.Lines(TextLine.Index + nextLine).Text)
+                End While
+            End If
+        Next
+
+        ' Remove unnecessary ListView items
+        For Each LVItem As ListViewItem In ListView1.Items
+            If LVItem.Text.Contains("[ExclusionList]") Or _
+                LVItem.Text.Contains("[CompressionExclusionList]") Or _
+                LVItem.Text.Contains("[ExclusionException]") Then
+                ListView1.Items.Remove(LVItem)
+            End If
+        Next
+        For Each LVItem As ListViewItem In ListView2.Items
+            If LVItem.Text.Contains("[ExclusionList]") Or _
+                LVItem.Text.Contains("[CompressionExclusionList]") Or _
+                LVItem.Text.Contains("[ExclusionException]") Then
+                ListView2.Items.Remove(LVItem)
+            End If
+        Next
+        For Each LVItem As ListViewItem In ListView3.Items
+            If LVItem.Text.Contains("[ExclusionList]") Or _
+                LVItem.Text.Contains("[CompressionExclusionList]") Or _
+                LVItem.Text.Contains("[ExclusionException]") Then
+                ListView3.Items.Remove(LVItem)
+            End If
+        Next
+
+        ' Indicate whether file has seen changes, if it exists
+        If ConfigListFile IsNot Nothing And File.Exists(ConfigListFile) Then
+            Dim titleMsg As String = ""
+            If File.ReadAllText(ConfigListFile).ToString() = Scintilla1.Text Then
+                DynaLog.LogMessage("This file does not have pending modifications.")
+                Select Case MainForm.Language
+                    Case 0
+                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                            Case "ENU", "ENG"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                            Case "ESN"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                            Case "FRA"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                            Case "PTB", "PTG"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                            Case "ITA"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                        End Select
+                    Case 1
+                        titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                    Case 2
+                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                    Case 3
+                        titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                    Case 4
+                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                    Case 5
+                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                End Select
+            Else
+                DynaLog.LogMessage("This file has pending modifications.")
+                Select Case MainForm.Language
+                    Case 0
+                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                            Case "ENU", "ENG"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " (modified) - DISM Configuration List Editor"
+                            Case "ESN"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " (modificado) - Editor de lista de configuraciones de DISM"
+                            Case "FRA"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " (modifié) - Éditeur de liste de configuration DISM"
+                            Case "PTB", "PTG"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " (modificado) - Editor de listas de configuração DISM"
+                            Case "ITA"
+                                titleMsg = Path.GetFileName(ConfigListFile) & " (modificato) - Editor dell'elenco di configurazione DISM"
+                        End Select
+                    Case 1
+                        titleMsg = Path.GetFileName(ConfigListFile) & " (modified) - DISM Configuration List Editor"
+                    Case 2
+                        titleMsg = Path.GetFileName(ConfigListFile) & " (modificado) - Editor de lista de configuraciones de DISM"
+                    Case 3
+                        titleMsg = Path.GetFileName(ConfigListFile) & " (modifié) - Éditeur de liste de configuration DISM"
+                    Case 4
+                        titleMsg = Path.GetFileName(ConfigListFile) & " (modificado) - Editor de listas de configuração DISM"
+                    Case 5
+                        titleMsg = Path.GetFileName(ConfigListFile) & " (modificato) - Editor dell'elenco di configurazione DISM"
+                End Select
+            End If
+            Text = titleMsg
+        End If
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        Dim msg As String = ""
+        Dim titleMsg As String = ""
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        msg = "Do you want to save this configuration list file?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - DISM Configuration List Editor"
+                    Case "ESN"
+                        msg = "¿Desea guardar este archivo de lista de configuraciones?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - Editor de lista de configuraciones de DISM"
+                    Case "FRA"
+                        msg = "Voulez-vous sauvegarder ce fichier de liste de configuration ?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - Éditeur de liste de configuration DISM"
+                    Case "PTB", "PTG"
+                        msg = "Deseja guardar este ficheiro de lista de configuração?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - Editor de listas de configuração DISM"
+                    Case "ITA"
+                        msg = "Vuoi salvare questo file dell'elenco di configurazione?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - Editor dell'elenco di configurazione DISM"
+                End Select
+            Case 1
+                msg = "Do you want to save this configuration list file?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - DISM Configuration List Editor"
+            Case 2
+                msg = "¿Desea guardar este archivo de lista de configuraciones?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - Editor de lista de configuraciones de DISM"
+            Case 3
+                msg = "Voulez-vous sauvegarder ce fichier de liste de configuration ?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - Éditeur de liste de configuration DISM"
+            Case 4
+                msg = "Deseja guardar este ficheiro de lista de configuração?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - Editor de listas de configuração DISM"
+            Case 5
+                msg = "Vuoi salvare questo file dell'elenco di configurazione?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & " - Editor dell'elenco di configurazione DISM"
+        End Select
+        If (ConfigListFile Is Nothing Or Not File.Exists(ConfigListFile)) And Scintilla1.Text <> "" Then
+            DynaLog.LogMessage("Asking user whether or not to save the file...")
+            Dim Result As MsgBoxResult = MsgBox(msg, vbYesNoCancel + vbQuestion, Text)
+            Select Case Result
+                Case MsgBoxResult.Yes
+                    If File.Exists(ConfigListFile) Then
+                        File.WriteAllText(ConfigListFile, Scintilla1.Text, ASCII)
+                        Select Case MainForm.Language
+                            Case 0
+                                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                    Case "ENU", "ENG"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                    Case "ESN"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                    Case "FRA"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                    Case "PTB", "PTG"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                    Case "ITA"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                End Select
+                            Case 1
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                            Case 2
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                            Case 3
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                            Case 4
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                            Case 5
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                        End Select
+                        Text = titleMsg
+                    Else
+                        If WimScriptSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                            File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                            ConfigListFile = WimScriptSFD.FileName
+                            Select Case MainForm.Language
+                                Case 0
+                                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                        Case "ENU", "ENG"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                        Case "ESN"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                        Case "FRA"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                        Case "PTB", "PTG"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                        Case "ITA"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                    End Select
+                                Case 1
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                Case 2
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                Case 3
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                Case 4
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                Case 5
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                            End Select
+                            Text = titleMsg
+                        Else
+                            Exit Sub
+                        End If
+                    End If
+                Case MsgBoxResult.No
+                    Exit Select
+                Case MsgBoxResult.Cancel
+                    Exit Sub
+            End Select
+        Else
+            Try
+                If (ConfigListFile IsNot Nothing And File.Exists(ConfigListFile) And File.ReadAllText(ConfigListFile).ToString() <> Scintilla1.Text) Then
+                    DynaLog.LogMessage("Asking user whether or not to save modifications...")
+                    Dim Result As MsgBoxResult = MsgBox(msg, vbYesNoCancel + vbQuestion, Text)
+                    Select Case Result
+                        Case MsgBoxResult.Yes
+                            If File.Exists(ConfigListFile) Then
+                                File.WriteAllText(ConfigListFile, Scintilla1.Text, ASCII)
+                                Select Case MainForm.Language
+                                    Case 0
+                                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                            Case "ENU", "ENG"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                            Case "ESN"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                            Case "FRA"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                            Case "PTB", "PTG"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                            Case "ITA"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                        End Select
+                                    Case 1
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                    Case 2
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                    Case 3
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                    Case 4
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                    Case 5
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                End Select
+                                Text = titleMsg
+                            Else
+                                If WimScriptSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                                    File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                                    ConfigListFile = WimScriptSFD.FileName
+                                    Select Case MainForm.Language
+                                        Case 0
+                                            Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                                Case "ENU", "ENG"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                                Case "ESN"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                                Case "FRA"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                                Case "PTB", "PTG"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                                Case "ITA"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                            End Select
+                                        Case 1
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                        Case 2
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                        Case 3
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                        Case 4
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                        Case 5
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                    End Select
+                                    Text = titleMsg
+                                Else
+                                    Exit Sub
+                                End If
+                            End If
+                        Case MsgBoxResult.No
+                            Exit Select
+                        Case MsgBoxResult.Cancel
+                            Exit Sub
+                    End Select
+                End If
+            Catch ex As Exception
+                Exit Try
+            End Try
+        End If
+
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = "New configuration list - DISM Configuration List Editor"
+                    Case "ESN"
+                        Text = "Nueva lista de configuraciones - Editor de lista de configuración de DISM"
+                    Case "FRA"
+                        Text = "Nouvelle liste de configuration - Éditeur de liste de configuration DISM"
+                    Case "PTB", "PTG"
+                        Text = "Nova lista de configuração - Editor de listas de configuração DISM"
+                    Case "ITA"
+                        Text = "Nuovo elenco di configurazione - Editor elenco di configurazione DISM"
+                End Select
+            Case 1
+                Text = "New configuration list - DISM Configuration List Editor"
+            Case 2
+                Text = "Nueva lista de configuraciones - Editor de lista de configuración de DISM"
+            Case 3
+                Text = "Nouvelle liste de configuration - Éditeur de liste de configuration DISM"
+            Case 4
+                Text = "Nova lista de configuração - Editor de listas de configuração DISM"
+            Case 5
+                Text = "Nuovo elenco di configurazione - Editor elenco di configurazione DISM"
+        End Select
+
+        ' Generate a default configuration list, as shown in the DISM configuration list documentation.
+        ' Source: https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-configuration-list-and-wimscriptini-files-winnext?view=windows-11
+
+        ConfigListFile = ""
+
+        Scintilla1.Text = CrLf & _
+            "[ExclusionList]" & CrLf & _
+            "\$ntfs.log" & CrLf & _
+            "\hiberfil.sys" & CrLf & _
+            "\pagefile.sys" & CrLf & _
+            "\swapfile.sys" & CrLf & _
+            "\System Volume Information" & CrLf & _
+            "\RECYCLER" & CrLf & _
+            "\Windows\CSC" & CrLf & CrLf & _
+            "[CompressionExclusionList]" & CrLf & _
+            "*.mp3" & CrLf & _
+            "*.zip" & CrLf & _
+            "*.cab" & CrLf & _
+            "\WINDOWS\inf\*.pnf"
+    End Sub
+
+    Private Sub FontChange(sender As Object, e As EventArgs) Handles FontFamilyTSCB.SelectedIndexChanged, FontSizeTSCB.SelectedIndexChanged
+        ' Change Scintilla editor font
+        InitScintilla(FontFamilyTSCB.SelectedItem, FontSizeTSCB.SelectedItem)
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        Dim msg As String = ""
+        Dim titleMsg As String = ""
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        msg = "Do you want to save this configuration list file?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                    Case "ESN"
+                        msg = "¿Desea guardar este archivo de lista de configuraciones?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                    Case "FRA"
+                        msg = "Voulez-vous sauvegarder ce fichier de liste de configuration ?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                    Case "PTB", "PTG"
+                        msg = "Deseja guardar este ficheiro de lista de configuração?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                    Case "ITA"
+                        msg = "Vuoi salvare questo file dell'elenco di configurazione?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                End Select
+            Case 1
+                msg = "Do you want to save this configuration list file?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+            Case 2
+                msg = "¿Desea guardar este archivo de lista de configuraciones?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+            Case 3
+                msg = "Voulez-vous sauvegarder ce fichier de liste de configuration ?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+            Case 4
+                msg = "Deseja guardar este ficheiro de lista de configuração?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+            Case 5
+                msg = "Vuoi salvare questo file dell'elenco di configurazione?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+        End Select
+        If (ConfigListFile Is Nothing Or Not File.Exists(ConfigListFile)) And Scintilla1.Text <> "" Then
+            DynaLog.LogMessage("Asking user whether or not to save the file...")
+            Dim Result As MsgBoxResult = MsgBox(msg, vbYesNoCancel + vbQuestion, Text)
+            Select Case Result
+                Case MsgBoxResult.Yes
+                    If File.Exists(ConfigListFile) Then
+                        File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                        ConfigListFile = WimScriptSFD.FileName
+                        Select Case MainForm.Language
+                            Case 0
+                                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                    Case "ENU", "ENG"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                    Case "ESN"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                    Case "FRA"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                    Case "PTB", "PTG"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                    Case "ITA"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                End Select
+                            Case 1
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                            Case 2
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                            Case 3
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                            Case 4
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                            Case 5
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                        End Select
+                        Text = titleMsg
+                    Else
+                        If WimScriptSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                            File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                            ConfigListFile = WimScriptSFD.FileName
+                            Select Case MainForm.Language
+                                Case 0
+                                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                        Case "ENU", "ENG"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                        Case "ESN"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                        Case "FRA"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                        Case "PTB", "PTG"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                        Case "ITA"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                    End Select
+                                Case 1
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                Case 2
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                Case 3
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                Case 4
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                Case 5
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                            End Select
+                            Text = titleMsg
+                        Else
+                            Exit Sub
+                        End If
+                    End If
+                Case MsgBoxResult.No
+                    Exit Select
+                Case MsgBoxResult.Cancel
+                    Exit Sub
+            End Select
+        Else
+            Try
+                If (ConfigListFile IsNot Nothing And File.Exists(ConfigListFile) And File.ReadAllText(ConfigListFile).ToString() <> Scintilla1.Text) Then
+                    DynaLog.LogMessage("Asking user whether or not to save modifications...")
+                    Dim Result As MsgBoxResult = MsgBox(msg, vbYesNoCancel + vbQuestion, Text)
+                    Select Case Result
+                        Case MsgBoxResult.Yes
+                            If File.Exists(ConfigListFile) Then
+                                File.WriteAllText(ConfigListFile, Scintilla1.Text, ASCII)
+                                Select Case MainForm.Language
+                                    Case 0
+                                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                            Case "ENU", "ENG"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                            Case "ESN"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                            Case "FRA"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                            Case "PTB", "PTG"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                            Case "ITA"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                        End Select
+                                    Case 1
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                    Case 2
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                    Case 3
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                    Case 4
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                    Case 5
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                End Select
+                                Text = titleMsg
+                            Else
+                                If WimScriptSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                                    File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                                    ConfigListFile = WimScriptSFD.FileName
+                                    Select Case MainForm.Language
+                                        Case 0
+                                            Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                                Case "ENU", "ENG"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                                Case "ESN"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                                Case "FRA"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                                Case "PTB", "PTG"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                                Case "ITA"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                            End Select
+                                        Case 1
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                        Case 2
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                        Case 3
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                        Case 4
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                        Case 5
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                    End Select
+                                    Text = titleMsg
+                                Else
+                                    Exit Sub
+                                End If
+                            End If
+                        Case MsgBoxResult.No
+                            Exit Select
+                        Case MsgBoxResult.Cancel
+                            Exit Sub
+                    End Select
+                End If
+            Catch ex As Exception
+                Exit Try
+            End Try
+        End If
+        WimScriptOFD.ShowDialog(Me)
+    End Sub
+
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        If ConfigListFile Is Nothing Or Not File.Exists(ConfigListFile) Then
+            If WimScriptSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                DynaLog.LogMessage("Saving contents to file...")
+                DynaLog.LogMessage("Destination file: " & Quote & WimScriptSFD.FileName & Quote)
+                File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                ConfigListFile = WimScriptSFD.FileName
+            End If
+        Else
+            DynaLog.LogMessage("Saving contents to file...")
+            DynaLog.LogMessage("Destination file: " & Quote & ConfigListFile & Quote)
+            File.WriteAllText(ConfigListFile, Scintilla1.Text, ASCII)
+        End If
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                    Case "ESN"
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                    Case "FRA"
+                        Text = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                    Case "PTB", "PTG"
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                    Case "ITA"
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                End Select
+            Case 1
+                Text = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+            Case 2
+                Text = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+            Case 3
+                Text = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+            Case 4
+                Text = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+            Case 5
+                Text = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+        End Select
+    End Sub
+
+    Private Sub WimScriptOFD_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles WimScriptOFD.FileOk
+        DynaLog.LogMessage("Loading file contents...")
+        DynaLog.LogMessage("Configuration list file: " & Quote & WimScriptOFD.FileName & Quote)
+        Scintilla1.Text = File.ReadAllText(WimScriptOFD.FileName)
+        ConfigListFile = WimScriptOFD.FileName
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                    Case "ESN"
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                    Case "FRA"
+                        Text = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                    Case "PTB", "PTG"
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                    Case "ITA"
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                End Select
+            Case 1
+                Text = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+            Case 2
+                Text = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+            Case 3
+                Text = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+            Case 4
+                Text = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+            Case 5
+                Text = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+        End Select
+    End Sub
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
+        Process.Start("https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-configuration-list-and-wimscriptini-files-winnext?view=windows-11")
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+        If ToolStripButton5.Checked Then
+            ToolStripButton5.Checked = False
+        Else
+            ToolStripButton5.Checked = True
+        End If
+        Scintilla1.WrapMode = If(ToolStripButton5.Checked, WrapMode.Word, WrapMode.None)
+    End Sub
+
+#Region "Button Regions"
+
+    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
+        If ListView1.SelectedItems.Count = 1 Then
+            Button2.Enabled = True
+            Button3.Enabled = True
+        Else
+            Button2.Enabled = False
+            Button3.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ListView2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView2.SelectedIndexChanged
+        If ListView2.SelectedItems.Count = 1 Then
+            Button6.Enabled = True
+            Button7.Enabled = True
+        Else
+            Button6.Enabled = False
+            Button7.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ListView3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView3.SelectedIndexChanged
+        If ListView3.SelectedItems.Count = 1 Then
+            Button11.Enabled = True
+            Button9.Enabled = True
+        Else
+            Button11.Enabled = False
+            Button9.Enabled = False
+        End If
+    End Sub
+
+    Sub UpdateConfigListContents()
+        ' Remove the TextChanged handler to avoid bad behavior (nothing showing up)
+        RemoveHandler Scintilla1.TextChanged, AddressOf Scintilla1_TextChanged
+
+        ' Clear text in Scintilla editor and add it back
+        Scintilla1.ClearAll()
+        If ListView1.Items.Count > 0 Then
+            DynaLog.LogMessage("Adding exclusion list items...")
+            Scintilla1.AppendText(CrLf & _
+                                  "[ExclusionList]" & CrLf)
+            For Each LVI As ListViewItem In ListView1.Items
+                Scintilla1.AppendText(LVI.Text & If(Not LVI.Text.EndsWith(CrLf), CrLf, ""))
+            Next
+            ' End with carriage return line feed
+            Scintilla1.AppendText(CrLf)
+        End If
+        If ListView2.Items.Count > 0 Then
+            DynaLog.LogMessage("Adding exclusion exception list items...")
+            Scintilla1.AppendText(CrLf & _
+                                  "[ExclusionException]" & CrLf)
+            For Each LVI As ListViewItem In ListView2.Items
+                Scintilla1.AppendText(LVI.Text & If(Not LVI.Text.EndsWith(CrLf), CrLf, ""))
+            Next
+            ' End with carriage return line feed
+            Scintilla1.AppendText(CrLf)
+        End If
+        If ListView3.Items.Count > 0 Then
+            DynaLog.LogMessage("Adding compression exclusion list items...")
+            Scintilla1.AppendText(CrLf & _
+                                  "[CompressionExclusionList]" & CrLf)
+            For Each LVI As ListViewItem In ListView3.Items
+                Scintilla1.AppendText(LVI.Text & If(Not LVI.Text.EndsWith(CrLf), CrLf, ""))
+            Next
+            ' End with carriage return line feed
+            Scintilla1.AppendText(CrLf)
+        End If
+
+        ' Indicate whether file has seen changes, if it exists
+        If ConfigListFile IsNot Nothing And File.Exists(ConfigListFile) Then
+            If File.ReadAllText(ConfigListFile).ToString() = Scintilla1.Text Then
+                Select Case MainForm.Language
+                    Case 0
+                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                            Case "ENU", "ENG"
+                                Text = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                            Case "ESN"
+                                Text = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                            Case "FRA"
+                                Text = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                            Case "PTB", "PTG"
+                                Text = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                            Case "ITA"
+                                Text = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                        End Select
+                    Case 1
+                        Text = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                    Case 2
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                    Case 3
+                        Text = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                    Case 4
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                    Case 5
+                        Text = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                End Select
+            Else
+                Select Case MainForm.Language
+                    Case 0
+                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                            Case "ENU", "ENG"
+                                Text = Path.GetFileName(ConfigListFile) & " (modified) - DISM Configuration List Editor"
+                            Case "ESN"
+                                Text = Path.GetFileName(ConfigListFile) & " (modificado) - Editor de lista de configuraciones de DISM"
+                            Case "FRA"
+                                Text = Path.GetFileName(ConfigListFile) & " (modifié) - Éditeur de liste de configuration DISM"
+                            Case "PTB", "PTG"
+                                Text = Path.GetFileName(ConfigListFile) & " (modificado) - Editor de listas de configuração DISM"
+                            Case "ITA"
+                                Text = Path.GetFileName(ConfigListFile) & " (modificato) - Editor dell'elenco di configurazione DISM"
+                        End Select
+                    Case 1
+                        Text = Path.GetFileName(ConfigListFile) & " (modified) - DISM Configuration List Editor"
+                    Case 2
+                        Text = Path.GetFileName(ConfigListFile) & " (modificado) - Editor de lista de configuraciones de DISM"
+                    Case 3
+                        Text = Path.GetFileName(ConfigListFile) & " (modifié) - Éditeur de liste de configuration DISM"
+                    Case 4
+                        Text = Path.GetFileName(ConfigListFile) & " (modificado) - Editor de listas de configuração DISM"
+                    Case 5
+                        Text = Path.GetFileName(ConfigListFile) & " (modificato) - Editor dell'elenco di configurazione DISM"
+                End Select
+            End If
+        End If
+
+        ' Add TextChanged event handler to let the user type files in the Scintilla editor again
+        AddHandler Scintilla1.TextChanged, AddressOf Scintilla1_TextChanged
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        AddListEntryDlg.IsForExclusionList = True
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        AddListEntryDlg.Text = "Add " & GroupBox1.Text.ToLower() & " entry"
+                    Case "ESN"
+                        AddListEntryDlg.Text = "Añadir entrada de " & GroupBox1.Text.ToLower()
+                    Case "FRA"
+                        AddListEntryDlg.Text = "Ajouter une entrée à la " & GroupBox1.Text.ToLower()
+                    Case "PTB", "PTG"
+                        AddListEntryDlg.Text = "Adicionar entrada de " & GroupBox1.Text.ToLower()
+                    Case "ITA"
+                        AddListEntryDlg.Text = "Aggiungere una entrata di " & GroupBox1.Text.ToLower()
+                End Select
+            Case 1
+                AddListEntryDlg.Text = "Add " & GroupBox1.Text.ToLower() & " entry"
+            Case 2
+                AddListEntryDlg.Text = "Añadir entrada de " & GroupBox1.Text.ToLower()
+            Case 3
+                AddListEntryDlg.Text = "Ajouter une entrée à la " & GroupBox1.Text.ToLower()
+            Case 4
+                AddListEntryDlg.Text = "Adicionar entrada de " & GroupBox1.Text.ToLower()
+            Case 5
+                AddListEntryDlg.Text = "Aggiungere una entrata di " & GroupBox1.Text.ToLower()
+        End Select
+        AddListEntryDlg.Left = Left + ((SplitContainer1.SplitterDistance + Scintilla1.Width) / 2)
+        AddListEntryDlg.Top = Top + Panel2.Top + DarkToolStrip1.Height + SplitContainer1.Top + GroupBox1.Top + 8
+        AddListEntryDlg.ShowDialog(Me)
+        If AddListEntryDlg.DialogResult = Windows.Forms.DialogResult.OK Then
+            ListView1.Items.Add(AddListEntryDlg.TextBox1.Text)
+            UpdateConfigListContents()
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        AddListEntryDlg.IsForExclusionList = False
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        AddListEntryDlg.Text = "Add " & GroupBox2.Text.ToLower() & " entry"
+                    Case "ESN"
+                        AddListEntryDlg.Text = "Añadir entrada de " & GroupBox2.Text.ToLower()
+                    Case "FRA"
+                        AddListEntryDlg.Text = "Ajouter une entrée à la " & GroupBox2.Text.ToLower()
+                    Case "PTB", "PTG"
+                        AddListEntryDlg.Text = "Adicionar entrada de " & GroupBox2.Text.ToLower()
+                    Case "ITA"
+                        AddListEntryDlg.Text = "Aggiungere una entrata di " & GroupBox2.Text.ToLower()
+                End Select
+            Case 1
+                AddListEntryDlg.Text = "Add " & GroupBox2.Text.ToLower() & " entry"
+            Case 2
+                AddListEntryDlg.Text = "Añadir entrada de " & GroupBox2.Text.ToLower()
+            Case 3
+                AddListEntryDlg.Text = "Ajouter une entrée à la " & GroupBox2.Text.ToLower()
+            Case 4
+                AddListEntryDlg.Text = "Adicionar entrada de " & GroupBox2.Text.ToLower()
+            Case 5
+                AddListEntryDlg.Text = "Aggiungere una entrata di " & GroupBox2.Text.ToLower()
+        End Select
+        AddListEntryDlg.Left = Left + ((SplitContainer1.SplitterDistance + Scintilla1.Width) / 2)
+        AddListEntryDlg.Top = Top + Panel2.Top + DarkToolStrip1.Height + SplitContainer1.Top + GroupBox2.Top + 8
+        AddListEntryDlg.ShowDialog(Me)
+        If AddListEntryDlg.DialogResult = Windows.Forms.DialogResult.OK Then
+            ListView2.Items.Add(AddListEntryDlg.TextBox1.Text)
+            UpdateConfigListContents()
+        End If
+    End Sub
+
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        AddListEntryDlg.IsForExclusionList = False
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        AddListEntryDlg.Text = "Add " & GroupBox3.Text.ToLower() & " entry"
+                    Case "ESN"
+                        AddListEntryDlg.Text = "Añadir entrada de " & GroupBox3.Text.ToLower()
+                    Case "FRA"
+                        AddListEntryDlg.Text = "Ajouter une entrée à la " & GroupBox3.Text.ToLower()
+                    Case "PTB", "PTG"
+                        AddListEntryDlg.Text = "Adicionar entrada de " & GroupBox3.Text.ToLower()
+                    Case "ITA"
+                        AddListEntryDlg.Text = "Aggiungere una entrata di " & GroupBox3.Text.ToLower()
+                End Select
+            Case 1
+                AddListEntryDlg.Text = "Add " & GroupBox3.Text.ToLower() & " entry"
+            Case 2
+                AddListEntryDlg.Text = "Añadir entrada de " & GroupBox3.Text.ToLower()
+            Case 3
+                AddListEntryDlg.Text = "Ajouter une entrée à la " & GroupBox3.Text.ToLower()
+            Case 4
+                AddListEntryDlg.Text = "Adicionar entrada de " & GroupBox3.Text.ToLower()
+            Case 5
+                AddListEntryDlg.Text = "Aggiungere una entrata di " & GroupBox3.Text.ToLower()
+        End Select
+        AddListEntryDlg.Left = Left + ((SplitContainer1.SplitterDistance + Scintilla1.Width) / 2)
+        AddListEntryDlg.Top = Top + Panel2.Top + DarkToolStrip1.Height + SplitContainer1.Top + GroupBox3.Top + 8
+        AddListEntryDlg.ShowDialog(Me)
+        If AddListEntryDlg.DialogResult = Windows.Forms.DialogResult.OK Then
+            ListView3.Items.Add(AddListEntryDlg.TextBox1.Text)
+            UpdateConfigListContents()
+        End If
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        If ListView1.SelectedItems.Count = 1 Then
+            ListView1.Items.Remove(ListView1.FocusedItem)
+            UpdateConfigListContents()
+        End If
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        If ListView2.SelectedItems.Count = 1 Then
+            ListView2.Items.Remove(ListView2.FocusedItem)
+            UpdateConfigListContents()
+        End If
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        If ListView3.SelectedItems.Count = 1 Then
+            ListView3.Items.Remove(ListView3.FocusedItem)
+            UpdateConfigListContents()
+        End If
+    End Sub
+
+    Private Sub ListView1_BeforeLabelEdit(sender As Object, e As LabelEditEventArgs) Handles ListView1.BeforeLabelEdit
+        EditedLVI = ListView1.Items(e.Item).Text
+    End Sub
+
+    Private Sub ListView1_AfterLabelEdit(sender As Object, e As LabelEditEventArgs) Handles ListView1.AfterLabelEdit
+        Scintilla1.Text = Scintilla1.Text.Replace(EditedLVI, e.Label & CrLf).Trim()
+    End Sub
+
+    Private Sub ListView2_BeforeLabelEdit(sender As Object, e As LabelEditEventArgs) Handles ListView2.BeforeLabelEdit
+        EditedLVI = ListView2.Items(e.Item).Text
+    End Sub
+
+    Private Sub ListView2_AfterLabelEdit(sender As Object, e As LabelEditEventArgs) Handles ListView2.AfterLabelEdit
+        Scintilla1.Text = Scintilla1.Text.Replace(EditedLVI, e.Label & CrLf).Trim()
+    End Sub
+
+    Private Sub ListView3_BeforeLabelEdit(sender As Object, e As LabelEditEventArgs) Handles ListView3.BeforeLabelEdit
+        EditedLVI = ListView3.Items(e.Item).Text
+    End Sub
+
+    Private Sub ListView3_AfterLabelEdit(sender As Object, e As LabelEditEventArgs) Handles ListView3.AfterLabelEdit
+        Scintilla1.Text = Scintilla1.Text.Replace(EditedLVI, e.Label & CrLf).Trim()
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        If ListView3.SelectedItems.Count = 1 Then
+            Dim LVI As ListViewItem = ListView3.FocusedItem
+            LVI.BeginEdit()
+        End If
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        If ListView2.SelectedItems.Count = 1 Then
+            Dim LVI As ListViewItem = ListView2.FocusedItem
+            LVI.BeginEdit()
+        End If
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If ListView1.SelectedItems.Count = 1 Then
+            Dim LVI As ListViewItem = ListView1.FocusedItem
+            LVI.BeginEdit()
+        End If
+    End Sub
+
+#End Region
+
+    Private Sub WimScriptEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Dim msg As String = ""
+        Dim titleMsg As String = ""
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        msg = "Do you want to save this configuration list file?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                    Case "ESN"
+                        msg = "¿Desea guardar este archivo de lista de configuraciones?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                    Case "FRA"
+                        msg = "Voulez-vous sauvegarder ce fichier de liste de configuration ?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                    Case "PTB", "PTG"
+                        msg = "Deseja guardar este ficheiro de lista de configuração?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                    Case "ITA"
+                        msg = "Vuoi salvare questo file dell'elenco di configurazione?"
+                        titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                End Select
+            Case 1
+                msg = "Do you want to save this configuration list file?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+            Case 2
+                msg = "¿Desea guardar este archivo de lista de configuraciones?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+            Case 3
+                msg = "Voulez-vous sauvegarder ce fichier de liste de configuration ?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+            Case 4
+                msg = "Deseja guardar este ficheiro de lista de configuração?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+            Case 5
+                msg = "Vuoi salvare questo file dell'elenco di configurazione?"
+                titleMsg = If((ConfigListFile IsNot Nothing And File.Exists(ConfigListFile)), Path.GetFileName(ConfigListFile), "") & Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+        End Select
+        If (ConfigListFile Is Nothing Or Not File.Exists(ConfigListFile)) And Scintilla1.Text <> "" Then
+            DynaLog.LogMessage("Asking user whether or not to save the file...")
+            Dim Result As MsgBoxResult = MsgBox(msg, vbYesNoCancel + vbQuestion, Text)
+            Select Case Result
+                Case MsgBoxResult.Yes
+                    If File.Exists(ConfigListFile) Then
+                        File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                        ConfigListFile = WimScriptSFD.FileName
+                        Select Case MainForm.Language
+                            Case 0
+                                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                    Case "ENU", "ENG"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                    Case "ESN"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                    Case "FRA"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                    Case "PTB", "PTG"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                    Case "ITA"
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                End Select
+                            Case 1
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                            Case 2
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                            Case 3
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                            Case 4
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                            Case 5
+                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                        End Select
+                        Text = titleMsg
+                    Else
+                        If WimScriptSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                            File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                            ConfigListFile = WimScriptSFD.FileName
+                            Select Case MainForm.Language
+                                Case 0
+                                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                        Case "ENU", "ENG"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                        Case "ESN"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                        Case "FRA"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                        Case "PTB", "PTG"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                        Case "ITA"
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                    End Select
+                                Case 1
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                Case 2
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                Case 3
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                Case 4
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                Case 5
+                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                            End Select
+                            Text = titleMsg
+                        Else
+                            e.Cancel = True
+                        End If
+                    End If
+                Case MsgBoxResult.No
+                    Exit Select
+                Case MsgBoxResult.Cancel
+                    e.Cancel = True
+            End Select
+        Else
+            Try
+                If (ConfigListFile IsNot Nothing And File.Exists(ConfigListFile) And File.ReadAllText(ConfigListFile).ToString() <> Scintilla1.Text) Then
+                    DynaLog.LogMessage("Asking user whether or not to save modifications...")
+                    Dim Result As MsgBoxResult = MsgBox(msg, vbYesNoCancel + vbQuestion, Text)
+                    Select Case Result
+                        Case MsgBoxResult.Yes
+                            If File.Exists(ConfigListFile) Then
+                                File.WriteAllText(ConfigListFile, Scintilla1.Text, ASCII)
+                                Select Case MainForm.Language
+                                    Case 0
+                                        Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                            Case "ENU", "ENG"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                            Case "ESN"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                            Case "FRA"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                            Case "PTB", "PTG"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                            Case "ITA"
+                                                titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                        End Select
+                                    Case 1
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                    Case 2
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                    Case 3
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                    Case 4
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                    Case 5
+                                        titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                End Select
+                                Text = titleMsg
+                            Else
+                                If WimScriptSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+                                    File.WriteAllText(WimScriptSFD.FileName, Scintilla1.Text, ASCII)
+                                    ConfigListFile = WimScriptSFD.FileName
+                                    Select Case MainForm.Language
+                                        Case 0
+                                            Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                                                Case "ENU", "ENG"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                                Case "ESN"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                                Case "FRA"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                                Case "PTB", "PTG"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                                Case "ITA"
+                                                    titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                            End Select
+                                        Case 1
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - DISM Configuration List Editor"
+                                        Case 2
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de lista de configuraciones de DISM"
+                                        Case 3
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Éditeur de liste de configuration DISM"
+                                        Case 4
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor de listas de configuração DISM"
+                                        Case 5
+                                            titleMsg = Path.GetFileName(ConfigListFile) & " - Editor dell'elenco di configurazione DISM"
+                                    End Select
+                                    Text = titleMsg
+                                Else
+                                    e.Cancel = True
+                                End If
+                            End If
+                        Case MsgBoxResult.No
+                            Exit Select
+                        Case MsgBoxResult.Cancel
+                            e.Cancel = True
+                    End Select
+                End If
+            Catch ex As Exception
+                Exit Try
+            End Try
+        End If
+    End Sub
+
+    Private Sub WimScriptEditor_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        If Visible Then
+            Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
+            WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
+            ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))
+        End If
+    End Sub
+
+    Private Sub NoOneDriveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NoOneDriveToolStripMenuItem.Click
+        If OneDriveExclusionDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            If OneDriveExclusionDlg.ExcludedFolders.Count > 0 Then
+                For Each ExcludedFolder In OneDriveExclusionDlg.ExcludedFolders
+                    ListView1.Items.Add(If(ExcludedFolder.Contains(" "), Quote & ExcludedFolder & Quote, ExcludedFolder))
+                    DynaLog.LogMessage("Adding OneDrive item to exclusion...")
+                    UpdateConfigListContents()
+                Next
+            End If
+        End If
+    End Sub
+End Class

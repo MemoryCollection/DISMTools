@@ -1,0 +1,153 @@
+﻿Imports System.Windows.Forms
+Imports System.IO
+Imports Microsoft.VisualBasic.ControlChars
+
+Public Class ApplyUnattendFile
+
+    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+        DynaLog.LogMessage("Disposing of progress panel if not disposed of previously...")
+        If Not ProgressPanel.IsDisposed Then ProgressPanel.Dispose()
+        DynaLog.LogMessage("Checking answer file...")
+        If TextBox1.Text <> "" AndAlso File.Exists(TextBox1.Text) Then
+            DynaLog.LogMessage("An answer file has been specified and it exists in the file system.")
+            ProgressPanel.UnattendedFile = TextBox1.Text
+        Else
+            DynaLog.LogMessage("Either no unattended answer file has been specified or it does not exist in the file system.")
+            Dim msg As String = ""
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            msg = "Either no unattended answer file has been specified or the specified file does not exist. Please verify that it exists, and try again."
+                        Case "ESN"
+                            msg = "O ningún archivo de respuesta desatendida se ha especificado o el archivo especificado no existe. Verifique de que existe, e inténtelo de nuevo."
+                        Case "FRA"
+                            msg = "Soit aucun fichier de réponse sans surveillance n'a été spécifié, soit le fichier spécifié n'existe pas. Veuillez vérifier qu'il existe et réessayer."
+                        Case "PTB", "PTG"
+                            msg = "Ou não foi especificado nenhum ficheiro de resposta não assistida ou o ficheiro especificado não existe. Verifique se ele existe e tente novamente."
+                        Case "ITA"
+                            msg = "Non è stato specificato alcun file di risposta non presidiato oppure il file specificato non esiste. Verificare che esista e riprovare."
+                    End Select
+                Case 1
+                    msg = "Either no unattended answer file has been specified or the specified file does not exist. Please verify that it exists, and try again."
+                Case 2
+                    msg = "O ningún archivo de respuesta desatendida se ha especificado o el archivo especificado no existe. Verifique de que existe, e inténtelo de nuevo."
+                Case 3
+                    msg = "Soit aucun fichier de réponse sans surveillance n'a été spécifié, soit le fichier spécifié n'existe pas. Veuillez vérifier qu'il existe et réessayer."
+                Case 4
+                    msg = "Ou não foi especificado nenhum ficheiro de resposta não assistida ou o ficheiro especificado não existe. Verifique se ele existe e tente novamente."
+                Case 5
+                    msg = "Non è stato specificato alcun file di risposta non presidiato oppure il file specificato non esiste. Verificare che esista e riprovare."
+            End Select
+            MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+            Exit Sub
+        End If
+        ProgressPanel.OperationNum = 79
+        ProgressPanel.UnattendedCopyToSysprep = CheckBox1.Checked
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
+        Visible = False
+        ProgressPanel.ShowDialog(MainForm)
+        Me.Close()
+    End Sub
+
+    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.Close()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        OpenFileDialog1.ShowDialog(Me)
+    End Sub
+
+    Private Sub OpenFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
+        DynaLog.LogMessage("Specified unattended answer file: " & Quote & OpenFileDialog1.FileName & Quote)
+        TextBox1.Text = OpenFileDialog1.FileName
+    End Sub
+
+    Private Sub ApplyUnattendFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = "Apply unattended answer file"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Answer file:"
+                        Button1.Text = "Browse..."
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Cancel"
+                    Case "ESN"
+                        Text = "Aplicar archivo de respuesta desatendida"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Archivo de respuesta:"
+                        Button1.Text = "Examinar..."
+                        OK_Button.Text = "Aceptar"
+                        Cancel_Button.Text = "Cancelar"
+                    Case "FRA"
+                        Text = "Appliquer le fichier de réponses sans surveillance"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Fichier de réponse :"
+                        Button1.Text = "Parcourir..."
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Annuler"
+                    Case "PTB", "PTG"
+                        Text = "Aplicar ficheiro de resposta não assistida"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Ficheiro de resposta:"
+                        Button1.Text = "Procurar..."
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Cancelar"
+                    Case "ITA"
+                        Text = "Applicare il file di risposta non presidiato"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "File di risposta:"
+                        Button1.Text = "Sfoglia..."
+                        OK_Button.Text = "OK"
+                        Cancel_Button.Text = "Annullare"
+                End Select
+            Case 1
+                Text = "Apply unattended answer file"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Answer file:"
+                Button1.Text = "Browse..."
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Cancel"
+            Case 2
+                Text = "Aplicar archivo de respuesta desatendida"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Archivo de respuesta:"
+                Button1.Text = "Examinar..."
+                OK_Button.Text = "Aceptar"
+                Cancel_Button.Text = "Cancelar"
+            Case 3
+                Text = "Appliquer le fichier de réponses sans surveillance"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Fichier de réponse :"
+                Button1.Text = "Parcourir..."
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Annuler"
+            Case 4
+                Text = "Aplicar ficheiro de resposta não assistida"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Ficheiro de resposta:"
+                Button1.Text = "Procurar..."
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Cancelar"
+            Case 5
+                Text = "Applicare il file di risposta non presidiato"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "File di risposta:"
+                Button1.Text = "Sfoglia..."
+                OK_Button.Text = "OK"
+                Cancel_Button.Text = "Annullare"
+        End Select
+        ImageTaskHeader1.SetColors()
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+        TextBox1.BackColor = CurrentTheme.SectionBackgroundColor
+        TextBox1.ForeColor = ForeColor
+        Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
+        WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
+        ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))
+        ImageTaskHeader1.HideWindowTitle(handle)
+    End Sub
+End Class

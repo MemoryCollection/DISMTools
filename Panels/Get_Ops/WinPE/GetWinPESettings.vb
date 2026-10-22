@@ -1,0 +1,299 @@
+﻿Imports System.Windows.Forms
+Imports Microsoft.VisualBasic.ControlChars
+Imports Microsoft.Win32
+Imports System.ComponentModel
+Imports System.IO
+
+Public Class GetWinPESettings
+    Implements IImageTaskDialog
+
+    Sub GetPESettings()
+        ' Mount the SOFTWARE and SYSTEM keys
+        DynaLog.LogMessage("Preparing to get Windows PE settings...")
+        DynaLog.LogMessage("Loading SOFTWARE hive of WinPE image...")
+        Dim regExitCode As Integer = RegistryHelper.LoadRegistryHive(Path.Combine(MainForm.MountDir, "Windows", "system32", "config", "SOFTWARE"), "HKLM\PE_SOFT")
+        DynaLog.LogMessage("REG hive exit code: " & Hex(regExitCode))
+        If regExitCode <> 0 Then
+            DynaLog.LogMessage("Could not load the hive.")
+            DynaLog.LogMessage("Error message: " & New Win32Exception(regExitCode).Message)
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            Label5.Text = "Could not get value"
+                        Case "ESN"
+                            Label5.Text = "No se pudo obtener el valor"
+                        Case "FRA"
+                            Label5.Text = "Impossible d'obtenir la valeur"
+                        Case "PTB", "PTG"
+                            Label5.Text = "Não foi possível obter o valor"
+                        Case "ITA"
+                            Label5.Text = "Impossibile ottenere il valore"
+                    End Select
+                Case 1
+                    Label5.Text = "Could not get value"
+                Case 2
+                    Label5.Text = "No se pudo obtener el valor"
+                Case 3
+                    Label5.Text = "Impossible d'obtenir la valeur"
+                Case 4
+                    Label5.Text = "Não foi possível obter o valor"
+                Case 5
+                    Label5.Text = "Impossibile ottenere il valore"
+            End Select
+            Button1.Visible = False
+        End If
+        DynaLog.LogMessage("Loading SYSTEM hive of WinPE image...")
+        regExitCode = RegistryHelper.LoadRegistryHive(Path.Combine(MainForm.MountDir, "Windows", "system32", "config", "SYSTEM"), "HKLM\PE_SYS")
+        DynaLog.LogMessage("REG hive exit code: " & Hex(regExitCode))
+        If regExitCode <> 0 Then
+            DynaLog.LogMessage("Could not load the hive.")
+            DynaLog.LogMessage("Error message: " & New Win32Exception(regExitCode).Message)
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            Label6.Text = "Could not get value"
+                        Case "ESN"
+                            Label6.Text = "No se pudo obtener el valor"
+                        Case "FRA"
+                            Label6.Text = "Impossible d'obtenir la valeur"
+                        Case "PTB", "PTG"
+                            Label6.Text = "Não foi possível obter o valor"
+                        Case "ITA"
+                            Label6.Text = "Impossibile ottenere il valore"
+                    End Select
+                Case 1
+                    Label6.Text = "Could not get value"
+                Case 2
+                    Label6.Text = "No se pudo obtener el valor"
+                Case 3
+                    Label6.Text = "Impossible d'obtenir la valeur"
+                Case 4
+                    Label6.Text = "Não foi possível obter o valor"
+                Case 5
+                    Label6.Text = "Impossibile ottenere il valore"
+            End Select
+            Button2.Visible = False
+        End If
+        Try
+            Dim msg As String = ""
+            Select Case MainForm.Language
+                Case 0
+                    Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                        Case "ENU", "ENG"
+                            msg = "Could not get value"
+                        Case "ESN"
+                            msg = "No se pudo obtener el valor"
+                        Case "FRA"
+                            msg = "Impossible d'obtenir la valeur"
+                        Case "PTB", "PTG"
+                            msg = "Não foi possível obter o valor"
+                        Case "ITA"
+                            msg = "Impossibile ottenere il valore"
+                    End Select
+                Case 1
+                    msg = "Could not get value"
+                Case 2
+                    msg = "No se pudo obtener el valor"
+                Case 3
+                    msg = "Impossible d'obtenir la valeur"
+                Case 4
+                    msg = "Não foi possível obter o valor"
+                Case 5
+                    msg = "Impossibile ottenere il valore"
+            End Select
+            DynaLog.LogMessage("Getting target path...")
+            ' Get target path first
+            Dim regKey As RegistryKey = Registry.LocalMachine.OpenSubKey("PE_SOFT\Microsoft\Windows NT\CurrentVersion\WinPE", False)
+            DynaLog.LogMessage("Target path: " & Quote & regKey.GetValue("InstRoot", "") & Quote)
+            Label5.Text = regKey.GetValue("InstRoot", msg).ToString()
+            regKey.Close()
+            DynaLog.LogMessage("Getting scratch space...")
+            regKey = Registry.LocalMachine.OpenSubKey("PE_SYS\ControlSet001\Services\FBWF", False)
+            DynaLog.LogMessage("Scratch space: " & regKey.GetValue("WinPECacheThreshold", 0) & " MB")
+            Dim scSize As String = regKey.GetValue("WinPECacheThreshold", "").ToString()
+            Label6.Text = If(Not scSize = "", scSize & " MB", msg)
+            regKey.Close()
+        Catch ex As Exception
+
+        End Try
+        DynaLog.LogMessage("Unloading hives...")
+        ' Unload registry hives
+        RegistryHelper.UnloadRegistryHive("HKLM\PE_SOFT")
+        RegistryHelper.UnloadRegistryHive("HKLM\PE_SYS")
+    End Sub
+
+    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
+        Me.Close()
+    End Sub
+
+    Function Initialize() As Boolean Implements IImageTaskDialog.Initialize
+        DynaLog.LogMessage("Opening WinPE configuration observation dialog...")
+        If MainForm.ImgBW.IsBusy Then
+            DynaLog.LogMessage("Background processes are still busy.")
+            BGProcsBusyDialog.ShowDialog(Me)
+            Return False
+        End If
+        Return True
+    End Function
+
+    Private Sub GetWinPESettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not Initialize() Then
+            Close()
+            Exit Sub
+        End If
+        Select Case MainForm.Language
+            Case 0
+                Select Case My.Computer.Info.InstalledUICulture.ThreeLetterWindowsLanguageName
+                    Case "ENU", "ENG"
+                        Text = "Get Windows PE settings"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "These are the Windows PE settings for this image:"
+                        Label3.Text = "Target path:"
+                        Label4.Text = "Scratch space:"
+                        Button1.Text = "Change..."
+                        Button2.Text = "Change..."
+                        Button4.Text = "Save..."
+                        OK_Button.Text = "OK"
+                    Case "ESN"
+                        Text = "Obtener configuraciones de Windows PE"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Estas son las configuraciones de Windows PE para esta imagen:"
+                        Label3.Text = "Carpeta de destino:"
+                        Label4.Text = "Espacio temporal:"
+                        Button1.Text = "Cambiar..."
+                        Button2.Text = "Cambiar..."
+                        OK_Button.Text = "Aceptar"
+                        Button4.Text = "Guardar..."
+                    Case "FRA"
+                        Text = "Obtenir les paramètres de Windows PE"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Il s'agit des paramètres Windows PE pour cette image :"
+                        Label3.Text = "Chemin cible :"
+                        Label4.Text = "Espace temporaire :"
+                        Button1.Text = "Changer..."
+                        Button2.Text = "Changer..."
+                        OK_Button.Text = "OK"
+                        Button4.Text = "Sauvegarder..."
+                    Case "PTB", "PTG"
+                        Text = "Obter as configurações do Windows PE"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Estas são as configurações do Windows PE para esta imagem:"
+                        Label3.Text = "Localização do destino:"
+                        Label4.Text = "Espaço temporário:"
+                        Button1.Text = "Alterar..."
+                        Button2.Text = "Alterar..."
+                        Button4.Text = "Guardar..."
+                        OK_Button.Text = "OK"
+                    Case "ITA"
+                        Text = "Ottieni le impostazioni di Windows PE"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "Queste sono le impostazioni di Windows PE per questa immagine:"
+                        Label3.Text = "Percorso di destinazione:"
+                        Label4.Text = "Spazio temporaneo:"
+                        Button1.Text = "Cambia..."
+                        Button2.Text = "Cambia..."
+                        Button4.Text = "Salva..."
+                        OK_Button.Text = "OK"
+                End Select
+            Case 1
+                Text = "Get Windows PE settings"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "These are the Windows PE settings for this image:"
+                Label3.Text = "Target path:"
+                Label4.Text = "Scratch space:"
+                Button1.Text = "Change..."
+                Button2.Text = "Change..."
+                OK_Button.Text = "OK"
+                Button4.Text = "Save..."
+            Case 2
+                Text = "Obtener configuraciones de Windows PE"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Estas son las configuraciones de Windows PE para esta imagen:"
+                Label3.Text = "Carpeta de destino:"
+                Label4.Text = "Espacio temporal:"
+                Button1.Text = "Cambiar..."
+                Button2.Text = "Cambiar..."
+                OK_Button.Text = "Aceptar"
+                Button4.Text = "Guardar..."
+            Case 3
+                Text = "Obtenir les paramètres de Windows PE"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Il s'agit des paramètres Windows PE pour cette image :"
+                Label3.Text = "Chemin cible :"
+                Label4.Text = "Espace temporaire :"
+                Button1.Text = "Changer..."
+                Button2.Text = "Changer..."
+                OK_Button.Text = "OK"
+                Button4.Text = "Sauvegarder..."
+            Case 4
+                Text = "Obter as configurações do Windows PE"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Estas são as configurações do Windows PE para esta imagem:"
+                Label3.Text = "Localização do destino:"
+                Label4.Text = "Espaço temporário:"
+                Button1.Text = "Alterar..."
+                Button2.Text = "Alterar..."
+                Button4.Text = "Guardar..."
+                OK_Button.Text = "OK"
+            Case 5
+                Text = "Ottieni le impostazioni di Windows PE"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "Queste sono le impostazioni di Windows PE per questa immagine:"
+                Label3.Text = "Percorso di destinazione:"
+                Label4.Text = "Spazio temporaneo:"
+                Button1.Text = "Cambia..."
+                Button2.Text = "Cambia..."
+                Button4.Text = "Salva..."
+                OK_Button.Text = "OK"
+        End Select
+        ImageTaskHeader1.SetColors()
+        BackColor = CurrentTheme.SectionBackgroundColor
+        ForeColor = CurrentTheme.ForegroundColor
+
+        Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
+        WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
+        ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))
+
+        Button1.Visible = True
+        Button2.Visible = True
+
+        ' Get Windows PE settings
+        GetPESettings()
+        ImageTaskHeader1.HideWindowTitle(handle)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        DynaLog.LogMessage("Preparing to configure target path...")
+        Visible = False
+        If SetPETargetPath.ShowDialog(MainForm) = Windows.Forms.DialogResult.OK Then GetPESettings()
+        Visible = True
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        DynaLog.LogMessage("Preparing to configure scratch space...")
+        Visible = False
+        If SetPEScratchSpace.ShowDialog(MainForm) = Windows.Forms.DialogResult.OK Then GetPESettings()
+        Visible = True
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If MainForm.ImgInfoSFD.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            DynaLog.LogMessage("Saving Windows PE configuration information...")
+            If Not ImgInfoSaveDlg.IsDisposed Then ImgInfoSaveDlg.Dispose()
+            ImgInfoSaveDlg.SourceImage = MainForm.SourceImg
+            ImgInfoSaveDlg.SaveTarget = MainForm.ImgInfoSFD.FileName
+            ImgInfoSaveDlg.ImgMountDir = If(Not MainForm.OnlineManagement, MainForm.MountDir, "")
+            ImgInfoSaveDlg.OnlineMode = MainForm.OnlineManagement
+            ImgInfoSaveDlg.SkipQuestions = MainForm.SkipQuestions
+            ImgInfoSaveDlg.AutoCompleteInfo = MainForm.AutoCompleteInfo
+            ImgInfoSaveDlg.ForceAppxApi = False
+            ImgInfoSaveDlg.SaveTask = 9
+            ImgInfoSaveDlg.ImageToGetInfoFrom = MainForm.CurrentImage
+            ImgInfoSaveDlg.ShowDialog(Me)
+            InfoSaveResults.Show()
+        End If
+    End Sub
+End Class
