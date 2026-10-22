@@ -44,3 +44,6 @@ feature=功能、capability=功能包、driver=驱动程序、provisioning=预�
 
 > 构建诊断：若 `Generate installer` 步骤失败，工作流会把 `CheckMissingDlls.ps1` 的异常与
 > `msbuild` 的错误行以 `::error::` 注解输出，便于定位是依赖缺失还是 VB 编译错误。
+>
+> `BDELib.dll` 是 `Tools/BDELib` 工程的产物（被 `DISMTools.vbproj` 以 ProjectReference 引用）。
+> CI 现会在编译主工程前先显式构建 `BDELib` 并复制到 `bin/Debug`，修复 `BC2017 找不到 BDELib.dll`。
