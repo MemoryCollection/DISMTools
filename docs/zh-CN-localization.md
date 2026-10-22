@@ -47,3 +47,19 @@ feature=功能、capability=功能包、driver=驱动程序、provisioning=预�
 >
 > `BDELib.dll` 是 `Tools/BDELib` 工程的产物（被 `DISMTools.vbproj` 以 ProjectReference 引用）。
 > CI 现会在编译主工程前先显式构建 `BDELib` 并复制到 `bin/Debug`，修复 `BC2017 找不到 BDELib.dll`。
+
+## 译文编码约束（重要）
+
+VB 编译器（Roslyn）把 **U+201C/U+201D（全角引号）也视为字符串定界符**。因此中译文里不能出现
+`“ ”`，否则字符串会被提前截断，报 `BC30205 End of statement expected`。
+本项目统一改用 `「 」`。同理，ASCII 双引号在 VB 字符串中必须写成 `""` 转义。
+
+> 其他修复：`DriverManualFilePicker.vb` 的多行字符串（`& CrLf & _` 续行）曾被注入脚本截断，
+> 导致 `BC30201`；已改为完整的两行续行写法。
+
+## 构建结果
+
+`Create Nightly Installer` 的 `build-runspace` 作业已在 GitHub Actions 上**编译成功**，
+证明中文 `Case 6` 注入未破坏 VB 语法结构。`upload-installer` 作业仅母仓库执行（需要
+`SSH_DEPLOY_KEY` / `API_TOKEN_GITHUB` 才能推送 installer 到 `dt-nightly-installers`），
+fork 中会自动跳过。
