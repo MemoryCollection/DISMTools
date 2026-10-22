@@ -87,7 +87,7 @@ Public Class DriverManualFilePicker
                         Button1.Text = "Aggiorna"
                     Case "CHS", "CHT"
                         Text = "在目录中选择驱动程序文件"
-                        Label1.Text = "以下是您指定目录中所有驱动程序的递归列表。请从该列表中选择要添加的驱动程序，然后单击“确定”。"
+                        Label1.Text = "以下是您指定目录中所有驱动程序的递归列表。请从该列表中选择要添加的驱动程序，然后单击「确定」。"
                         OK_Button.Text = "确定"
                         Cancel_Button.Text = "取消"
                         Button1.Text = "刷新"
@@ -124,7 +124,7 @@ Public Class DriverManualFilePicker
                 Button1.Text = "Aggiorna"
             Case 6
                 Text = "在目录中选择驱动程序文件"
-                Label1.Text = "以下是您指定目录中所有驱动程序的递归列表。请从该列表中选择要添加的驱动程序，然后单击“确定”。"
+                Label1.Text = "以下是您指定目录中所有驱动程序的递归列表。请从该列表中选择要添加的驱动程序，然后单击「确定」。"
                 OK_Button.Text = "确定"
                 Cancel_Button.Text = "取消"
                 Button1.Text = "刷新"
