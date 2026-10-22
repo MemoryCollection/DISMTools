@@ -260,6 +260,51 @@ Public Class GetDriverInfo
                         ListView1.Columns(1).Text = "Nome file originale"
                         OpenFileDialog1.Title = "Rilevamento file driver"
                         SearchBox1.Text = "Digita qui per cercare un driver..."
+                    Case "CHS", "CHT"
+                        Text = "获取驱动程序信息"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "您想获取哪方面的信息？"
+                        Label3.Text = "单击此处获取已安装的驱动程序或正在维护的 Windows 映像自带的驱动程序的信息"
+                        Label4.Text = "单击此处获取您希望在继续添加驱动程序之前添加到正在维护的 Windows 映像的驱动程序的信息"
+                        Label5.Text = "就绪"
+                        Label6.Text = "添加或选择驱动程序包，即可在此查看其信息"
+                        Label7.Text = "硬件目标"
+                        Label8.Text = "硬件说明："
+                        Label10.Text = "硬件 ID："
+                        Label12.Text = "其他 ID："
+                        Label13.Text = "兼容 ID："
+                        Label16.Text = "排除 ID："
+                        Label17.Text = "硬件制造商："
+                        Label20.Text = "体系结构："
+                        Label21.Text = "跳转到目标："
+                        Label22.Text = "已发布名称："
+                        Label24.Text = "原始文件名："
+                        Label26.Text = "提供程序名称："
+                        Label28.Text = "对启动过程是否关键？"
+                        Label30.Text = "版本："
+                        Label31.Text = "类名称："
+                        Label33.Text = "是否属于 Windows 分发内容？"
+                        Label36.Text = "驱动程序信息"
+                        Label37.Text = "选择一个已安装的驱动程序，即可在此查看其信息"
+                        Label39.Text = "日期："
+                        Label41.Text = "类说明："
+                        Label43.Text = "类 GUID："
+                        Label45.Text = "驱动程序签名状态："
+                        Label47.Text = "目录文件路径："
+                        Label48.Text = "您已将后台进程配置为不显示此映像中的所有驱动程序（其中包括属于 Windows 分发内容的驱动程序），因此可能看不到您关注的驱动程序。"
+                        Button1.Text = "添加驱动程序..."
+                        Button2.Text = "删除所选"
+                        Button3.Text = "全部删除"
+                        Button7.Text = "更改"
+                        Button8.Text = "保存..."
+                        Button9.Text = "查看驱动程序文件信息"
+                        LinkLabel1.Text = "<- 返回"
+                        InstalledDriverLink.Text = "我想获取映像中已安装驱动程序的信息"
+                        DriverFileLink.Text = "我想获取驱动程序文件的信息"
+                        ListView1.Columns(0).Text = "已发布名称"
+                        ListView1.Columns(1).Text = "原始文件名"
+                        OpenFileDialog1.Title = "定位驱动程序文件"
+                        SearchBox1.Text = "在此输入以搜索驱动程序..."
                 End Select
             Case 1
                 Text = "Get driver information"
@@ -484,6 +529,52 @@ Public Class GetDriverInfo
                 ListView1.Columns(1).Text = "Nome file originale"
                 OpenFileDialog1.Title = "Rilevazione file driver"
                 SearchBox1.Text = "Digita qui per cercare un driver..."
+            Case 6
+                Text = "获取驱动程序信息"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "您想获取哪方面的信息？"
+                Label3.Text = "单击此处获取已安装的驱动程序或正在维护的 Windows 映像自带的驱动程序的信息"
+                Label4.Text = "单击此处获取您希望在继续添加驱动程序之前添加到正在维护的 Windows 映像的驱动程序的信息"
+                Label5.Text = "就绪"
+                Label6.Text = "添加或选择驱动程序包，即可在此查看其信息"
+                Label7.Text = "硬件目标"
+                Label8.Text = "硬件说明："
+                Label10.Text = "硬件 ID："
+                Label12.Text = "其他 ID："
+                Label13.Text = "兼容 ID："
+                Label16.Text = "排除 ID："
+                Label17.Text = "硬件制造商："
+                Label20.Text = "体系结构："
+                Label21.Text = "跳转到目标："
+                Label22.Text = "已发布名称："
+                Label24.Text = "原始文件名："
+                Label26.Text = "提供程序名称："
+                Label28.Text = "对启动过程是否关键？"
+                Label30.Text = "版本："
+                Label31.Text = "类名称："
+                Label33.Text = "是否属于 Windows 分发内容？"
+                Label36.Text = "驱动程序信息"
+                Label37.Text = "选择一个已安装的驱动程序，即可在此查看其信息"
+                Label39.Text = "日期："
+                Label41.Text = "类说明："
+                Label43.Text = "类 GUID："
+                Label45.Text = "驱动程序签名状态："
+                Label47.Text = "目录文件路径："
+                Label48.Text = "您已将后台进程配置为不显示此映像中的所有驱动程序（其中包括属于 Windows 分发内容的驱动程序），因此可能看不到您关注的驱动程序。"
+                Button1.Text = "添加驱动程序..."
+                Button2.Text = "删除所选"
+                Button3.Text = "全部删除"
+                Button7.Text = "更改"
+                Button8.Text = "保存..."
+                Button9.Text = "查看驱动程序文件信息"
+                LinkLabel1.Text = "<- 返回"
+                InstalledDriverLink.Text = "我想获取映像中已安装驱动程序的信息"
+                DriverFileLink.Text = "我想获取驱动程序文件的信息"
+                ListView1.Columns(0).Text = "已发布名称"
+                ListView1.Columns(1).Text = "原始文件名"
+                OpenFileDialog1.Title = "定位驱动程序文件"
+                SearchBox1.Text = "在此输入以搜索驱动程序..."
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -606,6 +697,8 @@ Public Class GetDriverInfo
                                 msg = "Os processos em segundo plano precisam de ser concluídos antes de mostrar as informações dos pacotes. Esperamos até que estejam concluídos"
                             Case "ITA"
                                 msg = "Prima di visualizzare le informazioni sul pacchetto devono essere completati i processi in background. Attendi che siano completati."
+                            Case "CHS", "CHT"
+                                msg = "需要等后台进程完成才能显示程序包信息。我们将等待它们完成"
                         End Select
                     Case 1
                         msg = "Background processes need to have completed before showing package information. We'll wait until they have completed"
@@ -617,6 +710,9 @@ Public Class GetDriverInfo
                         msg = "Os processos em segundo plano precisam de ser concluídos antes de mostrar as informações dos pacotes. Esperamos até que estejam concluídos"
                     Case 5
                         msg = "Prima di visualizzare le informazioni sul pacchetto devono essere completati i processi in secondo piano. Attendi che siano completati."
+                    Case 6
+                        msg = "需要等后台进程完成才能显示程序包信息。我们将等待它们完成"
+
                 End Select
                 MsgBox(msg, vbOKOnly + vbInformation, ImageTaskHeader1.ItemText)
                 Select Case MainForm.Language
@@ -632,6 +728,8 @@ Public Class GetDriverInfo
                                 Label5.Text = "À espera que os processos em segundo plano terminem..."
                             Case "ITA"
                                 Label5.Text = "In attesa del completamento dei processi in background..."
+                            Case "CHS", "CHT"
+                                Label5.Text = "正在等待后台进程完成..."
                         End Select
                     Case 1
                         Label5.Text = "Waiting for background processes to finish..."
@@ -643,6 +741,9 @@ Public Class GetDriverInfo
                         Label5.Text = "À espera que os processos em segundo plano terminem..."
                     Case 5
                         Label5.Text = "In attesa del completamento dei processi in background..."
+                    Case 6
+                        Label5.Text = "正在等待后台进程完成..."
+
                 End Select
                 While MainForm.ImgBW.IsBusy
                     Application.DoEvents()
@@ -663,6 +764,8 @@ Public Class GetDriverInfo
                             Label5.Text = "Preparar os processos de informação dos controladores..."
                         Case "ITA"
                             Label5.Text = "Preparazione verifica informazioni driver..."
+                        Case "CHS", "CHT"
+                            Label5.Text = "正在准备驱动程序信息进程..."
                     End Select
                 Case 1
                     Label5.Text = "Preparing driver information processes..."
@@ -674,6 +777,9 @@ Public Class GetDriverInfo
                     Label5.Text = "Preparar os processos de informação dos controladores..."
                 Case 5
                     Label5.Text = "Preparazione verifica informazioni driver..."
+                Case 6
+                    Label5.Text = "正在准备驱动程序信息进程..."
+
             End Select
             Application.DoEvents()
             DynaLog.LogMessage("Initializing API...")
@@ -748,6 +854,8 @@ Public Class GetDriverInfo
                         Label5.Text = "Pronto"
                     Case "ITA"
                         Label5.Text = "Pronto"
+                    Case "CHS", "CHT"
+                        Label5.Text = "就绪"
                 End Select
             Case 1
                 Label5.Text = "Ready"
@@ -759,6 +867,9 @@ Public Class GetDriverInfo
                 Label5.Text = "Pronto"
             Case 5
                 Label5.Text = "Pronto"
+            Case 6
+                Label5.Text = "就绪"
+
         End Select
         WindowHelper.EnableCloseCapability(Handle)
     End Sub
@@ -792,6 +903,8 @@ Public Class GetDriverInfo
                             Label14.Text = "Nenhum declarado pelo fabricante do hardware"
                         Case "ITA"
                             Label14.Text = "Nessuno dichiarato dal produttore hardware"
+                        Case "CHS", "CHT"
+                            Label14.Text = "硬件制造商未声明"
                     End Select
                 Case 1
                     Label14.Text = "None declared by the hardware manufacturer"
@@ -803,6 +916,9 @@ Public Class GetDriverInfo
                     Label14.Text = "Nenhum declarado pelo fabricante do hardware"
                 Case 5
                     Label14.Text = "Nessuno dichiarato dal produttore hardware"
+                Case 6
+                    Label14.Text = "硬件制造商未声明"
+
             End Select
         End If
         If Label15.Text = "" Then
@@ -820,6 +936,8 @@ Public Class GetDriverInfo
                             Label15.Text = "Nenhum declarado pelo fabricante do hardware"
                         Case "ITA"
                             Label15.Text = "Nessuno dichiarato dal produttore hardware"
+                        Case "CHS", "CHT"
+                            Label15.Text = "硬件制造商未声明"
                     End Select
                 Case 1
                     Label15.Text = "None declared by the hardware manufacturer"
@@ -831,6 +949,9 @@ Public Class GetDriverInfo
                     Label15.Text = "Nenhum declarado pelo fabricante do hardware"
                 Case 5
                     Label15.Text = "Nessuno dichiarato dal produttore hardware"
+                Case 6
+                    Label15.Text = "硬件制造商未声明"
+
             End Select
         End If
     End Sub
@@ -1047,6 +1168,8 @@ Public Class GetDriverInfo
                         msg = "Equipamento-alvo anterior"
                     Case "ITA"
                         msg = "Destinazione hardware precedente"
+                    Case "CHS", "CHT"
+                        msg = "上一个硬件目标"
                 End Select
             Case 1
                 msg = "Previous hardware target"
@@ -1058,6 +1181,9 @@ Public Class GetDriverInfo
                 msg = "Equipamento-alvo anterior"
             Case 5
                 msg = "Destinazione hardware precedente"
+            Case 6
+                msg = "上一个硬件目标"
+
         End Select
         WindowHelper.DisplayToolTip(sender, msg)
     End Sub
@@ -1077,6 +1203,8 @@ Public Class GetDriverInfo
                         msg = "Equipamento-alvo seguinte"
                     Case "ITA"
                         msg = "Destinazione hardware successiva"
+                    Case "CHS", "CHT"
+                        msg = "下一个硬件目标"
                 End Select
             Case 1
                 msg = "Next hardware target"
@@ -1088,6 +1216,9 @@ Public Class GetDriverInfo
                 msg = "Equipamento-alvo seguinte"
             Case 5
                 msg = "Destinazione hardware sucecssiva"
+            Case 6
+                msg = "下一个硬件目标"
+
         End Select
         WindowHelper.DisplayToolTip(sender, msg)
     End Sub
@@ -1107,6 +1238,8 @@ Public Class GetDriverInfo
                         msg = "Saltar para um equipamento-alvo específico"
                     Case "ITA"
                         msg = "Salta ad una destinazione hardware specifica"
+                    Case "CHS", "CHT"
+                        msg = "跳转到指定的硬件目标"
                 End Select
             Case 1
                 msg = "Jump to specific hardware target"
@@ -1118,6 +1251,9 @@ Public Class GetDriverInfo
                 msg = "Saltar para um equipamento-alvo específico"
             Case 5
                 msg = "Salta ad una destinazione hardware specifica"
+            Case 6
+                msg = "跳转到指定的硬件目标"
+
         End Select
         WindowHelper.DisplayToolTip(sender, msg)
     End Sub
@@ -1196,6 +1332,9 @@ Public Class GetDriverInfo
                                 Case "ITA"
                                     Label27.Text = ""
                                     Label34.Text = If(drv.DriverInbox, "Sì", "No")
+                                Case "CHS", "CHT"
+                                    Label27.Text = ""
+                                    Label34.Text = If(drv.DriverInbox, "是", "否")
                             End Select
                         Case 1
                             Label27.Text = ""
@@ -1212,6 +1351,10 @@ Public Class GetDriverInfo
                         Case 5
                             Label27.Text = ""
                             Label34.Text = If(drv.DriverInbox, "Sì", "No")
+                        Case 6
+                            Label27.Text = ""
+                            Label34.Text = If(drv.DriverInbox, "是", "否")
+
                     End Select
                     Label29.Text = drv.DriverVersion.ToString()
                     Label32.Text = drv.DriverClassName
@@ -1250,6 +1393,9 @@ Public Class GetDriverInfo
                                 Case "ITA"
                                     Label27.Text = If(drv.BootCritical, "Sì", "No")
                                     Label34.Text = If(drv.InBox, "Sì", "No")
+                                Case "CHS", "CHT"
+                                    Label27.Text = If(drv.BootCritical, "是", "否")
+                                    Label34.Text = If(drv.InBox, "是", "否")
                             End Select
                         Case 1
                             Label27.Text = If(drv.BootCritical, "Yes", "No")
@@ -1266,6 +1412,10 @@ Public Class GetDriverInfo
                         Case 5
                             Label27.Text = If(drv.BootCritical, "Sì", "No")
                             Label34.Text = If(drv.InBox, "Sì", "No")
+                        Case 6
+                            Label27.Text = If(drv.BootCritical, "是", "否")
+                            Label34.Text = If(drv.InBox, "是", "否")
+
                     End Select
                     Label29.Text = drv.Version.ToString()
                     Label32.Text = drv.ClassName

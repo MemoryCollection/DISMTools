@@ -139,6 +139,15 @@ Public Class WDSImageGroupSpecifier
                 Refresh_Button.Text = "Aggiorna"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annulla"
+            Case "CHS", "CHT"
+                Text = "在您的 WDS 服务器中指定组..."
+                Label1.Text = "选择操作："
+                Label2.Text = "此组已存在。"
+                RadioButton1.Text = "将此映像上传到以下 WDS 映像组："
+                RadioButton2.Text = "为我创建以下 WDS 映像组并将此映像上传到该组："
+                Refresh_Button.Text = "刷新"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
         End Select
         ComboBox1.Items.Clear()
         GetWdsGroups()

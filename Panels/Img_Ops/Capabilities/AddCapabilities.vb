@@ -61,6 +61,11 @@ Public Class AddCapabilities
                                             CheckBox1.Checked = True
                                             Button1.PerformClick()
                                         End If
+                                    Case "CHS", "CHT"
+                                        If MsgBox("此映像中的某些功能包需要指定源才能启用。指定的源对此操作无效。" & CrLf & CrLf & If(RichTextBox1.Text = "", "请指定有效的源，然后重试。", "请确保该源在文件系统中存在，然后重试。"), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                            CheckBox1.Checked = True
+                                            Button1.PerformClick()
+                                        End If
                                 End Select
                             Case 1
                                 If MsgBox("Some capabilities in this image require specifying a source for them to be enabled. The specified source is not valid for this operation." & CrLf & CrLf & If(RichTextBox1.Text = "", "Please specify a valid source and try again.", "Please make sure the source exists in the file system and try again."), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
@@ -87,6 +92,12 @@ Public Class AddCapabilities
                                     CheckBox1.Checked = True
                                     Button1.PerformClick()
                                 End If
+                            Case 6
+                                If MsgBox("此映像中的某些功能包需要指定源才能启用。指定的源对此操作无效。" & CrLf & CrLf & If(RichTextBox1.Text = "", "请指定有效的源，然后重试。", "请确保该源在文件系统中存在，然后重试。"), vbOKOnly + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
+                                    CheckBox1.Checked = True
+                                    Button1.PerformClick()
+                                End If
+
                         End Select
                     End If
                 End If
@@ -349,6 +360,23 @@ Public Class AddCapabilities
                         CheckBox3.Text = "Applica l'immagine dopo l'aggiunta delle funzionalità"
                         ListView1.Columns(0).Text = "Capacità"
                         ListView1.Columns(1).Text = "Stato"
+                    Case "CHS", "CHT"
+                        Text = "添加功能包"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "源："
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "全选"
+                        Button3.Text = "全不选"
+                        Button4.Text = "从组策略检测"
+                        GroupBox1.Text = "功能包"
+                        GroupBox2.Text = "选项"
+                        CheckBox1.Text = "为功能包安装指定其他源"
+                        CheckBox2.Text = "限制访问 Windows Update"
+                        CheckBox3.Text = "添加功能包后提交映像"
+                        ListView1.Columns(0).Text = "功能包"
+                        ListView1.Columns(1).Text = "状态"
                 End Select
             Case 1
                 Text = "Add capabilities"
@@ -435,6 +463,24 @@ Public Class AddCapabilities
                 CheckBox3.Text = "Applica l'immagine dopo l'aggiunta delle funzionalità"
                 ListView1.Columns(0).Text = "Capacità"
                 ListView1.Columns(1).Text = "Stato"
+            Case 6
+                Text = "添加功能包"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "源："
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                Button1.Text = "浏览..."
+                Button2.Text = "全选"
+                Button3.Text = "全不选"
+                Button4.Text = "从组策略检测"
+                GroupBox1.Text = "功能包"
+                GroupBox2.Text = "选项"
+                CheckBox1.Text = "为功能包安装指定其他源"
+                CheckBox2.Text = "限制访问 Windows Update"
+                CheckBox3.Text = "添加功能包后提交映像"
+                ListView1.Columns(0).Text = "功能包"
+                ListView1.Columns(1).Text = "状态"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

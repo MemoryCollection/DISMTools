@@ -424,6 +424,8 @@ Namespace Elements.Contemporaneus
                                     mountStatusString = "OK"
                                 Case "ITA"
                                     mountStatusString = "OK"
+                                Case "CHS", "CHT"
+                                    mountStatusString = "确定"
                             End Select
                         Case 1
                             mountStatusString = "OK"
@@ -435,6 +437,9 @@ Namespace Elements.Contemporaneus
                             mountStatusString = "OK"
                         Case 5
                             mountStatusString = "OK"
+                        Case 6
+                            mountStatusString = "确定"
+
                     End Select
                 Case DismMountStatus.NeedsRemount
                     Select Case LangCode
@@ -450,6 +455,8 @@ Namespace Elements.Contemporaneus
                                     mountStatusString = "Necessita de remontagem"
                                 Case "ITA"
                                     mountStatusString = "Necessità di rimontaggio"
+                                Case "CHS", "CHT"
+                                    mountStatusString = "需要重新挂载"
                             End Select
                         Case 1
                             mountStatusString = "Needs Remount"
@@ -461,6 +468,9 @@ Namespace Elements.Contemporaneus
                             mountStatusString = "Necessita de remontagem"
                         Case 5
                             mountStatusString = "Necessità di rimontaggio"
+                        Case 6
+                            mountStatusString = "需要重新挂载"
+
                     End Select
                 Case DismMountStatus.Invalid
                     Select Case LangCode
@@ -476,6 +486,8 @@ Namespace Elements.Contemporaneus
                                     mountStatusString = "Inválido"
                                 Case "ITA"
                                     mountStatusString = "Non valido"
+                                Case "CHS", "CHT"
+                                    mountStatusString = "无效"
                             End Select
                         Case 1
                             mountStatusString = "Invalid"
@@ -487,6 +499,9 @@ Namespace Elements.Contemporaneus
                             mountStatusString = "Inválido"
                         Case 5
                             mountStatusString = "Non valido"
+                        Case 6
+                            mountStatusString = "无效"
+
                     End Select
             End Select
 
@@ -516,6 +531,8 @@ Namespace Elements.Contemporaneus
                                     mountModeString = "Sim"
                                 Case "ITA"
                                     mountModeString = "Sì"
+                                Case "CHS", "CHT"
+                                    mountModeString = "是"
                             End Select
                         Case 1
                             mountModeString = "Yes"
@@ -527,6 +544,9 @@ Namespace Elements.Contemporaneus
                             mountModeString = "Sim"
                         Case 5
                             mountModeString = "Sì"
+                        Case 6
+                            mountModeString = "是"
+
                     End Select
                 Case DismMountMode.ReadOnly
                     Select Case LangCode
@@ -542,6 +562,8 @@ Namespace Elements.Contemporaneus
                                     mountModeString = "Não"
                                 Case "ITA"
                                     mountModeString = "No"
+                                Case "CHS", "CHT"
+                                    mountModeString = "否"
                             End Select
                         Case 1
                             mountModeString = "No"
@@ -553,6 +575,9 @@ Namespace Elements.Contemporaneus
                             mountModeString = "Não"
                         Case 5
                             mountModeString = "No"
+                        Case 6
+                            mountModeString = "否"
+
                     End Select
             End Select
 

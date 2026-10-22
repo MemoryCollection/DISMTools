@@ -44,6 +44,11 @@ Public Class SettingsResetDlg
                         Label1.Text = "Se procedi, le impostazioni verranno ripristinate ai valori predefiniti. Al termine di questo processo, si tornerà alla finestra principale del programma." & CrLf & CrLf & "Vuoi procedere?"
                         OK_Button.Text = "Sì"
                         Cancel_Button.Text = "No"
+                    Case "CHS", "CHT"
+                        Text = "重置首选项"
+                        Label1.Text = "如果继续，设置将重置为默认值。此过程完成后，您将返回程序主窗口。" & CrLf & CrLf & "是否要继续？"
+                        OK_Button.Text = "是"
+                        Cancel_Button.Text = "否"
                 End Select
             Case 1
                 Text = "Reset preferences"
@@ -70,6 +75,12 @@ Public Class SettingsResetDlg
                 Label1.Text = "Se procedi, le impostazioni verranno ripristinate ai valori predefiniti. Al termine di questo processo, si tornerà alla finestra principale del programma." & CrLf & CrLf & "Vuoi procedere?"
                 OK_Button.Text = "Sì"
                 Cancel_Button.Text = "No"
+            Case 6
+                Text = "重置首选项"
+                Label1.Text = "如果继续，设置将重置为默认值。此过程完成后，您将返回程序主窗口。" & CrLf & CrLf & "是否要继续？"
+                OK_Button.Text = "是"
+                Cancel_Button.Text = "否"
+
         End Select
         Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
         WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)

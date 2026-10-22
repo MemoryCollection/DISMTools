@@ -216,6 +216,18 @@ Public Class RemPackage
                         Cancel_Button.Text = "Annullare"
                         OK_Button.Text = "OK"
                         FolderBrowserDialog1.Description = "Specificare l'origine del pacchetto:"
+                    Case "CHS", "CHT"
+                        Text = "删除程序包"
+                        ImageTaskHeader1.ItemText = Text
+                        Label3.Text = "程序包源："
+                        Label4.Text = "注意：程序可能会显示最初未添加的程序包。不过，如果程序包未添加，程序将跳过它。"
+                        GroupBox1.Text = "程序包删除"
+                        RadioButton1.Text = "指定程序包名称："
+                        RadioButton2.Text = "指定程序包文件："
+                        Button1.Text = "浏览..."
+                        Cancel_Button.Text = "取消"
+                        OK_Button.Text = "确定"
+                        FolderBrowserDialog1.Description = "请指定程序包源："
                 End Select
             Case 1
                 Text = "Remove packages"
@@ -277,6 +289,19 @@ Public Class RemPackage
                 Cancel_Button.Text = "Annullare"
                 OK_Button.Text = "OK"
                 FolderBrowserDialog1.Description = "Specificare l'origine del pacchetto:"
+            Case 6
+                Text = "删除程序包"
+                ImageTaskHeader1.ItemText = Text
+                Label3.Text = "程序包源："
+                Label4.Text = "注意：程序可能会显示最初未添加的程序包。不过，如果程序包未添加，程序将跳过它。"
+                GroupBox1.Text = "程序包删除"
+                RadioButton1.Text = "指定程序包名称："
+                RadioButton2.Text = "指定程序包文件："
+                Button1.Text = "浏览..."
+                Cancel_Button.Text = "取消"
+                OK_Button.Text = "确定"
+                FolderBrowserDialog1.Description = "请指定程序包源："
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

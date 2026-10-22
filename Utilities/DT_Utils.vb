@@ -827,6 +827,8 @@ Namespace Utilities
                                         Return "Sim"
                                     Case "ITA"
                                         Return "Sì"
+                                    Case "CHS", "CHT"
+                                        Return "是"
                                 End Select
                             Case 1
                                 Return "Yes"
@@ -838,6 +840,9 @@ Namespace Utilities
                                 Return "Sim"
                             Case 5
                                 Return "Sì"
+                            Case 6
+                                Return "是"
+
                         End Select
                     Else
                         Return "Yes"
@@ -857,6 +862,8 @@ Namespace Utilities
                                         Return "Não"
                                     Case "ITA"
                                         Return "No"
+                                    Case "CHS", "CHT"
+                                        Return "否"
                                 End Select
                             Case 1
                                 Return "No"
@@ -868,6 +875,9 @@ Namespace Utilities
                                 Return "Não"
                             Case 5
                                 Return "No"
+                            Case 6
+                                Return "否"
+
                         End Select
                     Else
                         Return "No"

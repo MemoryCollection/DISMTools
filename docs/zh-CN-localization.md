@@ -67,3 +67,25 @@ VB 编译器（Roslyn）把 **U+201C/U+201D（全角引号）也视为字符串�
 `dt_setup.exe`，不再依赖外部仓库 `dt-nightly-installers` 与 `SSH_DEPLOY_KEY`/`API_TOKEN_GITHUB`。
 若仓库的 Actions 工作流权限为只读，需在 Settings → Actions → General → Workflow permissions
 中改为 "Read and write permissions"。
+
+## 覆盖面（第二轮补全）
+
+首轮仅覆盖 6 个核心文件；第二轮做了全量普查并补全：
+
+| 指标 | 数量 |
+| --- | --- |
+| 含语言分支的 `.vb` 文件 | 100（本轮改动 93） |
+| 语言 `Select Case` 块 | 675 |
+| 新增 `Case 6`（简体中文）块 | 342 |
+| 新增自动检测 `Case "CHS", "CHT"` 分支 | 517 |
+| 翻译字典条目 | 1520 |
+| 唯一英文 UI 串（Case 1 语料） | 1326，覆盖率约 99% |
+
+未翻译的少量条目为代码标识符与技术片段（如 `dandi_amd64`、`scr_temp`、`yyMMdd-HHmm`、`/LogPath`），
+这些内容本身不应翻译。
+
+> 自动模式（系统语言为中文）现在也能正常显示中文：所有 `Case 0` 内的
+> `Select Case ...ThreeLetterWindowsLanguageName` 均已加入 `CHS/CHT` 分支。
+
+工具：`lang_work/injector2.py`（注入 `Case 6`，支持多行续行与内联 `Case`）、
+`lang_work/injector2_auto.py`（注入 `CHS/CHT` 自动检测分支）、`lang_work/translations.json`（字典）。

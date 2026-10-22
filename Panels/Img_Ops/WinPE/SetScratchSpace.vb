@@ -98,6 +98,13 @@ Public Class SetPEScratchSpace
                         Label3.Text = "Spazio temporaneo:"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Text = "设置 Windows PE 暂存空间"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "暂存空间是指将 Windows PE 系统卷的内容复制到内存时可用于写入的空间量。请指定暂存空间大小，然后单击「确定」。"
+                        Label3.Text = "暂存空间："
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Set Windows PE scratch space"
@@ -134,6 +141,14 @@ Public Class SetPEScratchSpace
                 Label3.Text = "Spazio temporaneo:"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Text = "设置 Windows PE 暂存空间"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "暂存空间是指将 Windows PE 系统卷的内容复制到内存时可用于写入的空间量。请指定暂存空间大小，然后单击「确定」。"
+                Label3.Text = "暂存空间："
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

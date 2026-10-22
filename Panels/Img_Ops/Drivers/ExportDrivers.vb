@@ -86,6 +86,8 @@ Public Class ExportDrivers
                             msg = "Especifique um destino para o qual exportar os controladores e certifique-se de que o destino especificado existe."
                         Case "ITA"
                             msg = "Specificare una destinazione in cui esportare i driver e assicurarsi che la destinazione specificata esista"
+                        Case "CHS", "CHT"
+                            msg = "请指定用于导出驱动程序的目标，并确保该目标存在。"
                     End Select
                 Case 1
                     msg = "Please specify a target to export the drivers to and make sure that the specified target exists."
@@ -97,6 +99,9 @@ Public Class ExportDrivers
                     msg = "Especifique um destino para o qual exportar os controladores e certifique-se de que o destino especificado existe."
                 Case 5
                     msg = "Specificare una destinazione in cui esportare i driver e assicurarsi che la destinazione specificata esista"
+                Case 6
+                    msg = "请指定用于导出驱动程序的目标，并确保该目标存在。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -170,6 +175,14 @@ Public Class ExportDrivers
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
                         FolderBrowserDialog1.Description = "Specificare il percorso in cui verranno esportati i driver:"
+                    Case "CHS", "CHT"
+                        Text = "导出驱动程序"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "导出目标："
+                        Button1.Text = "浏览..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        FolderBrowserDialog1.Description = "请指定驱动程序的导出路径："
                 End Select
             Case 1
                 Text = "Export drivers"
@@ -211,6 +224,15 @@ Public Class ExportDrivers
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
                 FolderBrowserDialog1.Description = "Specificare il percorso in cui verranno esportati i driver:"
+            Case 6
+                Text = "导出驱动程序"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "导出目标："
+                Button1.Text = "浏览..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                FolderBrowserDialog1.Description = "请指定驱动程序的导出路径："
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

@@ -35,6 +35,10 @@ Public Class IncompleteSetupDlg
                 Label1.Text = "L'impostazione non è ancora stata completata e le impostazioni personalizzate non verranno salvate. Procedendo, il programma userà le impostazioni predefinite." & CrLf & CrLf & "Vuoi procedere?"
                 OK_Button.Text = "Sì"
                 Cancel_Button.Text = "No"
+            Case "CHS", "CHT"
+                Label1.Text = "设置尚未完成，您的自定义设置将不会被保存。继续操作将使程序使用默认设置。" & CrLf & CrLf & "是否要继续？"
+                OK_Button.Text = "是"
+                Cancel_Button.Text = "否"
         End Select
         WindowHelper.ToggleDarkTitleBar(Handle, CurrentTheme.IsDark)
         ThemeHelper.UpdateLinkLabelColors(Me, Color.DodgerBlue, CurrentTheme.AccentColors(0))

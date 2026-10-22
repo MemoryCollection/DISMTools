@@ -339,6 +339,68 @@ Public Class GetPkgInfoDlg
                         PackageFileLink.Text = "Voglio ottenere informazioni sui file dei pacchetti"
                         OpenFileDialog1.Title = "Individuare i file dei pacchetti"
                         SearchBox1.cueBanner = "Digitare qui per cercare un pacchetto..."
+                    Case "CHS", "CHT"
+                        Text = "获取程序包信息"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "您想获取哪方面的信息？"
+                        Label3.Text = "单击此处获取已安装的程序包或正在维护的 Windows 映像自带的程序包的信息"
+                        Label4.Text = "单击此处获取您希望在继续添加程序包之前添加到正在维护的 Windows 映像的程序包的信息"
+                        Label5.Text = "就绪"
+                        Label6.Text = "添加或选择程序包文件，即可在此查看其信息"
+                        Label7.Text = "程序包信息"
+                        Label8.Text = "程序包名称："
+                        Label10.Text = "程序包是否适用？"
+                        Label12.Text = "版权："
+                        Label14.Text = "产品版本："
+                        Label16.Text = "发布类型："
+                        Label18.Text = "公司："
+                        Label20.Text = "创建时间："
+                        Label22.Text = "程序包名称："
+                        Label24.Text = "程序包是否适用？"
+                        Label26.Text = "版权："
+                        Label28.Text = "安装时间："
+                        Label30.Text = "上次更新时间："
+                        Label31.Text = "公司："
+                        Label33.Text = "安装程序包名称："
+                        Label36.Text = "程序包信息"
+                        Label37.Text = "选择一个已安装的程序包，即可在此查看其信息"
+                        Label39.Text = "显示名称："
+                        Label41.Text = "创建时间："
+                        Label43.Text = "描述："
+                        Label45.Text = "产品名称："
+                        Label47.Text = "安装客户端："
+                        Label48.Text = "是否需要重启？"
+                        Label50.Text = "支持信息："
+                        Label52.Text = "状态："
+                        Label54.Text = "完整安装是否需要启动？"
+                        Label58.Text = "自定义属性："
+                        Label60.Text = "功能："
+                        Label61.Text = "功能包标识："
+                        Label63.Text = "描述："
+                        Label65.Text = "安装客户端："
+                        Label67.Text = "安装程序包名称："
+                        Label69.Text = "安装时间："
+                        Label71.Text = "上次更新时间："
+                        Label73.Text = "显示名称："
+                        Label75.Text = "产品名称："
+                        Label77.Text = "产品版本："
+                        Label79.Text = "发布类型："
+                        Label81.Text = "是否需要重启？"
+                        Label83.Text = "支持信息："
+                        Label85.Text = "状态："
+                        Label87.Text = "完整安装是否需要启动？"
+                        Label89.Text = "功能包标识："
+                        Label91.Text = "自定义属性："
+                        Label93.Text = "功能："
+                        LinkLabel1.Text = "<- 返回"
+                        Button1.Text = "添加程序包..."
+                        Button2.Text = "删除所选"
+                        Button3.Text = "全部删除"
+                        Button4.Text = "保存..."
+                        InstalledPackageLink.Text = "我想获取映像中已安装程序包的信息"
+                        PackageFileLink.Text = "我想获取程序包文件的信息"
+                        OpenFileDialog1.Title = "定位程序包文件"
+                        SearchBox1.cueBanner = "在此输入以搜索程序包..."
                 End Select
             Case 1
                 Text = "Get package information"
@@ -650,6 +712,69 @@ Public Class GetPkgInfoDlg
                 PackageFileLink.Text = "Voglio ottenere informazioni sui file dei pacchetti"
                 OpenFileDialog1.Title = "Individuare i file dei pacchetti"
                 SearchBox1.cueBanner = "Digitare qui per cercare un pacchetto..."
+            Case 6
+                Text = "获取程序包信息"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "您想获取哪方面的信息？"
+                Label3.Text = "单击此处获取已安装的程序包或正在维护的 Windows 映像自带的程序包的信息"
+                Label4.Text = "单击此处获取您希望在继续添加程序包之前添加到正在维护的 Windows 映像的程序包的信息"
+                Label5.Text = "就绪"
+                Label6.Text = "添加或选择程序包文件，即可在此查看其信息"
+                Label7.Text = "程序包信息"
+                Label8.Text = "程序包名称："
+                Label10.Text = "程序包是否适用？"
+                Label12.Text = "版权："
+                Label14.Text = "产品版本："
+                Label16.Text = "发布类型："
+                Label18.Text = "公司："
+                Label20.Text = "创建时间："
+                Label22.Text = "程序包名称："
+                Label24.Text = "程序包是否适用？"
+                Label26.Text = "版权："
+                Label28.Text = "安装时间："
+                Label30.Text = "上次更新时间："
+                Label31.Text = "公司："
+                Label33.Text = "安装程序包名称："
+                Label36.Text = "程序包信息"
+                Label37.Text = "选择一个已安装的程序包，即可在此查看其信息"
+                Label39.Text = "显示名称："
+                Label41.Text = "创建时间："
+                Label43.Text = "描述："
+                Label45.Text = "产品名称："
+                Label47.Text = "安装客户端："
+                Label48.Text = "是否需要重启？"
+                Label50.Text = "支持信息："
+                Label52.Text = "状态："
+                Label54.Text = "完整安装是否需要启动？"
+                Label58.Text = "自定义属性："
+                Label60.Text = "功能："
+                Label61.Text = "功能包标识："
+                Label63.Text = "描述："
+                Label65.Text = "安装客户端："
+                Label67.Text = "安装程序包名称："
+                Label69.Text = "安装时间："
+                Label71.Text = "上次更新时间："
+                Label73.Text = "显示名称："
+                Label75.Text = "产品名称："
+                Label77.Text = "产品版本："
+                Label79.Text = "发布类型："
+                Label81.Text = "是否需要重启？"
+                Label83.Text = "支持信息："
+                Label85.Text = "状态："
+                Label87.Text = "完整安装是否需要启动？"
+                Label89.Text = "功能包标识："
+                Label91.Text = "自定义属性："
+                Label93.Text = "功能："
+                LinkLabel1.Text = "<- 返回"
+                Button1.Text = "添加程序包..."
+                Button2.Text = "删除所选"
+                Button3.Text = "全部删除"
+                Button4.Text = "保存..."
+                InstalledPackageLink.Text = "我想获取映像中已安装程序包的信息"
+                PackageFileLink.Text = "我想获取程序包文件的信息"
+                OpenFileDialog1.Title = "定位程序包文件"
+                SearchBox1.cueBanner = "在此输入以搜索程序包..."
+
         End Select
         ListBox1.ForeColor = ForeColor
         ListBox2.ForeColor = ForeColor
@@ -723,6 +848,8 @@ Public Class GetPkgInfoDlg
                                     msg = "Os processos em segundo plano precisam de ser concluídos antes de mostrar as informações dos pacotes. Esperamos até que estejam concluídos"
                                 Case "ITA"
                                     msg = "I processi in secondo piano devono essere completati prima di mostrare le informazioni sul pacchetto. Aspetteremo che siano completati"
+                                Case "CHS", "CHT"
+                                    msg = "需要等后台进程完成才能显示程序包信息。我们将等待它们完成"
                             End Select
                         Case 1
                             msg = "Background processes need to have completed before showing package information. We'll wait until they have completed"
@@ -734,6 +861,9 @@ Public Class GetPkgInfoDlg
                             msg = "Os processos em segundo plano precisam de ser concluídos antes de mostrar as informações dos pacotes. Esperamos até que estejam concluídos"
                         Case 5
                             msg = "I processi in secondo piano devono essere completati prima di mostrare le informazioni sul pacchetto. Aspetteremo che siano completati"
+                        Case 6
+                            msg = "需要等后台进程完成才能显示程序包信息。我们将等待它们完成"
+
                     End Select
                     MsgBox(msg, vbOKOnly + vbInformation, ImageTaskHeader1.ItemText)
                     Select Case MainForm.Language
@@ -749,6 +879,8 @@ Public Class GetPkgInfoDlg
                                     Label5.Text = "À espera que os processos em segundo plano terminem..."
                                 Case "ITA"
                                     Label5.Text = "In attesa che i processi in secondo piano finiscano..."
+                                Case "CHS", "CHT"
+                                    Label5.Text = "正在等待后台进程完成..."
                             End Select
                         Case 1
                             Label5.Text = "Waiting for background processes to finish..."
@@ -760,6 +892,9 @@ Public Class GetPkgInfoDlg
                             Label5.Text = "À espera que os processos em segundo plano terminem..."
                         Case 5
                             Label5.Text = "In attesa che i processi in secondo piano finiscano..."
+                        Case 6
+                            Label5.Text = "正在等待后台进程完成..."
+
                     End Select
                     While MainForm.ImgBW.IsBusy
                         Application.DoEvents()
@@ -783,6 +918,8 @@ Public Class GetPkgInfoDlg
                                 Label5.Text = "Preparar-se para obter informações sobre o pacote..."
                             Case "ITA"
                                 Label5.Text = "Preparazione per ottenere le informazioni sul pacchetto..."
+                            Case "CHS", "CHT"
+                                Label5.Text = "正在准备获取程序包信息..."
                         End Select
                     Case 1
                         Label5.Text = "Preparing to get package information..."
@@ -794,6 +931,9 @@ Public Class GetPkgInfoDlg
                         Label5.Text = "Preparar-se para obter informações sobre o pacote..."
                     Case 5
                         Label5.Text = "Preparazione per ottenere le informazioni sul pacchetto..."
+                    Case 6
+                        Label5.Text = "正在准备获取程序包信息..."
+
                 End Select
                 Application.DoEvents()
                 Try
@@ -897,6 +1037,8 @@ Public Class GetPkgInfoDlg
                                             cPropValue.Text = "Por favor, seleccione ou expanda uma entrada."
                                         Case "ITA"
                                             cPropValue.Text = "Selezionare o espandere un elemento."
+                                        Case "CHS", "CHT"
+                                            cPropValue.Text = "请选择一个条目或将其展开。"
                                     End Select
                                 Case 1
                                     cPropValue.Text = "Please select or expand an entry."
@@ -908,6 +1050,9 @@ Public Class GetPkgInfoDlg
                                     cPropValue.Text = "Por favor, seleccione ou expanda uma entrada."
                                 Case 5
                                     cPropValue.Text = "Selezionare o espandere un elemento."
+                                Case 6
+                                    cPropValue.Text = "请选择一个条目或将其展开。"
+
                             End Select
                         Else
                             DynaLog.LogMessage("This package does not have custom properties.")
@@ -924,6 +1069,8 @@ Public Class GetPkgInfoDlg
                                             Label57.Text = "Nenhum"
                                         Case "ITA"
                                             Label57.Text = "Nessuno"
+                                        Case "CHS", "CHT"
+                                            Label57.Text = "无"
                                     End Select
                                 Case 1
                                     Label57.Text = "None"
@@ -935,6 +1082,9 @@ Public Class GetPkgInfoDlg
                                     Label57.Text = "Nenhum"
                                 Case 5
                                     Label57.Text = "Nessuno"
+                                Case 6
+                                    Label57.Text = "无"
+
                             End Select
                             Label57.Visible = True
                             CPropViewer.Visible = False
@@ -963,6 +1113,8 @@ Public Class GetPkgInfoDlg
                                             Label59.Text = "Nenhum"
                                         Case "ITA"
                                             Label59.Text = "Nessuno"
+                                        Case "CHS", "CHT"
+                                            Label59.Text = "无"
                                     End Select
                                 Case 1
                                     Label59.Text = "None"
@@ -974,6 +1126,9 @@ Public Class GetPkgInfoDlg
                                     Label59.Text = "Nenhum"
                                 Case 5
                                     Label59.Text = "Nessuno"
+                                Case 6
+                                    Label59.Text = "无"
+
                             End Select
                         End If
                     End Using
@@ -992,6 +1147,8 @@ Public Class GetPkgInfoDlg
                                     Label5.Text = "Pronto"
                                 Case "ITA"
                                     Label5.Text = "Pronto"
+                                Case "CHS", "CHT"
+                                    Label5.Text = "就绪"
                             End Select
                         Case 1
                             Label5.Text = "Ready"
@@ -1003,6 +1160,9 @@ Public Class GetPkgInfoDlg
                             Label5.Text = "Pronto"
                         Case 5
                             Label5.Text = "Pronto"
+                        Case 6
+                            Label5.Text = "就绪"
+
                     End Select
                 Finally
                     Try
@@ -1082,6 +1242,8 @@ Public Class GetPkgInfoDlg
                             cPropValue.Text = "Nenhum valor foi definido. Se o item selecionado tiver subitens, expanda-o."
                         Case "ITA"
                             cPropValue.Text = "Non è stato definito alcun valore. Se l'elemento selezionato ha delle sottovoci, espandetelo."
+                        Case "CHS", "CHT"
+                            cPropValue.Text = "尚未定义值。如果所选项包含子项，请将其展开。"
                     End Select
                 Case 1
                     cPropValue.Text = "No value has been defined. If the selected item has subitems, expand it."
@@ -1093,6 +1255,9 @@ Public Class GetPkgInfoDlg
                     cPropValue.Text = "Nenhum valor foi definido. Se o item selecionado tiver subitens, expanda-o."
                 Case 5
                     cPropValue.Text = "Non è stato definito alcun valore. Se l'elemento selezionato ha delle sottovoci, espandetelo."
+                Case 6
+                    cPropValue.Text = "尚未定义值。如果所选项包含子项，请将其展开。"
+
             End Select
         End If
     End Sub
@@ -1121,6 +1286,8 @@ Public Class GetPkgInfoDlg
                                 msg = "Os processos em segundo plano precisam de ser concluídos antes de mostrar as informações dos pacotes. Esperamos até que estejam concluídos"
                             Case "ITA"
                                 msg = "I processi in secondo piano devono essere completati prima di mostrare le informazioni sul pacchetto. Aspetteremo che siano completati"
+                            Case "CHS", "CHT"
+                                msg = "需要等后台进程完成才能显示程序包信息。我们将等待它们完成"
                         End Select
                     Case 1
                         msg = "Background processes need to have completed before showing package information. We'll wait until they have completed"
@@ -1132,6 +1299,9 @@ Public Class GetPkgInfoDlg
                         msg = "Os processos em segundo plano precisam de ser concluídos antes de mostrar as informações dos pacotes. Esperamos até que estejam concluídos"
                     Case 5
                         msg = "I processi in secondo piano devono essere completati prima di mostrare le informazioni sul pacchetto. Aspetteremo che siano completati"
+                    Case 6
+                        msg = "需要等后台进程完成才能显示程序包信息。我们将等待它们完成"
+
                 End Select
                 MsgBox(msg, vbOKOnly + vbInformation, ImageTaskHeader1.ItemText)
                 Select Case MainForm.Language
@@ -1147,6 +1317,8 @@ Public Class GetPkgInfoDlg
                                 Label5.Text = "À espera que os processos em segundo plano terminem..."
                             Case "ITA"
                                 Label5.Text = "In attesa che i processi in secondo piano finiscano..."
+                            Case "CHS", "CHT"
+                                Label5.Text = "正在等待后台进程完成..."
                         End Select
                     Case 1
                         Label5.Text = "Waiting for background processes to finish..."
@@ -1158,6 +1330,9 @@ Public Class GetPkgInfoDlg
                         Label5.Text = "À espera que os processos em segundo plano terminem..."
                     Case 5
                         Label5.Text = "In attesa che i processi in secondo piano finiscano..."
+                    Case 6
+                        Label5.Text = "正在等待后台进程完成..."
+
                 End Select
                 While MainForm.ImgBW.IsBusy
                     Application.DoEvents()
@@ -1178,6 +1353,8 @@ Public Class GetPkgInfoDlg
                             Label5.Text = "Preparar os processos de informação dos pacotes..."
                         Case "ITA"
                             Label5.Text = "Preparazione per ottenere le informazioni sul pacchetto..."
+                        Case "CHS", "CHT"
+                            Label5.Text = "正在准备程序包信息进程..."
                     End Select
                 Case 1
                     Label5.Text = "Preparing package information processes..."
@@ -1189,6 +1366,9 @@ Public Class GetPkgInfoDlg
                     Label5.Text = "Preparar os processos de informação dos pacotes..."
                 Case 5
                     Label5.Text = "Preparazione per ottenere le informazioni sul pacchetto..."
+                Case 6
+                    Label5.Text = "正在准备程序包信息进程..."
+
             End Select
             Application.DoEvents()
             Try
@@ -1274,6 +1454,8 @@ Public Class GetPkgInfoDlg
                         Label5.Text = "Pronto"
                     Case "ITA"
                         Label5.Text = "Pronto"
+                    Case "CHS", "CHT"
+                        Label5.Text = "就绪"
                 End Select
             Case 1
                 Label5.Text = "Ready"
@@ -1285,6 +1467,9 @@ Public Class GetPkgInfoDlg
                 Label5.Text = "Pronto"
             Case 5
                 Label5.Text = "Pronto"
+            Case 6
+                Label5.Text = "就绪"
+
         End Select
         WindowHelper.EnableCloseCapability(Handle)
     End Sub
@@ -1334,6 +1519,8 @@ Public Class GetPkgInfoDlg
                             Label92.Text = "Nenhum"
                         Case "ITA"
                             Label92.Text = "Nessuno"
+                        Case "CHS", "CHT"
+                            Label92.Text = "无"
                     End Select
                 Case 1
                     Label92.Text = "None"
@@ -1345,6 +1532,9 @@ Public Class GetPkgInfoDlg
                     Label92.Text = "Nenhum"
                 Case 5
                     Label92.Text = "Nessuno"
+                Case 6
+                    Label92.Text = "无"
+
             End Select
         End If
         Label94.Text = ""
@@ -1371,6 +1561,8 @@ Public Class GetPkgInfoDlg
                             Label94.Text = "Nenhum"
                         Case "ITA"
                             Label94.Text = "Nessuno"
+                        Case "CHS", "CHT"
+                            Label94.Text = "无"
                     End Select
                 Case 1
                     Label94.Text = "None"
@@ -1382,6 +1574,9 @@ Public Class GetPkgInfoDlg
                     Label94.Text = "Nenhum"
                 Case 5
                     Label94.Text = "Nessuno"
+                Case 6
+                    Label94.Text = "无"
+
             End Select
         End If
     End Sub

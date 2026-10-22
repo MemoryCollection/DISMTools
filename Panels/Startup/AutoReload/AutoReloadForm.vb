@@ -175,6 +175,11 @@ Public Class AutoReloadForm
                 Label3.Text = "File immagine:"
                 Label4.Text = "Punto di montaggio dell'immagine:"
                 GroupBox1.Text = "Informazioni sull'immagine"
+            Case "CHS", "CHT"
+                Label1.Text = "请稍候，DISMTools 正在重新加载孤立映像的服务会话。这可能需要一些时间。完成后，此对话框将关闭。"
+                Label3.Text = "映像文件："
+                Label4.Text = "映像挂载点："
+                GroupBox1.Text = "映像信息"
         End Select
         TaskbarHelper.SetIndicatorState(0, Windows.Shell.TaskbarItemProgressState.Indeterminate, Handle)
         Thread.Sleep(2000)

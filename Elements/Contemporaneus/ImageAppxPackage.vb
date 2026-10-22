@@ -48,6 +48,8 @@ Namespace Elements.Contemporaneus
                                 registrationString = "Sim"
                             Case "ITA"
                                 registrationString = "Sì"
+                            Case "CHS", "CHT"
+                                registrationString = "是"
                         End Select
                     Case 1
                         registrationString = "Yes"
@@ -59,6 +61,9 @@ Namespace Elements.Contemporaneus
                         registrationString = "Sim"
                     Case 5
                         registrationString = "Sì"
+                    Case 6
+                        registrationString = "是"
+
                 End Select
             Else
                 Select Case LangCode
@@ -74,6 +79,8 @@ Namespace Elements.Contemporaneus
                                 registrationString = "Não"
                             Case "ITA"
                                 registrationString = "No"
+                            Case "CHS", "CHT"
+                                registrationString = "否"
                         End Select
                     Case 1
                         registrationString = "No"
@@ -85,6 +92,9 @@ Namespace Elements.Contemporaneus
                         registrationString = "Não"
                     Case 5
                         registrationString = "No"
+                    Case 6
+                        registrationString = "否"
+
                 End Select
             End If
             Return registrationString

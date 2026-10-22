@@ -29,6 +29,8 @@ Public Class GetWinPESettings
                             Label5.Text = "Não foi possível obter o valor"
                         Case "ITA"
                             Label5.Text = "Impossibile ottenere il valore"
+                        Case "CHS", "CHT"
+                            Label5.Text = "无法获取值"
                     End Select
                 Case 1
                     Label5.Text = "Could not get value"
@@ -40,6 +42,9 @@ Public Class GetWinPESettings
                     Label5.Text = "Não foi possível obter o valor"
                 Case 5
                     Label5.Text = "Impossibile ottenere il valore"
+                Case 6
+                    Label5.Text = "无法获取值"
+
             End Select
             Button1.Visible = False
         End If
@@ -62,6 +67,8 @@ Public Class GetWinPESettings
                             Label6.Text = "Não foi possível obter o valor"
                         Case "ITA"
                             Label6.Text = "Impossibile ottenere il valore"
+                        Case "CHS", "CHT"
+                            Label6.Text = "无法获取值"
                     End Select
                 Case 1
                     Label6.Text = "Could not get value"
@@ -73,6 +80,9 @@ Public Class GetWinPESettings
                     Label6.Text = "Não foi possível obter o valor"
                 Case 5
                     Label6.Text = "Impossibile ottenere il valore"
+                Case 6
+                    Label6.Text = "无法获取值"
+
             End Select
             Button2.Visible = False
         End If
@@ -91,6 +101,8 @@ Public Class GetWinPESettings
                             msg = "Não foi possível obter o valor"
                         Case "ITA"
                             msg = "Impossibile ottenere il valore"
+                        Case "CHS", "CHT"
+                            msg = "无法获取值"
                     End Select
                 Case 1
                     msg = "Could not get value"
@@ -102,6 +114,9 @@ Public Class GetWinPESettings
                     msg = "Não foi possível obter o valor"
                 Case 5
                     msg = "Impossibile ottenere il valore"
+                Case 6
+                    msg = "无法获取值"
+
             End Select
             DynaLog.LogMessage("Getting target path...")
             ' Get target path first
@@ -197,6 +212,16 @@ Public Class GetWinPESettings
                         Button2.Text = "Cambia..."
                         Button4.Text = "Salva..."
                         OK_Button.Text = "OK"
+                    Case "CHS", "CHT"
+                        Text = "获取 Windows PE 设置"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "这是此映像的 Windows PE 设置："
+                        Label3.Text = "目标路径："
+                        Label4.Text = "暂存空间："
+                        Button1.Text = "更改..."
+                        Button2.Text = "更改..."
+                        Button4.Text = "保存..."
+                        OK_Button.Text = "确定"
                 End Select
             Case 1
                 Text = "Get Windows PE settings"
@@ -248,6 +273,17 @@ Public Class GetWinPESettings
                 Button2.Text = "Cambia..."
                 Button4.Text = "Salva..."
                 OK_Button.Text = "OK"
+            Case 6
+                Text = "获取 Windows PE 设置"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "这是此映像的 Windows PE 设置："
+                Label3.Text = "目标路径："
+                Label4.Text = "暂存空间："
+                Button1.Text = "更改..."
+                Button2.Text = "更改..."
+                OK_Button.Text = "确定"
+                Button4.Text = "保存..."
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

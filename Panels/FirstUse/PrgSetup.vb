@@ -228,6 +228,8 @@ Public Class PrgSetup
                     Next_Button.Text = "Terminar"
                 Case "ITA"
                     Next_Button.Text = "Fine"
+                Case "CHS", "CHT"
+                    Next_Button.Text = "完成"
             End Select
             Cancel_Button.Enabled = False
             closeBox.Enabled = False
@@ -243,6 +245,8 @@ Public Class PrgSetup
                     Next_Button.Text = "Seguinte"
                 Case "ITA"
                     Next_Button.Text = "Avanti"
+                Case "CHS", "CHT"
+                    Next_Button.Text = "下一步"
             End Select
             Cancel_Button.Enabled = True
             closeBox.Enabled = True
@@ -311,6 +315,8 @@ Public Class PrgSetup
                     Next_Button.Text = "Terminar"
                 Case "ITA"
                     Next_Button.Text = "Fine"
+                Case "CHS", "CHT"
+                    Next_Button.Text = "完成"
             End Select
             Cancel_Button.Enabled = False
             closeBox.Enabled = False
@@ -326,6 +332,8 @@ Public Class PrgSetup
                     Next_Button.Text = "Seguinte"
                 Case "ITA"
                     Next_Button.Text = "Avanti"
+                Case "CHS", "CHT"
+                    Next_Button.Text = "下一步"
             End Select
             Cancel_Button.Enabled = True
             closeBox.Enabled = True
@@ -642,6 +650,56 @@ Public Class PrgSetup
                 Languages(3) = "Francese"
                 Languages(4) = "Portoghese"
                 Languages(5) = "Italiano"
+            Case "CHS", "CHT"
+                Text = "设置 DISMTools"
+                Label1.Text = Text
+                Label2.Text = "欢迎使用 DISMTools"
+                Label3.Text = "DISMTools 是一个免费、开源、由项目驱动的 DISM 操作图形界面。要开始设置，请单击「下一步」。"
+                Label5.Text = "随心定制。按您的喜好自定义此程序，然后单击「下一步」。这些设置随时可以在" & Quote & "个性化" & Quote & "（选项窗口中的相应部分）"
+                Label6.Text = "自定义此程序"
+                Label7.Text = "颜色模式："
+                Label8.Text = "语言："
+                Label9.Text = "日志窗口字体："
+                Label10.Text = "日志文件："
+                ' Since we start with log level 3, manually show that option
+                Label11.Text = "错误、警告和信息消息（日志级别 3）"
+                Label13.Text = "指定日志设置，然后单击「下一步」。根据您指定的内容级别，我们将记录更多或更少的信息。此设置随时可以在" & Quote & "日志" & Quote & "（选项窗口中的相应部分）"
+                Label14.Text = "执行操作时我们应记录哪些内容？"
+                ' Same here
+                Label16.Text = "执行映像操作后，日志文件应显示错误、警告和信息消息。"
+                Label20.Text = "您还有其他需要配置的内容吗？"
+                Label21.Text = "可用的设置远不止您刚才配置的这些。如果希望更改更多设置，请单击下方按钮。我们也会让这些设置持久保存。"
+                Label22.Text = "您可以随时执行这些步骤。"
+                Label23.Text = "您已按自己的方式完成使用 DISMTools 的基本设置。请单击" & Quote & "完成" & Quote & "，我们将使您的设置持久保存。"
+                Label24.Text = "设置完成"
+                Label25.Text = "现在已完成设置，我们建议您执行以下操作："
+                Label26.Text = "保持更新，以获取新功能和更好的体验"
+                Label27.Text = "开始使用 DISMTools 和映像维护，以便更快上手"
+                Label28.Text = "辅助进度面板样式："
+                Label29.Text = "此字体在日志窗口中可能不易阅读。虽然仍可使用，但建议使用等宽字体以提高可读性。"
+                Back_Button.Text = "上一步"
+                Next_Button.Text = "下一步"
+                Cancel_Button.Text = "取消"
+                Button1.Text = "浏览..."
+                Button2.Text = "使用默认日志文件"
+                Button5.Text = "配置更多设置"
+                Button6.Text = "开始使用"
+                Button7.Text = "检查更新"
+                CheckBox1.Text = "在程序的日志目录中自动创建日志"
+                RadioButton1.Text = "现代"
+                RadioButton2.Text = "经典"
+                SaveFileDialog1.Title = "指定日志文件"
+
+                ' Configure string arrays to put them in the comboboxes
+                ColorModes(0) = "使用系统设置"
+                ColorModes(1) = "浅色模式"
+                ColorModes(2) = "深色模式"
+                Languages(0) = "使用系统语言"
+                Languages(1) = "英语"
+                Languages(2) = "西班牙语"
+                Languages(3) = "法语"
+                Languages(4) = "葡萄牙语"
+                Languages(5) = "意大利语"
         End Select
         ' Add new items to the comboboxes
         ComboBox1.Items.AddRange(ColorModes)
@@ -812,6 +870,21 @@ Public Class PrgSetup
                         Label11.Text = "Errori, avvisi, informazioni e messaggi di debug (livello di registro 4)"
                         Label16.Text = "Il file di log deve visualizzare errori, avvisi, informazioni e messaggi di debug dopo l'esecuzione di un'operazione di immagine."
                 End Select
+            Case "CHS", "CHT"
+                Select Case TrackBar1.Value
+                    Case 0
+                        Label11.Text = "错误（日志级别 1）"
+                        Label16.Text = "执行映像操作后，日志文件应仅显示错误。"
+                    Case 1
+                        Label11.Text = "错误和警告（日志级别 2）"
+                        Label16.Text = "执行映像操作后，日志文件应显示错误和警告。"
+                    Case 2
+                        Label11.Text = "错误、警告和信息消息（日志级别 3）"
+                        Label16.Text = "执行映像操作后，日志文件应显示错误、警告和信息消息。"
+                    Case 3
+                        Label11.Text = "错误、警告、信息和调试消息（日志级别 4）"
+                        Label16.Text = "执行映像操作后，日志文件应显示错误、警告、信息和调试消息。"
+                End Select
         End Select
         MainForm.LogLevel = TrackBar1.Value + 1
     End Sub
@@ -874,6 +947,8 @@ Public Class PrgSetup
                     MsgBox("Não foi possível descarregar o verificador de actualizações. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "Verificar actualizações")
                 Case "ITA"
                     MsgBox("Non è stato possibile scaricare il programma di controllo degli aggiornamenti. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "Verifica aggiornamenti")
+                Case "CHS", "CHT"
+                    MsgBox("无法下载更新检查器。原因：" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "检查更新")
             End Select
             Exit Sub
         End Try

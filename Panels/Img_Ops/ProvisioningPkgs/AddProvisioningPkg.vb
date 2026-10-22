@@ -62,6 +62,8 @@ Public Class AddProvisioningPkg
                                 msg = "O ficheiro de catálogo especificado não existe. Não utilizaremos este ficheiro se prosseguir." & CrLf & CrLf & "Deseja continuar?"
                             Case "ITA"
                                 msg = "Il file di catalogo specificato non esiste. Non utilizzeremo questo file se si procede." & CrLf & CrLf & "Si desidera continuare?"
+                            Case "CHS", "CHT"
+                                msg = "指定的目录文件不存在。如果继续，我们将不使用此文件。" & CrLf & CrLf & "是否要继续？"
                         End Select
                     Case 1
                         msg = "The catalog file specified doesn't exist. We won't use this file if you proceed." & CrLf & CrLf & "Do you want to continue?"
@@ -73,6 +75,9 @@ Public Class AddProvisioningPkg
                         msg = "O ficheiro de catálogo especificado não existe. Não utilizaremos este ficheiro se prosseguir." & CrLf & CrLf & "Deseja continuar?"
                     Case 5
                         msg = "Il file di catalogo specificato non esiste. Non utilizzeremo questo file se si procede." & CrLf & CrLf & "Si desidera continuare?"
+                    Case 6
+                        msg = "指定的目录文件不存在。如果继续，我们将不使用此文件。" & CrLf & CrLf & "是否要继续？"
+
                 End Select
                 If MsgBox(msg, vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
                     Exit Sub
@@ -216,6 +221,17 @@ Public Class AddProvisioningPkg
                         Button1.Text = "Sfoglia..."
                         Button2.Text = "Sfoglia..."
                         CheckBox1.Text = "Applica l'immagine dopo aver aggiunto questo pacchetto di approvvigionamento"
+                    Case "CHS", "CHT"
+                        Text = "添加预配程序包"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "程序包路径："
+                        Label3.Text = "此操作无法还原。添加预配程序包后，将无法从 Windows 映像中删除它。"
+                        Label4.Text = "目录路径："
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "浏览..."
+                        CheckBox1.Text = "添加此预配程序包后提交映像"
                 End Select
             Case 1
                 Text = "Add provisioning packages"
@@ -272,6 +288,18 @@ Public Class AddProvisioningPkg
                 Button1.Text = "Sfoglia..."
                 Button2.Text = "Sfoglia..."
                 CheckBox1.Text = "Applica l'immagine dopo aver aggiunto questo pacchetto di approvvigionamento"
+            Case 6
+                Text = "添加预配程序包"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "程序包路径："
+                Label3.Text = "此操作无法还原。添加预配程序包后，将无法从 Windows 映像中删除它。"
+                Label4.Text = "目录路径："
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                Button1.Text = "浏览..."
+                Button2.Text = "浏览..."
+                CheckBox1.Text = "添加此预配程序包后提交映像"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

@@ -231,6 +231,32 @@ Public Class ImgApply
                         GroupBox2.Text = "Opzioni"
                         GroupBox3.Text = "Destinazione"
                         GroupBox4.Text = "Schema di file SWM"
+                    Case "CHS", "CHT"
+                        Text = "应用映像"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "源映像文件："
+                        Label3.Text = "映像索引："
+                        Label4.Text = "命名模式："
+                        CheckBox1.Text = "检查映像完整性"
+                        CheckBox2.Text = "验证"
+                        CheckBox3.Text = "使用重解析点标记修复"
+                        CheckBox4.Text = "引用 SWM 文件"
+                        CheckBox5.Text = "为受信任桌面验证映像"
+                        CheckBox6.Text = "以 WIMBoot 配置追加映像"
+                        CheckBox7.Text = "以压缩模式应用映像"
+                        CheckBox8.Text = "应用扩展属性"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "浏览..."
+                        Button4.Text = "使用映像名称"
+                        Button5.Text = "扫描模式"
+                        UseMountedImgBtn.Text = "使用已挂载的映像"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        Label5.Text = "目标目录："
+                        GroupBox1.Text = "源"
+                        GroupBox2.Text = "选项"
+                        GroupBox3.Text = "目标"
+                        GroupBox4.Text = "SWM 文件模式"
                 End Select
             Case 1
                 Text = "Apply an image"
@@ -362,6 +388,33 @@ Public Class ImgApply
                 GroupBox2.Text = "Opzioni"
                 GroupBox3.Text = "Destinazione"
                 GroupBox4.Text = "Schema di file SWM"
+            Case 6
+                Text = "应用映像"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "源映像文件："
+                Label3.Text = "映像索引："
+                Label4.Text = "命名模式："
+                CheckBox1.Text = "检查映像完整性"
+                CheckBox2.Text = "验证"
+                CheckBox3.Text = "使用重解析点标记修复"
+                CheckBox4.Text = "引用 SWM 文件"
+                CheckBox5.Text = "为受信任桌面验证映像"
+                CheckBox6.Text = "以 WIMBoot 配置追加映像"
+                CheckBox7.Text = "以压缩模式应用映像"
+                CheckBox8.Text = "应用扩展属性"
+                Button1.Text = "浏览..."
+                Button2.Text = "浏览..."
+                Button4.Text = "使用映像名称"
+                Button5.Text = "扫描模式"
+                UseMountedImgBtn.Text = "使用已挂载的映像"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                Label5.Text = "目标目录："
+                GroupBox1.Text = "源"
+                GroupBox2.Text = "选项"
+                GroupBox3.Text = "目标"
+                GroupBox4.Text = "SWM 文件模式"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -394,6 +447,8 @@ Public Class ImgApply
                         ToolStripStatusLabel1.Text = "Especifique o padrão de nomenclatura dos ficheiros SWM"
                     Case "ITA"
                         ToolStripStatusLabel1.Text = "Specificare il modello di denominazione dei file SWM"
+                    Case "CHS", "CHT"
+                        ToolStripStatusLabel1.Text = "请指定 SWM 文件的命名模式"
                 End Select
             Case 1
                 ToolStripStatusLabel1.Text = "Please specify the naming pattern of the SWM files"
@@ -405,6 +460,9 @@ Public Class ImgApply
                 ToolStripStatusLabel1.Text = "Especifique o padrão de nomenclatura dos ficheiros SWM"
             Case 5
                 ToolStripStatusLabel1.Text = "Specificare il modello di denominazione dei file SWM"
+            Case 6
+                ToolStripStatusLabel1.Text = "请指定 SWM 文件的命名模式"
+
         End Select
         If MainForm.SourceImg = "N/A" Or Not File.Exists(MainForm.SourceImg) Or MainForm.OnlineManagement Or MainForm.OfflineManagement Then
             UseMountedImgBtn.Enabled = False
@@ -470,6 +528,8 @@ Public Class ImgApply
                             msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                         Case "ITA"
                             msg = "Impossibile raccogliere informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case "CHS", "CHT"
+                            msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
                     End Select
                 Case 1
                     msg = "Could not gather information of this image file. Reason:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
@@ -481,6 +541,9 @@ Public Class ImgApply
                     msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                 Case 5
                     msg = "Impossibile raccogliere informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                Case 6
+                    msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
         Finally
@@ -543,6 +606,9 @@ Public Class ImgApply
                         Case "ITA"
                             MsgBox("Specificare un file WIM di origine. In questo modo sarà possibile utilizzare i file SWM per una successiva applicazione di immagini", vbOKOnly + vbCritical, "Applica un'immagine")
                             ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+                        Case "CHS", "CHT"
+                            MsgBox("请指定源 WIM 文件。这样您就可以使用 SWM 文件进行后续映像应用", vbOKOnly + vbCritical, "应用映像")
+                            ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SWM 文件"
                     End Select
                 Case 1
                     MsgBox("Please specify a source WIM file. This will let you use the SWM files for later image application", vbOKOnly + vbCritical, "Apply an image")
@@ -559,6 +625,10 @@ Public Class ImgApply
                 Case 5
                     MsgBox("Specificare un file WIM di origine. In questo modo sarà possibile utilizzare i file SWM per una successiva applicazione di immagini", vbOKOnly + vbCritical, "Applica un'immagine")
                     ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+                Case 6
+                    MsgBox("请指定源 WIM 文件。这样您就可以使用 SWM 文件进行后续映像应用", vbOKOnly + vbCritical, "应用映像")
+                    ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SWM 文件"
+
             End Select
             Beep()
             Exit Sub
@@ -583,6 +653,8 @@ Public Class ImgApply
                         ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SWM"
                     Case "ITA"
                         ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+                    Case "CHS", "CHT"
+                        ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SWM 文件"
                 End Select
             Case 1
                 ToolStripStatusLabel1.Text = "This naming pattern returns " & ListBox1.Items.Count & " SWM files"
@@ -594,6 +666,9 @@ Public Class ImgApply
                 ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SWM"
             Case 5
                 ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+            Case 6
+                ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SWM 文件"
+
         End Select
         If ListBox1.Items.Count <= 0 Then Beep()
     End Sub

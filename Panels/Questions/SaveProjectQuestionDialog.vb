@@ -51,6 +51,12 @@ Public Class SaveProjectQuestionDialog
                         Yes_Button.Text = "Sì"
                         No_Button.Text = "No"
                         Cancel_Button.Text = "Annulla"
+                    Case "CHS", "CHT"
+                        Label1.Text = "是否要保存此项目的更改？"
+                        Label2.Text = "如果在未卸载映像的情况下关闭或重启系统，则需要重新加载服务会话。"
+                        Yes_Button.Text = "是"
+                        No_Button.Text = "否"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Label1.Text = "Do you want to save the changes of this project?"
@@ -82,6 +88,13 @@ Public Class SaveProjectQuestionDialog
                 Yes_Button.Text = "Sì"
                 No_Button.Text = "No"
                 Cancel_Button.Text = "Annulla"
+            Case 6
+                Label1.Text = "是否要保存此项目的更改？"
+                Label2.Text = "如果在未卸载映像的情况下关闭或重启系统，则需要重新加载服务会话。"
+                Yes_Button.Text = "是"
+                No_Button.Text = "否"
+                Cancel_Button.Text = "取消"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

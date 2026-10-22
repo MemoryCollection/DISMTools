@@ -39,6 +39,8 @@ Public Class ImgExport
                             msg = "Especifique um ficheiro de imagem de origem para exportar e tente novamente"
                         Case "ITA"
                             msg = "Specificare un file immagine di origine da esportare e riprovare."
+                        Case "CHS", "CHT"
+                            msg = "请指定要导出的源映像文件，然后重试"
                     End Select
                 Case 1
                     msg = "Please specify a source image file to export and try again"
@@ -50,6 +52,9 @@ Public Class ImgExport
                     msg = "Especifique um ficheiro de imagem de origem para exportar e tente novamente"
                 Case 5
                     msg = "Specificare un file immagine di origine da esportare e riprovare."
+                Case 6
+                    msg = "请指定要导出的源映像文件，然后重试"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -73,6 +78,8 @@ Public Class ImgExport
                             msg = "Especifique um ficheiro de imagem de destino e tente novamente"
                         Case "ITA"
                             msg = "Specificare un file immagine di destinazione e riprovare"
+                        Case "CHS", "CHT"
+                            msg = "请指定目标映像文件，然后重试"
                     End Select
                 Case 1
                     msg = "Please specify a destination image file and try again"
@@ -84,6 +91,9 @@ Public Class ImgExport
                     msg = "Especifique um ficheiro de imagem de destino e tente novamente"
                 Case 5
                     msg = "Specificare un file immagine di destinazione e riprovare"
+                Case 6
+                    msg = "请指定目标映像文件，然后重试"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -280,6 +290,36 @@ Public Class ImgExport
                         CompressionTypeStrings(1) = "Verrà applicata la compressione veloce. È l'opzione predefinita"
                         CompressionTypeStrings(2) = "Verrà applicata la compressione massima. Questa opzione richiede più tempo, ma produce un'immagine più piccola"
                         CompressionTypeStrings(3) = "Verrà applicato il livello di compressione per le immagini con reset a pulsante. Ciò richiede l'esportazione dell'immagine come file ESD"
+                    Case "CHS", "CHT"
+                        Text = "导出映像"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "目标映像文件："
+                        Label3.Text = "源映像文件："
+                        Label4.Text = "命名模式："
+                        Label5.Text = "目标映像压缩类型："
+                        Label7.Text = "源映像索引："
+                        CheckBox1.Text = "引用 SWM 文件"
+                        CheckBox2.Text = "为目标映像指定自定义名称"
+                        CheckBox3.Text = "使映像可启动（仅限 Windows PE）"
+                        CheckBox4.Text = "以 WIMBoot 配置追加映像"
+                        CheckBox5.Text = "导出映像前检查完整性"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "浏览..."
+                        Button4.Text = "使用映像名称"
+                        Button5.Text = "扫描模式"
+                        GroupBox1.Text = "源和目标"
+                        GroupBox2.Text = "选项"
+                        OpenFileDialog1.Title = "指定要导出的源映像文件"
+                        ListView1.Columns(0).Text = "索引"
+                        ListView1.Columns(1).Text = "映像名称"
+                        ListView1.Columns(2).Text = "映像说明"
+                        ListView1.Columns(3).Text = "映像版本"
+                        CompressionTypeStrings(0) = "目标映像将不进行压缩。"
+                        CompressionTypeStrings(1) = "将使用快速压缩。这是默认选项。"
+                        CompressionTypeStrings(2) = "将使用最大压缩。这最耗时，但映像会更小。"
+                        CompressionTypeStrings(3) = "将应用「一键重置」映像的压缩级别。这要求将映像导出为 ESD 文件。"
                 End Select
             Case 1
                 Text = "Export an image"
@@ -431,6 +471,37 @@ Public Class ImgExport
                 CompressionTypeStrings(1) = "Verrà applicata la compressione veloce. È l'opzione predefinita"
                 CompressionTypeStrings(2) = "Verrà applicata la compressione massima. Questa opzione richiede più tempo, ma produce un'immagine più piccola"
                 CompressionTypeStrings(3) = "Verrà applicato il livello di compressione per le immagini con reset a pulsante. Ciò richiede l'esportazione dell'immagine come file ESD"
+            Case 6
+                Text = "导出映像"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "目标映像文件："
+                Label3.Text = "源映像文件："
+                Label4.Text = "命名模式："
+                Label5.Text = "目标映像压缩类型："
+                Label7.Text = "源映像索引："
+                CheckBox1.Text = "引用 SWM 文件"
+                CheckBox2.Text = "为目标映像指定自定义名称"
+                CheckBox3.Text = "使映像可启动（仅限 Windows PE）"
+                CheckBox4.Text = "以 WIMBoot 配置追加映像"
+                CheckBox5.Text = "导出映像前检查完整性"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                Button1.Text = "浏览..."
+                Button2.Text = "浏览..."
+                Button4.Text = "使用映像名称"
+                Button5.Text = "扫描模式"
+                GroupBox1.Text = "源和目标"
+                GroupBox2.Text = "选项"
+                OpenFileDialog1.Title = "指定要导出的源映像文件"
+                ListView1.Columns(0).Text = "索引"
+                ListView1.Columns(1).Text = "映像名称"
+                ListView1.Columns(2).Text = "映像说明"
+                ListView1.Columns(3).Text = "映像版本"
+                CompressionTypeStrings(0) = "目标映像将不进行压缩。"
+                CompressionTypeStrings(1) = "将使用快速压缩。这是默认选项。"
+                CompressionTypeStrings(2) = "将使用最大压缩。这最耗时，但映像会更小。"
+                CompressionTypeStrings(3) = "将应用「一键重置」映像的压缩级别。这要求将映像导出为 ESD 文件。"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -467,6 +538,8 @@ Public Class ImgExport
                         ToolStripStatusLabel1.Text = "Especifique o padrão de nomenclatura dos ficheiros SWM"
                     Case "ITA"
                         ToolStripStatusLabel1.Text = "Specificare il modello di denominazione dei file SWM"
+                    Case "CHS", "CHT"
+                        ToolStripStatusLabel1.Text = "请指定 SWM 文件的命名模式"
                 End Select
             Case 1
                 ToolStripStatusLabel1.Text = "Please specify the naming pattern of the SWM files"
@@ -478,6 +551,9 @@ Public Class ImgExport
                 ToolStripStatusLabel1.Text = "Especifique o padrão de nomenclatura dos ficheiros SWM"
             Case 5
                 ToolStripStatusLabel1.Text = "Specificare il modello di denominazione dei file SWM"
+            Case 6
+                ToolStripStatusLabel1.Text = "请指定 SWM 文件的命名模式"
+
         End Select
         Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)
         WindowHelper.ToggleDarkTitleBar(handle, CurrentTheme.IsDark)
@@ -608,6 +684,9 @@ Public Class ImgExport
                         Case "ITA"
                             MsgBox("Specificare un file WIM di origine. In questo modo sarà possibile utilizzare i file SWM per una successiva applicazione di immagini", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
                             ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+                        Case "CHS", "CHT"
+                            MsgBox("请指定源 WIM 文件。这样您就可以使用 SWM 文件进行后续映像应用", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                            ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SWM 文件"
                     End Select
                 Case 1
                     MsgBox("Please specify a source WIM file. This will let you use the SWM files for later image application", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
@@ -624,6 +703,10 @@ Public Class ImgExport
                 Case 5
                     MsgBox("Specificare un file WIM di origine. In questo modo sarà possibile utilizzare i file SWM per una successiva applicazione di immagini", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
                     ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+                Case 6
+                    MsgBox("请指定源 WIM 文件。这样您就可以使用 SWM 文件进行后续映像应用", vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
+                    ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SWM 文件"
+
             End Select
             Beep()
             Exit Sub
@@ -648,6 +731,8 @@ Public Class ImgExport
                         ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SWM"
                     Case "ITA"
                         ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+                    Case "CHS", "CHT"
+                        ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SWM 文件"
                 End Select
             Case 1
                 ToolStripStatusLabel1.Text = "This naming pattern returns " & ListBox1.Items.Count & " SWM files"
@@ -659,6 +744,9 @@ Public Class ImgExport
                 ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SWM"
             Case 5
                 ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SWM"
+            Case 6
+                ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SWM 文件"
+
         End Select
         If ListBox1.Items.Count <= 0 Then Beep()
     End Sub

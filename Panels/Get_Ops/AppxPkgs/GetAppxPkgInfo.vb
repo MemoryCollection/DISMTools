@@ -124,6 +124,25 @@ Public Class GetAppxPkgInfoDlg
                         LinkLabel1.Text = "Questa risorsa non è quella cercata"
                         Button2.Text = "Salva..."
                         SearchBox1.cueBanner = "Digita qui per cercare un'applicazione..."
+                    Case "CHS", "CHT"
+                        Text = "获取 AppX 程序包信息"
+                        ImageTaskHeader1.ItemText = Text
+                        Label36.Text = "AppX 程序包信息"
+                        Label37.Text = "在左侧选择一个已安装的 AppX 程序包，即可在此查看其信息"
+                        Label22.Text = "程序包名称："
+                        Label24.Text = "应用程序显示名称："
+                        Label26.Text = "体系结构："
+                        Label31.Text = "资源 ID："
+                        Label41.Text = "版本："
+                        Label43.Text = "是否已注册到任何用户？"
+                        Label4.Text = "安装目录："
+                        Label6.Text = "程序包清单位置："
+                        Label8.Text = "应用商店徽标素材目录："
+                        Label9.Text = "主应用商店徽标素材："
+                        Label10.Text = "此素材是 DISMTools 根据其大小推断的，可能导致结果不正确。如果出现这种情况，请在 GitHub 仓库中报告问题"
+                        LinkLabel1.Text = "此素材不是我要找的"
+                        Button2.Text = "保存..."
+                        SearchBox1.cueBanner = "在此输入以搜索应用程序..."
                 End Select
             Case 1
                 Text = "Get AppX package information"
@@ -220,6 +239,26 @@ Public Class GetAppxPkgInfoDlg
                 LinkLabel1.Text = "Questa risorsa non è quella cercata"
                 Button2.Text = "Salva..."
                 SearchBox1.cueBanner = "Digita qui per cercare un'applicazione..."
+            Case 6
+                Text = "获取 AppX 程序包信息"
+                ImageTaskHeader1.ItemText = Text
+                Label36.Text = "AppX 程序包信息"
+                Label37.Text = "在左侧选择一个已安装的 AppX 程序包，即可在此查看其信息"
+                Label22.Text = "程序包名称："
+                Label24.Text = "应用程序显示名称："
+                Label26.Text = "体系结构："
+                Label31.Text = "资源 ID："
+                Label41.Text = "版本："
+                Label43.Text = "是否已注册到任何用户？"
+                Label4.Text = "安装目录："
+                Label6.Text = "程序包清单位置："
+                Label8.Text = "应用商店徽标素材目录："
+                Label9.Text = "主应用商店徽标素材："
+                Label10.Text = "此素材是 DISMTools 根据其大小推断的，可能导致结果不正确。如果出现这种情况，请在 GitHub 仓库中报告问题"
+                LinkLabel1.Text = "此素材不是我要找的"
+                Button2.Text = "保存..."
+                SearchBox1.cueBanner = "在此输入以搜索应用程序..."
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -433,6 +472,8 @@ Public Class GetAppxPkgInfoDlg
                                 Label42.Text = "Sim"
                             Case "ITA"
                                 Label42.Text = "Sì"
+                            Case "CHS", "CHT"
+                                Label42.Text = "是"
                         End Select
                     Case 1
                         Label42.Text = "Yes"
@@ -444,6 +485,9 @@ Public Class GetAppxPkgInfoDlg
                         Label42.Text = "Sim"
                     Case 5
                         Label42.Text = "Sì"
+                    Case 6
+                        Label42.Text = "是"
+
                 End Select
                 If MainForm.OnlineManagement AndAlso Not MainForm.NoNTSamMappings Then
                     DynaLog.LogMessage("Online installation management mode has been detected and we're expected to map SAM information. Proceeding...")
@@ -471,6 +515,8 @@ Public Class GetAppxPkgInfoDlg
                                 Label42.Text = "Não"
                             Case "ITA"
                                 Label42.Text = "No"
+                            Case "CHS", "CHT"
+                                Label42.Text = "否"
                         End Select
                     Case 1
                         Label42.Text = "No"
@@ -482,6 +528,9 @@ Public Class GetAppxPkgInfoDlg
                         Label42.Text = "Não"
                     Case 5
                         Label42.Text = "No"
+                    Case 6
+                        Label42.Text = "否"
+
                 End Select
             End If
 

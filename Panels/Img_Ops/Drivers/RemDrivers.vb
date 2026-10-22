@@ -48,6 +48,10 @@ Public Class RemDrivers
                                     If MsgBox("Sono stati selezionati pacchetti di driver critici per l'avvio. La rimozione di tali pacchetti potrebbe rendere l'immagine di destinazione non avviabile" & CrLf & CrLf & "Si desidera continuare?", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
                                         Exit Sub
                                     End If
+                                Case "CHS", "CHT"
+                                    If MsgBox("您选择了启动关键的驱动程序包。继续删除这些程序包可能导致目标映像无法启动。" & CrLf & CrLf & "是否要继续？", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
+                                        Exit Sub
+                                    End If
                             End Select
                         Case 1
                             If MsgBox("You have selected driver packages that are boot-critical. Proceeding with the removal of such packages may leave the target image unbootable." & CrLf & CrLf & "Do you want to continue?", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
@@ -69,6 +73,11 @@ Public Class RemDrivers
                             If MsgBox("Sono stati selezionati pacchetti di driver critici per l'avvio. La rimozione di tali pacchetti potrebbe rendere l'immagine di destinazione non avviabile" & CrLf & CrLf & "Si desidera continuare?", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
                                 Exit Sub
                             End If
+                        Case 6
+                            If MsgBox("您选择了启动关键的驱动程序包。继续删除这些程序包可能导致目标映像无法启动。" & CrLf & CrLf & "是否要继续？", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
+                                Exit Sub
+                            End If
+
                     End Select
                     Exit For
                 End If
@@ -97,6 +106,10 @@ Public Class RemDrivers
                                     If MsgBox("Sono stati selezionati pacchetti di driver che fanno parte della distribuzione di Windows. Procedere potrebbe rendere inaccessibili alcune parti di Windows che dipendono da questi driver." & CrLf & CrLf & "Si desidera continuare?", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
                                         Exit Sub
                                     End If
+                                Case "CHS", "CHT"
+                                    If MsgBox("您选择了属于 Windows 分发内容的驱动程序包。继续操作可能导致依赖这些驱动程序的 Windows 某些部分无法访问。" & CrLf & CrLf & "是否要继续？", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
+                                        Exit Sub
+                                    End If
                             End Select
                         Case 1
                             If MsgBox("You have selected driver packages that are part of the Windows distribution. Proceeding may leave certain parts of Windows that depend on these drivers inaccessible." & CrLf & CrLf & "Do you want to continue?", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
@@ -118,6 +131,11 @@ Public Class RemDrivers
                             If MsgBox("Sono stati selezionati pacchetti di driver che fanno parte della distribuzione di Windows. Procedere potrebbe rendere inaccessibili alcune parti di Windows che dipendono da questi driver." & CrLf & CrLf & "Si desidera continuare?", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
                                 Exit Sub
                             End If
+                        Case 6
+                            If MsgBox("您选择了属于 Windows 分发内容的驱动程序包。继续操作可能导致依赖这些驱动程序的 Windows 某些部分无法访问。" & CrLf & CrLf & "是否要继续？", vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
+                                Exit Sub
+                            End If
+
                     End Select
                     Exit For
                 End If
@@ -300,6 +318,22 @@ Public Class RemDrivers
                         ListView1.Columns(5).Text = "È critico per l'avvio?"
                         ListView1.Columns(6).Text = "Versione"
                         ListView1.Columns(7).Text = "Data"
+                    Case "CHS", "CHT"
+                        Text = "删除驱动程序"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "指定要删除的驱动程序包，然后单击「确定」："
+                        CheckBox1.Text = "隐藏启动关键驱动程序"
+                        CheckBox2.Text = "隐藏属于 Windows 分发内容的驱动程序"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        ListView1.Columns(0).Text = "已发布名称"
+                        ListView1.Columns(1).Text = "原始文件名"
+                        ListView1.Columns(2).Text = "提供程序名称"
+                        ListView1.Columns(3).Text = "类名称"
+                        ListView1.Columns(4).Text = "是否属于 Windows 分发内容？"
+                        ListView1.Columns(5).Text = "是否启动关键？"
+                        ListView1.Columns(6).Text = "版本"
+                        ListView1.Columns(7).Text = "日期"
                 End Select
             Case 1
                 Text = "Remove drivers"
@@ -381,6 +415,23 @@ Public Class RemDrivers
                 ListView1.Columns(5).Text = "È critico per l'avvio?"
                 ListView1.Columns(6).Text = "Versione"
                 ListView1.Columns(7).Text = "Data"
+            Case 6
+                Text = "删除驱动程序"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "指定要删除的驱动程序包，然后单击「确定」："
+                CheckBox1.Text = "隐藏启动关键驱动程序"
+                CheckBox2.Text = "隐藏属于 Windows 分发内容的驱动程序"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                ListView1.Columns(0).Text = "已发布名称"
+                ListView1.Columns(1).Text = "原始文件名"
+                ListView1.Columns(2).Text = "提供程序名称"
+                ListView1.Columns(3).Text = "类名称"
+                ListView1.Columns(4).Text = "是否属于 Windows 分发内容？"
+                ListView1.Columns(5).Text = "是否启动关键？"
+                ListView1.Columns(6).Text = "版本"
+                ListView1.Columns(7).Text = "日期"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -420,6 +471,8 @@ Public Class RemDrivers
                         PleaseWaitDialog.Label2.Text = "Obter pacotes de controladores instalados..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Ottenere i pacchetti dei driver installati..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取已安装的驱动程序包..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting installed driver packages..."
@@ -431,6 +484,9 @@ Public Class RemDrivers
                 PleaseWaitDialog.Label2.Text = "Obter pacotes de controladores instalados..."
             Case 5
                 PleaseWaitDialog.Label2.Text = "Ottenere i pacchetti dei driver installati..."
+            Case 6
+                PleaseWaitDialog.Label2.Text = "正在获取已安装的驱动程序包..."
+
         End Select
         If Not MainForm.areBackgroundProcessesDone Then
             PleaseWaitDialog.ShowDialog(Me)

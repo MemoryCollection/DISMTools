@@ -155,6 +155,13 @@ Public Class RemCapabilities
                         Cancel_Button.Text = "Annullare"
                         ListView1.Columns(0).Text = "Capacità"
                         ListView1.Columns(1).Text = "Stato"
+                    Case "CHS", "CHT"
+                        Text = "删除功能包"
+                        ImageTaskHeader1.ItemText = Text
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        ListView1.Columns(0).Text = "功能包"
+                        ListView1.Columns(1).Text = "状态"
                 End Select
             Case 1
                 Text = "Remove capabilities"
@@ -191,6 +198,14 @@ Public Class RemCapabilities
                 Cancel_Button.Text = "Annullare"
                 ListView1.Columns(0).Text = "Capacità"
                 ListView1.Columns(1).Text = "Stato"
+            Case 6
+                Text = "删除功能包"
+                ImageTaskHeader1.ItemText = Text
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                ListView1.Columns(0).Text = "功能包"
+                ListView1.Columns(1).Text = "状态"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

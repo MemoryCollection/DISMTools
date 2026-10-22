@@ -144,6 +144,8 @@ Public Class WDSInstallImageCopy
                             msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                         Case "ITA"
                             msg = "Impossibile raccogliere informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case "CHS", "CHT"
+                            msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
                     End Select
                 Case 1
                     msg = "Could not gather information of this image file. Reason:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
@@ -155,6 +157,9 @@ Public Class WDSInstallImageCopy
                     msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                 Case 5
                     msg = "Impossibile raccogliere informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                Case 6
+                    msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
         Finally

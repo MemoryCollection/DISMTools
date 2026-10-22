@@ -36,6 +36,10 @@ Public Class OSNoRollbackErrorDlg
                         Label1.Text = "Non è possibile tornare a una versione precedente"
                         Label2.Text = "Non è stata rilevata alcuna vecchia versione, perché i suoi file non sono stati trovati. È possibile che si disponga di questa versione da un tempo superiore a quello consentito dalla finestra di disinstallazione, oppure che siano stati cancellati i file della vecchia versione (per risparmiare spazio). Non è necessario fare nulla"
                         OK_Button.Text = "OK"
+                    Case "CHS", "CHT"
+                        Label1.Text = "无法回滚到较旧的版本"
+                        Label2.Text = "未检测到旧版本，因为找不到其文件。您可能持有此版本的时间已超过卸载窗口允许的时长，或者您已删除旧版本的文件（以节省空间）。您无需执行任何操作。"
+                        OK_Button.Text = "确定"
                 End Select
             Case 1
                 Label1.Text = "You can't roll back to an older version"
@@ -57,6 +61,11 @@ Public Class OSNoRollbackErrorDlg
                 Label1.Text = "Non è possibile tornare a una versione precedente"
                 Label2.Text = "Non è stata rilevata alcuna vecchia versione, perché i suoi file non sono stati trovati. È possibile che si disponga di questa versione da un tempo superiore a quello consentito dalla finestra di disinstallazione, oppure che siano stati cancellati i file della vecchia versione (per risparmiare spazio). Non è necessario fare nulla"
                 OK_Button.Text = "OK"
+            Case 6
+                Label1.Text = "无法回滚到较旧的版本"
+                Label2.Text = "未检测到旧版本，因为找不到其文件。您可能持有此版本的时间已超过卸载窗口允许的时长，或者您已删除旧版本的文件（以节省空间）。您无需执行任何操作。"
+                OK_Button.Text = "确定"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

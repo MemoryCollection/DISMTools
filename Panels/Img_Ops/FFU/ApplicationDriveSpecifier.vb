@@ -83,6 +83,16 @@ Public Class ApplicationDriveSpecifier
                         ListView1.Columns(1).Text = "Modello"
                         ListView1.Columns(2).Text = "Partizioni"
                         ListView1.Columns(3).Text = "Dimensione"
+                    Case "CHS", "CHT"
+                        Text = "指定目标磁盘..."
+                        Label2.Text = "目标磁盘 ID (\.\PHYSICALDRIVE(n))："
+                        Button2.Text = "刷新"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        ListView1.Columns(0).Text = "设备 ID"
+                        ListView1.Columns(1).Text = "型号"
+                        ListView1.Columns(2).Text = "分区"
+                        ListView1.Columns(3).Text = "大小"
                 End Select
             Case 1
                 Text = "Specify target disk..."
@@ -134,6 +144,17 @@ Public Class ApplicationDriveSpecifier
                 ListView1.Columns(1).Text = "Modello"
                 ListView1.Columns(2).Text = "Partizioni"
                 ListView1.Columns(3).Text = "Dimensione"
+            Case 6
+                Text = "指定目标磁盘..."
+                Label2.Text = "目标磁盘 ID (\.\PHYSICALDRIVE(n))："
+                Button2.Text = "刷新"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                ListView1.Columns(0).Text = "设备 ID"
+                ListView1.Columns(1).Text = "型号"
+                ListView1.Columns(2).Text = "分区"
+                ListView1.Columns(3).Text = "大小"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

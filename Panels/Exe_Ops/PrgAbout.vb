@@ -177,6 +177,37 @@ Public Class PrgAbout
                         LinkLabel12.Text = "Sito web"
                         OK_Button.Text = "OK"
                         UpdCheckBtn.Text = "Controlla aggiornamenti"
+                    Case "CHS", "CHT"
+                        Text = "关于本程序"
+                        Label1.Text = "DISMTools - 版本 " & My.Application.Info.Version.ToString() & If(MainForm.dtBranch.Contains("pre"), "." & MainForm.dtBranch & "." & RetrieveLinkerTimestamp().ToString("yyMMdd-HHmm"), "")
+
+                        Label3.Text = "创建本程序时使用了以下资源和组件："
+                        Label4.Text = "资源"
+                        Label5.Text = "Fluency"
+                        Label6.Text = "SQL Server 图标（彩色）"
+                        Label7.Text = "实用工具"
+                        Label8.Text = "7-Zip"
+                        Label10.Text = "帮助文档"
+                        Label11.Text = "命令帮助来源"
+                        Label13.Text = "Scintilla.NET（NuGet 包）"
+                        If Not MainForm.dtBranch.Contains("pre") Then
+                            Label15.Text = "构建于 " & RetrieveLinkerTimestamp() & "，由 msbuild 构建"
+                            Label15.Visible = True
+                        End If
+                        Label16.Text = "ManagedDism（NuGet 包）"
+                        Label17.Text = "品牌素材"
+                        Label18.Text = "Windows Home Server 2011"
+                        LinkLabel1.Text = "致谢"
+                        LinkLabel2.Text = "许可证"
+                        LinkLabel3.Text = "新增内容"
+                        LinkLabel4.Text = "Icons8"
+                        LinkLabel5.Text = "访问网站"
+                        LinkLabel7.Text = "Microsoft"
+                        LinkLabel9.Text = "访问网站"
+                        LinkLabel10.Text = "访问网站"
+                        LinkLabel11.Text = "Microsoft"
+                        LinkLabel12.Text = "访问网站"
+                        OK_Button.Text = "确定"
                 End Select
             Case 1
                 Text = "About this program"
@@ -338,6 +369,39 @@ Public Class PrgAbout
                 LinkLabel12.Text = "Sito web"
                 OK_Button.Text = "OK"
                 UpdCheckBtn.Text = "Controlla aggiornamenti"
+            Case 6
+                Text = "关于本程序"
+                Label1.Text = "DISMTools - 版本 " & My.Application.Info.Version.ToString() & If(MainForm.dtBranch.Contains("pre"), "." & MainForm.dtBranch & "." & RetrieveLinkerTimestamp().ToString("yyMMdd-HHmm"), "")
+
+                Label3.Text = "创建本程序时使用了以下资源和组件："
+                Label4.Text = "资源"
+                Label5.Text = "Fluency"
+                Label6.Text = "SQL Server 图标（彩色）"
+                Label7.Text = "实用工具"
+                Label8.Text = "7-Zip"
+                Label10.Text = "帮助文档"
+                Label11.Text = "命令帮助来源"
+                Label13.Text = "Scintilla.NET（NuGet 包）"
+                If Not MainForm.dtBranch.Contains("pre") Then
+                    Label15.Text = "构建于 " & RetrieveLinkerTimestamp() & "，由 msbuild 构建"
+                    Label15.Visible = True
+                End If
+                Label16.Text = "ManagedDism（NuGet 包）"
+                Label17.Text = "品牌素材"
+                Label18.Text = "Windows Home Server 2011"
+                LinkLabel1.Text = "致谢"
+                LinkLabel2.Text = "许可证"
+                LinkLabel3.Text = "新增内容"
+                LinkLabel4.Text = "Icons8"
+                LinkLabel5.Text = "访问网站"
+                LinkLabel7.Text = "Microsoft"
+                LinkLabel9.Text = "访问网站"
+                LinkLabel10.Text = "访问网站"
+                LinkLabel11.Text = "Microsoft"
+                LinkLabel12.Text = "访问网站"
+                OK_Button.Text = "确定"
+                UpdCheckBtn.Text = "检查更新"
+
         End Select
         RichTextBox1.Text = My.Resources.LicenseOverview
         RichTextBox2.Text = My.Resources.WhatsNew
@@ -640,6 +704,8 @@ Public Class PrgAbout
                             MsgBox("Não foi possível descarregar o verificador de actualizações. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, UpdCheckBtn.Text)
                         Case "ITA"
                             MsgBox("Non è stato possibile scaricare il programma di controllo degli aggiornamenti. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, UpdCheckBtn.Text)
+                        Case "CHS", "CHT"
+                            MsgBox("无法下载更新检查器。原因：" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, UpdCheckBtn.Text)
                     End Select
                 Case 1
                     MsgBox("We couldn't download the update checker. Reason:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, UpdCheckBtn.Text)
@@ -651,6 +717,9 @@ Public Class PrgAbout
                     MsgBox("Não foi possível descarregar o verificador de actualizações. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, UpdCheckBtn.Text)
                 Case 5
                     MsgBox("Non è stato possibile scaricare il programma di controllo degli aggiornamenti. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, UpdCheckBtn.Text)
+                Case 6
+                    MsgBox("无法下载更新检查器。原因：" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, UpdCheckBtn.Text)
+
             End Select
             Exit Sub
         End Try

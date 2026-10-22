@@ -38,6 +38,8 @@ Public Class ImgCleanup
                                     MsgBox("Não foi fornecida nenhuma fonte válida para a reparação do armazenamento de componentes." & CrLf & CrLf & If(RichTextBox1.Text = "", "Forneça uma fonte e tente novamente.", "Certifique-se de que a fonte especificada existe no sistema de ficheiros e tente novamente."), vbOKOnly + vbCritical, "Limpeza da imagem")
                                 Case "ITA"
                                     MsgBox("Non è stata fornita un'origine valida per la riparazione dell'archivio componenti." & CrLf & CrLf & If(RichTextBox1.Text = "", "Fornire un'origine e riprovare.", "Assicurarsi che l'origine specificata esista nel file system e riprovare."), vbOKOnly + vbCritical, "Pulizia immagine")
+                                Case "CHS", "CHT"
+                                    MsgBox("未提供用于修复组件存储的有效源。" & CrLf & CrLf & If(RichTextBox1.Text = "", "请提供源，然后重试。", "请确保指定的源在文件系统中存在，然后重试。"), vbOKOnly + vbCritical, "映像清理")
                             End Select
                         Case 1
                             MsgBox("No valid source has been provided for component store repair." & CrLf & CrLf & If(RichTextBox1.Text = "", "Please provide a source and try again.", "Please make sure the specified source exists in the file system and try again."), vbOKOnly + vbCritical, "Image cleanup")
@@ -49,6 +51,9 @@ Public Class ImgCleanup
                             MsgBox("Não foi fornecida nenhuma fonte válida para a reparação do armazenamento de componentes." & CrLf & CrLf & If(RichTextBox1.Text = "", "Forneça uma fonte e tente novamente.", "Certifique-se de que a fonte especificada existe no sistema de ficheiros e tente novamente."), vbOKOnly + vbCritical, "Limpeza da imagem")
                         Case 5
                             MsgBox("Non è stata fornita un'origine valida per la riparazione dell'archivio componenti." & CrLf & CrLf & If(RichTextBox1.Text = "", "Fornire un'origine e riprovare.", "Assicurarsi che l'origine specificata esista nel file system e riprovare."), vbOKOnly + vbCritical, "Pulizia immagine")
+                        Case 6
+                            MsgBox("未提供用于修复组件存储的有效源。" & CrLf & CrLf & If(RichTextBox1.Text = "", "请提供源，然后重试。", "请确保指定的源在文件系统中存在，然后重试。"), vbOKOnly + vbCritical, "映像清理")
+
                     End Select
                     Exit Sub
                 End If
@@ -232,6 +237,38 @@ Public Class ImgCleanup
                         CheckBox3.Text = "Rimanda le operazioni di pulizia di lunga durata"
                         CheckBox4.Text = "Usa un'altra fonte per la riparazione dei componenti"
                         CheckBox5.Text = "Limita l'accesso a Windows Update"
+                    Case "CHS", "CHT"
+                        Text = "映像清理"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "选择任务："
+                        If ComboBox1.SelectedItem = "" Then Label3.Text = "选择一个任务以查看其说明"
+                        Label4.Text = "此任务没有可配置的选项。不过，只有在尝试恢复无法启动的 Windows 映像时才应运行此任务。"
+                        Label5.Text = "上次运行已取代组件基础重置的时间："
+                        Label7.Text = "仅当基础重置耗时超过 30 分钟时才应选中此选项"
+                        Label8.Text = "此任务没有可配置的选项。"
+                        Label9.Text = "此任务没有可配置的选项。"
+                        Label10.Text = "此任务没有可配置的选项。"
+                        Label11.Text = "源："
+                        Label12.Text = "选择上方列出的任务以配置其选项。"
+                        GroupBox1.Text = "任务选项"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        Tasks(0) = "还原挂起操作"
+                        Tasks(1) = "清理 Service Pack 备份文件"
+                        Tasks(2) = "清理组件存储"
+                        Tasks(3) = "分析组件存储"
+                        Tasks(4) = "检查组件存储"
+                        Tasks(5) = "扫描组件存储以查找损坏"
+                        Tasks(6) = "修复组件存储"
+                        ComboBox1.Items.AddRange(Tasks)
+                        HealthRestoreSourceOFD.Title = "指定用于还原组件存储运行状况的源"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "从组策略检测"
+                        CheckBox1.Text = "在「已安装的更新」列表中隐藏 Service Pack"
+                        CheckBox2.Text = "重置已取代组件的基础"
+                        CheckBox3.Text = "推迟长时间运行的清理操作"
+                        CheckBox4.Text = "使用其他源修复组件"
+                        CheckBox5.Text = "限制访问 Windows Update"
                 End Select
             Case 1
                 Text = "Image cleanup"
@@ -393,6 +430,39 @@ Public Class ImgCleanup
                 CheckBox3.Text = "Rimanda le operazioni di pulizia di lunga durata"
                 CheckBox4.Text = "Usa un'altra fonte per la riparazione dei componenti"
                 CheckBox5.Text = "Limita l'accesso a Windows Update"
+            Case 6
+                Text = "映像清理"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "选择任务："
+                If ComboBox1.SelectedItem = "" Then Label3.Text = "选择一个任务以查看其说明"
+                Label4.Text = "此任务没有可配置的选项。不过，只有在尝试恢复无法启动的 Windows 映像时才应运行此任务。"
+                Label5.Text = "上次运行已取代组件基础重置的时间："
+                Label7.Text = "仅当基础重置耗时超过 30 分钟时才应选中此选项"
+                Label8.Text = "此任务没有可配置的选项。"
+                Label9.Text = "此任务没有可配置的选项。"
+                Label10.Text = "此任务没有可配置的选项。"
+                Label11.Text = "源："
+                Label12.Text = "选择上方列出的任务以配置其选项。"
+                GroupBox1.Text = "任务选项"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                Tasks(0) = "还原挂起操作"
+                Tasks(1) = "清理 Service Pack 备份文件"
+                Tasks(2) = "清理组件存储"
+                Tasks(3) = "分析组件存储"
+                Tasks(4) = "检查组件存储"
+                Tasks(5) = "扫描组件存储以查找损坏"
+                Tasks(6) = "修复组件存储"
+                ComboBox1.Items.AddRange(Tasks)
+                HealthRestoreSourceOFD.Title = "指定用于还原组件存储运行状况的源"
+                Button1.Text = "浏览..."
+                Button2.Text = "从组策略检测"
+                CheckBox1.Text = "在「已安装的更新」列表中隐藏 Service Pack"
+                CheckBox2.Text = "重置已取代组件的基础"
+                CheckBox3.Text = "推迟长时间运行的清理操作"
+                CheckBox4.Text = "使用其他源修复组件"
+                CheckBox5.Text = "限制访问 Windows Update"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -497,6 +567,8 @@ Public Class ImgCleanup
                                 Label6.Text = "Não foi possível obter a data da última reposição de base."
                             Case "ITA"
                                 Label6.Text = "Impossibile ottenere la data dell'ultimo ripristino della base."
+                            Case "CHS", "CHT"
+                                Label6.Text = "无法获取上次基础重置日期"
                         End Select
                     Case 1
                         Label6.Text = "Could not get last base reset date"
@@ -508,6 +580,9 @@ Public Class ImgCleanup
                         Label6.Text = "Não foi possível obter a data da última reposição de base."
                     Case 5
                         Label6.Text = "Impossibile ottenere la data dell'ultimo ripristino della base."
+                    Case 6
+                        Label6.Text = "无法获取上次基础重置日期"
+
                 End Select
             End If
         End If
@@ -538,6 +613,8 @@ Public Class ImgCleanup
                             Label3.Text = "Escolha uma tarefa para ver a sua descrição"
                         Case "ITA"
                             Label3.Text = "Scegliere un'attività per vederne la descrizione"
+                        Case "CHS", "CHT"
+                            Label3.Text = "选择一个任务以查看其说明"
                     End Select
                 Case 1
                     Label3.Text = "Choose a task to see its description"
@@ -549,6 +626,9 @@ Public Class ImgCleanup
                     Label3.Text = "Escolha uma tarefa para ver a sua descrição"
                 Case 5
                     Label3.Text = "Scegliere un'attività per vederne la descrizione"
+                Case 6
+                    Label3.Text = "选择一个任务以查看其说明"
+
             End Select
             Panel2.Visible = False
             Panel3.Visible = False
@@ -573,6 +653,8 @@ Public Class ImgCleanup
                                     Label3.Text = "Se ocorrer uma falha de arranque, esta opção pode tentar recuperar o sistema revertendo todas as acções pendentes de operações de manutenção anteriores"
                                 Case "ITA"
                                     Label3.Text = "Se si verifica un errore di avvio, questa opzione può tentare di ripristinare il sistema annullando tutte le azioni in sospeso dalle precedenti operazioni di assistenza."
+                                Case "CHS", "CHT"
+                                    Label3.Text = "如果遇到启动失败，此选项可以尝试通过还原之前服务操作的所有挂起操作来恢复系统"
                             End Select
                         Case 1
                             Label3.Text = "If you experience a boot failure, this option can try to recover the system by reverting all pending actions from previous servicing operations"
@@ -584,6 +666,9 @@ Public Class ImgCleanup
                             Label3.Text = "Se ocorrer uma falha de arranque, esta opção pode tentar recuperar o sistema revertendo todas as acções pendentes de operações de manutenção anteriores"
                         Case 5
                             Label3.Text = "Se si verifica un errore di avvio, questa opzione può tentare di ripristinare il sistema annullando tutte le azioni in sospeso dalle precedenti operazioni di assistenza."
+                        Case 6
+                            Label3.Text = "如果遇到启动失败，此选项可以尝试通过还原之前服务操作的所有挂起操作来恢复系统"
+
                     End Select
                     Panel2.Visible = True
                     Panel3.Visible = False
@@ -606,6 +691,8 @@ Public Class ImgCleanup
                                     Label3.Text = "Remove os ficheiros de cópia de segurança criados durante a instalação de um service pack"
                                 Case "ITA"
                                     Label3.Text = "Rimuove i file di backup creati durante l'installazione di un service pack"
+                                Case "CHS", "CHT"
+                                    Label3.Text = "删除安装 Service Pack 期间创建的备份文件"
                             End Select
                         Case 1
                             Label3.Text = "Removes backup files created during the installation of a service pack"
@@ -617,6 +704,9 @@ Public Class ImgCleanup
                             Label3.Text = "Remove os ficheiros de cópia de segurança criados durante a instalação de um service pack"
                         Case 5
                             Label3.Text = "Rimuove i file di backup creati durante l'installazione di un service pack"
+                        Case 6
+                            Label3.Text = "删除安装 Service Pack 期间创建的备份文件"
+
                     End Select
                     Panel2.Visible = False
                     Panel3.Visible = True
@@ -639,6 +729,8 @@ Public Class ImgCleanup
                                     Label3.Text = "Limpa os componentes substituídos e reduz o tamanho do armazenamento de componentes"
                                 Case "ITA"
                                     Label3.Text = "Pulisce i componenti sostituiti e riduce le dimensioni dell'archivio dei componenti"
+                                Case "CHS", "CHT"
+                                    Label3.Text = "清理已取代的组件并减小组件存储的大小"
                             End Select
                         Case 1
                             Label3.Text = "Cleans up the superseded components and reduces the size of the component store"
@@ -650,6 +742,9 @@ Public Class ImgCleanup
                             Label3.Text = "Limpa os componentes substituídos e reduz o tamanho do armazenamento de componentes"
                         Case 5
                             Label3.Text = "Pulisce i componenti sostituiti e riduce le dimensioni dell'archivio dei componenti"
+                        Case 6
+                            Label3.Text = "清理已取代的组件并减小组件存储的大小"
+
                     End Select
                     Panel2.Visible = False
                     Panel3.Visible = False
@@ -672,6 +767,8 @@ Public Class ImgCleanup
                                     Label3.Text = "Cria um relatório do armazenamento de componentes, incluindo o seu tamanho"
                                 Case "ITA"
                                     Label3.Text = "Crea un rapporto sul magazzino dei componenti, comprese le dimensioni"
+                                Case "CHS", "CHT"
+                                    Label3.Text = "创建组件存储报告，包括其大小"
                             End Select
                         Case 1
                             Label3.Text = "Creates a report of the component store, including its size"
@@ -683,6 +780,9 @@ Public Class ImgCleanup
                             Label3.Text = "Cria um relatório do armazenamento de componentes, incluindo o seu tamanho"
                         Case 5
                             Label3.Text = "Crea un rapporto sul magazzino dei componenti, comprese le dimensioni"
+                        Case 6
+                            Label3.Text = "创建组件存储报告，包括其大小"
+
                     End Select
                     Panel2.Visible = False
                     Panel3.Visible = False
@@ -705,6 +805,8 @@ Public Class ImgCleanup
                                     Label3.Text = "Verifica se a imagem foi assinalada como corrompida por um processo falhado e se a corrupção pode ser reparada"
                                 Case "ITA"
                                     Label3.Text = "Controlla se l'immagine è stata contrassegnata come corrotta da un processo non riuscito e se la corruzione può essere riparata"
+                                Case "CHS", "CHT"
+                                    Label3.Text = "检查映像是否因进程失败而被标记为损坏，以及该损坏是否可修复"
                             End Select
                         Case 1
                             Label3.Text = "Checks whether the image has been flagged as corrupted by a failed process and whether the corruption can be repaired"
@@ -716,6 +818,9 @@ Public Class ImgCleanup
                             Label3.Text = "Verifica se a imagem foi assinalada como corrompida por um processo falhado e se a corrupção pode ser reparada"
                         Case 5
                             Label3.Text = "Controlla se l'immagine è stata contrassegnata come corrotta da un processo non riuscito e se la corruzione può essere riparata"
+                        Case 6
+                            Label3.Text = "检查映像是否因进程失败而被标记为损坏，以及该损坏是否可修复"
+
                     End Select
                     Panel2.Visible = False
                     Panel3.Visible = False
@@ -738,6 +843,8 @@ Public Class ImgCleanup
                                     Label3.Text = "Analisa a imagem em busca de corrupção no armazenamento de componentes, mas não executa as opções de reparação automaticamente"
                                 Case "ITA"
                                     Label3.Text = "Esegue la scansione dell'immagine per individuare eventuali danni all'archivio componenti, ma non esegue automaticamente le opzioni di riparazione"
+                                Case "CHS", "CHT"
+                                    Label3.Text = "扫描映像以查找组件存储损坏，但不会自动执行修复操作"
                             End Select
                         Case 1
                             Label3.Text = "Scans the image for component store corruption, but does not perform repair options automatically"
@@ -749,6 +856,9 @@ Public Class ImgCleanup
                             Label3.Text = "Analisa a imagem em busca de corrupção no armazenamento de componentes, mas não executa as opções de reparação automaticamente"
                         Case 5
                             Label3.Text = "Esegue la scansione dell'immagine per individuare eventuali danni all'archivio componenti, ma non esegue automaticamente le opzioni di riparazione"
+                        Case 6
+                            Label3.Text = "扫描映像以查找组件存储损坏，但不会自动执行修复操作"
+
                     End Select
                     Panel2.Visible = False
                     Panel3.Visible = False
@@ -771,6 +881,8 @@ Public Class ImgCleanup
                                     Label3.Text = "Analisa a imagem em busca de corrupção no armazenamento de componentes e efectua operações de reparação automaticamente"
                                 Case "ITA"
                                     Label3.Text = "Esegue la scansione dell'immagine per individuare eventuali danni all'archivio componenti ed esegue automaticamente le operazioni di riparazione"
+                                Case "CHS", "CHT"
+                                    Label3.Text = "扫描映像以查找组件存储损坏，并自动执行修复操作"
                             End Select
                         Case 1
                             Label3.Text = "Scans the image for component store corruption and performs repair operations automatically"
@@ -782,6 +894,9 @@ Public Class ImgCleanup
                             Label3.Text = "Analisa a imagem em busca de corrupção no armazenamento de componentes e efectua operações de reparação automaticamente"
                         Case 5
                             Label3.Text = "Esegue la scansione dell'immagine per individuare eventuali danni all'archivio componenti ed esegue automaticamente le operazioni di riparazione"
+                        Case 6
+                            Label3.Text = "扫描映像以查找组件存储损坏，并自动执行修复操作"
+
                     End Select
                     Panel2.Visible = False
                     Panel3.Visible = False

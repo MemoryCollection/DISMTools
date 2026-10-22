@@ -25,6 +25,8 @@ Public Class ImgAppend
                             msg = "Especifique um diretório de imagens de origem e tente novamente."
                         Case "ITA"
                             msg = "Specificare una directory di origine dell'immagine e riprovare."
+                        Case "CHS", "CHT"
+                            msg = "请指定源映像目录，然后重试。"
                     End Select
                 Case 1
                     msg = "Please specify a source image directory and try again."
@@ -36,6 +38,9 @@ Public Class ImgAppend
                     msg = "Especifique um diretório de imagens de origem e tente novamente."
                 Case 5
                     msg = "Specificare una directory di origine dell'immagine e riprovare."
+                Case 6
+                    msg = "请指定源映像目录，然后重试。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -58,6 +63,8 @@ Public Class ImgAppend
                             msg = "Especifique um ficheiro de imagem de destino e tente novamente."
                         Case "ITA"
                             msg = "Specificare un file immagine di destinazione e riprovare."
+                        Case "CHS", "CHT"
+                            msg = "请指定目标映像文件，然后重试。"
                     End Select
                 Case 1
                     msg = "Please specify a destination image file and try again."
@@ -69,6 +76,9 @@ Public Class ImgAppend
                     msg = "Especifique um ficheiro de imagem de destino e tente novamente."
                 Case 5
                     msg = "Specificare un file immagine di destinazione e riprovare."
+                Case 6
+                    msg = "请指定目标映像文件，然后重试。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -91,6 +101,8 @@ Public Class ImgAppend
                             msg = "Especifique um nome para o ficheiro de imagem de destino e tente novamente."
                         Case "ITA"
                             msg = "Specificare un nome per il file immagine di destinazione e riprovare."
+                        Case "CHS", "CHT"
+                            msg = "请为目标映像文件指定名称，然后重试。"
                     End Select
                 Case 1
                     msg = "Please specify a name for the destination image file and try again."
@@ -102,6 +114,9 @@ Public Class ImgAppend
                     msg = "Especifique um nome para o ficheiro de imagem de destino e tente novamente."
                 Case 5
                     msg = "Specificare un nome per il file immagine di destinazione e riprovare."
+                Case 6
+                    msg = "请为目标映像文件指定名称，然后重试。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -130,6 +145,8 @@ Public Class ImgAppend
                                 msg = "Ou não foi especificado nenhum ficheiro de lista de configuração ou o ficheiro de lista de configuração não foi detectado no seu sistema de ficheiros. Deseja continuar sem qualquer ficheiro de lista de configuração?"
                             Case "ITA"
                                 msg = "Non è stato specificato alcun file dell'elenco di configurazione oppure non è stato possibile rilevare il file dell'elenco di configurazione nel file system. Si desidera continuare senza alcun file dell'elenco di configurazione?"
+                            Case "CHS", "CHT"
+                                msg = "未指定配置文件，或在文件系统中找不到该配置文件。是否要在不使用配置文件的情况下继续？"
                         End Select
                     Case 1
                         msg = "Either no configuration list file has been specified or the configuration list file could not be detected in your file system. Would you like to continue without any configuration list file?"
@@ -141,6 +158,9 @@ Public Class ImgAppend
                         msg = "Ou não foi especificado nenhum ficheiro de lista de configuração ou o ficheiro de lista de configuração não foi detectado no seu sistema de ficheiros. Deseja continuar sem qualquer ficheiro de lista de configuração?"
                     Case 5
                         msg = "Non è stato specificato alcun file dell'elenco di configurazione oppure non è stato possibile rilevare il file dell'elenco di configurazione nel file system. Si desidera continuare senza alcun file dell'elenco di configurazione?"
+                    Case 6
+                        msg = "未指定配置文件，或在文件系统中找不到该配置文件。是否要在不使用配置文件的情况下继续？"
+
                 End Select
                 If MsgBox(msg, vbYesNo + vbCritical, ImageTaskHeader1.ItemText) = MsgBoxResult.Ok Then
                     DynaLog.LogMessage("The user does not mind if we continue without the configuration list file.")
@@ -296,6 +316,30 @@ Public Class ImgAppend
                         CheckBox7.Text = "Cattura attributi estesi"
                         GroupBox1.Text = "Sorgenti e destinazioni"
                         GroupBox2.Text = "Opzioni"
+                    Case "CHS", "CHT"
+                        Text = "追加到映像"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "配置文件路径："
+                        Label3.Text = "源映像目录："
+                        Label5.Text = "目标映像说明"
+                        Label6.Text = "目标映像文件："
+                        Label7.Text = "目标映像名称"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "浏览..."
+                        Button3.Text = "浏览..."
+                        Button4.Text = "从上个映像获取"
+                        Button5.Text = "创建..."
+                        CheckBox1.Text = "为目标映像排除某些文件和目录"
+                        CheckBox2.Text = "以 WIMBoot 配置追加"
+                        CheckBox3.Text = "使映像可启动（仅限 Windows PE）"
+                        CheckBox4.Text = "验证映像完整性"
+                        CheckBox5.Text = "检查文件错误"
+                        CheckBox6.Text = "使用重解析点标记修复"
+                        CheckBox7.Text = "捕获扩展属性"
+                        GroupBox1.Text = "源和目标"
+                        GroupBox2.Text = "选项"
                 End Select
             Case 1
                 Text = "Append to an image"
@@ -417,6 +461,31 @@ Public Class ImgAppend
                 CheckBox7.Text = "Cattura attributi estesi"
                 GroupBox1.Text = "Sorgenti e destinazioni"
                 GroupBox2.Text = "Opzioni"
+            Case 6
+                Text = "追加到映像"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "配置文件路径："
+                Label3.Text = "源映像目录："
+                Label5.Text = "目标映像说明"
+                Label6.Text = "目标映像文件："
+                Label7.Text = "目标映像名称"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                Button1.Text = "浏览..."
+                Button2.Text = "浏览..."
+                Button3.Text = "浏览..."
+                Button4.Text = "从上个映像获取"
+                Button5.Text = "创建..."
+                CheckBox1.Text = "为目标映像排除某些文件和目录"
+                CheckBox2.Text = "以 WIMBoot 配置追加"
+                CheckBox3.Text = "使映像可启动（仅限 Windows PE）"
+                CheckBox4.Text = "验证映像完整性"
+                CheckBox5.Text = "检查文件错误"
+                CheckBox6.Text = "使用重解析点标记修复"
+                CheckBox7.Text = "捕获扩展属性"
+                GroupBox1.Text = "源和目标"
+                GroupBox2.Text = "选项"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -552,6 +621,8 @@ Public Class ImgAppend
                         msg = "Obter o nome do último índice da imagem de destino"
                     Case "ITA"
                         msg = "Ottenere il nome dell'ultimo indice dell'immagine di destinazione"
+                    Case "CHS", "CHT"
+                        msg = "获取目标映像最后一个索引的名称"
                 End Select
             Case 1
                 msg = "Grab the name of the last index of the target image"
@@ -563,6 +634,9 @@ Public Class ImgAppend
                 msg = "Obter o nome do último índice da imagem de destino"
             Case 5
                 msg = "Ottenere il nome dell'ultimo indice dell'immagine di destinazione"
+            Case 6
+                msg = "获取目标映像最后一个索引的名称"
+
         End Select
         WindowHelper.DisplayToolTip(sender, msg)
     End Sub

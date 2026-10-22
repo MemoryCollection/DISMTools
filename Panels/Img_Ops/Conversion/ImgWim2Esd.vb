@@ -150,6 +150,27 @@ Public Class ImgWim2Esd
                         GroupBox3.Text = "Destinazione"
                         OpenFileDialog1.Title = "Specificare il file immagine di origine che si desidera convertire"
                         SaveFileDialog1.Title = "Dove verrà memorizzata l'immagine di destinazione?"
+                    Case "CHS", "CHT"
+                        Text = "转换映像"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "源映像文件："
+                        Label3.Text = "转换后映像的格式："
+                        Label5.Text = "目标映像文件："
+                        Label7.Text = "索引："
+                        LinkLabel1.Text = "我该选择哪种格式？"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "浏览..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        ListView1.Columns(0).Text = "索引"
+                        ListView1.Columns(1).Text = "映像名称"
+                        ListView1.Columns(2).Text = "映像说明"
+                        ListView1.Columns(3).Text = "映像版本"
+                        GroupBox1.Text = "源"
+                        GroupBox2.Text = "选项"
+                        GroupBox3.Text = "目标"
+                        OpenFileDialog1.Title = "指定要转换的源映像文件"
+                        SaveFileDialog1.Title = "目标映像将存储在何处？"
                 End Select
             Case 1
                 Text = "Convert image"
@@ -256,6 +277,28 @@ Public Class ImgWim2Esd
                 GroupBox3.Text = "Destinazione"
                 OpenFileDialog1.Title = "Specificare il file immagine di origine che si desidera convertire"
                 SaveFileDialog1.Title = "Dove verrà memorizzata l'immagine di destinazione?"
+            Case 6
+                Text = "转换映像"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "源映像文件："
+                Label3.Text = "转换后映像的格式："
+                Label5.Text = "目标映像文件："
+                Label7.Text = "索引："
+                LinkLabel1.Text = "我该选择哪种格式？"
+                Button1.Text = "浏览..."
+                Button2.Text = "浏览..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                ListView1.Columns(0).Text = "索引"
+                ListView1.Columns(1).Text = "映像名称"
+                ListView1.Columns(2).Text = "映像说明"
+                ListView1.Columns(3).Text = "映像版本"
+                GroupBox1.Text = "源"
+                GroupBox2.Text = "选项"
+                GroupBox3.Text = "目标"
+                OpenFileDialog1.Title = "指定要转换的源映像文件"
+                SaveFileDialog1.Title = "目标映像将存储在何处？"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

@@ -1080,6 +1080,98 @@ Public Class Options
                         EditorOFD.Title = "Specifica l'editor da usare"
                         LinkLabel3.Text = "Visualizza dove sono archiviati i registri"
                         CheckBox20.Text = "Disabilita registrazione di DynaLog"
+                    Case "CHS", "CHT"
+                        Text = "选项"
+                        ImageTaskHeader1.ItemText = Text
+                        Label49.Text = "程序"
+                        Label50.Text = "个性化"
+                        Label51.Text = "日志"
+                        Label52.Text = "映像操作"
+                        Label53.Text = "暂存目录"
+                        Label54.Text = "程序输出"
+                        Label55.Text = "后台进程"
+                        Label57.Text = "文件关联"
+                        Label58.Text = "启动选项"
+                        Label34.Text = "关闭选项"
+                        Label2.Text = "DISM 可执行文件路径："
+                        Label3.Text = "版本："
+                        Label5.Text = "保存设置到："
+                        Label7.Text = "颜色模式："
+                        Label8.Text = "语言："
+                        'Label9.Text = "请指定日志窗口的设置："
+                        Label10.Text = "日志窗口字体："
+                        Label11.Text = "预览："
+                        Label12.Text = "操作日志文件："
+                        Label13.Text = "在命令行中执行映像操作时，请指定" & Quote & "/LogPath" & Quote & " 参数，以将映像操作日志保存到目标日志文件。"
+                        Label14.Text = "日志文件级别："
+                        Label18.Text = "静默执行操作时，程序将隐藏信息和进度输出。错误消息仍会显示。" & CrLf & "获取程序包或功能等信息时不会使用此选项。" & CrLf & "此外，执行映像维护时，您的计算机可能会自动重启。"
+                        Label19.Text = "选中此选项后，即使静默执行操作，您的计算机也不会自动重启"
+                        Label20.Text = "请指定用于 DISM 操作的暂存目录："
+                        Label21.Text = "暂存目录："
+                        Label22.Text = "所选暂存目录的剩余空间："
+                        Label25.Text = "日志视图："
+                        Label26.Text = "示例报告："
+                        Label27.Text = "某些报告不允许以表格形式显示。"
+                        Label28.Text = "程序何时应通知您后台进程已启动？"
+                        Label29.Text = "程序使用后台进程收集完整的映像信息，例如修改日期、已安装的程序包、现有功能等"
+                        Label40.Text = "管理 DISMTools 组件的文件关联："
+                        Label43.Text = "设置程序启动时要执行的操作："
+                        Label44.Text = "如果已加载项目，程序将使用项目提供的暂存目录。如果处于联机或脱机安装管理模式，程序将使用其自身的暂存目录"
+                        Label45.Text = "辅助进度面板样式："
+                        Label46.Text = "这些设置不适用于非便携版安装"
+                        Label47.Text = "此字体在日志窗口中可能不易阅读。虽然仍可使用，但建议使用等宽字体以提高可读性。"
+                        Label48.Text = "选择程序在保存映像信息时应考虑的设置："
+                        Button1.Text = "浏览..."
+                        Button2.Text = "查看 DISM 组件版本"
+                        Button3.Text = "浏览..."
+                        Button4.Text = "浏览..."
+                        Button9.Text = "设置文件关联"
+                        Button10.Text = "高级设置"
+                        Cancel_Button.Text = "取消"
+                        OK_Button.Text = "确定"
+                        PrefReset.Text = "重置首选项"
+                        CheckBox2.Text = "静默执行映像操作"
+                        CheckBox3.Text = "跳过系统重启"
+                        CheckBox4.Text = "使用暂存目录"
+                        CheckBox5.Text = "以英文显示命令输出"
+                        CheckBox6.Text = "后台进程启动时通知我"
+                        CheckBox7.Text = "默认在进度面板上显示日志视图"
+                        CheckBox9.Text = "使用大写菜单"
+                        CheckBox10.Text = "为每次执行的操作自动创建日志"
+                        CheckBox11.Text = "为 DISMTools 项目设置自定义文件图标"
+                        CheckBox12.Text = "重新挂载需要重新加载服务会话的已挂载映像"
+                        CheckBox13.Text = "检查更新"
+                        CheckBox14.Text = "始终为以下元素保存完整信息："
+                        CheckBox15.Text = "已安装的程序包"
+                        CheckBox16.Text = "功能"
+                        CheckBox17.Text = "已安装的 AppX 程序包"
+                        CheckBox18.Text = "功能包"
+                        CheckBox19.Text = "已安装的驱动程序"
+                        CheckBox22.Text = "自动清理挂载点（会启动单独的进程）"
+                        DismOFD.Title = "指定要使用的 DISM 可执行文件"
+                        Label59.Text = "日志自定义"
+                        Label60.Text = "设置程序关闭时要执行的操作："
+                        Label61.Text = "预览："
+                        Label9.Text = "正在保存映像信息"
+                        LinkLabel1.Text = "程序将根据 DISM 版本支持的功能启用或禁用某些功能。这会如何影响我使用本程序，哪些功能会相应被禁用？"
+                        LinkLabel1.LinkArea = New LinkArea(97, 100)
+                        LinkLabel2.Text = "了解有关后台进程的详细信息"
+                        LogSFD.Title = "指定日志文件的位置"
+                        RadioButton3.Text = "使用项目或程序的暂存目录"
+                        RadioButton4.Text = "使用指定的暂存目录"
+                        RadioButton5.Text = "现代"
+                        RadioButton6.Text = "经典"
+                        ScratchFBD.Description = "指定程序应使用的暂存目录："
+                        Label62.Text = "DynaLog 日志记录提供保存诊断日志的方法，在遇到问题时可用于帮助修复程序问题。您可以使用下方的开关禁用记录器，但不建议这样做。" & CrLf & CrLf &
+                            "仅在日志记录导致计算机性能开销时才禁用。单击开关将自动应用此设置。"
+                        Label63.Text = "默认情况下，操作出错时会用记事本打开操作日志。如果希望使用其他程序打开，请在下方指定："
+                        Label64.Text = "DynaLog 日志记录控制"
+                        Label65.Text = "用于打开日志文件的编辑器："
+                        Label66.Text = "系统编辑器"
+                        Button5.Text = "浏览..."
+                        EditorOFD.Title = "指定要使用的编辑器"
+                        LinkLabel3.Text = "显示这些日志的存储位置"
+                        CheckBox20.Text = "禁用 DynaLog 日志记录"
                 End Select
             Case 1
                 Text = "Options"
@@ -1541,6 +1633,99 @@ Public Class Options
                 EditorOFD.Title = "Specificare l'editor da usare"
                 LinkLabel3.Text = "Mostrami dove sono archiviati i registri"
                 CheckBox20.Text = "Disabilita la registrazione di DynaLog"
+            Case 6
+                Text = "选项"
+                ImageTaskHeader1.ItemText = Text
+                Label49.Text = "程序"
+                Label50.Text = "个性化"
+                Label51.Text = "日志"
+                Label52.Text = "映像操作"
+                Label53.Text = "暂存目录"
+                Label54.Text = "程序输出"
+                Label55.Text = "后台进程"
+                Label57.Text = "文件关联"
+                Label58.Text = "启动选项"
+                Label34.Text = "关闭选项"
+                Label2.Text = "DISM 可执行文件路径："
+                Label3.Text = "版本："
+                Label5.Text = "保存设置到："
+                Label7.Text = "颜色模式："
+                Label8.Text = "语言："
+                'Label9.Text = "请指定日志窗口的设置："
+                Label10.Text = "日志窗口字体："
+                Label11.Text = "预览："
+                Label12.Text = "操作日志文件："
+                Label13.Text = "在命令行中执行映像操作时，请指定" & Quote & "/LogPath" & Quote & " 参数，以将映像操作日志保存到目标日志文件。"
+                Label14.Text = "日志文件级别："
+                Label18.Text = "静默执行操作时，程序将隐藏信息和进度输出。错误消息仍会显示。" & CrLf & "获取程序包或功能等信息时不会使用此选项。" & CrLf & "此外，执行映像维护时，您的计算机可能会自动重启。"
+                Label19.Text = "选中此选项后，即使静默执行操作，您的计算机也不会自动重启"
+                Label20.Text = "请指定用于 DISM 操作的暂存目录："
+                Label21.Text = "暂存目录："
+                Label22.Text = "所选暂存目录的剩余空间："
+                Label25.Text = "日志视图："
+                Label26.Text = "示例报告："
+                Label27.Text = "某些报告不允许以表格形式显示。"
+                Label28.Text = "程序何时应通知您后台进程已启动？"
+                Label29.Text = "程序使用后台进程收集完整的映像信息，例如修改日期、已安装的程序包、现有功能等"
+                Label40.Text = "管理 DISMTools 组件的文件关联："
+                Label43.Text = "设置程序启动时要执行的操作："
+                Label44.Text = "如果已加载项目，程序将使用项目提供的暂存目录。如果处于联机或脱机安装管理模式，程序将使用其自身的暂存目录"
+                Label45.Text = "辅助进度面板样式："
+                Label46.Text = "这些设置不适用于非便携版安装"
+                Label47.Text = "此字体在日志窗口中可能不易阅读。虽然仍可使用，但建议使用等宽字体以提高可读性。"
+                Label48.Text = "选择程序在保存映像信息时应考虑的设置："
+                Button1.Text = "浏览..."
+                Button2.Text = "查看 DISM 组件版本"
+                Button3.Text = "浏览..."
+                Button4.Text = "浏览..."
+                Button9.Text = "设置文件关联"
+                Button10.Text = "高级设置"
+                Cancel_Button.Text = "取消"
+                OK_Button.Text = "确定"
+                PrefReset.Text = "重置首选项"
+                CheckBox2.Text = "静默执行映像操作"
+                CheckBox3.Text = "跳过系统重启"
+                CheckBox4.Text = "使用暂存目录"
+                CheckBox5.Text = "以英文显示命令输出"
+                CheckBox6.Text = "后台进程启动时通知我"
+                CheckBox7.Text = "默认在进度面板上显示日志视图"
+                CheckBox9.Text = "使用大写菜单"
+                CheckBox10.Text = "为每次执行的操作自动创建日志"
+                CheckBox11.Text = "为 DISMTools 项目设置自定义文件图标"
+                CheckBox12.Text = "重新挂载需要重新加载服务会话的已挂载映像"
+                CheckBox13.Text = "检查更新"
+                CheckBox14.Text = "始终为以下元素保存完整信息："
+                CheckBox15.Text = "已安装的程序包"
+                CheckBox16.Text = "功能"
+                CheckBox17.Text = "已安装的 AppX 程序包"
+                CheckBox18.Text = "功能包"
+                CheckBox19.Text = "已安装的驱动程序"
+                CheckBox22.Text = "自动清理挂载点（会启动单独的进程）"
+                DismOFD.Title = "指定要使用的 DISM 可执行文件"
+                Label59.Text = "日志自定义"
+                Label60.Text = "设置程序关闭时要执行的操作："
+                Label61.Text = "预览："
+                Label9.Text = "正在保存映像信息"
+                LinkLabel1.Text = "程序将根据 DISM 版本支持的功能启用或禁用某些功能。这会如何影响我使用本程序，哪些功能会相应被禁用？"
+                LinkLabel1.LinkArea = New LinkArea(97, 100)
+                LinkLabel2.Text = "了解有关后台进程的详细信息"
+                LogSFD.Title = "指定日志文件的位置"
+                RadioButton3.Text = "使用项目或程序的暂存目录"
+                RadioButton4.Text = "使用指定的暂存目录"
+                RadioButton5.Text = "现代"
+                RadioButton6.Text = "经典"
+                ScratchFBD.Description = "指定程序应使用的暂存目录："
+                Label62.Text = "DynaLog 日志记录提供保存诊断日志的方法，在遇到问题时可用于帮助修复程序问题。您可以使用下方的开关禁用记录器，但不建议这样做。" & CrLf & CrLf &
+                            "仅在日志记录导致计算机性能开销时才禁用。单击开关将自动应用此设置。"
+                Label63.Text = "默认情况下，操作出错时会用记事本打开操作日志。如果希望使用其他程序打开，请在下方指定："
+                Label64.Text = "DynaLog 日志记录控制"
+                Label65.Text = "用于打开日志文件的编辑器："
+                Label66.Text = "系统编辑器"
+                Button5.Text = "浏览..."
+                EditorOFD.Title = "指定要使用的编辑器"
+                LinkLabel3.Text = "显示这些日志的存储位置"
+                CheckBox20.Text = "禁用 DynaLog 日志记录"
+
         End Select
         Select Case MainForm.Language
             Case 0
@@ -1625,6 +1810,22 @@ Public Class Options
                         LogViews(1) = "tabella"
                         NotFreqs(0) = "Ogni volta che un progetto è stato caricato correttamente"
                         NotFreqs(1) = "Una volta"
+                    Case "CHS", "CHT"
+                        SaveLocations(0) = "设置文件"
+                        SaveLocations(1) = "注册表"
+                        ColorModes(0) = "使用系统设置"
+                        ColorModes(1) = "浅色模式"
+                        ColorModes(2) = "深色模式"
+                        Languages(0) = "使用系统语言"
+                        Languages(1) = "英语"
+                        Languages(2) = "西班牙语"
+                        Languages(3) = "法语"
+                        Languages(4) = "葡萄牙语"
+                        Languages(5) = "意大利语"
+                        LogViews(0) = "列表"
+                        LogViews(1) = "表格"
+                        NotFreqs(0) = "每次成功加载项目后"
+                        NotFreqs(1) = "一次"
                 End Select
             Case 1
                 SaveLocations(0) = "Settings file"
@@ -1706,6 +1907,23 @@ Public Class Options
                 LogViews(1) = "tabella"
                 NotFreqs(0) = "Ogni volta che un progetto è stato caricato con successo"
                 NotFreqs(1) = "Una volta"
+            Case 6
+                SaveLocations(0) = "设置文件"
+                SaveLocations(1) = "注册表"
+                ColorModes(0) = "使用系统设置"
+                ColorModes(1) = "浅色模式"
+                ColorModes(2) = "深色模式"
+                Languages(0) = "使用系统语言"
+                Languages(1) = "英语"
+                Languages(2) = "西班牙语"
+                Languages(3) = "法语"
+                Languages(4) = "葡萄牙语"
+                Languages(5) = "意大利语"
+                LogViews(0) = "列表"
+                LogViews(1) = "表格"
+                NotFreqs(0) = "每次成功加载项目后"
+                NotFreqs(1) = "一次"
+
         End Select
         ComboBox1.Items.AddRange(SaveLocations)
         ComboBox2.Items.AddRange(ColorModes)
@@ -2148,6 +2366,21 @@ Public Class Options
                                 Label15.Text = "Errori, avvisi, informazioni e messaggi di debug (livello registro 4)"
                                 Label16.Text = "Il file registro visualizza errori, avvisi, informazioni e messaggi di debug dopo l'esecuzione di un'operazione sull'immagine."
                         End Select
+                    Case "CHS", "CHT"
+                        Select Case TrackBar1.Value
+                            Case 0
+                                Label15.Text = "错误（日志级别 1）"
+                                Label16.Text = "执行映像操作后，日志文件应仅显示错误。"
+                            Case 1
+                                Label15.Text = "错误和警告（日志级别 2）"
+                                Label16.Text = "执行映像操作后，日志文件应显示错误和警告。"
+                            Case 2
+                                Label15.Text = "错误、警告和信息消息（日志级别 3）"
+                                Label16.Text = "执行映像操作后，日志文件应显示错误、警告和信息消息。"
+                            Case 3
+                                Label15.Text = "错误、警告、信息和调试消息（日志级别 4）"
+                                Label16.Text = "执行映像操作后，日志文件应显示错误、警告、信息和调试消息。"
+                        End Select
                 End Select
             Case 1
                 Select Case TrackBar1.Value
@@ -2224,6 +2457,22 @@ Public Class Options
                         Label15.Text = "Errori, avvisi, informazioni e messaggi di debug (livello registro 4)"
                         Label16.Text = "Il file registro visualizza errori, avvisi, informazioni e messaggi di debug dopo l'esecuzione di un'operazione sull'immagine."
                 End Select
+            Case 6
+                Select Case TrackBar1.Value
+                    Case 0
+                        Label15.Text = "错误（日志级别 1）"
+                        Label16.Text = "执行映像操作后，日志文件应仅显示错误。"
+                    Case 1
+                        Label15.Text = "错误和警告（日志级别 2）"
+                        Label16.Text = "执行映像操作后，日志文件应显示错误和警告。"
+                    Case 2
+                        Label15.Text = "错误、警告和信息消息（日志级别 3）"
+                        Label16.Text = "执行映像操作后，日志文件应显示错误、警告和信息消息。"
+                    Case 3
+                        Label15.Text = "错误、警告、信息和调试消息（日志级别 4）"
+                        Label16.Text = "执行映像操作后，日志文件应显示错误、警告、信息和调试消息。"
+                End Select
+
         End Select
     End Sub
 
@@ -2455,6 +2704,44 @@ Public Class Options
                                 Exit Sub
                             End Try
                         End If
+                    Case "CHS", "CHT"
+                        If SourceDir = "" Then
+                            Label23.Text = "请指定暂存目录。"
+                            Label24.Visible = False
+                            PictureBox5.Visible = False
+                            PictureBox5.Image = New Bitmap(My.Resources.info_16px)
+                            Label24.Text = "所选暂存目录的可用空间充足"
+                        Else
+                            Try
+                                Dim drInfo As New DriveInfo(Path.GetPathRoot(SourceDir))
+                                Dim FreeSpace As Double = drInfo.AvailableFreeSpace / (1024 ^ 3)
+                                Label23.Text = Math.Round(FreeSpace, 2) & " GB"
+                                Select Case Math.Round(FreeSpace, 0)
+                                    Case Is < 5
+                                        Label24.Visible = True
+                                        PictureBox5.Visible = True
+                                        PictureBox5.Image = New Bitmap(My.Resources.error_16px)
+                                        Label24.Text = "所选暂存目录的空间不足，无法执行映像操作。请尝试释放该驱动器的一些空间"
+                                    Case 5 To 19.989999999999998
+                                        Label24.Visible = True
+                                        PictureBox5.Visible = True
+                                        PictureBox5.Image = New Bitmap(My.Resources.warning_16px)
+                                        Label24.Text = "所选暂存目录的空间可能不足以执行某些操作。"
+                                    Case Is >= 20
+                                        Label24.Visible = False
+                                        PictureBox5.Visible = False
+                                        PictureBox5.Image = New Bitmap(My.Resources.info_16px)
+                                        Label24.Text = "所选暂存目录的可用空间充足"
+                                End Select
+                            Catch ex As Exception
+                                Label23.Text = "无法获取可用的剩余空间。请自行承担继续操作的风险"
+                                Label24.Visible = False
+                                PictureBox5.Visible = False
+                                PictureBox5.Image = New Bitmap(My.Resources.info_16px)
+                                Label24.Text = "所选暂存目录的可用空间充足"
+                                Exit Sub
+                            End Try
+                        End If
                 End Select
             Case 1
                 If SourceDir = "" Then
@@ -2646,6 +2933,45 @@ Public Class Options
                         Exit Sub
                     End Try
                 End If
+            Case 6
+                If SourceDir = "" Then
+                    Label23.Text = "请指定暂存目录。"
+                    Label24.Visible = False
+                    PictureBox5.Visible = False
+                    PictureBox5.Image = New Bitmap(My.Resources.info_16px)
+                    Label24.Text = "所选暂存目录的可用空间充足"
+                Else
+                    Try
+                        Dim drInfo As New DriveInfo(Path.GetPathRoot(SourceDir))
+                        Dim FreeSpace As Double = drInfo.AvailableFreeSpace / (1024 ^ 3)
+                        Label23.Text = Math.Round(FreeSpace, 2) & " GB"
+                        Select Case Math.Round(FreeSpace, 0)
+                            Case Is < 5
+                                Label24.Visible = True
+                                PictureBox5.Visible = True
+                                PictureBox5.Image = New Bitmap(My.Resources.error_16px)
+                                Label24.Text = "所选暂存目录的空间不足，无法执行映像操作。请尝试释放该驱动器的一些空间"
+                            Case 5 To 19.989999999999998
+                                Label24.Visible = True
+                                PictureBox5.Visible = True
+                                PictureBox5.Image = New Bitmap(My.Resources.warning_16px)
+                                Label24.Text = "所选暂存目录的空间可能不足以执行某些操作。"
+                            Case Is >= 20
+                                Label24.Visible = False
+                                PictureBox5.Visible = False
+                                PictureBox5.Image = New Bitmap(My.Resources.info_16px)
+                                Label24.Text = "所选暂存目录的可用空间充足"
+                        End Select
+                    Catch ex As Exception
+                        Label23.Text = "无法获取可用的剩余空间。请自行承担继续操作的风险"
+                        Label24.Visible = False
+                        PictureBox5.Visible = False
+                        PictureBox5.Image = New Bitmap(My.Resources.info_16px)
+                        Label24.Text = "所选暂存目录的可用空间充足"
+                        Exit Sub
+                    End Try
+                End If
+
         End Select
     End Sub
 

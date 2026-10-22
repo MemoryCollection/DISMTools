@@ -42,6 +42,8 @@ Public Class ImgMount
                                     MsgBox("Não foi possível criar o diretório de montagem. Motivo: " & ex.ToString() & "; " & ex.Message, MsgBoxStyle.OkOnly + vbCritical, "Montar uma imagem")
                                 Case "ITA"
                                     MsgBox("Impossibile creare una cartella di montaggio. Motivo: " & ex.ToString() & "; " & ex.Message, MsgBoxStyle.OkOnly + vbCritical, "Monta un'immagine")
+                                Case "CHS", "CHT"
+                                    MsgBox("无法创建挂载目录。原因：" & ex.ToString() & "; " & ex.Message, MsgBoxStyle.OkOnly + vbCritical, "挂载映像")
                             End Select
                         Case 1
                             MsgBox("Could not create mount directory. Reason: " & ex.ToString() & "; " & ex.Message, MsgBoxStyle.OkOnly + vbCritical, "Mount an image")
@@ -53,6 +55,9 @@ Public Class ImgMount
                             MsgBox("Não foi possível criar o diretório de montagem. Motivo: " & ex.ToString() & "; " & ex.Message, MsgBoxStyle.OkOnly + vbCritical, "Montar uma imagem")
                         Case 5
                             MsgBox("Impossibile creare una cartella di montaggio. Motivo: " & ex.ToString() & "; " & ex.Message, MsgBoxStyle.OkOnly + vbCritical, "Monta un'immagine")
+                        Case 6
+                            MsgBox("无法创建挂载目录。原因：" & ex.ToString() & "; " & ex.Message, MsgBoxStyle.OkOnly + vbCritical, "挂载映像")
+
                     End Select
                     Exit Sub
                 End Try
@@ -246,6 +251,35 @@ Public Class ImgMount
                         CheckBox1.Text = "Montare con permessi di sola lettura"
                         CheckBox3.Text = "Ottimizza tempi di montaggio"
                         CheckBox4.Text = "Controlla l'integrità dell'immagine"
+                    Case "CHS", "CHT"
+                        Text = "挂载映像"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "请指定挂载映像的选项："
+                        Label3.Text = "映像文件*："
+                        If Path.GetExtension(TextBox1.Text).EndsWith("esd", StringComparison.OrdinalIgnoreCase) Then
+                            Label4.Text = "需要先将此文件转换为 WIM 文件才能挂载"
+                            Button3.Text = "转换"
+                        ElseIf Path.GetExtension(TextBox1.Text).EndsWith("swm", StringComparison.OrdinalIgnoreCase) Then
+                            Label4.Text = "需要先将 SWM 文件合并为 WIM 文件才能挂载"
+                            Button3.Text = "合并"
+                        End If
+                        Label6.Text = "挂载目录*："
+                        Label7.Text = "索引*："
+                        Label11.Text = "以 * 结尾的字段为必填项"
+                        GroupBox1.Text = "源"
+                        GroupBox2.Text = "目标"
+                        GroupBox3.Text = "选项"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "浏览..."
+                        Cancel_Button.Text = "取消"
+                        OK_Button.Text = "确定"
+                        ListView1.Columns(0).Text = "索引"
+                        ListView1.Columns(1).Text = "映像名称"
+                        ListView1.Columns(2).Text = "映像说明"
+                        ListView1.Columns(3).Text = "映像版本"
+                        CheckBox1.Text = "以只读权限挂载"
+                        CheckBox3.Text = "优化挂载时间"
+                        CheckBox4.Text = "检查映像完整性"
                 End Select
             Case 1
                 Text = "Mount an image"
@@ -392,6 +426,36 @@ Public Class ImgMount
                 CheckBox1.Text = "Montare con permessi di sola lettura"
                 CheckBox3.Text = "Ottimizza tempi di montaggio"
                 CheckBox4.Text = "Controlla l'integrità dell'immagine"
+            Case 6
+                Text = "挂载映像"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "请指定挂载映像的选项："
+                Label3.Text = "映像文件*："
+                If Path.GetExtension(TextBox1.Text).EndsWith("esd", StringComparison.OrdinalIgnoreCase) Then
+                    Label4.Text = "需要先将此文件转换为 WIM 文件才能挂载"
+                    Button3.Text = "转换"
+                ElseIf Path.GetExtension(TextBox1.Text).EndsWith("swm", StringComparison.OrdinalIgnoreCase) Then
+                    Label4.Text = "需要先将 SWM 文件合并为 WIM 文件才能挂载"
+                    Button3.Text = "合并"
+                End If
+                Label6.Text = "挂载目录*："
+                Label7.Text = "索引*："
+                Label11.Text = "以 * 结尾的字段为必填项"
+                GroupBox1.Text = "源"
+                GroupBox2.Text = "目标"
+                GroupBox3.Text = "选项"
+                Button1.Text = "浏览..."
+                Button2.Text = "浏览..."
+                Cancel_Button.Text = "取消"
+                OK_Button.Text = "确定"
+                ListView1.Columns(0).Text = "索引"
+                ListView1.Columns(1).Text = "映像名称"
+                ListView1.Columns(2).Text = "映像说明"
+                ListView1.Columns(3).Text = "映像版本"
+                CheckBox1.Text = "以只读权限挂载"
+                CheckBox3.Text = "优化挂载时间"
+                CheckBox4.Text = "检查映像完整性"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -467,6 +531,9 @@ Public Class ImgMount
                             Case "ITA"
                                 Label4.Text = "È necessario convertire questo file in un file WIM per poterlo montare"
                                 Button3.Text = "Convertire"
+                            Case "CHS", "CHT"
+                                Label4.Text = "需要先将此文件转换为 WIM 文件才能挂载"
+                                Button3.Text = "转换"
                         End Select
                     Case 1
                         Label4.Text = "You need to convert this file to a WIM file in order to mount it"
@@ -483,6 +550,10 @@ Public Class ImgMount
                     Case 5
                         Label4.Text = "È necessario convertire questo file in un file WIM per poterlo montare"
                         Button3.Text = "Convertire"
+                    Case 6
+                        Label4.Text = "需要先将此文件转换为 WIM 文件才能挂载"
+                        Button3.Text = "转换"
+
                 End Select
                 IsReqField1Valid = False
                 ImgWim2Esd.TextBox1.Text = TextBox1.Text
@@ -542,6 +613,9 @@ Public Class ImgMount
                             Case "ITA"
                                 Label4.Text = "È necessario unire i file SWM in un file WIM per poterlo montare"
                                 Button3.Text = "Unisci"
+                            Case "CHS", "CHT"
+                                Label4.Text = "需要先将 SWM 文件合并为 WIM 文件才能挂载"
+                                Button3.Text = "合并"
                         End Select
                     Case 1
                         Label4.Text = "You need to merge the SWM files to a WIM file in order to mount it"
@@ -558,6 +632,10 @@ Public Class ImgMount
                     Case 5
                         Label4.Text = "È necessario unire i file SWM in un file WIM per poterlo montare"
                         Button3.Text = "Unisci"
+                    Case 6
+                        Label4.Text = "需要先将 SWM 文件合并为 WIM 文件才能挂载"
+                        Button3.Text = "合并"
+
                 End Select
                 IsReqField1Valid = False
                 ImgSwmToWim.TextBox1.Text = TextBox1.Text
@@ -583,6 +661,8 @@ Public Class ImgMount
                                     MsgBox("É necessário combinar os ficheiros SWM com um ficheiro WIM para o montar", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
                                 Case "ITA"
                                     MsgBox("È necessario unire i file SWM in un file WIM per poterlo montare", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
+                                Case "CHS", "CHT"
+                                    MsgBox("需要先将 SWM 文件合并为 WIM 文件才能挂载", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
                             End Select
                         Case 1
                             MsgBox("You need to merge the SWM files to a WIM file in order to mount it", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
@@ -594,6 +674,9 @@ Public Class ImgMount
                             MsgBox("É necessário combinar os ficheiros SWM com um ficheiro WIM para o montar", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
                         Case 5
                             MsgBox("È necessario unire i file SWM in un file WIM per poterlo montare", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
+                        Case 6
+                            MsgBox("需要先将 SWM 文件合并为 WIM 文件才能挂载", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
+
                     End Select
                 End If
             ElseIf Path.GetExtension(TextBox1.Text).EndsWith(".iso", StringComparison.OrdinalIgnoreCase) Then
@@ -658,6 +741,8 @@ Public Class ImgMount
                             msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                         Case "ITA"
                             msg = "Impossibile raccogliere informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case "CHS", "CHT"
+                            msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
                     End Select
                 Case 1
                     msg = "Could not gather information of this image file. Reason:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
@@ -669,6 +754,9 @@ Public Class ImgMount
                     msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                 Case 5
                     msg = "Impossibile raccogliere informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                Case 6
+                    msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
         Finally
@@ -746,6 +834,8 @@ Public Class ImgMount
                             msg = "Esta imagem já está montada e não pode ser montada novamente. Se pretender montá-la no diretório pretendido, desmonte a imagem do seu diretório de montagem original (guardando as alterações, se pretender) e abra depois esta caixa de diálogo"
                         Case "ITA"
                             msg = "Questa immagine è già montata e non può essere montata di nuovo. Se si desidera montarla nella directory desiderata, smontare l'immagine dalla directory di montaggio originale (salvando le modifiche, se si vuole) e aprire successivamente questa finestra di dialogo"
+                        Case "CHS", "CHT"
+                            msg = "此映像已挂载，无法再次挂载。如果希望将其挂载到所需的目录，请先将其从原始挂载目录卸载（如有需要请保存更改），然后再打开此对话框"
                     End Select
                 Case 1
                     msg = "This image is already mounted, and cannot be mounted again. If you want to mount it to the directory you wanted, unmount the image from its original mount directory (saving the changes if you want) and open this dialog afterwards"
@@ -757,6 +847,9 @@ Public Class ImgMount
                     msg = "Esta imagem já está montada e não pode ser montada novamente. Se pretender montá-la no diretório pretendido, desmonte a imagem do seu diretório de montagem original (guardando as alterações, se pretender) e abra depois esta caixa de diálogo"
                 Case 5
                     msg = "Questa immagine è già montata e non può essere montata di nuovo. Se si desidera montarla nella directory desiderata, smontare l'immagine dalla directory di montaggio originale (salvando le modifiche, se si vuole) e aprire successivamente questa finestra di dialogo"
+                Case 6
+                    msg = "此映像已挂载，无法再次挂载。如果希望将其挂载到所需的目录，请先将其从原始挂载目录卸载（如有需要请保存更改），然后再打开此对话框"
+
             End Select
             MsgBox(msg, vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
         End If
@@ -844,6 +937,8 @@ Public Class ImgMount
                                 MsgBox("É necessário combinar os ficheiros SWM com um ficheiro WIM para o montar", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
                             Case "ITA"
                                 MsgBox("È necessario unire i file SWM in un file WIM per poterlo montare", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
+                            Case "CHS", "CHT"
+                                MsgBox("需要先将 SWM 文件合并为 WIM 文件才能挂载", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
                         End Select
                     Case 1
                         MsgBox("You need to merge the SWM files to a WIM file in order to mount it", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
@@ -855,6 +950,9 @@ Public Class ImgMount
                         MsgBox("É necessário combinar os ficheiros SWM com um ficheiro WIM para o montar", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
                     Case 5
                         MsgBox("È necessario unire i file SWM in un file WIM per poterlo montare", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
+                    Case 6
+                        MsgBox("需要先将 SWM 文件合并为 WIM 文件才能挂载", vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
+
                 End Select
             End If
         Else

@@ -74,6 +74,15 @@ Public Class SetLayeredDriverDialog
                         Label6.Text = "Questo driver è già stato impostato"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Text = "设置键盘分层驱动程序"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "此操作允许您为日语和朝鲜语键盘设置键盘分层驱动程序，因为某些用户的键盘带有附加按键。只需从下方列表中选择新的分层驱动程序，然后单击「确定」"
+                        Label3.Text = "当前键盘分层驱动程序："
+                        Label5.Text = "新的键盘分层驱动程序："
+                        Label6.Text = "此驱动程序已设置"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Set keyboard layered driver"
@@ -120,6 +129,16 @@ Public Class SetLayeredDriverDialog
                 Label6.Text = "Questo driver è già stato impostato"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Text = "设置键盘分层驱动程序"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "此操作允许您为日语和朝鲜语键盘设置键盘分层驱动程序，因为某些用户的键盘带有附加按键。只需从下方列表中选择新的分层驱动程序，然后单击「确定」"
+                Label3.Text = "当前键盘分层驱动程序："
+                Label5.Text = "新的键盘分层驱动程序："
+                Label6.Text = "此驱动程序已设置"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

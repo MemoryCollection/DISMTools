@@ -645,6 +645,8 @@ Public Class ProgressPanel
                             LogButton.Text = "Ocultar registo"
                         Case "ITA"
                             LogButton.Text = "Nascondi registro"
+                        Case "CHS", "CHT"
+                            LogButton.Text = "隐藏日志"
                     End Select
                 Case 1
                     LogButton.Text = "Hide log"
@@ -674,6 +676,8 @@ Public Class ProgressPanel
                             LogButton.Text = "Mostrar registo"
                         Case "ITA"
                             LogButton.Text = "Visualizza registro"
+                        Case "CHS", "CHT"
+                            LogButton.Text = "显示日志"
                     End Select
                 Case 1
                     LogButton.Text = "Show log"
@@ -766,6 +770,8 @@ Public Class ProgressPanel
                         taskCountLbl.Text = "Tarefas: 1/" & taskCount
                     Case "ITA"
                         taskCountLbl.Text = "Attività: 1/" & taskCount
+                    Case "CHS", "CHT"
+                        taskCountLbl.Text = "任务：1/" & taskCount
                 End Select
             Case 1
                 taskCountLbl.Text = "Tasks: 1/" & taskCount
@@ -837,6 +843,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: " & currentTCont & "/" & taskList.Count
                         Case "ITA"
                             taskCountLbl.Text = "Attività: " & currentTCont & "/" & taskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：" & currentTCont & "/" & taskList.Count
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskList.Count
@@ -1045,6 +1053,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Creazione di progetto: " & Quote & projName & Quote
                         currentTask.Text = "Creazione struttura progetto DISMTools..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在创建项目：" & Quote & projName & Quote
+                        currentTask.Text = "正在创建 DISMTools 项目结构..."
                 End Select
             Case 1
                 allTasks.Text = "Creating project: " & Quote & projName & Quote
@@ -1194,6 +1205,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Applicazione all'immagine..."
                         currentTask.Text = "Applicazione cartella montaggio specificata all'immagine destinazione specificata..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在附加到映像..."
+                        currentTask.Text = "正在将指定的挂载目录附加到指定的目标映像..."
                 End Select
             Case 1
                 allTasks.Text = "Appending to image..."
@@ -1275,6 +1289,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -1321,6 +1337,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Applicazione dell'immagine..."
                         currentTask.Text = "Applicazione immagine specificata alla destinazione specificata..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在应用映像..."
+                        currentTask.Text = "正在将指定的映像应用到指定的目标..."
                 End Select
             Case 1
                 allTasks.Text = "Applying image..."
@@ -1378,6 +1397,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -1432,6 +1453,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Applicazione dell'immagine..."
                         currentTask.Text = "Applicazione immagine specificata alla destinazione specificata..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在应用映像..."
+                        currentTask.Text = "正在将指定的映像应用到指定的目标..."
                 End Select
             Case 1
                 allTasks.Text = "Applying image..."
@@ -1533,6 +1557,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -1580,6 +1606,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Cattura immagine..."
                         currentTask.Text = "Cattura cartella specificata in una nuova immagine..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在捕获映像..."
+                        currentTask.Text = "正在将指定目录捕获到新映像..."
                 End Select
             Case 1
                 allTasks.Text = "Capturing image..."
@@ -1645,6 +1674,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -1705,6 +1736,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Cattura immagine..."
                         currentTask.Text = "Cattura cartella specificata in una nuova immagine..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在捕获映像..."
+                        currentTask.Text = "正在将指定目录捕获到新映像..."
                 End Select
             Case 1
                 allTasks.Text = "Capturing image..."
@@ -1823,6 +1857,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -1867,6 +1903,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Pulizia punti montaggio..."
                         currentTask.Text = "Eliminazione risorse da immagini vecchie o corrotte..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在清理挂载点..."
+                        currentTask.Text = "正在从旧映像或已损坏的映像中删除资源..."
                 End Select
             Case 1
                 allTasks.Text = "Cleaning up mount points..."
@@ -1920,6 +1959,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -2002,6 +2043,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Modifica immagine..."
                         currentTask.Text = "Salvataggio modifiche nell'immagine..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在提交映像..."
+                        currentTask.Text = "正在将更改保存到映像..."
                 End Select
             Case 1
                 allTasks.Text = "Committing image..."
@@ -2056,6 +2100,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -2100,6 +2146,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: " & currentTCont & "/" & taskCount
                         Case "ITA"
                             taskCountLbl.Text = "Attività: " & currentTCont & "/" & TaskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：" & currentTCont & "/" & taskCount
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskCount
@@ -2133,6 +2181,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Eliminazione immagini..."
                         currentTask.Text = "Preparazione rimozione immagini volume..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在删除映像..."
+                        currentTask.Text = "正在准备删除卷映像..."
                 End Select
             Case 1
                 allTasks.Text = "Deleting images..."
@@ -2184,6 +2235,8 @@ Public Class ProgressPanel
                             currentTask.Text = "Remover a imagem do volume " & Quote & imgIndexDeletionNames(x) & Quote & "..."
                         Case "ITA"
                             currentTask.Text = "Rimozione immagine volume " & Quote & imgIndexDeletionNames(x) & Quote & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在删除卷映像 " & Quote & imgIndexDeletionNames(x) & Quote & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Removing volume image " & Quote & imgIndexDeletionNames(x) & Quote & "..."
@@ -2249,6 +2302,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Esportazione immagine..."
                         currentTask.Text = "Esportazione immagine specificata..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在导出映像..."
+                        currentTask.Text = "正在导出指定的映像..."
                 End Select
             Case 1
                 allTasks.Text = "Exporting image..."
@@ -2336,6 +2392,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -2398,6 +2456,9 @@ Public Class ProgressPanel
                         Case "ITA"
                             allTasks.Text = "Montaggio immagine..."
                             currentTask.Text = "Montaggio immagine specificata..."
+                        Case "CHS", "CHT"
+                            allTasks.Text = "正在挂载映像..."
+                            currentTask.Text = "正在挂载指定的映像..."
                     End Select
                 Case 1
                     allTasks.Text = "Mounting image..."
@@ -2475,6 +2536,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A recolher o nível de erro..."
                         Case "ITA"
                             currentTask.Text = "Raccolta livello errore..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在收集错误级别..."
                     End Select
                 Case 1
                     currentTask.Text = "Gathering error level..."
@@ -2586,6 +2649,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Rimontaggio immagine..."
                         currentTask.Text = "Ricaricamento sessione assistenza per l'immagine montata..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在重新挂载映像..."
+                        currentTask.Text = "正在重新加载已挂载映像的维护会话..."
                 End Select
             Case 1
                 allTasks.Text = "Remounting image..."
@@ -2640,6 +2706,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -2690,6 +2758,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Divisione immagine..."
                         currentTask.Text = "Divisione file FFU..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在拆分映像..."
+                        currentTask.Text = "正在拆分 FFU 文件..."
                 End Select
             Case 1
                 allTasks.Text = "Splitting image..."
@@ -2767,6 +2838,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Divisione immagine..."
                         currentTask.Text = "Divisione file WIM..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在拆分映像..."
+                        currentTask.Text = "正在拆分 WIM 文件..."
                 End Select
             Case 1
                 allTasks.Text = "Splitting image..."
@@ -2845,6 +2919,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Smontaggio immagine..."
                         currentTask.Text = "Smontaggio file immagine..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在卸载映像..."
+                        currentTask.Text = "正在卸载映像文件..."
                 End Select
             Case 1
                 allTasks.Text = "Unmounting image..."
@@ -2934,6 +3011,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -3030,6 +3109,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -3076,6 +3157,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Aggiunta pacchetti..."
                         currentTask.Text = "Preparazione aggiunta pacchetti..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在添加程序包..."
+                        currentTask.Text = "正在准备添加程序包..."
                 End Select
             Case 1
                 allTasks.Text = "Adding packages..."
@@ -3139,6 +3223,8 @@ Public Class ProgressPanel
                         currentTask.Text = "Adicionando " & pkgCount & " pacotes..."
                     Case "ITA"
                         currentTask.Text = "Aggiunta di " & pkgCount & " pacchetti..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在添加 " & pkgCount & " packages..."
                 End Select
             Case 1
                 currentTask.Text = "Adding " & pkgCount & " packages..."
@@ -3183,6 +3269,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: " & currentTCont & "/" & taskCount
                         Case "ITA"
                             taskCountLbl.Text = "Attività: " & currentTCont & "/" & TaskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：" & currentTCont & "/" & taskCount
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskCount
@@ -3232,6 +3320,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A adicionar o pacote " & (x + 1) & " de " & pkgCount & "..."
                         Case "ITA"
                             currentTask.Text = "Aggiunta del pacchetto " & (x + 1) & " di " & pkgCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在添加程序包 " & (x + 1) & " of " & pkgCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Adding package " & (x + 1) & " of " & pkgCount & "..."
@@ -3356,6 +3446,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A adicionar o pacote 1 de " & pkgCount & "..."
                     Case "ITA"
                         currentTask.Text = "Aggiunta del pacchetto 1 di " & pkgCount & "..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在添加程序包 1 / " & pkgCount & "..."
                 End Select
             Case 1
                 currentTask.Text = "Adding package 1 of " & pkgCount & "..."
@@ -3418,6 +3510,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Rimozione pacchetti..."
                         currentTask.Text = "Preparazione rimozione pacchetti..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在删除程序包..."
+                        currentTask.Text = "正在准备删除程序包..."
                 End Select
             Case 1
                 allTasks.Text = "Removing packages..."
@@ -3457,6 +3552,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A remover pacotes..."
                     Case "ITA"
                         currentTask.Text = "Rimozione pacchetti..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在删除程序包..."
                 End Select
             Case 1
                 currentTask.Text = "Removing packages..."
@@ -3516,6 +3613,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A remover o pacote " & (x + 1) & " de " & pkgRemovalCount & "..."
                         Case "ITA"
                             currentTask.Text = "Rimozione del pacchetto " & (x + 1) & " di " & pkgRemovalCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在删除程序包 " & (x + 1) & " of " & pkgRemovalCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Removing package " & (x + 1) & " of " & pkgRemovalCount & "..."
@@ -3637,6 +3736,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A remover o pacote " & (x + 1) & " de " & pkgRemovalCount & "..."
                         Case "ITA"
                             currentTask.Text = "Rimozione del pacchetto " & (x + 1) & " di " & pkgRemovalCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在删除程序包 " & (x + 1) & " of " & pkgRemovalCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Removing package " & (x + 1) & " of " & pkgRemovalCount & "..."
@@ -3763,6 +3864,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Abilitazione funzionalità..."
                         currentTask.Text = "Preparazione abilitazione funzionalità..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在启用功能..."
+                        currentTask.Text = "正在准备启用功能..."
                 End Select
             Case 1
                 allTasks.Text = "Enabling features..."
@@ -3844,6 +3948,8 @@ Public Class ProgressPanel
                         currentTask.Text = "Ativar características..."
                     Case "ITA"
                         currentTask.Text = "Abilitazione funzionalità..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在启用功能..."
                 End Select
             Case 1
                 currentTask.Text = "Enabling features..."
@@ -3875,6 +3981,8 @@ Public Class ProgressPanel
                             currentTask.Text = "Ativar a caraterística " & (x + 1) & " de " & featEnablementCount & "..."
                         Case "ITA"
                             currentTask.Text = "Abilitazione funzionalità " & (x + 1) & " di " & featEnablementCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在启用功能 " & (x + 1) & " of " & featEnablementCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Enabling feature " & (x + 1) & " of " & featEnablementCount & "..."
@@ -3974,6 +4082,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: " & currentTCont & "/" & taskCount
                         Case "ITA"
                             taskCountLbl.Text = "Attività: " & currentTCont & "/" & TaskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：" & currentTCont & "/" & taskCount
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskCount
@@ -4026,6 +4136,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Disabilitazione funzionalità..."
                         currentTask.Text = "Preparazione disabilitazione funzionalità..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在禁用功能..."
+                        currentTask.Text = "正在准备禁用功能..."
                 End Select
             Case 1
                 allTasks.Text = "Disabling features..."
@@ -4079,6 +4192,8 @@ Public Class ProgressPanel
                         currentTask.Text = "Desativar características..."
                     Case "ITA"
                         currentTask.Text = "Disabilitazione funzionalità..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在禁用功能..."
                 End Select
             Case 1
                 currentTask.Text = "Disabling features..."
@@ -4110,6 +4225,8 @@ Public Class ProgressPanel
                             currentTask.Text = "Desativar a caraterística " & (x + 1) & " de " & featDisablementCount & "..."
                         Case "ITA"
                             currentTask.Text = "Disabilitazione funzionalità " & (x + 1) & " di " & featDisablementCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在禁用功能 " & (x + 1) & " of " & featDisablementCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Disabling feature " & (x + 1) & " of " & featDisablementCount & "..."
@@ -4215,6 +4332,8 @@ Public Class ProgressPanel
                         allTasks.Text = "Limpar a imagem..."
                     Case "ITA"
                         allTasks.Text = "Pulizia immagine..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在清理映像..."
                 End Select
             Case 1
                 allTasks.Text = "Cleaning up the image..."
@@ -4246,6 +4365,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "Reverter acções de manutenção pendentes..."
                             Case "ITA"
                                 currentTask.Text = "Ripristino azioni assistenza in sospeso..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在还原挂起的服务操作..."
                         End Select
                     Case 1
                         currentTask.Text = "Reverting pending servicing actions..."
@@ -4257,6 +4378,9 @@ Public Class ProgressPanel
                         currentTask.Text = "Reverter acções de manutenção pendentes..."
                     Case 5
                         currentTask.Text = "Ripristino azioni assistenza in sospeso..."
+                    Case 6
+                        currentTask.Text = "正在还原挂起的服务操作..."
+
                 End Select
                 LogView.AppendText(CrLf &
                                    "Reverting pending servicing actions...")
@@ -4277,6 +4401,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "Limpeza dos ficheiros de cópia de segurança do Service Pack..."
                             Case "ITA"
                                 currentTask.Text = "Pulizia file backup Service Pack..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在清理 Service Pack 备份文件..."
                         End Select
                     Case 1
                         currentTask.Text = "Cleaning up Service Pack backup files..."
@@ -4288,6 +4414,9 @@ Public Class ProgressPanel
                         currentTask.Text = "Limpeza dos ficheiros de cópia de segurança do Service Pack..."
                     Case 5
                         currentTask.Text = "Pulizia file backup Service Pack..."
+                    Case 6
+                        currentTask.Text = "正在清理 Service Pack 备份文件..."
+
                 End Select
                 LogView.AppendText(CrLf &
                                    "Cleaning up Service Pack backup files..." & CrLf &
@@ -4311,6 +4440,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "Limpar o armazenamento de componentes..."
                             Case "ITA"
                                 currentTask.Text = "Pulizia archivio componenti..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在清理组件存储..."
                         End Select
                     Case 1
                         currentTask.Text = "Cleaning up the component store..."
@@ -4322,6 +4453,9 @@ Public Class ProgressPanel
                         currentTask.Text = "Limpar o armazenamento de componentes..."
                     Case 5
                         currentTask.Text = "Pulizia archivio componenti..."
+                    Case 6
+                        currentTask.Text = "正在清理组件存储..."
+
                 End Select
                 LogView.AppendText(CrLf &
                                    "Cleaning up the component store..." & CrLf &
@@ -4344,6 +4478,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "Analisando o armazenamento de componentes..."
                             Case "ITA"
                                 currentTask.Text = "Analisi archivio componenti..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在分析组件存储..."
                         End Select
                     Case 1
                         currentTask.Text = "Analyzing the component store..."
@@ -4355,6 +4491,9 @@ Public Class ProgressPanel
                         currentTask.Text = "Analisando o armazenamento de componentes..."
                     Case 5
                         currentTask.Text = "Analisi archivio componenti..."
+                    Case 6
+                        currentTask.Text = "正在分析组件存储..."
+
                 End Select
                 LogView.AppendText(CrLf &
                                    "Analyzing the component store...")
@@ -4374,6 +4513,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "Verificar a integridade do armazenamento de componentes..."
                             Case "ITA"
                                 currentTask.Text = "Controllo stato di salute archivio componenti..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在检查组件存储运行状况..."
                         End Select
                     Case 1
                         currentTask.Text = "Checking the component store health..."
@@ -4385,6 +4526,9 @@ Public Class ProgressPanel
                         currentTask.Text = "Verificar a integridade do armazenamento de componentes..."
                     Case 5
                         currentTask.Text = "Controllo stato di salute archivio componenti..."
+                    Case 6
+                        currentTask.Text = "正在检查组件存储运行状况..."
+
                 End Select
                 LogView.AppendText(CrLf &
                                    "Checking the component store health...")
@@ -4404,6 +4548,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "A analisar o armazenamento de componentes..."
                             Case "ITA"
                                 currentTask.Text = "Scansione archivio componenti..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在扫描组件存储..."
                         End Select
                     Case 1
                         currentTask.Text = "Scanning the component store..."
@@ -4415,6 +4561,9 @@ Public Class ProgressPanel
                         currentTask.Text = "A analisar o armazenamento de componentes..."
                     Case 5
                         currentTask.Text = "Scansione archivio componenti..."
+                    Case 6
+                        currentTask.Text = "正在扫描组件存储..."
+
                 End Select
                 LogView.AppendText(CrLf &
                                    "Scanning the component store...")
@@ -4438,6 +4587,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "Reparar o armazenamento de componentes..."
                             Case "ITA"
                                 currentTask.Text = "Riparazione archivio componenti..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在修复组件存储..."
                         End Select
                     Case 1
                         currentTask.Text = "Repairing the component store..."
@@ -4449,6 +4600,9 @@ Public Class ProgressPanel
                         currentTask.Text = "Reparar o armazenamento de componentes..."
                     Case 5
                         currentTask.Text = "Riparazione archivio componenti..."
+                    Case 6
+                        currentTask.Text = "正在修复组件存储..."
+
                 End Select
                 LogView.AppendText(CrLf &
                                    "Repairing the component store..." & CrLf &
@@ -4480,6 +4634,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -4530,6 +4686,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Aggiunta pacchetto approvvigionamento..."
                         currentTask.Text = "Aggiunta pacchetto approvvigionamento all'immagine..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在添加预配包..."
+                        currentTask.Text = "正在向映像添加预配包..."
                 End Select
             Case 1
                 allTasks.Text = "Adding provisioning package..."
@@ -4585,6 +4744,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: " & currentTCont & "/" & taskCount
                         Case "ITA"
                             taskCountLbl.Text = "Attività: " & currentTCont & "/" & TaskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：" & currentTCont & "/" & taskCount
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskCount
@@ -4630,6 +4791,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Aggiunta pacchetti AppX..."
                         currentTask.Text = "Preparazione aggiunta pacchetti AppX approvvigionati..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在添加 AppX 程序包..."
+                        currentTask.Text = "正在准备添加已预配的 AppX 程序包..."
                 End Select
             Case 1
                 allTasks.Text = "Adding AppX packages..."
@@ -4694,6 +4858,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A adicionar pacotes AppX..."
                     Case "ITA"
                         currentTask.Text = "Aggiunta pacchetti AppX..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在添加 AppX 程序包..."
                 End Select
             Case 1
                 currentTask.Text = "Adding AppX packages..."
@@ -4725,6 +4891,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A adicionar pacote " & (x + 1) & " de " & appxAdditionCount & "..."
                         Case "ITA"
                             currentTask.Text = "Aggiunta pacchetto " & (x + 1) & " di " & appxAdditionCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在添加程序包 " & (x + 1) & " of " & appxAdditionCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Adding package " & (x + 1) & " of " & appxAdditionCount & "..."
@@ -4926,6 +5094,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: " & currentTCont & "/" & taskCount
                         Case "ITA"
                             taskCountLbl.Text = "Attività: " & currentTCont & "/" & TaskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：" & currentTCont & "/" & taskCount
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskCount
@@ -5006,6 +5176,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Rimozione pacchetti AppX..."
                         currentTask.Text = "Preparazione rimozione pacchetti AppX approvvigionati..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在删除 AppX 程序包..."
+                        currentTask.Text = "正在准备删除已预配的 AppX 程序包..."
                 End Select
             Case 1
                 allTasks.Text = "Removing AppX packages..."
@@ -5043,6 +5216,8 @@ Public Class ProgressPanel
                         currentTask.Text = "Removendo pacotes AppX..."
                     Case "ITA"
                         currentTask.Text = "Rimozione pacchetti AppX..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在删除 AppX 程序包..."
                 End Select
             Case 1
                 currentTask.Text = "Removing AppX packages..."
@@ -5082,6 +5257,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "A remover o pacote " & (x + 1) & " de " & appxRemovalCount & "..."
                             Case "ITA"
                                 currentTask.Text = "Rimozione pacchetto " & (x + 1) & " di " & appxRemovalCount & "..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在删除程序包 " & (x + 1) & " of " & appxRemovalCount & "..."
                         End Select
                     Case 1
                         currentTask.Text = "Removing package " & (x + 1) & " of " & appxRemovalCount & "..."
@@ -5181,6 +5358,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Impostazione driver stratificato..."
                         currentTask.Text = "Impostazione driver stratificato tastiera..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在设置分层驱动程序..."
+                        currentTask.Text = "正在设置键盘分层驱动程序..."
                 End Select
             Case 1
                 allTasks.Text = "Setting layered driver..."
@@ -5284,6 +5464,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Aggiunta capacità..."
                         currentTask.Text = "Preparazione aggiunta capacità..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在添加功能包..."
+                        currentTask.Text = "正在准备添加功能包..."
                 End Select
             Case 1
                 allTasks.Text = "Adding capabilities..."
@@ -5329,6 +5512,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A adicionar capacidades..."
                     Case "ITA"
                         currentTask.Text = "Aggiunta capacità..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在添加功能包..."
                 End Select
             Case 1
                 currentTask.Text = "Adding capabilities..."
@@ -5362,6 +5547,8 @@ Public Class ProgressPanel
                             currentTask.Text = "Adicionar capacidade " & (x + 1) & " de " & capAdditionCount & "..."
                         Case "ITA"
                             currentTask.Text = "Aggiunta capacità " & (x + 1) & " di " & capAdditionCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在添加功能包 " & (x + 1) & " of " & capAdditionCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Adding capability " & (x + 1) & " of " & capAdditionCount & "..."
@@ -5462,6 +5649,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: " & currentTCont & "/" & taskCount
                         Case "ITA"
                             taskCountLbl.Text = "Attività: " & currentTCont & "/" & TaskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：" & currentTCont & "/" & taskCount
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskCount
@@ -5509,6 +5698,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Rimozione capacità..."
                         currentTask.Text = "Preparazione rimozione capacità..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在删除功能包..."
+                        currentTask.Text = "正在准备删除功能包..."
                 End Select
             Case 1
                 allTasks.Text = "Removing capabilities..."
@@ -5543,6 +5735,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A remover capacidades..."
                     Case "ITA"
                         currentTask.Text = "Rimozione capacità..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在删除功能包..."
                 End Select
             Case 1
                 currentTask.Text = "Removing capabilities..."
@@ -5576,6 +5770,8 @@ Public Class ProgressPanel
                             currentTask.Text = "Remover a capacidade " & (x + 1) & " de " & capRemovalCount & "..."
                         Case "ITA"
                             currentTask.Text = "Rimozione capacità " & (x + 1) & " di " & capRemovalCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在删除功能包 " & (x + 1) & " of " & capRemovalCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Removing capability " & (x + 1) & " of " & capRemovalCount & "..."
@@ -5754,6 +5950,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Aggiunta driver..."
                         currentTask.Text = "Preparazione aggiunta driver..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在添加驱动程序..."
+                        currentTask.Text = "正在准备添加驱动程序..."
                 End Select
             Case 1
                 allTasks.Text = "Adding drivers..."
@@ -5795,6 +5994,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A adicionar controladores..."
                     Case "ITA"
                         currentTask.Text = "Aggiunta driver..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在添加驱动程序..."
                 End Select
             Case 1
                 currentTask.Text = "Adding drivers..."
@@ -5828,6 +6029,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A adicionar o controlador " & (x + 1) & " de " & drvAdditionCount & "..."
                         Case "ITA"
                             currentTask.Text = "Aggiunta driver " & (x + 1) & " di " & drvAdditionCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在添加驱动程序 " & (x + 1) & " of " & drvAdditionCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Adding driver " & (x + 1) & " of " & drvAdditionCount & "..."
@@ -5988,6 +6191,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: " & currentTCont & "/" & taskCount
                         Case "ITA"
                             taskCountLbl.Text = "Attività: " & currentTCont & "/" & TaskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：" & currentTCont & "/" & taskCount
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskCount
@@ -6050,6 +6255,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Rimozione driver..."
                         currentTask.Text = "Preparazione rimozione driver..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在删除驱动程序..."
+                        currentTask.Text = "正在准备删除驱动程序..."
                 End Select
             Case 1
                 allTasks.Text = "Removing drivers..."
@@ -6088,6 +6296,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A remover controladores..."
                     Case "ITA"
                         currentTask.Text = "Rimozione driver..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在删除驱动程序..."
                 End Select
             Case 1
                 currentTask.Text = "Removing drivers..."
@@ -6122,6 +6332,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A remover o controlador " & (x + 1) & " de " & drvRemovalCount & "..."
                         Case "ITA"
                             currentTask.Text = "Rimozione driver " & (x + 1) & " di " & drvRemovalCount & "..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在删除驱动程序 " & (x + 1) & " of " & drvRemovalCount & "..."
                     End Select
                 Case 1
                     currentTask.Text = "Removing driver " & (x + 1) & " of " & drvRemovalCount & "..."
@@ -6229,6 +6441,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Esportazione driver..."
                         currentTask.Text = "Esportazione driver terze parti nella cartella specificata..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在导出驱动程序..."
+                        currentTask.Text = "正在将第三方驱动程序导出到指定文件夹..."
                 End Select
             Case 1
                 allTasks.Text = "Exporting drivers..."
@@ -6606,6 +6821,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Importazione driver..."
                         currentTask.Text = "Preparazione importazione driver terze parti..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在导入驱动程序..."
+                        currentTask.Text = "正在准备导入第三方驱动程序..."
                 End Select
             Case 1
                 allTasks.Text = "Importing drivers..."
@@ -6650,6 +6868,8 @@ Public Class ProgressPanel
                         currentTask.Text = "Exportar controladores de terceiros a partir da fonte de importação de controladores..."
                     Case "ITA"
                         currentTask.Text = "Esportazione driver terze parti dalla sorgente importazione driver..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在从驱动程序导入源导出第三方驱动程序..."
                 End Select
             Case 1
                 currentTask.Text = "Exporting third-party drivers from driver import source..."
@@ -6711,6 +6931,8 @@ Public Class ProgressPanel
                                 currentTask.Text = "A importar controladores de terceiros para a imagem de destino..."
                             Case "ITA"
                                 currentTask.Text = "Importazione driver terze parti nell'immagine destinazione..."
+                            Case "CHS", "CHT"
+                                currentTask.Text = "正在将第三方驱动程序导入到目标映像..."
                         End Select
                     Case 1
                         currentTask.Text = "Importing third-party drivers to destination image..."
@@ -6838,6 +7060,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Applicazione file risposta non presidiate..."
                         currentTask.Text = "Applicazione file risposta non presidiate specificato all'immagine destinazione..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在应用无人参与应答文件..."
+                        currentTask.Text = "正在将指定的无人参与应答文件应用到目标映像..."
                 End Select
             Case 1
                 allTasks.Text = "Applying unattended answer file..."
@@ -6893,6 +7118,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A recolher o nível de erro..."
                         Case "ITA"
                             currentTask.Text = "Raccolta livello errore..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在收集错误级别..."
                     End Select
                 Case 1
                     currentTask.Text = "Gathering error level..."
@@ -6942,6 +7169,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Impostazione percorso destinazione..."
                         currentTask.Text = "Impostazione percorso destinazione Windows PE..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在设置目标路径..."
+                        currentTask.Text = "正在设置 Windows PE 目标路径..."
                 End Select
             Case 1
                 allTasks.Text = "Setting the target path..."
@@ -7001,6 +7231,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Impostazione spazio temporaneo..."
                         currentTask.Text = "Impostazione spazio temporaneo Windows PE..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在设置临时空间..."
+                        currentTask.Text = "正在设置 Windows PE 临时空间..."
                 End Select
             Case 1
                 allTasks.Text = "Setting the scratch space..."
@@ -7064,6 +7297,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Impostazione finestra disinstallazione..."
                         currentTask.Text = "Impostazione numero di giorni in cui può avvenire la disinstallazione..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在设置卸载时间窗口..."
+                        currentTask.Text = "正在设置允许卸载的天数..."
                 End Select
             Case 1
                 allTasks.Text = "Setting the uninstall window..."
@@ -7117,6 +7353,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Rimozione possibilità rollback sistema operativo..."
                         currentTask.Text = "Rimozione possibilità tornare alla vecchia installazione di Windows..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在删除操作系统回退能力..."
+                        currentTask.Text = "正在删除还原到旧版 Windows 安装的能力..."
                 End Select
             Case 1
                 allTasks.Text = "Removing OS rollback ability..."
@@ -7169,6 +7408,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Disinstallazione di questa versione di Windows..."
                         currentTask.Text = "Preparazione rollback sistema operativo..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在卸载此版本的 Windows..."
+                        currentTask.Text = "正在准备操作系统回退..."
                 End Select
             Case 1
                 allTasks.Text = "Uninstalling this version of Windows..."
@@ -7229,6 +7471,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Conversione immagine..."
                         currentTask.Text = "Conversione immagine specificata..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在转换映像..."
+                        currentTask.Text = "正在转换指定的映像..."
                 End Select
             Case 1
                 allTasks.Text = "Converting image..."
@@ -7293,6 +7538,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -7339,6 +7586,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Unione file SWM..."
                         currentTask.Text = "Unione file SWM in un file WIM..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在合并 SWM 文件..."
+                        currentTask.Text = "正在将 SWM 文件合并到 WIM 文件..."
                 End Select
             Case 1
                 allTasks.Text = "Merging SWM files..."
@@ -7392,6 +7642,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -7438,6 +7690,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         allTasks.Text = "Modifica indici immagine..."
                         currentTask.Text = "Smontaggio indice sorgente..."
+                    Case "CHS", "CHT"
+                        allTasks.Text = "正在切换映像索引..."
+                        currentTask.Text = "正在卸载源索引..."
                 End Select
             Case 1
                 allTasks.Text = "Switching image indexes..."
@@ -7501,6 +7756,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -7538,6 +7795,8 @@ Public Class ProgressPanel
                             currentTask.Text = "Desmontar índice de origem..."
                         Case "ITA"
                             currentTask.Text = "Smontaggio indice sorgente..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在卸载源索引..."
                     End Select
                 Case 1
                     currentTask.Text = "Unmounting source index..."
@@ -7577,6 +7836,8 @@ Public Class ProgressPanel
                             currentTask.Text = "A recolher o nível de erro..."
                         Case "ITA"
                             currentTask.Text = "Raccolta livello errore..."
+                        Case "CHS", "CHT"
+                            currentTask.Text = "正在收集错误级别..."
                     End Select
                 Case 1
                     currentTask.Text = "Gathering error level..."
@@ -7624,6 +7885,9 @@ Public Class ProgressPanel
                     Case "ITA"
                         taskCountLbl.Text = "Attività: " & currentTCont & "/" & TaskList.Count
                         currentTask.Text = "Montaggio indice destinazione..."
+                    Case "CHS", "CHT"
+                        taskCountLbl.Text = "任务：" & currentTCont & "/" & taskCount
+                        currentTask.Text = "正在挂载目标索引..."
                 End Select
             Case 1
                 taskCountLbl.Text = "Tasks: " & currentTCont & "/" & taskCount
@@ -7673,6 +7937,8 @@ Public Class ProgressPanel
                         currentTask.Text = "A recolher o nível de erro..."
                     Case "ITA"
                         currentTask.Text = "Raccolta livello errore..."
+                    Case "CHS", "CHT"
+                        currentTask.Text = "正在收集错误级别..."
                 End Select
             Case 1
                 currentTask.Text = "Gathering error level..."
@@ -8065,6 +8331,8 @@ Public Class ProgressPanel
                             MainForm.MenuDesc.Text = "Pronto"
                         Case "ITA"
                             MainForm.MenuDesc.Text = "Pronto"
+                        Case "CHS", "CHT"
+                            MainForm.MenuDesc.Text = "就绪"
                     End Select
                 Case 1
                     MainForm.MenuDesc.Text = "Ready"
@@ -8104,6 +8372,9 @@ Public Class ProgressPanel
                         Case "ITA"
                             Label1.Text = "Non è stato possibile eseguire operazioni sull'immagine"
                             Label2.Text = "Si è verificato un errore che ha interrotto le operazioni sull'immagine. Per ulteriori informazioni, consulta il registro sottostante."
+                        Case "CHS", "CHT"
+                            Label1.Text = "无法执行映像操作"
+                            Label2.Text = "发生错误，导致映像操作中止。请阅读以下日志了解更多信息。"
                     End Select
                 Case 1
                     Label1.Text = "Could not perform image operations"
@@ -8142,6 +8413,8 @@ Public Class ProgressPanel
                             Cancel_Button.Text = "OK"
                         Case "ITA"
                             Cancel_Button.Text = "OK"
+                        Case "CHS", "CHT"
+                            Cancel_Button.Text = "确定"
                     End Select
                 Case 1
                     Cancel_Button.Text = "OK"
@@ -8256,6 +8529,8 @@ Public Class ProgressPanel
                             MainForm.MenuDesc.Text = "Pronto"
                         Case "ITA"
                             MainForm.MenuDesc.Text = "Pronto"
+                        Case "CHS", "CHT"
+                            MainForm.MenuDesc.Text = "就绪"
                     End Select
                 Case 1
                     MainForm.MenuDesc.Text = "Ready"
@@ -8341,6 +8616,15 @@ Public Class ProgressPanel
                         LinkLabel1.Text = "Visualizza il file registro DISM (avanzato)"
                         allTasks.Text = "Attendi..."
                         currentTask.Text = "Attendi..."
+                    Case "CHS", "CHT"
+                        Text = "进度"
+                        Label1.Text = "映像操作正在进行..."
+                        Label2.Text = "请稍候，正在完成以下任务。这可能需要一些时间。"
+                        Cancel_Button.Text = "取消"
+                        LogButton.Text = If(Not IsExpanded, "显示日志", "隐藏日志")
+                        LinkLabel1.Text = "显示 DISM 日志文件（高级）"
+                        allTasks.Text = "请稍候..."
+                        currentTask.Text = "请稍候..."
                 End Select
             Case 1
                 Text = "Progress"
@@ -8493,6 +8777,8 @@ Public Class ProgressPanel
                         MainForm.MenuDesc.Text = "Realização de operações de imagem. Por favor, aguarde..."
                     Case "ITA"
                         MainForm.MenuDesc.Text = "Esecuzione operazioni sulle immagini..."
+                    Case "CHS", "CHT"
+                        MainForm.MenuDesc.Text = "正在执行映像操作。请稍候..."
                 End Select
             Case 1
                 MainForm.MenuDesc.Text = "Performing image operations. Please wait..."
@@ -8565,6 +8851,8 @@ Public Class ProgressPanel
                             taskCountLbl.Text = "Tarefas: 1/" & TaskList.Count
                         Case "ITA"
                             taskCountLbl.Text = "Attività: 1/" & TaskList.Count
+                        Case "CHS", "CHT"
+                            taskCountLbl.Text = "任务：1/" & TaskList.Count
                     End Select
                 Case 1
                     taskCountLbl.Text = "Tasks: 1/" & TaskList.Count
@@ -8643,6 +8931,8 @@ Public Class ProgressPanel
                         MainForm.MenuDesc.Text = "Pronto"
                     Case "ITA"
                         MainForm.MenuDesc.Text = "Pronto"
+                    Case "CHS", "CHT"
+                        MainForm.MenuDesc.Text = "就绪"
                 End Select
             Case 1
                 MainForm.MenuDesc.Text = "Ready"
@@ -8696,6 +8986,8 @@ Public Class ProgressPanel
                         olcText = "Registos de operações"
                     Case "ITA"
                         olcText = "Registri operazioni"
+                    Case "CHS", "CHT"
+                        olcText = "操作日志"
                 End Select
             Case 1
                 olcText = "Operation Logs"
@@ -8707,6 +8999,9 @@ Public Class ProgressPanel
                 olcText = "Registos de operações"
             Case 5
                 olcText = "Registri operazioni"
+            Case 6
+                olcText = "操作日志"
+
         End Select
         WindowHelper.DisplayToolTip(sender, olcText)
     End Sub
@@ -8726,6 +9021,8 @@ Public Class ProgressPanel
                         olcText = "Saída DISM"
                     Case "ITA"
                         olcText = "Output DISM"
+                    Case "CHS", "CHT"
+                        olcText = "DISM 输出"
                 End Select
             Case 1
                 olcText = "DISM Output"
@@ -8737,6 +9034,9 @@ Public Class ProgressPanel
                 olcText = "Saída DISM"
             Case 5
                 olcText = "Uscita DISM"
+            Case 6
+                olcText = "DISM 输出"
+
         End Select
         WindowHelper.DisplayToolTip(sender, olcText)
     End Sub

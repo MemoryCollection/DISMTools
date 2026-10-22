@@ -42,6 +42,8 @@ Public Class PleaseWaitDialog
                         Label1.Text = "Por favor, aguarde..."
                     Case "ITA"
                         Label1.Text = "Attendi..."
+                    Case "CHS", "CHT"
+                        Label1.Text = "请稍候..."
                 End Select
             Case 1
                 Label1.Text = "Please wait..."
@@ -53,6 +55,9 @@ Public Class PleaseWaitDialog
                 Label1.Text = "Por favor, aguarde..."
             Case 5
                 Label1.Text = "Attendi..."
+            Case 6
+                Label1.Text = "请稍候..."
+
         End Select
         Visible = True
         Panel1.BorderStyle = BorderStyle.None

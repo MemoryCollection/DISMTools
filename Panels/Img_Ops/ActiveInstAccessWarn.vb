@@ -62,6 +62,15 @@ Public Class ActiveInstAccessWarn
                         Label2.Text = "Il progetto corrente verrà scaricato"
                         OK_Button.Text = "Continua"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Text = "关于活动安装管理"
+                        Label1.Text = "您即将进入联机安装管理模式，该模式允许对活动 Windows 安装进行更改。" & CrLf & CrLf & _
+                            "由于此模式允许修改您的安装，使用本程序执行任务时应格外小心。" & CrLf & CrLf & _
+                            "如果对联机映像随意执行操作，可能会损坏它，甚至导致安装无法启动。" & CrLf & CrLf & _
+                            "对于对活动安装造成的任何损坏，我们概不负责。如果系统无法启动，您应重新安装 Windows（如有可能，请先备份文件）"
+                        Label2.Text = "当前项目将被卸载。"
+                        OK_Button.Text = "继续"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "About active installation management"
@@ -108,6 +117,16 @@ Public Class ActiveInstAccessWarn
                 Label2.Text = "Il progetto corrente verrà scaricato"
                 OK_Button.Text = "Continua"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Text = "关于活动安装管理"
+                Label1.Text = "您即将进入联机安装管理模式，该模式允许对活动 Windows 安装进行更改。" & CrLf & CrLf & _
+                    "由于此模式允许修改您的安装，使用本程序执行任务时应格外小心。" & CrLf & CrLf & _
+                    "如果对联机映像随意执行操作，可能会损坏它，甚至导致安装无法启动。" & CrLf & CrLf & _
+                    "对于对活动安装造成的任何损坏，我们概不负责。如果系统无法启动，您应重新安装 Windows（如有可能，请先备份文件）"
+                Label2.Text = "当前项目将被卸载。"
+                OK_Button.Text = "继续"
+                Cancel_Button.Text = "取消"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

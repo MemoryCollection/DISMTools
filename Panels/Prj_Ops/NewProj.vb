@@ -171,6 +171,18 @@ Public Class NewProj
                         Cancel_Button.Text = "Annullare"
                         GroupBox1.Text = "Progetto"
                         FolderBrowserDialog1.Description = "Selezionare una cartella per memorizzare questo progetto:"
+                    Case "CHS", "CHT"
+                        Text = "创建新项目"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "请指定创建新项目的选项："
+                        Label3.Text = "名称*："
+                        Label4.Text = "位置*："
+                        Label5.Text = "以 * 结尾的字段为必填项"
+                        Button1.Text = "浏览..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        GroupBox1.Text = "项目"
+                        FolderBrowserDialog1.Description = "请选择用于存储此项目的文件夹："
                 End Select
             Case 1
                 Text = "Create a new project"
@@ -232,6 +244,19 @@ Public Class NewProj
                 Cancel_Button.Text = "Annullare"
                 GroupBox1.Text = "Progetto"
                 FolderBrowserDialog1.Description = "Selezionare una cartella per memorizzare questo progetto:"
+            Case 6
+                Text = "创建新项目"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "请指定创建新项目的选项："
+                Label3.Text = "名称*："
+                Label4.Text = "位置*："
+                Label5.Text = "以 * 结尾的字段为必填项"
+                Button1.Text = "浏览..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                GroupBox1.Text = "项目"
+                FolderBrowserDialog1.Description = "请选择用于存储此项目的文件夹："
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

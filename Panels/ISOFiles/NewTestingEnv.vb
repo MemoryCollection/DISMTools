@@ -107,6 +107,25 @@ Public Class NewTestingEnv
                         Cancel_Button.Text = "Annullare"
                         GroupBox2.Text = "Stato di avanzamento"
                         LinkLabel1.Text = "Scarica l'ADK di Windows"
+                    Case "CHS", "CHT"
+                        progressMessages(0) = "状态"
+                        progressMessages(1) = "正在创建项目。这可能需要一些时间。请稍候..."
+                        progressMessages(2) = "项目已创建"
+                        Text = "创建测试环境"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "此向导将创建一个环境，帮助您在 Windows 预安装环境中测试应用程序。" & CrLf & CrLf &
+                                      "将要创建的项目包含一套模板解决方案，适用于为 Windows 预安装环境创建应用程序的所有环境和资源。您可以在随附的 README 文件中详细了解这些项目。"
+                        Label3.Text = "准备好后，请单击「创建」按钮。"
+                        Label5.Text = "环境体系结构："
+                        Label6.Text = "体系结构："
+                        Label7.Text = "目标项目位置："
+                        Label8.Text = progressMessages(0)
+                        Label9.Text = "创建项目期间，您可以做其他事情。随时返回此处查看更新的状态。"
+                        Button3.Text = "浏览..."
+                        OK_Button.Text = "创建"
+                        Cancel_Button.Text = "取消"
+                        GroupBox2.Text = "进度"
+                        LinkLabel1.Text = "下载 Windows ADK"
                 End Select
             Case 1
                 progressMessages(0) = "Status"
@@ -203,6 +222,26 @@ Public Class NewTestingEnv
                 Cancel_Button.Text = "Annullare"
                 GroupBox2.Text = "Stato di avanzamento"
                 LinkLabel1.Text = "Scarica l'ADK di Windows"
+            Case 6
+                progressMessages(0) = "状态"
+                progressMessages(1) = "正在创建项目。这可能需要一些时间。请稍候..."
+                progressMessages(2) = "项目已创建"
+                Text = "创建测试环境"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "此向导将创建一个环境，帮助您在 Windows 预安装环境中测试应用程序。" & CrLf & CrLf &
+                              "将要创建的项目包含一套模板解决方案，适用于为 Windows 预安装环境创建应用程序的所有环境和资源。您可以在随附的 README 文件中详细了解这些项目。"
+                Label3.Text = "准备好后，请单击「创建」按钮。"
+                Label5.Text = "环境体系结构："
+                Label6.Text = "体系结构："
+                Label7.Text = "目标项目位置："
+                Label8.Text = progressMessages(0)
+                Label9.Text = "创建项目期间，您可以做其他事情。随时返回此处查看更新的状态。"
+                Button3.Text = "浏览..."
+                OK_Button.Text = "创建"
+                Cancel_Button.Text = "取消"
+                GroupBox2.Text = "进度"
+                LinkLabel1.Text = "下载 Windows ADK"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

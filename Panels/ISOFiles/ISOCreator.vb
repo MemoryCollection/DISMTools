@@ -160,6 +160,33 @@ Public Class ISOCreator
                         CheckBox2.Text = "Copia su unità Ventoy"
                         CheckBox3.Text = "Utilizzare binari di avvio con firma recente"
                         CheckBox4.Text = "Includi i driver essenziali di questo sistema"
+                    Case "CHS", "CHT"
+                        Text = "创建 ISO 文件"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "ISO 文件创建向导可帮助您快速创建可用于测试 Windows 映像更改的光盘映像文件。将创建自定义预安装环境 (PE)。此环境会自动执行磁盘配置并应用您在此指定的映像。"
+                        Label3.Text = "准备好后，请单击「创建」按钮。"
+                        Label4.Text = "要添加到 ISO 文件的映像文件："
+                        Label6.Text = "体系结构："
+                        Label7.Text = "目标 ISO 位置："
+                        Button1.Text = "浏览..."
+                        Button2.Text = "选择..."
+                        Button3.Text = "浏览..."
+                        Button4.Text = "使用已挂载的映像"
+                        Button5.Text = "浏览..."
+                        Button6.Text = "自定义环境..."
+                        OK_Button.Text = "创建"
+                        Cancel_Button.Text = "取消"
+                        GroupBox1.Text = "选项"
+                        GroupBox2.Text = "进度"
+                        LinkLabel1.Text = "下载 Windows ADK"
+                        ColumnHeader2.Text = "映像名称"
+                        ColumnHeader3.Text = "映像说明"
+                        ColumnHeader4.Text = "映像版本"
+                        ColumnHeader5.Text = "映像体系结构"
+                        CheckBox1.Text = "无人参与应答文件："
+                        CheckBox2.Text = "复制到 Ventoy 驱动器"
+                        CheckBox3.Text = "使用新签名的启动二进制文件"
+                        CheckBox4.Text = "包含此系统的必要驱动程序"
                 End Select
             Case 1
                 Text = "Create an ISO file"
@@ -296,6 +323,34 @@ Public Class ISOCreator
                 CheckBox2.Text = "Copia su unità Ventoy"
                 CheckBox3.Text = "Utilizzare binari di avvio con firma recente"
                 CheckBox4.Text = "Includi i driver essenziali di questo sistema"
+            Case 6
+                Text = "创建 ISO 文件"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "ISO 文件创建向导可帮助您快速创建可用于测试 Windows 映像更改的光盘映像文件。将创建自定义预安装环境 (PE)。此环境会自动执行磁盘配置并应用您在此指定的映像。"
+                Label3.Text = "准备好后，请单击「创建」按钮。"
+                Label4.Text = "要添加到 ISO 文件的映像文件："
+                Label6.Text = "体系结构："
+                Label7.Text = "目标 ISO 位置："
+                Button1.Text = "浏览..."
+                Button2.Text = "选择..."
+                Button3.Text = "浏览..."
+                Button4.Text = "使用已挂载的映像"
+                Button5.Text = "浏览..."
+                Button6.Text = "自定义环境..."
+                OK_Button.Text = "创建"
+                Cancel_Button.Text = "取消"
+                GroupBox1.Text = "选项"
+                GroupBox2.Text = "进度"
+                LinkLabel1.Text = "下载 Windows ADK"
+                ColumnHeader2.Text = "映像名称"
+                ColumnHeader3.Text = "映像说明"
+                ColumnHeader4.Text = "映像版本"
+                ColumnHeader5.Text = "映像体系结构"
+                CheckBox1.Text = "无人参与应答文件："
+                CheckBox2.Text = "复制到 Ventoy 驱动器"
+                CheckBox3.Text = "使用新签名的启动二进制文件"
+                CheckBox4.Text = "包含此系统的必要驱动程序"
+
         End Select
         ImageTaskHeader1.SetColors()
         ImageTaskHeader1.HideWindowTitle(Me.Handle)
@@ -545,6 +600,8 @@ Public Class ISOCreator
                             msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                         Case "ITA"
                             msg = "Impossibile raccogliere informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case "CHS", "CHT"
+                            msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
                     End Select
                 Case 1
                     msg = "Could not gather information of this image file. Reason:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
@@ -556,6 +613,9 @@ Public Class ISOCreator
                     msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                 Case 5
                     msg = "Impossibile raccogliere informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                Case 6
+                    msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
         Finally
@@ -593,6 +653,8 @@ Public Class ISOCreator
                             ISOMsg = "Ou o ficheiro de imagem de origem não existe ou não forneceu qualquer ficheiro de imagem. Especifique um ficheiro de imagem válido e tente novamente."
                         Case "ITA"
                             ISOMsg = "Il file immagine di origine non esiste o non è stato fornito alcun file immagine. Specificare un file immagine valido e riprovare."
+                        Case "CHS", "CHT"
+                            ISOMsg = "源映像文件不存在，或您未提供任何映像文件。请指定有效的映像文件，然后重试。"
                     End Select
                 Case 1
                     ISOMsg = "Either the source image file does not exist or you haven't provided any image file. Please specify a valid image file and try again."
@@ -604,6 +666,9 @@ Public Class ISOCreator
                     ISOMsg = "Ou o ficheiro de imagem de origem não existe ou não forneceu qualquer ficheiro de imagem. Especifique um ficheiro de imagem válido e tente novamente."
                 Case 5
                     ISOMsg = "Il file immagine di origine non esiste o non è stato fornito alcun file immagine. Specificare un file immagine valido e riprovare."
+                Case 6
+                    ISOMsg = "源映像文件不存在，或您未提供任何映像文件。请指定有效的映像文件，然后重试。"
+
             End Select
             MsgBox(ISOMsg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -623,6 +688,8 @@ Public Class ISOCreator
                                 ISOMsg = "O ISO de destino não foi especificado. Especifique uma localização para o ficheiro ISO e tente novamente."
                             Case "ITA"
                                 ISOMsg = "L'ISO di destinazione non è stata specificata. Specificare una posizione per il file ISO e riprovare."
+                            Case "CHS", "CHT"
+                                ISOMsg = "未指定目标 ISO。请指定 ISO 文件的位置，然后重试。"
                         End Select
                     Case 1
                         ISOMsg = "The target ISO hasn't been specified. Please specify a location for the ISO file and try again."
@@ -634,6 +701,9 @@ Public Class ISOCreator
                         ISOMsg = "O ISO de destino não foi especificado. Especifique uma localização para o ficheiro ISO e tente novamente."
                     Case 5
                         ISOMsg = "L'ISO di destinazione non è stata specificata. Specificare una posizione per il file ISO e riprovare."
+                    Case 6
+                        ISOMsg = "未指定目标 ISO。请指定 ISO 文件的位置，然后重试。"
+
                 End Select
                 MsgBox(ISOMsg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
                 Exit Sub
@@ -652,6 +722,8 @@ Public Class ISOCreator
                         ISOMsg = "Certifique-se de que guardou todas as suas alterações antes de continuar." & CrLf & CrLf & "Se ainda não o fez, clique em Não, guarde a sua imagem e comece o processo novamente. Não é necessário fechar esta janela." & CrLf & CrLf & "Deseja criar uma ISO com este ficheiro?"
                     Case "ITA"
                         ISOMsg = "Assicurarsi di aver salvato tutte le modifiche prima di continuare." & CrLf & CrLf & "Se non lo si è fatto, fare clic su No, salvare l'immagine e ricominciare il processo. Non è necessario chiudere questa finestra." & CrLf & CrLf & "Si desidera creare una ISO con questo file?"
+                    Case "CHS", "CHT"
+                        ISOMsg = "继续之前，请确保已保存所有更改。" & CrLf & CrLf & "如果尚未完成，请单击「否」，保存映像，然后重新开始此过程。您无需关闭此窗口。" & CrLf & CrLf & "是否要使用此文件创建 ISO？"
                 End Select
             Case 1
                 ISOMsg = "Make sure that you have saved all your changes before continuing." & CrLf & CrLf & "If you have not done so, click No, save your image, and start the process again. You don't have to close this window." & CrLf & CrLf & "Do you want to create an ISO with this file?"
@@ -663,6 +735,9 @@ Public Class ISOCreator
                 ISOMsg = "Certifique-se de que guardou todas as suas alterações antes de continuar." & CrLf & CrLf & "Se ainda não o fez, clique em Não, guarde a sua imagem e comece o processo novamente. Não é necessário fechar esta janela." & CrLf & CrLf & "Deseja criar uma ISO com este ficheiro?"
             Case 5
                 ISOMsg = "Assicurarsi di aver salvato tutte le modifiche prima di continuare." & CrLf & CrLf & "Se non lo si è fatto, fare clic su No, salvare l'immagine e ricominciare il processo. Non è necessario chiudere questa finestra." & CrLf & CrLf & "Si desidera creare una ISO con questo file?"
+            Case 6
+                ISOMsg = "继续之前，请确保已保存所有更改。" & CrLf & CrLf & "如果尚未完成，请单击「否」，保存映像，然后重新开始此过程。您无需关闭此窗口。" & CrLf & CrLf & "是否要使用此文件创建 ISO？"
+
         End Select
         If MsgBox(ISOMsg, vbYesNo + vbQuestion, ImageTaskHeader1.ItemText) = MsgBoxResult.No Then
             Exit Sub
@@ -689,6 +764,8 @@ Public Class ISOCreator
                             ISOMsg = "O ISO de destino já existe. Deseja substituí-la?"
                         Case "ITA"
                             ISOMsg = "L'ISO di destinazione esiste già. Si desidera sostituirla?"
+                        Case "CHS", "CHT"
+                            ISOMsg = "目标 ISO 已存在。是否要替换它？"
                     End Select
                 Case 1
                     ISOMsg = "The target ISO already exists. Do you want to replace it?"
@@ -700,6 +777,9 @@ Public Class ISOCreator
                     ISOMsg = "O ISO de destino já existe. Deseja substituí-la?"
                 Case 5
                     ISOMsg = "L'ISO di destinazione esiste già. Si desidera sostituirla?"
+                Case 6
+                    ISOMsg = "目标 ISO 已存在。是否要替换它？"
+
             End Select
             If MsgBox(ISOMsg, vbYesNo + vbQuestion, ImageTaskHeader1.ItemText) = MsgBoxResult.Yes Then
                 Try
@@ -786,6 +866,7 @@ Public Class ISOCreator
                     Case "FRA" : Process.Start("https://learn.microsoft.com/fr-fr/windows-hardware/get-started/adk-install")
                     Case "PTB", "PTG" : Process.Start("https://learn.microsoft.com/pt-pt/windows-hardware/get-started/adk-install")
                     Case "ITA" : Process.Start("https://learn.microsoft.com/it-it/windows-hardware/get-started/adk-install")
+                    Case "CHS", "CHT" : Process.Start("https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install")
                 End Select
             Case 1 : Process.Start("https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install")
             Case 2 : Process.Start("https://learn.microsoft.com/es-es/windows-hardware/get-started/adk-install")
@@ -868,6 +949,13 @@ Public Class ISOCreator
                             "In caso di dubbi, si consiglia di lasciare questa opzione deselezionata."
                         uefiCA2023_NotSupportedOnCurrentSystemMessage = "Abbiamo rilevato che, attualmente, questo sistema non supporta i file binari di avvio Windows UEFI CA 2023. Se si procede con la creazione dell'ISO, potrebbe non essere possibile avviare il file ISO risultante su questo sistema."
                         uefiCA2023_Title = "Informazioni su Windows UEFI CA 2023"
+                    Case "CHS", "CHT"
+                        uefiCA2023_Message = "此选项将创建包含 EFI 启动二进制文件的 ISO 文件，这些文件使用以下签名" & Quote & "Windows UEFI CA 2023" & Quote & " 证书。" & CrLf & CrLf &
+                            "某些使用 UEFI 的计算机可能无法使用更新后的启动二进制文件正确启动此 ISO 文件。因此，建议您检查测试设备与这些二进制文件的兼容性。" & CrLf & CrLf &
+                            "请运行 ISO 创建器帮助文档中所述的 PowerShell 命令，以确定设备是否安装了此证书。" & CrLf & CrLf &
+                            "如有疑问，建议不要选中此选项。"
+                        uefiCA2023_NotSupportedOnCurrentSystemMessage = "我们检测到当前系统不支持 Windows UEFI CA 2023 启动二进制文件。如果继续创建 ISO，您可能无法在此系统上启动生成的 ISO 文件。"
+                        uefiCA2023_Title = "Windows UEFI CA 2023 信息"
                 End Select
             Case 1
                 uefiCA2023_Message = "This option will create ISO files that contain EFI boot binaries that are signed with the " & Quote & "Windows UEFI CA 2023" & Quote & " certificate." & CrLf & CrLf &
@@ -904,6 +992,14 @@ Public Class ISOCreator
                     "In caso di dubbi, si consiglia di lasciare questa opzione deselezionata."
                 uefiCA2023_NotSupportedOnCurrentSystemMessage = "Abbiamo rilevato che, attualmente, questo sistema non supporta i file binari di avvio Windows UEFI CA 2023. Se si procede con la creazione dell'ISO, potrebbe non essere possibile avviare il file ISO risultante su questo sistema."
                 uefiCA2023_Title = "Informazioni su Windows UEFI CA 2023"
+            Case 6
+                uefiCA2023_Message = "此选项将创建包含 EFI 启动二进制文件的 ISO 文件，这些文件使用以下签名" & Quote & "Windows UEFI CA 2023" & Quote & " 证书。" & CrLf & CrLf &
+                    "某些使用 UEFI 的计算机可能无法使用更新后的启动二进制文件正确启动此 ISO 文件。因此，建议您检查测试设备与这些二进制文件的兼容性。" & CrLf & CrLf &
+                    "请运行 ISO 创建器帮助文档中所述的 PowerShell 命令，以确定设备是否安装了此证书。" & CrLf & CrLf &
+                    "如有疑问，建议不要选中此选项。"
+                uefiCA2023_NotSupportedOnCurrentSystemMessage = "我们检测到当前系统不支持 Windows UEFI CA 2023 启动二进制文件。如果继续创建 ISO，您可能无法在此系统上启动生成的 ISO 文件。"
+                uefiCA2023_Title = "Windows UEFI CA 2023 信息"
+
         End Select
         If CheckBox3.Checked Then
             MsgBox(uefiCA2023_Message, vbOKOnly + vbInformation, uefiCA2023_Title)
@@ -1057,12 +1153,15 @@ Public Class ISOCreator
                     Case "FRA" : msg = If(isSuccess, String.Format("Le fichier ISO {0}{1}{0} a été créé avec succès.", Quote, Path.GetFileName(isoFilePath)), "Le processus de création de l'ISO a échoué")
                     Case "PTB", "PTG" : msg = If(isSuccess, String.Format("O ficheiro ISO {0}{1}{0} foi criado com êxito.", Quote, Path.GetFileName(isoFilePath)), "O processo de criação do ISO falhou")
                     Case "ITA" : msg = If(isSuccess, String.Format("Il file ISO {0}{1}{0} è stato creato con successo.", Quote, Path.GetFileName(isoFilePath)), "La creazione del file ISO non è riuscita")
+                    Case "CHS", "CHT" : msg = If(isSuccess, String.Format("ISO 文件 {0}{1}{0} 已成功创建。", Quote, Path.GetFileName(isoFilePath)), "创建 ISO 文件失败")
                 End Select
             Case 1 : msg = If(isSuccess, String.Format("The ISO file {0}{1}{0} has been created successfully.", Quote, Path.GetFileName(isoFilePath)), "Failed to create the ISO file")
             Case 2 : msg = If(isSuccess, String.Format("El archivo ISO {0}{1}{0} ha sido creado satisfactoriamente.", Quote, Path.GetFileName(isoFilePath)), "No pudimos crear el archivo ISO")
             Case 3 : msg = If(isSuccess, String.Format("Le fichier ISO {0}{1}{0} a été créé avec succès.", Quote, Path.GetFileName(isoFilePath)), "Le processus de création de l'ISO a échoué")
             Case 4 : msg = If(isSuccess, String.Format("O ficheiro ISO {0}{1}{0} foi criado com êxito.", Quote, Path.GetFileName(isoFilePath)), "O processo de criação do ISO falhou")
             Case 5 : msg = If(isSuccess, String.Format("Il file ISO {0}{1}{0} è stato creato con successo.", Quote, Path.GetFileName(isoFilePath)), "La creazione del file ISO non è riuscita")
+            Case 6 : msg = If(isSuccess, String.Format("ISO 文件 {0}{1}{0} 已成功创建。", Quote, Path.GetFileName(isoFilePath)), "创建 ISO 文件失败")
+
         End Select
 
         WindowHelper.DisplayNotificationBalloon(If(isSuccess, ToolTipIcon.Info, ToolTipIcon.Warning), ImageTaskHeader1.ItemText, msg)

@@ -169,6 +169,19 @@ Public Class DisableFeat
                         ListView1.Columns(1).Text = "Stato"
                         CheckBox1.Text = "Specificare il nome del pacchetto padre per le caratteristiche"
                         CheckBox2.Text = "Rimuovi la caratteristica senza rimuovere il manifesto"
+                    Case "CHS", "CHT"
+                        Text = "禁用功能"
+                        ImageTaskHeader1.ItemText = Text
+                        Label3.Text = "程序包名称："
+                        GroupBox1.Text = "功能"
+                        GroupBox2.Text = "选项"
+                        Button1.Text = "查找..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        ListView1.Columns(0).Text = "功能名称"
+                        ListView1.Columns(1).Text = "状态"
+                        CheckBox1.Text = "为功能指定父程序包名称"
+                        CheckBox2.Text = "删除功能但保留清单"
                 End Select
             Case 1
                 Text = "Disable features"
@@ -235,6 +248,20 @@ Public Class DisableFeat
                 ListView1.Columns(1).Text = "Stato"
                 CheckBox1.Text = "Specificare il nome del pacchetto padre per le caratteristiche"
                 CheckBox2.Text = "Rimuovi la caratteristica senza rimuovere il manifesto"
+            Case 6
+                Text = "禁用功能"
+                ImageTaskHeader1.ItemText = Text
+                Label3.Text = "程序包名称："
+                GroupBox1.Text = "功能"
+                GroupBox2.Text = "选项"
+                Button1.Text = "查找..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                ListView1.Columns(0).Text = "功能名称"
+                ListView1.Columns(1).Text = "状态"
+                CheckBox1.Text = "为功能指定父程序包名称"
+                CheckBox2.Text = "删除功能但保留清单"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

@@ -254,6 +254,32 @@ Public Class ImportDrivers
                         ImportSources(0) = "Immagine di Windows"
                         ImportSources(1) = "Installazione attiva"
                         ImportSources(2) = "Installazione offline"
+                    Case "CHS", "CHT"
+                        Text = "导入驱动程序"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "此过程会将您指定源中的所有第三方驱动程序导入到此映像或安装。这可确保目标映像具有与源映像相同的硬件兼容性"
+                        Label3.Text = "导入源："
+                        Label4.Text = If(ImportSourceInt = 1, "此源没有可用的附加设置。", "选择上方列出的源以配置其设置。")
+                        Label5.Text = "要从中导入驱动程序的 Windows 映像："
+                        Label6.Text = "不能将导入目标用作导入源"
+                        Label7.Text = "要从中导入驱动程序的脱机安装："
+                        Label8.Text = "不能将导入目标用作导入源"
+                        Label9.Text = "映像文件："
+                        Button1.Text = "选择..."
+                        Button2.Text = "刷新"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        ListView1.Columns(0).Text = "驱动器号"
+                        ListView1.Columns(1).Text = "驱动器标卷"
+                        ListView1.Columns(2).Text = "驱动器类型"
+                        ListView1.Columns(3).Text = "总大小"
+                        ListView1.Columns(4).Text = "可用剩余空间"
+                        ListView1.Columns(5).Text = "驱动器格式"
+                        ListView1.Columns(6).Text = "是否包含 Windows？"
+                        ListView1.Columns(7).Text = "Windows 版本"
+                        ImportSources(0) = "Windows 映像"
+                        ImportSources(1) = "联机安装"
+                        ImportSources(2) = "脱机安装"
                 End Select
             Case 1
                 Text = "Import drivers"
@@ -385,6 +411,33 @@ Public Class ImportDrivers
                 ImportSources(0) = "Immagine di Windows"
                 ImportSources(1) = "Installazione attiva"
                 ImportSources(2) = "Installazione offline"
+            Case 6
+                Text = "导入驱动程序"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "此过程会将您指定源中的所有第三方驱动程序导入到此映像或安装。这可确保目标映像具有与源映像相同的硬件兼容性"
+                Label3.Text = "导入源："
+                Label4.Text = If(ImportSourceInt = 1, "此源没有可用的附加设置。", "选择上方列出的源以配置其设置。")
+                Label5.Text = "要从中导入驱动程序的 Windows 映像："
+                Label6.Text = "不能将导入目标用作导入源"
+                Label7.Text = "要从中导入驱动程序的脱机安装："
+                Label8.Text = "不能将导入目标用作导入源"
+                Label9.Text = "映像文件："
+                Button1.Text = "选择..."
+                Button2.Text = "刷新"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                ListView1.Columns(0).Text = "驱动器号"
+                ListView1.Columns(1).Text = "驱动器标卷"
+                ListView1.Columns(2).Text = "驱动器类型"
+                ListView1.Columns(3).Text = "总大小"
+                ListView1.Columns(4).Text = "可用剩余空间"
+                ListView1.Columns(5).Text = "驱动器格式"
+                ListView1.Columns(6).Text = "是否包含 Windows？"
+                ListView1.Columns(7).Text = "Windows 版本"
+                ImportSources(0) = "Windows 映像"
+                ImportSources(1) = "联机安装"
+                ImportSources(2) = "脱机安装"
+
         End Select
         ComboBox1.Items.AddRange(ImportSources)
         If ImportSourceInt >= 0 Then ComboBox1.SelectedIndex = ImportSourceInt
@@ -462,6 +515,8 @@ Public Class ImportDrivers
                         Label4.Text = If(ImportSourceInt = 1, "Esta origem não tem quaisquer configurações adicionais disponíveis.", "Escolha uma origem listada acima para configurar as suas configurações.")
                     Case "ITA"
                         Label4.Text = If(ImportSourceInt = 1, "Questa sorgente non ha impostazioni aggiuntive disponibili", "Scegliere una sorgente elencata sopra per configurarne le impostazioni")
+                    Case "CHS", "CHT"
+                        Label4.Text = If(ImportSourceInt = 1, "此源没有可用的附加设置。", "选择上方列出的源以配置其设置。")
                 End Select
             Case 1
                 Label4.Text = If(ImportSourceInt = 1, "This source doesn't have any additional settings available.", "Choose a source listed above to configure its settings.")
@@ -473,6 +528,9 @@ Public Class ImportDrivers
                 Label4.Text = If(ImportSourceInt = 1, "Esta origem não tem quaisquer configurações adicionais disponíveis.", "Escolha uma origem listada acima para configurar as suas configurações.")
             Case 5
                 Label4.Text = If(ImportSourceInt = 1, "Questa sorgente non ha impostazioni aggiuntive disponibili", "Scegliere una sorgente elencata sopra per configurarne le impostazioni")
+            Case 6
+                Label4.Text = If(ImportSourceInt = 1, "此源没有可用的附加设置。", "选择上方列出的源以配置其设置。")
+
         End Select
     End Sub
 

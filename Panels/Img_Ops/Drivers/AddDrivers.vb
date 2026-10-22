@@ -161,6 +161,11 @@ Public Class AddDrivers
                                       "- Per consentire a DISM di eseguire la scansione ricorsiva di questa cartella, fare clic su Sì" & CrLf & _
                                       "- Per scegliere manualmente i driver in questa cartella, fare clic su No" & CrLf & _
                                       "- Per non aggiungere questa cartella, fare clic su Annulla"
+                            Case "CHS", "CHT"
+                                msg = "指定的程序包是一个文件夹。您可以让 DISM 递归扫描该文件夹以添加其中的所有驱动程序，也可以手动指定要添加的驱动程序。" & CrLf & CrLf & _
+                                      "- 要让 DISM 递归扫描此文件夹，请单击「是」" & CrLf & _
+                                      "- 要手动选择此文件夹中的驱动程序，请单击「否」" & CrLf & _
+                                      "- 要跳过添加此文件夹，请单击「取消」"
                         End Select
                     Case 1
                         msg = "The package specified is a folder. You can let DISM scan it recursively to add all drivers in it, or you can specify the drivers to add manually." & CrLf & CrLf & _
@@ -187,6 +192,12 @@ Public Class AddDrivers
                               "- Per consentire a DISM di eseguire la scansione ricorsiva di questa cartella, fare clic su Sì" & CrLf & _
                               "- Per scegliere manualmente i driver in questa cartella, fare clic su No" & CrLf & _
                               "- Per non aggiungere questa cartella, fare clic su Annulla"
+                    Case 6
+                        msg = "指定的程序包是一个文件夹。您可以让 DISM 递归扫描该文件夹以添加其中的所有驱动程序，也可以手动指定要添加的驱动程序。" & CrLf & CrLf & _
+                              "- 要让 DISM 递归扫描此文件夹，请单击「是」" & CrLf & _
+                              "- 要手动选择此文件夹中的驱动程序，请单击「否」" & CrLf & _
+                              "- 要跳过添加此文件夹，请单击「取消」"
+
                 End Select
                 Select Case MsgBox(msg, vbYesNoCancel + vbInformation, ImageTaskHeader1.ItemText)
                     Case MsgBoxResult.Yes
@@ -397,6 +408,26 @@ Public Class AddDrivers
                         ListView1.Columns(1).Text = "Tipo"
                         OpenFileDialog1.Title = "Specificare il pacchetto driver da aggiungere"
                         FolderBrowserDialog1.Description = "Specificare la cartella contenente i pacchetti di driver. Sarà quindi possibile specificare se è necessario eseguire una scansione ricorsiva:"
+                    Case "CHS", "CHT"
+                        Text = "添加驱动程序"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "请使用下方按钮添加驱动程序，或将其拖放到下方列表中："
+                        Label3.Text = "您可以让程序递归扫描下方列表中的驱动程序文件夹并将其一并添加。为此，请勾选希望扫描的条目："
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        Button1.Text = "添加文件..."
+                        Button2.Text = "添加文件夹..."
+                        Button3.Text = "删除所有条目"
+                        Button4.Text = "删除所选条目"
+                        CheckBox1.Text = "强制安装未签名的驱动程序"
+                        CheckBox2.Text = "添加驱动程序后提交映像"
+                        GroupBox1.Text = "驱动程序文件"
+                        GroupBox2.Text = "驱动程序文件夹"
+                        GroupBox3.Text = "选项"
+                        ListView1.Columns(0).Text = "文件/文件夹"
+                        ListView1.Columns(1).Text = "类型"
+                        OpenFileDialog1.Title = "指定要添加的驱动程序包"
+                        FolderBrowserDialog1.Description = "指定包含驱动程序包的文件夹。之后您可以指定是否需要递归扫描："
                 End Select
             Case 1
                 Text = "Add drivers"
@@ -498,6 +529,27 @@ Public Class AddDrivers
                 ListView1.Columns(1).Text = "Tipo"
                 OpenFileDialog1.Title = "Specificare il pacchetto driver da aggiungere"
                 FolderBrowserDialog1.Description = "Specificare la cartella contenente i pacchetti di driver. Sarà quindi possibile specificare se è necessario eseguire una scansione ricorsiva:"
+            Case 6
+                Text = "添加驱动程序"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "请使用下方按钮添加驱动程序，或将其拖放到下方列表中："
+                Label3.Text = "您可以让程序递归扫描下方列表中的驱动程序文件夹并将其一并添加。为此，请勾选希望扫描的条目："
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                Button1.Text = "添加文件..."
+                Button2.Text = "添加文件夹..."
+                Button3.Text = "删除所有条目"
+                Button4.Text = "删除所选条目"
+                CheckBox1.Text = "强制安装未签名的驱动程序"
+                CheckBox2.Text = "添加驱动程序后提交映像"
+                GroupBox1.Text = "驱动程序文件"
+                GroupBox2.Text = "驱动程序文件夹"
+                GroupBox3.Text = "选项"
+                ListView1.Columns(0).Text = "文件/文件夹"
+                ListView1.Columns(1).Text = "类型"
+                OpenFileDialog1.Title = "指定要添加的驱动程序包"
+                FolderBrowserDialog1.Description = "指定包含驱动程序包的文件夹。之后您可以指定是否需要递归扫描："
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -561,6 +613,11 @@ Public Class AddDrivers
                                       "- Per consentire a DISM di eseguire la scansione ricorsiva di questa cartella, fare clic su Sì" & CrLf & _
                                       "- Per scegliere manualmente i driver in questa cartella, fare clic su No" & CrLf & _
                                       "- Per non aggiungere questa cartella, fare clic su Annulla"
+                            Case "CHS", "CHT"
+                                msg = "指定的程序包是一个文件夹。您可以让 DISM 递归扫描该文件夹以添加其中的所有驱动程序，也可以手动指定要添加的驱动程序。" & CrLf & CrLf & _
+                                      "- 要让 DISM 递归扫描此文件夹，请单击「是」" & CrLf & _
+                                      "- 要手动选择此文件夹中的驱动程序，请单击「否」" & CrLf & _
+                                      "- 要跳过添加此文件夹，请单击「取消」"
                         End Select
                     Case 1
                         msg = "The package specified is a folder. You can let DISM scan it recursively to add all drivers in it, or you can specify the drivers to add manually." & CrLf & CrLf & _
@@ -587,6 +644,12 @@ Public Class AddDrivers
                               "- Per consentire a DISM di eseguire la scansione ricorsiva di questa cartella, fare clic su Sì" & CrLf & _
                               "- Per scegliere manualmente i driver in questa cartella, fare clic su No" & CrLf & _
                               "- Per non aggiungere questa cartella, fare clic su Annulla"
+                    Case 6
+                        msg = "指定的程序包是一个文件夹。您可以让 DISM 递归扫描该文件夹以添加其中的所有驱动程序，也可以手动指定要添加的驱动程序。" & CrLf & CrLf & _
+                              "- 要让 DISM 递归扫描此文件夹，请单击「是」" & CrLf & _
+                              "- 要手动选择此文件夹中的驱动程序，请单击「否」" & CrLf & _
+                              "- 要跳过添加此文件夹，请单击「取消」"
+
                 End Select
                 Select Case MsgBox(msg, vbYesNoCancel + vbInformation, ImageTaskHeader1.ItemText)
                     Case MsgBoxResult.Yes

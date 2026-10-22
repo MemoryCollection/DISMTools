@@ -223,6 +223,12 @@ Public Class ImgInfoSaveDlg
                           "Nota che questa operazione richiederà più tempo a seconda del numero di pacchetti installati." & CrLf & CrLf &
                           "Vuoi avere queste informazioni e salvarle nel rapporto?"
                         msg(2) = "Informazioni pacchetto"
+                    Case "CHS", "CHT"
+                        msg(0) = "正在准备程序包信息进程..."
+                        msg(1) = "程序已获取此映像已安装程序包的基本信息。您还可以获取这些程序包的完整信息并保存到报告中。" & CrLf & CrLf &
+                          "请注意，具体耗时会随已安装程序包的数量而增加。" & CrLf & CrLf &
+                          "是否要获取此信息并保存到报告中？"
+                        msg(2) = "程序包信息"
                 End Select
             Case 1
                 msg(0) = "Preparing package information processes..."
@@ -254,6 +260,13 @@ Public Class ImgInfoSaveDlg
                   "Nota che questa operazione richiederà più tempo a seconda del numero di pacchetti installati." & CrLf & CrLf &
                   "Vuoi ottenere queste informazioni e salvarle nel rapporto?"
                 msg(2) = "Informazioni pacchetto"
+            Case 6
+                msg(0) = "正在准备程序包信息进程..."
+                msg(1) = "程序已获取此映像已安装程序包的基本信息。您还可以获取这些程序包的完整信息并保存到报告中。" & CrLf & CrLf &
+                  "请注意，具体耗时会随已安装程序包的数量而增加。" & CrLf & CrLf &
+                  "是否要获取此信息并保存到报告中？"
+                msg(2) = "程序包信息"
+
         End Select
         Contents &= GetHeader("Package information", HeaderSize.Header2) & CrLf &
                     GetListItems(New String() {"Image file to get information from: " & If(SourceImage <> "" And Not OnlineMode, Quote & SourceImage & Quote, "active installation")}.ToList()) & CrLf
@@ -281,6 +294,8 @@ Public Class ImgInfoSaveDlg
                                 msg(0) = "Os pacotes foram obtidos"
                             Case "ITA"
                                 msg(0) = "I pacchetti sono stati acquisiti"
+                            Case "CHS", "CHT"
+                                msg(0) = "已获取程序包"
                         End Select
                     Case 1
                         msg(0) = "Packages have been obtained"
@@ -292,6 +307,9 @@ Public Class ImgInfoSaveDlg
                         msg(0) = "Os pacotes foram obtidos"
                     Case 5
                         msg(0) = "I pacchetti sono stati acquisiti"
+                    Case 6
+                        msg(0) = "已获取程序包"
+
                 End Select
                 ReportChanges(msg(0), 10)
                 Dim pkgCustomPropsList As String = "<ul>"
@@ -460,6 +478,8 @@ Public Class ImgInfoSaveDlg
                                     msg(0) = "Guardar os pacotes instalados..."
                                 Case "ITA"
                                     msg(0) = "Salvataggio pacchetti installati..."
+                                Case "CHS", "CHT"
+                                    msg(0) = "正在保存已安装的程序包..."
                             End Select
                         Case 1
                             msg(0) = "Saving installed packages..."
@@ -471,6 +491,9 @@ Public Class ImgInfoSaveDlg
                             msg(0) = "Guardar os pacotes instalados..."
                         Case 5
                             msg(0) = "Salvataggio pacchetti installati..."
+                        Case 6
+                            msg(0) = "正在保存已安装的程序包..."
+
                     End Select
                     ReportChanges(msg(0), 50)
                     Contents &= GetTableHeader(New String() {"Package name",
@@ -511,6 +534,8 @@ Public Class ImgInfoSaveDlg
                         msg = "A preparar processos de informação sobre pacotes..."
                     Case "ITA"
                         msg = "Preparazione processi verifica informazioni pacchetti..."
+                    Case "CHS", "CHT"
+                        msg = "正在准备程序包信息进程..."
                 End Select
             Case 1
                 msg = "Preparing package information processes..."
@@ -522,6 +547,9 @@ Public Class ImgInfoSaveDlg
                 msg = "A preparar processos de informação sobre pacotes..."
             Case 5
                 msg = "Preparazione processi verifica informazioni pacchetti..."
+            Case 6
+                msg = "正在准备程序包信息进程..."
+
         End Select
         Contents &= GetHeader("Package file information", HeaderSize.Header2) & CrLf &
                     GetListItems(New String() {"Image file to get information from: " & If(SourceImage <> "" And Not OnlineMode, Quote & SourceImage & Quote, "active installation")}.ToList()) & CrLf
@@ -732,6 +760,12 @@ Public Class ImgInfoSaveDlg
                           "Tieni presente che questa operazione richiederà più tempo a seconda del numero di funzionalità installate." & CrLf & CrLf &
                           "Vuoi avere queste informazioni e salvarle nel rapporto?"
                         msg(2) = "Informazioni funzionalità"
+                    Case "CHS", "CHT"
+                        msg(0) = "正在准备功能信息进程..."
+                        msg(1) = "程序已获取此映像已安装功能的基本信息。您还可以获取这些功能的完整信息并保存到报告中。" & CrLf & CrLf &
+                          "请注意，具体耗时会随已安装功能的数量而增加。" & CrLf & CrLf &
+                          "是否要获取此信息并保存到报告中？"
+                        msg(2) = "功能信息"
                 End Select
             Case 1
                 msg(0) = "Preparing feature information processes..."
@@ -763,6 +797,13 @@ Public Class ImgInfoSaveDlg
                   "Tieni presente che questa operazione richiederà più tempo a seconda del numero di funzionalità installate." & CrLf & CrLf &
                   "Vuoi avere queste informazioni e salvarle nel rapporto?"
                 msg(2) = "Informazioni funzionalità"
+            Case 6
+                msg(0) = "正在准备功能信息进程..."
+                msg(1) = "程序已获取此映像已安装功能的基本信息。您还可以获取这些功能的完整信息并保存到报告中。" & CrLf & CrLf &
+                  "请注意，具体耗时会随已安装功能的数量而增加。" & CrLf & CrLf &
+                  "是否要获取此信息并保存到报告中？"
+                msg(2) = "功能信息"
+
         End Select
         Contents &= GetHeader("Feature information", HeaderSize.Header2) & CrLf &
                     GetListItems(New String() {"Image file to get information from: " & If(SourceImage <> "" And Not OnlineMode, Quote & SourceImage & Quote, "active installation")}.ToList()) & CrLf
@@ -790,6 +831,8 @@ Public Class ImgInfoSaveDlg
                                 msg(0) = "As características foram obtidas"
                             Case "ITA"
                                 msg(0) = "Le funzionalità sono state acquisite"
+                            Case "CHS", "CHT"
+                                msg(0) = "已获取功能"
                         End Select
                     Case 1
                         msg(0) = "Features have been obtained"
@@ -801,6 +844,9 @@ Public Class ImgInfoSaveDlg
                         msg(0) = "As características foram obtidas"
                     Case 5
                         msg(0) = "Le funzionalità sono state acquisite"
+                    Case 6
+                        msg(0) = "已获取功能"
+
                 End Select
                 ReportChanges(msg(0), 10)
                 Dim featCustomPropsList As String = "<ul>"
@@ -874,6 +920,8 @@ Public Class ImgInfoSaveDlg
                                     msg(0) = "Guardar as características instaladas..."
                                 Case "ITA"
                                     msg(0) = "Salvataggio funzionalità installate..."
+                                Case "CHS", "CHT"
+                                    msg(0) = "正在保存已安装的功能..."
                             End Select
                         Case 1
                             msg(0) = "Saving installed features..."
@@ -885,6 +933,9 @@ Public Class ImgInfoSaveDlg
                             msg(0) = "Guardar as características instaladas..."
                         Case 5
                             msg(0) = "Salvataggio funzionalità installate..."
+                        Case 6
+                            msg(0) = "正在保存已安装的功能..."
+
                     End Select
                     ReportChanges(msg(0), 50)
                     Contents &= GetTableHeader(New String() {"Feature name",
@@ -942,6 +993,12 @@ Public Class ImgInfoSaveDlg
                           "Nota che questa operazione richiederà più tempo a seconda del numero di pacchetti AppX installati." & CrLf & CrLf &
                           "Vuoi avere queste informazioni e salvarle nel rapporto?"
                         msg(2) = "Informazioni pacchetti AppX"
+                    Case "CHS", "CHT"
+                        msg(0) = "正在准备 AppX 程序包信息进程..."
+                        msg(1) = "程序已获取此映像已安装 AppX 程序包的基本信息。您还可以获取这些 AppX 程序包的完整信息并保存到报告中。" & CrLf & CrLf &
+                          "请注意，具体耗时会随已安装 AppX 程序包的数量而增加。" & CrLf & CrLf &
+                          "是否要获取此信息并保存到报告中？"
+                        msg(2) = "AppX 程序包信息"
                 End Select
             Case 1
                 msg(0) = "Preparing AppX package information processes..."
@@ -973,6 +1030,13 @@ Public Class ImgInfoSaveDlg
                   "Si noti che questa operazione richiederà più tempo a seconda del numero di pacchetti AppX installati." & CrLf & CrLf &
                   "Volete ottenere queste informazioni e salvarle nel rapporto?"
                 msg(2) = "Informazioni sui pacchetti AppX"
+            Case 6
+                msg(0) = "正在准备 AppX 程序包信息进程..."
+                msg(1) = "程序已获取此映像已安装 AppX 程序包的基本信息。您还可以获取这些 AppX 程序包的完整信息并保存到报告中。" & CrLf & CrLf &
+                  "请注意，具体耗时会随已安装 AppX 程序包的数量而增加。" & CrLf & CrLf &
+                  "是否要获取此信息并保存到报告中？"
+                msg(2) = "AppX 程序包信息"
+
         End Select
         Contents &= GetHeader("AppX package information", HeaderSize.Header2) & CrLf &
                     GetListItems(New String() {"Image file to get information from: " & If(SourceImage <> "" And Not OnlineMode, Quote & SourceImage & Quote, "active installation")}.ToList()) & CrLf
@@ -1159,6 +1223,8 @@ Public Class ImgInfoSaveDlg
                                         msg(0) = "Os pacotes AppX foram obtidos"
                                     Case "ITA"
                                         msg(0) = "I pacchetti AppX sono stati ottenuti"
+                                    Case "CHS", "CHT"
+                                        msg(0) = "已获取 AppX 程序包"
                                 End Select
                             Case 1
                                 msg(0) = "AppX packages have been obtained"
@@ -1170,6 +1236,9 @@ Public Class ImgInfoSaveDlg
                                 msg(0) = "Os pacotes AppX foram obtidos"
                             Case 5
                                 msg(0) = "I pacchetti AppX sono stati ottenuti"
+                            Case 6
+                                msg(0) = "已获取 AppX 程序包"
+
                         End Select
                         ReportChanges(msg(0), 10)
                         If GetEverything Then
@@ -1426,6 +1495,8 @@ Public Class ImgInfoSaveDlg
                                             msg(0) = "Guardar os pacotes AppX instalados..."
                                         Case "ITA"
                                             msg(0) = "Salvataggio dei pacchetti AppX installati..."
+                                        Case "CHS", "CHT"
+                                            msg(0) = "正在保存已安装的 AppX 程序包..."
                                     End Select
                                 Case 1
                                     msg(0) = "Saving installed AppX packages..."
@@ -1437,6 +1508,9 @@ Public Class ImgInfoSaveDlg
                                     msg(0) = "Guardar os pacotes AppX instalados..."
                                 Case 5
                                     msg(0) = "Salvataggio dei pacchetti AppX installati..."
+                                Case 6
+                                    msg(0) = "正在保存已安装的 AppX 程序包..."
+
                             End Select
                             ReportChanges(msg(0), 50)
                             Contents &= GetTableHeader(New String() {"Package name",
@@ -1500,6 +1574,12 @@ Public Class ImgInfoSaveDlg
                           "Si noti che questa operazione richiederà più tempo a seconda del numero di funzionalità installate." & CrLf & CrLf &
                           "Volete ottenere queste informazioni e salvarle nel rapporto?"
                         msg(2) = "Informazioni sulle capacità"
+                    Case "CHS", "CHT"
+                        msg(0) = "正在准备功能包信息进程..."
+                        msg(1) = "程序已获取此映像已安装功能包的基本信息。您还可以获取这些功能包的完整信息并保存到报告中。" & CrLf & CrLf &
+                          "请注意，具体耗时会随已安装功能包的数量而增加。" & CrLf & CrLf &
+                          "是否要获取此信息并保存到报告中？"
+                        msg(2) = "功能包信息"
                 End Select
             Case 1
                 msg(0) = "Preparing capability information processes..."
@@ -1531,6 +1611,13 @@ Public Class ImgInfoSaveDlg
                   "Si noti che questa operazione richiederà più tempo a seconda del numero di funzionalità installate." & CrLf & CrLf &
                   "Volete ottenere queste informazioni e salvarle nel rapporto?"
                 msg(2) = "Informazioni sulle capacità"
+            Case 6
+                msg(0) = "正在准备功能包信息进程..."
+                msg(1) = "程序已获取此映像已安装功能包的基本信息。您还可以获取这些功能包的完整信息并保存到报告中。" & CrLf & CrLf &
+                  "请注意，具体耗时会随已安装功能包的数量而增加。" & CrLf & CrLf &
+                  "是否要获取此信息并保存到报告中？"
+                msg(2) = "功能包信息"
+
         End Select
         Contents &= GetHeader("Capability information", HeaderSize.Header2) & CrLf &
                     GetListItems(New String() {"Image file to get information from: " & If(SourceImage <> "" And Not OnlineMode, Quote & SourceImage & Quote, "active installation")}.ToList()) & CrLf
@@ -1564,6 +1651,8 @@ Public Class ImgInfoSaveDlg
                                     msg(0) = "As capacidades foram obtidas"
                                 Case "ITA"
                                     msg(0) = "Le capacità sono state ottenute"
+                                Case "CHS", "CHT"
+                                    msg(0) = "已获取功能包"
                             End Select
                         Case 1
                             msg(0) = "Capabilities have been obtained"
@@ -1575,6 +1664,9 @@ Public Class ImgInfoSaveDlg
                             msg(0) = "As capacidades foram obtidas"
                         Case 5
                             msg(0) = "Le capacità sono state ottenute"
+                        Case 6
+                            msg(0) = "已获取功能包"
+
                     End Select
                     ReportChanges(msg(0), 10)
                     If GetEverything Then
@@ -1637,6 +1729,8 @@ Public Class ImgInfoSaveDlg
                                         msg(0) = "Guardar as capacidades instaladas..."
                                     Case "ITA"
                                         msg(0) = "Salvataggio delle capacità installate..."
+                                    Case "CHS", "CHT"
+                                        msg(0) = "正在保存已安装的功能包..."
                                 End Select
                             Case 1
                                 msg(0) = "Saving installed capabilities..."
@@ -1648,6 +1742,9 @@ Public Class ImgInfoSaveDlg
                                 msg(0) = "Guardar as capacidades instaladas..."
                             Case 5
                                 msg(0) = "Salvataggio delle capacità installate..."
+                            Case 6
+                                msg(0) = "正在保存已安装的功能包..."
+
                         End Select
                         ReportChanges(msg(0), 50)
                         Contents &= GetTableHeader(New String() {"Capability identity",
@@ -1721,6 +1818,15 @@ Public Class ImgInfoSaveDlg
                         msg(3) = "Avete configurato i processi in background in modo che non rilevino tutti i driver, compresi quelli che fanno parte della distribuzione di Windows, quindi potreste non vedere il driver che vi interessa." & CrLf & CrLf &
                       "Questa impostazione viene applicata anche a questa attività, ma ora è possibile ottenere le informazioni su tutti i driver. Tenere presente che questa operazione può richiedere molto tempo, a seconda della quantità di driver di prima parte." & CrLf & CrLf &
                       "Volete ottenere le informazioni su tutti i driver, compresi quelli che fanno parte della distribuzione di Windows?"
+                    Case "CHS", "CHT"
+                        msg(0) = "正在准备驱动程序信息进程..."
+                        msg(1) = "程序已获取此映像已安装驱动程序的基本信息。您还可以获取这些驱动程序的完整信息并保存到报告中。" & CrLf & CrLf &
+                          "请注意，具体耗时会随已安装驱动程序的数量而增加。" & CrLf & CrLf &
+                          "是否要获取此信息并保存到报告中？"
+                        msg(2) = "驱动程序信息"
+                        msg(3) = "您已将后台进程配置为不检测所有驱动程序（其中包括属于 Windows 分发内容的驱动程序），因此可能看不到您关注的驱动程序。" & CrLf & CrLf &
+                      "此设置同样应用于此任务，但您现在可以获取所有驱动程序的信息。请注意，这可能耗时较长，具体取决于第一方驱动程序的数量。" & CrLf & CrLf &
+                      "是否要获取所有驱动程序的信息（包括属于 Windows 分发内容的驱动程序）？"
                 End Select
             Case 1
                 msg(0) = "Preparing driver information processes..."
@@ -1767,6 +1873,16 @@ Public Class ImgInfoSaveDlg
                 msg(3) = "Avete configurato i processi in background in modo che non rilevino tutti i driver, compresi quelli che fanno parte della distribuzione di Windows, quindi potreste non vedere il driver che vi interessa." & CrLf & CrLf &
               "Questa impostazione viene applicata anche a questa attività, ma ora è possibile ottenere le informazioni su tutti i driver. Tenere presente che questa operazione può richiedere molto tempo, a seconda della quantità di driver di prima parte." & CrLf & CrLf &
               "Volete ottenere le informazioni su tutti i driver, compresi quelli che fanno parte della distribuzione di Windows?"
+            Case 6
+                msg(0) = "正在准备驱动程序信息进程..."
+                msg(1) = "程序已获取此映像已安装驱动程序的基本信息。您还可以获取这些驱动程序的完整信息并保存到报告中。" & CrLf & CrLf &
+                  "请注意，具体耗时会随已安装驱动程序的数量而增加。" & CrLf & CrLf &
+                  "是否要获取此信息并保存到报告中？"
+                msg(2) = "驱动程序信息"
+                msg(3) = "您已将后台进程配置为不检测所有驱动程序（其中包括属于 Windows 分发内容的驱动程序），因此可能看不到您关注的驱动程序。" & CrLf & CrLf &
+              "此设置同样应用于此任务，但您现在可以获取所有驱动程序的信息。请注意，这可能耗时较长，具体取决于第一方驱动程序的数量。" & CrLf & CrLf &
+              "是否要获取所有驱动程序的信息（包括属于 Windows 分发内容的驱动程序）？"
+
         End Select
         Contents &= GetHeader("Driver information", HeaderSize.Header2) & CrLf &
                     GetListItems(New String() {"Image file to get information from: " & If(SourceImage <> "" And Not OnlineMode, Quote & SourceImage & Quote, "active installation"),
@@ -1794,6 +1910,8 @@ Public Class ImgInfoSaveDlg
                                 msg(0) = "Os controladores foram obtidos"
                             Case "ITA"
                                 msg(0) = "I driver del dispositivo sono stati ottenuti"
+                            Case "CHS", "CHT"
+                                msg(0) = "已获取驱动程序"
                         End Select
                     Case 1
                         msg(0) = "Drivers have been obtained"
@@ -1805,6 +1923,9 @@ Public Class ImgInfoSaveDlg
                         msg(0) = "Os controladores foram obtidos"
                     Case 5
                         msg(0) = "I driver del dispositivo sono stati ottenuti"
+                    Case 6
+                        msg(0) = "已获取驱动程序"
+
                 End Select
                 ReportChanges(msg(0), 10)
                 If GetEverything Then
@@ -1877,6 +1998,8 @@ Public Class ImgInfoSaveDlg
                                     msg(0) = "Guardar os controladores instalados..."
                                 Case "ITA"
                                     msg(0) = "Salvataggio dei driver installati..."
+                                Case "CHS", "CHT"
+                                    msg(0) = "正在保存已安装的驱动程序..."
                             End Select
                         Case 1
                             msg(0) = "Saving installed drivers..."
@@ -1888,6 +2011,9 @@ Public Class ImgInfoSaveDlg
                             msg(0) = "Guardar os controladores instalados..."
                         Case 5
                             msg(0) = "Salvataggio dei driver installati..."
+                        Case 6
+                            msg(0) = "正在保存已安装的驱动程序..."
+
                     End Select
                     ReportChanges(msg(0), 50)
                     Contents &= GetTableHeader(New String() {"Published name",
@@ -1932,6 +2058,8 @@ Public Class ImgInfoSaveDlg
                         msg = "Preparar os processos de informação dos controladores..."
                     Case "ITA"
                         msg = "Preparazione dei processi di informazione del driver..."
+                    Case "CHS", "CHT"
+                        msg = "正在准备驱动程序信息进程..."
                 End Select
             Case 1
                 msg = "Preparing driver information processes..."
@@ -1943,6 +2071,9 @@ Public Class ImgInfoSaveDlg
                 msg = "Preparar os processos de informação dos controladores..."
             Case 5
                 msg = "Preparazione dei processi di informazione del driver..."
+            Case 6
+                msg = "正在准备驱动程序信息进程..."
+
         End Select
         Contents &= GetHeader("Driver package information", HeaderSize.Header2) & CrLf & CrLf &
                     GetListItems(New String() {"Image file to get information from: " & If(SourceImage <> "" And Not OnlineMode, Quote & SourceImage & Quote, "active installation")}.ToList()) & CrLf
@@ -2035,6 +2166,8 @@ Public Class ImgInfoSaveDlg
                         msg = "A preparar para obter a configuração do Windows PE..."
                     Case "ITA"
                         msg = "Preparazione per ottenere la configurazione di Windows PE..."
+                    Case "CHS", "CHT"
+                        msg = "正在准备获取 Windows PE 配置..."
                 End Select
             Case 1
                 msg = "Preparing to get Windows PE configuration..."
@@ -2046,6 +2179,9 @@ Public Class ImgInfoSaveDlg
                 msg = "A preparar para obter a configuração do Windows PE..."
             Case 5
                 msg = "Preparazione per ottenere la configurazione di Windows PE..."
+            Case 6
+                msg = "正在准备获取 Windows PE 配置..."
+
         End Select
         Contents &= GetHeader("Windows PE configuration", HeaderSize.Header2) & CrLf & CrLf
         If Not ImageToGetInfoFrom.ImageEditionId.Equals("WindowsPE", StringComparison.OrdinalIgnoreCase) Then
@@ -2079,6 +2215,8 @@ Public Class ImgInfoSaveDlg
                                 msg = "Obter a localização do objetivo do Windows PE..."
                             Case "ITA"
                                 msg = "Ottenere il percorso di destinazione di Windows PE..."
+                            Case "CHS", "CHT"
+                                msg = "正在获取 Windows PE 目标路径..."
                         End Select
                     Case 1
                         msg = "Getting Windows PE target path..."
@@ -2090,6 +2228,9 @@ Public Class ImgInfoSaveDlg
                         msg = "Obter a localização do objetivo do Windows PE..."
                     Case 5
                         msg = "Ottenere il percorso di destinazione di Windows PE..."
+                    Case 6
+                        msg = "正在获取 Windows PE 目标路径..."
+
                 End Select
                 ReportChanges(msg, 50)
                 ' Get target path first
@@ -2109,6 +2250,8 @@ Public Class ImgInfoSaveDlg
                                 msg = "A obter espaço temporário do Windows PE..."
                             Case "ITA"
                                 msg = "Ottenere lo spazio temporaneo di Windows PE..."
+                            Case "CHS", "CHT"
+                                msg = "正在获取 Windows PE 暂存空间..."
                         End Select
                     Case 1
                         msg = "Getting Windows PE scratch space..."
@@ -2120,6 +2263,9 @@ Public Class ImgInfoSaveDlg
                         msg = "A obter espaço temporário do Windows PE..."
                     Case 5
                         msg = "Ottenere lo spazio temporaneo di Windows PE..."
+                    Case 6
+                        msg = "正在获取 Windows PE 暂存空间..."
+
                 End Select
                 ReportChanges(msg, 75)
                 regKey = Registry.LocalMachine.OpenSubKey("PE_SYS\ControlSet001\Services\FBWF", False)
@@ -2239,6 +2385,10 @@ Public Class ImgInfoSaveDlg
                         Text = "Salvataggio delle informazioni sull'immagine..."
                         Label1.Text = "Attendere che DISMTools salvi le informazioni sull'immagine in un file. Questa operazione può richiedere un certo tempo, a seconda delle attività eseguite."
                         Label2.Text = "Attendere..."
+                    Case "CHS", "CHT"
+                        Text = "正在保存映像信息..."
+                        Label1.Text = "请稍候，DISMTools 正在将映像信息保存到文件。这可能需要一些时间，具体取决于所运行的任务。"
+                        Label2.Text = "请稍候..."
                 End Select
             Case 1
                 Text = "Saving image information..."
@@ -2260,6 +2410,11 @@ Public Class ImgInfoSaveDlg
                 Text = "Salvataggio delle informazioni sull'immagine..."
                 Label1.Text = "Attendere che DISMTools salvi le informazioni sull'immagine in un file. Questa operazione può richiedere un certo tempo, a seconda delle attività eseguite."
                 Label2.Text = "Attendere..."
+            Case 6
+                Text = "正在保存映像信息..."
+                Label1.Text = "请稍候，DISMTools 正在将映像信息保存到文件。这可能需要一些时间，具体取决于所运行的任务。"
+                Label2.Text = "请稍候..."
+
         End Select
         If MainForm.ImgBW.IsBusy Then
             Dim msg As String = ""
@@ -2276,6 +2431,8 @@ Public Class ImgInfoSaveDlg
                             msg = "Os processos em segundo plano têm de estar concluídos antes de obter informações. Vamos esperar até que estejam concluídos"
                         Case "ITA"
                             msg = "I processi in background devono essere completati prima di ottenere informazioni. Aspetteremo che siano completati"
+                        Case "CHS", "CHT"
+                            msg = "需要等后台进程完成才能获取信息。我们将等待它们完成"
                     End Select
                 Case 1
                     msg = "Background processes need to have completed before getting information. We'll wait until they have completed"
@@ -2287,6 +2444,9 @@ Public Class ImgInfoSaveDlg
                     msg = "Os processos em segundo plano têm de estar concluídos antes de obter informações. Vamos esperar até que estejam concluídos"
                 Case 5
                     msg = "I processi in background devono essere completati prima di ottenere informazioni. Aspetteremo che siano completati"
+                Case 6
+                    msg = "需要等后台进程完成才能获取信息。我们将等待它们完成"
+
             End Select
             MsgBox(msg, vbOKOnly + vbInformation, Text)
             Select Case MainForm.Language
@@ -2302,6 +2462,8 @@ Public Class ImgInfoSaveDlg
                             Label2.Text = "A aguardar que os processos em segundo plano terminem..."
                         Case "ITA"
                             Label2.Text = "In attesa che i processi in background finiscano..."
+                        Case "CHS", "CHT"
+                            Label2.Text = "正在等待后台进程完成..."
                     End Select
                 Case 1
                     Label2.Text = "Waiting for background processes to finish..."
@@ -2313,6 +2475,9 @@ Public Class ImgInfoSaveDlg
                     Label2.Text = "A aguardar que os processos em segundo plano terminem..."
                 Case 5
                     Label2.Text = "In attesa che i processi in background finiscano..."
+                Case 6
+                    Label2.Text = "正在等待后台进程完成..."
+
             End Select
             TaskbarHelper.SetIndicatorState(0, Windows.Shell.TaskbarItemProgressState.Indeterminate, MainForm.Handle)
             While MainForm.ImgBW.IsBusy
@@ -2359,6 +2524,9 @@ Public Class ImgInfoSaveDlg
                             Case "ITA"
                                 msg(0) = "Impossibile creare la destinazione di salvataggio. Motivo: "
                                 msg(1) = "L'operazione non è riuscita"
+                            Case "CHS", "CHT"
+                                msg(0) = "无法创建保存目标。原因："
+                                msg(1) = "操作失败"
                         End Select
                     Case 1
                         msg(0) = "Could not create the save target. Reason: "
@@ -2375,6 +2543,10 @@ Public Class ImgInfoSaveDlg
                     Case 5
                         msg(0) = "Impossibile creare la destinazione di salvataggio. Motivo: "
                         msg(1) = "L'operazione non è riuscita"
+                    Case 6
+                        msg(0) = "无法创建保存目标。原因："
+                        msg(1) = "操作失败"
+
                 End Select
                 MsgBox(msg(0) & ex.ToString() & ": " & ex.Message, vbOKOnly + vbCritical, msg(1))
                 Exit Sub
@@ -2437,6 +2609,13 @@ Public Class ImgInfoSaveDlg
                                                "Vuoi ottenere informazioni complete sui pacchetti AppX installati? Tieni presente che questa operazione richiederà più tempo.",
                                                "Vuoi ottenere informazioni complete sulle capacità installate? Tieni presente che questa operazione richiederà più tempo.",
                                                "Vuoi ottenere informazioni complete sui driver installati? Tieni presente che questa operazione richiederà più tempo."})
+                    Case "CHS", "CHT"
+                        TaskTitles.AddRange({"程序包信息", "功能信息", "AppX 程序包信息", "功能包信息", "驱动程序信息"})
+                        TaskMessages.AddRange({"是否要获取已安装程序包的完整信息？请注意，这会耗时更长。",
+                                               "是否要获取已安装功能的完整信息？请注意，这会耗时更长。",
+                                               "是否要获取已安装 AppX 程序包的完整信息？请注意，这会耗时更长。",
+                                               "是否要获取已安装功能包的完整信息？请注意，这会耗时更长。",
+                                               "是否要获取已安装驱动程序的完整信息？请注意，这会耗时更长。"})
                 End Select
             Case 1
                 TaskTitles.AddRange({"Package information", "Feature information", "AppX package information", "Capability information", "Driver information"})
@@ -2469,6 +2648,9 @@ Public Class ImgInfoSaveDlg
                                        "Vuoi ottenere informazioni complete sui pacchetti AppX installati? Tieni presente che questa operazione richiederà più tempo.",
                                        "Vuoi ottenere informazioni complete sulle capacità installate? Tieni presente che questa operazione richiederà più tempo.",
                                        "Vuoi ottenere informazioni complete sui driver installati? Tieni presente che questa operazione richiederà più tempo."})
+            Case 6
+                TaskTitles.AddRange({"程序包信息", "功能信息", "AppX 程序包信息", "功能包信息", "驱动程序信息"})
+
         End Select
 
         Dim GetEveryPackage As Boolean = True,
@@ -2588,6 +2770,10 @@ Public Class ImgInfoSaveDlg
                                 InboxDriverMessage = "Avete configurato i processi in background in modo che non rilevino tutti i driver, compresi quelli che fanno parte della distribuzione di Windows, quindi potreste non vedere il driver che vi interessa." & CrLf & CrLf &
                                     "Questa impostazione viene applicata anche a questa attività, ma ora è possibile ottenere le informazioni su tutti i driver. Tenere presente che questa operazione può richiedere molto tempo, a seconda della quantità di driver di prima parte." & CrLf & CrLf &
                                     "Volete ottenere le informazioni su tutti i driver, compresi quelli che fanno parte della distribuzione di Windows?"
+                            Case "CHS", "CHT"
+                                InboxDriverMessage = "您已将后台进程配置为不检测所有驱动程序（其中包括属于 Windows 分发内容的驱动程序），因此可能看不到您关注的驱动程序。" & CrLf & CrLf &
+                                    "此设置同样应用于此任务，但您现在可以获取所有驱动程序的信息。请注意，这可能耗时较长，具体取决于第一方驱动程序的数量。" & CrLf & CrLf &
+                                    "是否要获取所有驱动程序的信息（包括属于 Windows 分发内容的驱动程序）？"
                         End Select
                     Case 1
                         InboxDriverMessage = "You have configured background processes to not detect all drivers, which includes drivers part of the Windows distribution, so you may not see the driver you're interested in." & CrLf & CrLf &
@@ -2609,6 +2795,11 @@ Public Class ImgInfoSaveDlg
                         InboxDriverMessage = "Avete configurato i processi in background in modo che non rilevino tutti i driver, compresi quelli che fanno parte della distribuzione di Windows, quindi potreste non vedere il driver che vi interessa." & CrLf & CrLf &
                             "Questa impostazione viene applicata anche a questa attività, ma ora è possibile ottenere le informazioni su tutti i driver. Tenere presente che questa operazione può richiedere molto tempo, a seconda della quantità di driver di prima parte." & CrLf & CrLf &
                             "Volete ottenere le informazioni su tutti i driver, compresi quelli che fanno parte della distribuzione di Windows?"
+                    Case 6
+                        InboxDriverMessage = "您已将后台进程配置为不检测所有驱动程序（其中包括属于 Windows 分发内容的驱动程序），因此可能看不到您关注的驱动程序。" & CrLf & CrLf &
+                            "此设置同样应用于此任务，但您现在可以获取所有驱动程序的信息。请注意，这可能耗时较长，具体取决于第一方驱动程序的数量。" & CrLf & CrLf &
+                            "是否要获取所有驱动程序的信息（包括属于 Windows 分发内容的驱动程序）？"
+
                 End Select
 
                 Dim GetInboxDrivers As Boolean = True
@@ -2652,6 +2843,8 @@ Public Class ImgInfoSaveDlg
                         saveMsg = "A guardar o conteúdo..."
                     Case "ITA"
                         saveMsg = "Salvataggio dei contenuti..."
+                    Case "CHS", "CHT"
+                        saveMsg = "正在保存内容..."
                 End Select
             Case 1
                 saveMsg = "Saving contents..."
@@ -2663,6 +2856,9 @@ Public Class ImgInfoSaveDlg
                 saveMsg = "A guardar o conteúdo..."
             Case 5
                 saveMsg = "Salvataggio dei contenuti..."
+            Case 6
+                saveMsg = "正在保存内容..."
+
         End Select
         ReportChanges(saveMsg, ProgressBar1.Maximum)
         TaskbarHelper.SetIndicatorState(ProgressBar1.Maximum, Windows.Shell.TaskbarItemProgressState.None, MainForm.Handle)

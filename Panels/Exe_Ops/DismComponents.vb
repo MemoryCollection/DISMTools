@@ -40,6 +40,11 @@ Public Class DismComponents
                         ListView1.Columns(0).Text = "Componente"
                         ListView1.Columns(1).Text = "Versione"
                         OK_Button.Text = "OK"
+                    Case "CHS", "CHT"
+                        Text = "DISM 组件"
+                        ListView1.Columns(0).Text = "组件"
+                        ListView1.Columns(1).Text = "版本"
+                        OK_Button.Text = "确定"
                 End Select
             Case 1
                 Text = "DISM Components"
@@ -66,6 +71,12 @@ Public Class DismComponents
                 ListView1.Columns(0).Text = "Componente"
                 ListView1.Columns(1).Text = "Versione"
                 OK_Button.Text = "OK"
+            Case 6
+                Text = "DISM 组件"
+                ListView1.Columns(0).Text = "组件"
+                ListView1.Columns(1).Text = "版本"
+                OK_Button.Text = "确定"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

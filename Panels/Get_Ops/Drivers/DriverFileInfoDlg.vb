@@ -74,6 +74,13 @@ Public Class DriverFileInfoDlg
                         ListView1.Columns(1).Text = "Valore"
                         OK_Button.Text = "OK"
                         Copy_Button.Text = "Copia"
+                    Case "CHS", "CHT"
+                        Text = "驱动程序文件信息"
+                        Label1.Text = "驱动程序文件的信息：" & Path.GetFileName(GetDriverInfo.ListBox1.Items(GetDriverInfo.ListBox1.SelectedIndex))
+                        ListView1.Columns(0).Text = "属性"
+                        ListView1.Columns(1).Text = "值"
+                        OK_Button.Text = "确定"
+                        Copy_Button.Text = "复制"
                 End Select
             Case 1
                 Text = "Driver file information"
@@ -110,6 +117,14 @@ Public Class DriverFileInfoDlg
                 ListView1.Columns(1).Text = "Valore"
                 OK_Button.Text = "OK"
                 Copy_Button.Text = "Copia"
+            Case 6
+                Text = "驱动程序文件信息"
+                Label1.Text = "驱动程序文件的信息：" & Path.GetFileName(GetDriverInfo.ListBox1.Items(GetDriverInfo.ListBox1.SelectedIndex))
+                ListView1.Columns(0).Text = "属性"
+                ListView1.Columns(1).Text = "值"
+                OK_Button.Text = "确定"
+                Copy_Button.Text = "复制"
+
         End Select
         ListView1.Items.Clear()
         drvPkg = Nothing
@@ -199,6 +214,19 @@ Public Class DriverFileInfoDlg
                                     ListView1.Items.Add(New ListViewItem(New String() {"Data", DriverDateString}))
                                     ListView1.Items.Add(New ListViewItem(New String() {"Stato firma", Casters.CastDismSignatureStatus(drvPkg.DriverSignature, True)}))
                                     ListView1.Items.Add(New ListViewItem(New String() {"File catalogo", drvPkg.CatalogFile}))
+                                Case "CHS", "CHT"
+                                    ListView1.Items.Add(New ListViewItem(New String() {"已发布名称", drvPkg.PublishedName}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"原始文件名", drvPkg.OriginalFileName}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"对启动过程是否关键？", If(drvPkg.BootCritical, "是", "否")}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"是否属于 Windows 分发内容？", If(drvPkg.InBox, "是", "否")}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"版本", drvPkg.Version.ToString()}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"类名称", drvPkg.ClassName}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"类说明", drvPkg.ClassDescription}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"类 GUID", drvPkg.ClassGuid}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"提供程序名称", drvPkg.ProviderName}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"日期", DriverDateString}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"签名状态", Casters.CastDismSignatureStatus(drvPkg.DriverSignature, True)}))
+                                    ListView1.Items.Add(New ListViewItem(New String() {"目录文件", drvPkg.CatalogFile}))
                             End Select
                         Case 1
                             ListView1.Items.Add(New ListViewItem(New String() {"Published name", drvPkg.PublishedName}))
@@ -265,6 +293,20 @@ Public Class DriverFileInfoDlg
                             ListView1.Items.Add(New ListViewItem(New String() {"Data", DriverDateString}))
                             ListView1.Items.Add(New ListViewItem(New String() {"Stato firma", Casters.CastDismSignatureStatus(drvPkg.DriverSignature, True)}))
                             ListView1.Items.Add(New ListViewItem(New String() {"File catalogo", drvPkg.CatalogFile}))
+                        Case 6
+                            ListView1.Items.Add(New ListViewItem(New String() {"已发布名称", drvPkg.PublishedName}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"原始文件名", drvPkg.OriginalFileName}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"对启动过程是否关键？", If(drvPkg.BootCritical, "是", "否")}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"是否属于 Windows 分发内容？", If(drvPkg.InBox, "是", "否")}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"版本", drvPkg.Version.ToString()}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"类名称", drvPkg.ClassName}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"类说明", drvPkg.ClassDescription}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"类 GUID", drvPkg.ClassGuid}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"提供程序名称", drvPkg.ProviderName}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"日期", DriverDateString}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"签名状态", Casters.CastDismSignatureStatus(drvPkg.DriverSignature, True)}))
+                            ListView1.Items.Add(New ListViewItem(New String() {"目录文件", drvPkg.CatalogFile}))
+
                     End Select
                 End If
             End Using

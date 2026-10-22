@@ -185,6 +185,14 @@ Public Class PopupMountedImagePicker
                         pmipMountedImageList.Columns(0).Text = "File immagine"
                         pmipMountedImageList.Columns(1).Text = "Indice"
                         pmipMountedImageList.Columns(2).Text = "Directory di montaggio"
+                    Case "CHS", "CHT"
+                        pmipForm.Text = "选择映像"
+                        pmipOkButton.Text = "确定"
+                        pmipCancelButton.Text = "取消"
+                        pmipInstructionLabel.Text = "从下方列表中选择一个映像："
+                        pmipMountedImageList.Columns(0).Text = "映像文件"
+                        pmipMountedImageList.Columns(1).Text = "索引"
+                        pmipMountedImageList.Columns(2).Text = "挂载目录"
                 End Select
             Case 1
                 pmipForm.Text = "Pick image"
@@ -226,6 +234,15 @@ Public Class PopupMountedImagePicker
                 pmipMountedImageList.Columns(0).Text = "File immagine"
                 pmipMountedImageList.Columns(1).Text = "Indice"
                 pmipMountedImageList.Columns(2).Text = "Directory di montaggio"
+            Case 6
+                pmipForm.Text = "选择映像"
+                pmipOkButton.Text = "确定"
+                pmipCancelButton.Text = "取消"
+                pmipInstructionLabel.Text = "从下方列表中选择一个映像："
+                pmipMountedImageList.Columns(0).Text = "映像文件"
+                pmipMountedImageList.Columns(1).Text = "索引"
+                pmipMountedImageList.Columns(2).Text = "挂载目录"
+
         End Select
 
         ' Initial population and show the dialog

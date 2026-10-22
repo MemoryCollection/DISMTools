@@ -101,6 +101,22 @@ Public Class GetCapabilityInfoDlg
                         ListView1.Columns(1).Text = "Stato"
                         Button2.Text = "Salva..."
                         SearchBox1.cueBanner = "Digita qui per cercare una capacità..."
+                    Case "CHS", "CHT"
+                        Text = "获取功能包信息"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "就绪"
+                        Label22.Text = "功能包标识："
+                        Label24.Text = "功能包名称："
+                        Label26.Text = "功能包状态："
+                        Label31.Text = "显示名称："
+                        Label36.Text = "功能包信息"
+                        Label37.Text = "在左侧选择一个已安装的功能包，即可在此查看其信息"
+                        Label41.Text = "功能包说明："
+                        Label43.Text = "大小："
+                        ListView1.Columns(0).Text = "功能包标识"
+                        ListView1.Columns(1).Text = "状态"
+                        Button2.Text = "保存..."
+                        SearchBox1.cueBanner = "在此输入以搜索功能包..."
                 End Select
             Case 1
                 Text = "Get capability information"
@@ -182,6 +198,23 @@ Public Class GetCapabilityInfoDlg
                 ListView1.Columns(1).Text = "Stato"
                 Button2.Text = "Salva..."
                 SearchBox1.cueBanner = "Digita qui per cercare una capacità..."
+            Case 6
+                Text = "获取功能包信息"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "就绪"
+                Label22.Text = "功能包标识："
+                Label24.Text = "功能包名称："
+                Label26.Text = "功能包状态："
+                Label31.Text = "显示名称："
+                Label36.Text = "功能包信息"
+                Label37.Text = "在左侧选择一个已安装的功能包，即可在此查看其信息"
+                Label41.Text = "功能包说明："
+                Label43.Text = "大小："
+                ListView1.Columns(0).Text = "功能包标识"
+                ListView1.Columns(1).Text = "状态"
+                Button2.Text = "保存..."
+                SearchBox1.cueBanner = "在此输入以搜索功能包..."
+
         End Select
         If SplitContainer2.SplitterDistance = 440 Then
             SplitContainer2.SplitterDistance = WindowHelper.ScaleLogical(SplitContainer2.SplitterDistance)
@@ -230,6 +263,8 @@ Public Class GetCapabilityInfoDlg
                                     msg = "Os processos em segundo plano têm de estar concluídos antes de mostrar informações sobre as características. Vamos esperar até que estejam concluídos"
                                 Case "ITA"
                                     msg = "Prima di poter visualizzare le informazioni sulle funzionalità devono essere stati completati i processi in background. Attendi che siano completati"
+                                Case "CHS", "CHT"
+                                    msg = "需要等后台进程完成才能显示功能信息。我们将等待它们完成"
                             End Select
                         Case 1
                             msg = "Background processes need to have completed before showing feature information. We'll wait until they have completed"
@@ -241,6 +276,9 @@ Public Class GetCapabilityInfoDlg
                             msg = "Os processos em segundo plano têm de estar concluídos antes de mostrar informações sobre as características. Vamos esperar até que estejam concluídos"
                         Case 5
                             msg = "Prima di poter visualizzare le informazioni sulle funzionalità devono essere stati completati i processi in background. Attendi che siano completati"
+                        Case 6
+                            msg = "需要等后台进程完成才能显示功能信息。我们将等待它们完成"
+
                     End Select
                     MsgBox(msg, vbOKOnly + vbInformation, ImageTaskHeader1.ItemText)
                     Select Case MainForm.Language
@@ -256,6 +294,8 @@ Public Class GetCapabilityInfoDlg
                                     Label2.Text = "À espera que os processos em segundo plano terminem..."
                                 Case "ITA"
                                     Label2.Text = "In attesa del completamento che i processi in background..."
+                                Case "CHS", "CHT"
+                                    Label2.Text = "正在等待后台进程完成..."
                             End Select
                         Case 1
                             Label2.Text = "Waiting for background processes to finish..."
@@ -267,6 +307,9 @@ Public Class GetCapabilityInfoDlg
                             Label2.Text = "À espera que os processos em segundo plano terminem..."
                         Case 5
                             Label2.Text = "In attesa del completamento che i processi in background..."
+                        Case 6
+                            Label2.Text = "正在等待后台进程完成..."
+
                     End Select
                     While MainForm.ImgBW.IsBusy
                         Application.DoEvents()
@@ -287,6 +330,8 @@ Public Class GetCapabilityInfoDlg
                                 Label2.Text = "Preparar-se para obter informações sobre a capacidade..."
                             Case "ITA"
                                 Label2.Text = "Preparazione verifica informazioni sulle capacità..."
+                            Case "CHS", "CHT"
+                                Label2.Text = "正在准备获取功能包信息..."
                         End Select
                     Case 1
                         Label2.Text = "Preparing to get capability information..."
@@ -298,6 +343,9 @@ Public Class GetCapabilityInfoDlg
                         Label2.Text = "Preparar-se para obter informações sobre a capacidade..."
                     Case 5
                         Label2.Text = "Preparazione verifica informazioni sulle capacità..."
+                    Case 6
+                        Label2.Text = "正在准备获取功能包信息..."
+
                 End Select
                 Application.DoEvents()
                 Try
@@ -393,6 +441,8 @@ Public Class GetCapabilityInfoDlg
                                     msg = "Não foi possível obter informações sobre a capacidade. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                                 Case "ITA"
                                     msg = "Impossibile verificare informazioni sulle capacità. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                                Case "CHS", "CHT"
+                                    msg = "Could not get capability information. Reason: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
                             End Select
                         Case 1
                             msg = "Could not get capability information. Reason: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
@@ -404,6 +454,9 @@ Public Class GetCapabilityInfoDlg
                             msg = "Não foi possível obter informações sobre a capacidade. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                         Case 5
                             msg = "Impossibile verificare informazioni sulle capacità. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case 6
+                            msg = "Could not get capability information. Reason: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
+
                     End Select
                     MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
                 Finally
@@ -427,6 +480,8 @@ Public Class GetCapabilityInfoDlg
                                 Label2.Text = "Pronto"
                             Case "ITA"
                                 Label2.Text = "Pronto"
+                            Case "CHS", "CHT"
+                                Label2.Text = "就绪"
                         End Select
                     Case 1
                         Label2.Text = "Ready"
@@ -438,6 +493,9 @@ Public Class GetCapabilityInfoDlg
                         Label2.Text = "Pronto"
                     Case 5
                         Label2.Text = "Pronto"
+                    Case 6
+                        Label2.Text = "就绪"
+
                 End Select
                 Panel4.Visible = True
                 Panel7.Visible = False

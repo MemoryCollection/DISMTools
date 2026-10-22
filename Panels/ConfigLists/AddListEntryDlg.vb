@@ -63,6 +63,11 @@ Public Class AddListEntryDlg
                         Button1.Text = "Sfoglia..."
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annulla"
+                    Case "CHS", "CHT"
+                        Label1.Text = "条目："
+                        Button1.Text = "浏览..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Label1.Text = "Entry:"
@@ -89,6 +94,12 @@ Public Class AddListEntryDlg
                 Button1.Text = "Sfoglia..."
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annulla"
+            Case 6
+                Label1.Text = "条目："
+                Button1.Text = "浏览..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

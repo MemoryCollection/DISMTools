@@ -37,6 +37,11 @@ Public Class InvalidSettingsDialog
                         Label1.Text = "Il programma ha rilevato impostazioni non valide"
                         Label2.Text = "Le impostazioni non valide sono state ripristinate ai valori predefiniti. Per ulteriori informazioni: controlla i campi sottostanti:"
                         Button1.Text = "OK"
+                    Case "CHS", "CHT"
+                        Text = "检测到无效设置"
+                        Label1.Text = "程序检测到无效设置"
+                        Label2.Text = "无效设置已重置为默认值。请查看下方字段以了解更多信息："
+                        Button1.Text = "确定"
                 End Select
             Case 1
                 Text = "Invalid settings have been detected"
@@ -63,6 +68,12 @@ Public Class InvalidSettingsDialog
                 Label1.Text = "Il programma ha rilevato impostazioni non valide"
                 Label2.Text = "Le impostazioni non valide sono state ripristinate ai valori predefiniti. Per ulteriori informazioni controllare i campi sottostanti:"
                 Button1.Text = "OK"
+            Case 6
+                Text = "检测到无效设置"
+                Label1.Text = "程序检测到无效设置"
+                Label2.Text = "无效设置已重置为默认值。请查看下方字段以了解更多信息："
+                Button1.Text = "确定"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor
@@ -106,6 +117,8 @@ Public Class InvalidSettingsDialog
                             Label3.Text = "A configuração do executável DISM parece estar em ordem"
                         Case "ITA"
                             Label3.Text = "L'impostazione dell'eseguibile DISM sembra essere corretta"
+                        Case "CHS", "CHT"
+                            Label3.Text = "DISM 可执行文件设置似乎正常"
                     End Select
                 Case 1
                     Label3.Text = "The DISM executable setting seems to be in order"
@@ -117,6 +130,9 @@ Public Class InvalidSettingsDialog
                     Label3.Text = "A configuração do executável DISM parece estar em ordem"
                 Case 5
                     Label3.Text = "L'impostazione dell'eseguibile DISM sembra essere corretta"
+                Case 6
+                    Label3.Text = "DISM 可执行文件设置似乎正常"
+
             End Select
         End If
         If MainForm.isLogFontProblematic Then
@@ -159,6 +175,8 @@ Public Class InvalidSettingsDialog
                             Label4.Text = "A configuração da fonte de registo parece estar em ordem"
                         Case "ITA"
                             Label4.Text = "L'impostazione dei font del registro sembra essere corretta"
+                        Case "CHS", "CHT"
+                            Label4.Text = "日志字体设置似乎正常"
                     End Select
                 Case 1
                     Label4.Text = "The log font setting seems to be in order"
@@ -170,6 +188,9 @@ Public Class InvalidSettingsDialog
                     Label4.Text = "A configuração da fonte de registo parece estar em ordem"
                 Case 5
                     Label4.Text = "L'impostazione dei font del registro sembra essere corretta"
+                Case 6
+                    Label4.Text = "日志字体设置似乎正常"
+
             End Select
         End If
         If MainForm.isLogFileProblematic Then
@@ -212,6 +233,8 @@ Public Class InvalidSettingsDialog
                             Label5.Text = "A configuração do ficheiro de registo parece estar em ordem"
                         Case "ITA"
                             Label5.Text = "L'impostazione del file registro sembra essere corretta"
+                        Case "CHS", "CHT"
+                            Label5.Text = "日志文件设置似乎正常"
                     End Select
                 Case 1
                     Label5.Text = "The log file setting seems to be in order"
@@ -223,6 +246,9 @@ Public Class InvalidSettingsDialog
                     Label5.Text = "A configuração do ficheiro de registo parece estar em ordem"
                 Case 5
                     Label5.Text = "L'impostazione del file registro sembra essere corretta"
+                Case 6
+                    Label5.Text = "日志文件设置似乎正常"
+
             End Select
         End If
         If MainForm.isScratchDirProblematic Then
@@ -265,6 +291,8 @@ Public Class InvalidSettingsDialog
                             Label6.Text = "A configuração do diretório temporário parece estar em ordem"
                         Case "ITA"
                             Label6.Text = "L'impostazione della cartella temporanea sembra essere corretta"
+                        Case "CHS", "CHT"
+                            Label6.Text = "暂存目录设置似乎正常"
                     End Select
                 Case 1
                     Label6.Text = "The scratch directory setting seems to be in order"
@@ -276,6 +304,9 @@ Public Class InvalidSettingsDialog
                     Label6.Text = "A configuração do diretório temporário parece estar em ordem"
                 Case 5
                     Label6.Text = "L'impostazione della cartella temporanea sembra essere corretta"
+                Case 6
+                    Label6.Text = "暂存目录设置似乎正常"
+
             End Select
         End If
         Dim handle As IntPtr = WindowHelper.GetWindowHandle(Me)

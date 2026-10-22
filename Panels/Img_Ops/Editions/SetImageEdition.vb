@@ -78,6 +78,8 @@ Public Class SetImageEdition
                                     msg = "Esta imagem não pode ser actualizada para edições superiores porque está na sua edição mais elevada"
                                 Case "ITA"
                                     msg = "Questa immagine non può essere aggiornata a edizioni superiori perché si trova nell'edizione più alta"
+                                Case "CHS", "CHT"
+                                    msg = "此映像已处于最高版本，无法再升级"
                             End Select
                         Case 1
                             msg = "This image cannot be upgraded to higher editions because it is in its highest edition"
@@ -89,6 +91,9 @@ Public Class SetImageEdition
                             msg = "Esta imagem não pode ser actualizada para edições superiores porque está na sua edição mais elevada"
                         Case 5
                             msg = "Questa immagine non può essere aggiornata a edizioni superiori perché si trova nell'edizione più alta"
+                        Case 6
+                            msg = "此映像已处于最高版本，无法再升级"
+
                     End Select
                     MsgBox(msg, vbOKOnly + vbInformation, Text)
                 End If
@@ -110,6 +115,8 @@ Public Class SetImageEdition
                                 msg = "As imagens do Windows PE não podem ser actualizadas para edições superiores."
                             Case "ITA"
                                 msg = "Le immagini di Windows PE non possono essere aggiornate a edizioni superiori."
+                            Case "CHS", "CHT"
+                                msg = "Windows PE 映像无法升级到更高的版本。"
                         End Select
                     Case 1
                         msg = "Windows PE images cannot be upgraded to higher editions."
@@ -121,6 +128,9 @@ Public Class SetImageEdition
                         msg = "As imagens do Windows PE não podem ser actualizadas para edições superiores."
                     Case 5
                         msg = "Le immagini di Windows PE non possono essere aggiornate a edizioni superiori."
+                    Case 6
+                        msg = "Windows PE 映像无法升级到更高的版本。"
+
                 End Select
             Else
                 msg = ex.ToString()
@@ -202,6 +212,16 @@ Public Class SetImageEdition
                         Button1.Text = "Sfoglia..."
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annulla"
+                    Case "CHS", "CHT"
+                        Text = "设置映像版本"
+                        ImageTaskHeader1.ItemText = Text
+                        Label1.Text = "要升级到的目标版本："
+                        GroupBox1.Text = "活动服务器安装选项"
+                        RadioButton1.Text = "将最终用户许可协议 (EULA) 复制到以下位置："
+                        RadioButton2.Text = "接受最终用户许可协议 (EULA) 并使用以下产品密钥："
+                        Button1.Text = "浏览..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Set image edition"
@@ -253,6 +273,17 @@ Public Class SetImageEdition
                 Button1.Text = "Sfoglia..."
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annulla"
+            Case 6
+                Text = "设置映像版本"
+                ImageTaskHeader1.ItemText = Text
+                Label1.Text = "要升级到的目标版本："
+                GroupBox1.Text = "活动服务器安装选项"
+                RadioButton1.Text = "将最终用户许可协议 (EULA) 复制到以下位置："
+                RadioButton2.Text = "接受最终用户许可协议 (EULA) 并使用以下产品密钥："
+                Button1.Text = "浏览..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

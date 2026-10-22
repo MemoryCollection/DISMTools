@@ -37,6 +37,11 @@ Public Class BGProcsBusyDialog
                         Label2.Text = "Una volta terminato questo processo, è possibile iniziare a eseguire le operazioni sull'immagine. Di solito ci vogliono un paio di minuti, ma ciò può dipendere dall'immagine e dalla velocità del computer." & CrLf & CrLf & _
                             "È possibile controllare lo stato di questo processo in background in qualsiasi momento facendo clic sull'icona in basso a sinistra."
                         OK_Button.Text = "OK"
+                    Case "CHS", "CHT"
+                        Label1.Text = "我们仍在收集映像信息"
+                        Label2.Text = "此过程完成后，您就可以开始执行映像任务。通常只需几分钟，但具体取决于映像和计算机速度。" & CrLf & CrLf & _
+                            "您随时可以单击左下角的图标查看此后台进程的状态。"
+                        OK_Button.Text = "确定"
                 End Select
             Case 1
                 Label1.Text = "We're still gathering image information"
@@ -63,6 +68,12 @@ Public Class BGProcsBusyDialog
                 Label2.Text = "Una volta terminato questo processo, è possibile iniziare a eseguire le operazioni sull'immagine. Di solito ci vogliono un paio di minuti, ma ciò può dipendere dall'immagine e dalla velocità del computer." & CrLf & CrLf & _
                     "È possibile controllare lo stato di questo processo in background in qualsiasi momento facendo clic sull'icona in basso a sinistra."
                 OK_Button.Text = "OK"
+            Case 6
+                Label1.Text = "我们仍在收集映像信息"
+                Label2.Text = "此过程完成后，您就可以开始执行映像任务。通常只需几分钟，但具体取决于映像和计算机速度。" & CrLf & CrLf & _
+                    "您随时可以单击左下角的图标查看此后台进程的状态。"
+                OK_Button.Text = "确定"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

@@ -134,6 +134,24 @@ Public Class ImgSwmToWim
                         ListView1.Columns(3).Text = "Versione dell'immagine"
                         OpenFileDialog1.Title = "Specificare il file SWM di origine da unire"
                         SaveFileDialog1.Title = "Specificare il file WIM di destinazione in cui unire i file SWM di origine"
+                    Case "CHS", "CHT"
+                        Text = "合并 SWM 文件"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "源 SWM 文件："
+                        Label3.Text = "注意：指定 SWM 文件时，请选择第一个文件。DISMTools 会处理该目录中存储的其他 SWM 文件。"
+                        Label4.Text = "目标 WIM 文件："
+                        Label5.Text = "索引："
+                        Button1.Text = "浏览..."
+                        Button2.Text = "浏览..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        LinkLabel1.Text = "了解操作方法"
+                        ListView1.Columns(0).Text = "索引"
+                        ListView1.Columns(1).Text = "映像名称"
+                        ListView1.Columns(2).Text = "映像说明"
+                        ListView1.Columns(3).Text = "映像版本"
+                        OpenFileDialog1.Title = "指定要合并的源 SWM 文件"
+                        SaveFileDialog1.Title = "指定要将源 SWM 文件合并到的目标 WIM 文件"
                 End Select
             Case 1
                 Text = "Merge SWM files"
@@ -225,6 +243,25 @@ Public Class ImgSwmToWim
                 ListView1.Columns(3).Text = "Versione dell'immagine"
                 OpenFileDialog1.Title = "Specificare il file SWM di origine da unire"
                 SaveFileDialog1.Title = "Specificare il file WIM di destinazione in cui unire i file SWM di origine"
+            Case 6
+                Text = "合并 SWM 文件"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "源 SWM 文件："
+                Label3.Text = "注意：指定 SWM 文件时，请选择第一个文件。DISMTools 会处理该目录中存储的其他 SWM 文件。"
+                Label4.Text = "目标 WIM 文件："
+                Label5.Text = "索引："
+                Button1.Text = "浏览..."
+                Button2.Text = "浏览..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                LinkLabel1.Text = "了解操作方法"
+                ListView1.Columns(0).Text = "索引"
+                ListView1.Columns(1).Text = "映像名称"
+                ListView1.Columns(2).Text = "映像说明"
+                ListView1.Columns(3).Text = "映像版本"
+                OpenFileDialog1.Title = "指定要合并的源 SWM 文件"
+                SaveFileDialog1.Title = "指定要将源 SWM 文件合并到的目标 WIM 文件"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

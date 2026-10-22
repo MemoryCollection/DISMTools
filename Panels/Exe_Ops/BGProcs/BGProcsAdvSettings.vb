@@ -31,6 +31,8 @@ Public Class BGProcsAdvSettings
                             msg = "O programa irá agora detetar os controladores da imagem de acordo com as opções que especificou. Isto pode demorar algum tempo."
                         Case "ITA"
                             msg = "Il programma ora rileverà i driver dell'immagine in base alle opzioni specificate. Questa operazione potrebbe richiedere un po' di tempo"
+                        Case "CHS", "CHT"
+                            msg = "程序现在将根据您指定的选项检测映像的驱动程序。这可能需要一些时间。"
                     End Select
                 Case 1
                     msg = "The program will now detect the drivers of the image according to the options you've specified. This may take some time."
@@ -42,6 +44,9 @@ Public Class BGProcsAdvSettings
                     msg = "O programa irá agora detetar os controladores da imagem de acordo com as opções que especificou. Isto pode demorar algum tempo."
                 Case 5
                     msg = "Il programma rileverà i driver dell'immagine in base alle opzioni specificate. Questa operazione potrebbe richiedere un po' di tempo"
+                Case 6
+                    msg = "程序现在将根据您指定的选项检测映像的驱动程序。这可能需要一些时间。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbInformation, Text)
             MainForm.bwGetImageInfo = False
@@ -112,6 +117,16 @@ Public Class BGProcsAdvSettings
                         CheckBox5.Text = "Esegui tutti i processi in background dopo aver eseguito un'attività"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annulla"
+                    Case "CHS", "CHT"
+                        Text = "高级后台进程设置"
+                        Label1.Text = "配置后台进程的附加设置："
+                        CheckBox1.Text = "使用 PowerShell 辅助脚本增强对活动安装中所有已安装 AppX 程序包的检测"
+                        CheckBox2.Text = "跳过设置了不可删除策略的程序包"
+                        CheckBox3.Text = "检测所有映像驱动程序"
+                        CheckBox4.Text = "跳过框架程序包，如果已检测到则从列表中删除"
+                        CheckBox5.Text = "执行任务后运行所有后台进程"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Advanced background process settings"
@@ -163,6 +178,17 @@ Public Class BGProcsAdvSettings
                 CheckBox5.Text = "Esegui tutti i processi in background dopo aver eseguito un'attività"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annulla"
+            Case 6
+                Text = "高级后台进程设置"
+                Label1.Text = "配置后台进程的附加设置："
+                CheckBox1.Text = "使用 PowerShell 辅助脚本增强对活动安装中所有已安装 AppX 程序包的检测"
+                CheckBox2.Text = "跳过设置了不可删除策略的程序包"
+                CheckBox3.Text = "检测所有映像驱动程序"
+                CheckBox4.Text = "跳过框架程序包，如果已检测到则从列表中删除"
+                CheckBox5.Text = "执行任务后运行所有后台进程"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

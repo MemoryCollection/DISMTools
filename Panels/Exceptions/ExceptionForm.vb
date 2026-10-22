@@ -86,6 +86,18 @@ Public Class ExceptionForm
                 LinkLabel2.Text = "Esci"
                 copySuccess = "Queste informazioni sono state copiate negli appunti"
                 copyFail = "È necessario copiare queste informazioni manualmente"
+            Case "CHS", "CHT"
+                Text = "DISMTools - 内部错误"
+                Label1.Text = "很抱歉给您带来不便，DISMTools 遇到了无法处理的错误，我们需要您的帮助才能继续。" & CrLf & CrLf & "以下是错误信息（如有需要）："
+                Label2.Text = "请帮助我们修复此问题"
+                Label3.Text = "为避免此问题再次发生，我们希望通过在 GitHub 仓库中报告问题来了解更多情况。报告反馈需要一个 GitHub 账户。"
+                Label4.Text = "报告此问题时，请粘贴左侧的异常信息。否则将适用标准关闭策略，即在（至少）4 小时后关闭您的问题。"
+                Label5.Text = "单击「继续」也许可以让程序继续运行。不过，如果此错误再次出现，您可以单击「退出」强制关闭程序。请注意，对项目所做的更改以及「最近使用」列表中的更改将不会被保存。" & CrLf & CrLf & "您想做什么？"
+                Issue_Btn.Text = "报告此问题"
+                LinkLabel1.Text = "继续"
+                LinkLabel2.Text = "退出"
+                copySuccess = "此信息已复制到剪贴板。"
+                copyFail = "您需要手动复制此信息。"
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

@@ -106,6 +106,22 @@ Public Class GetFeatureInfoDlg
                         ListView1.Columns(1).Text = "Stato funzionalità"
                         Button2.Text = "Salva..."
                         SearchBox1.cueBanner = "Digita qui per cercare una funzionalità..."
+                    Case "CHS", "CHT"
+                        Text = "获取功能信息"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "就绪"
+                        Label22.Text = "功能名称："
+                        Label24.Text = "显示名称："
+                        Label26.Text = "功能说明："
+                        Label31.Text = "是否需要重启？"
+                        Label36.Text = "功能信息"
+                        Label37.Text = "在左侧选择一个已安装的功能，即可在此查看其信息"
+                        Label41.Text = "功能状态："
+                        Label43.Text = "自定义属性："
+                        ListView1.Columns(0).Text = "功能名称"
+                        ListView1.Columns(1).Text = "功能状态"
+                        Button2.Text = "保存..."
+                        SearchBox1.cueBanner = "在此输入以搜索功能..."
                 End Select
             Case 1
                 Text = "Get feature information"
@@ -187,6 +203,23 @@ Public Class GetFeatureInfoDlg
                 ListView1.Columns(1).Text = "Stato funzionalità"
                 Button2.Text = "Salva..."
                 SearchBox1.cueBanner = "Digita qui per cercare una funzionalità..."
+            Case 6
+                Text = "获取功能信息"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "就绪"
+                Label22.Text = "功能名称："
+                Label24.Text = "显示名称："
+                Label26.Text = "功能说明："
+                Label31.Text = "是否需要重启？"
+                Label36.Text = "功能信息"
+                Label37.Text = "在左侧选择一个已安装的功能，即可在此查看其信息"
+                Label41.Text = "功能状态："
+                Label43.Text = "自定义属性："
+                ListView1.Columns(0).Text = "功能名称"
+                ListView1.Columns(1).Text = "功能状态"
+                Button2.Text = "保存..."
+                SearchBox1.cueBanner = "在此输入以搜索功能..."
+
         End Select
         If SplitContainer2.SplitterDistance = 440 Then
             SplitContainer2.SplitterDistance = WindowHelper.ScaleLogical(SplitContainer2.SplitterDistance)
@@ -235,6 +268,8 @@ Public Class GetFeatureInfoDlg
                                     msg = "Os processos em segundo plano têm de estar concluídos antes de mostrar informações sobre as características. Vamos esperar até que estejam concluídos"
                                 Case "ITA"
                                     msg = "Prima di poter visualizzare le informazioni sulle funzionalità i processi in background devono essere stati completati. Attendi che siano stati completati."
+                                Case "CHS", "CHT"
+                                    msg = "需要等后台进程完成才能显示功能信息。我们将等待它们完成"
                             End Select
                         Case 1
                             msg = "Background processes need to have completed before showing feature information. We'll wait until they have completed"
@@ -246,6 +281,9 @@ Public Class GetFeatureInfoDlg
                             msg = "Os processos em segundo plano têm de estar concluídos antes de mostrar informações sobre as características. Vamos esperar até que estejam concluídos"
                         Case 5
                             msg = "Prima di poter visualizzare le informazioni sulle funzionalità i processi in background devono essere stati completati. Attendi che siano stati completati."
+                        Case 6
+                            msg = "需要等后台进程完成才能显示功能信息。我们将等待它们完成"
+
                     End Select
                     MsgBox(msg, vbOKOnly + vbInformation, ImageTaskHeader1.ItemText)
                     Select Case MainForm.Language
@@ -261,6 +299,8 @@ Public Class GetFeatureInfoDlg
                                     Label2.Text = "À espera que os processos em segundo plano terminem..."
                                 Case "ITA"
                                     Label2.Text = "In attesa che i processi in background siano stati completati..."
+                                Case "CHS", "CHT"
+                                    Label2.Text = "正在等待后台进程完成..."
                             End Select
                         Case 1
                             Label2.Text = "Waiting for background processes to finish..."
@@ -272,6 +312,9 @@ Public Class GetFeatureInfoDlg
                             Label2.Text = "À espera que os processos em segundo plano terminem..."
                         Case 5
                             Label2.Text = "In attesa che i processi in background siano stati completati..."
+                        Case 6
+                            Label2.Text = "正在等待后台进程完成..."
+
                     End Select
                     While MainForm.ImgBW.IsBusy
                         Application.DoEvents()
@@ -295,6 +338,8 @@ Public Class GetFeatureInfoDlg
                                 Label2.Text = "Preparar-se para obter informações sobre a característica..."
                             Case "ITA"
                                 Label2.Text = "Preparazione verifica informazioni funzionalità..."
+                            Case "CHS", "CHT"
+                                Label2.Text = "正在准备获取功能信息..."
                         End Select
                     Case 1
                         Label2.Text = "Preparing to get feature information..."
@@ -306,6 +351,9 @@ Public Class GetFeatureInfoDlg
                         Label2.Text = "Preparar-se para obter informações sobre a característica..."
                     Case 5
                         Label2.Text = "Preparazione verifica informazioni funzionalità..."
+                    Case 6
+                        Label2.Text = "正在准备获取功能信息..."
+
                 End Select
                 Application.DoEvents()
                 Try
@@ -370,6 +418,8 @@ Public Class GetFeatureInfoDlg
                                             cPropValue.Text = "Por favor, seleccione ou expanda uma entrada."
                                         Case "ITA"
                                             cPropValue.Text = "Seleziona o espandi un elemento."
+                                        Case "CHS", "CHT"
+                                            cPropValue.Text = "请选择一个条目或将其展开。"
                                     End Select
                                 Case 1
                                     cPropValue.Text = "Please select or expand an entry."
@@ -381,6 +431,9 @@ Public Class GetFeatureInfoDlg
                                     cPropValue.Text = "Por favor, seleccione ou expanda uma entrada."
                                 Case 5
                                     cPropValue.Text = "Seleziona o espandi un elemento."
+                                Case 6
+                                    cPropValue.Text = "请选择一个条目或将其展开。"
+
                             End Select
                         Else
                             DynaLog.LogMessage("This feature does not have custom properties.")
@@ -397,6 +450,8 @@ Public Class GetFeatureInfoDlg
                                             Label42.Text = "Nenhum"
                                         Case "ITA"
                                             Label42.Text = "Nessuno"
+                                        Case "CHS", "CHT"
+                                            Label42.Text = "无"
                                     End Select
                                 Case 1
                                     Label42.Text = "None"
@@ -408,6 +463,9 @@ Public Class GetFeatureInfoDlg
                                     Label42.Text = "Nenhum"
                                 Case 5
                                     Label42.Text = "Nessuno"
+                                Case 6
+                                    Label42.Text = "无"
+
                             End Select
                             Label42.Visible = True
                             CPropViewer.Visible = False
@@ -432,6 +490,8 @@ Public Class GetFeatureInfoDlg
                                     msg = "Não foi possível obter informações sobre a característica. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                                 Case "ITA"
                                     msg = "Impossibile verificare informazioni sulle funzionalità. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                                Case "CHS", "CHT"
+                                    msg = "Could not get feature information. Reason: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
                             End Select
                         Case 1
                             msg = "Could not get feature information. Reason: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
@@ -443,6 +503,9 @@ Public Class GetFeatureInfoDlg
                             msg = "Não foi possível obter informações sobre a característica. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                         Case 5
                             msg = "Impossibile verificare informazioni sulle funzionalità. Motivo: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case 6
+                            msg = "Could not get feature information. Reason: " & CrLf & CrLf & ex.ToString() & ": " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
+
                     End Select
                     MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
                 Finally
@@ -466,6 +529,8 @@ Public Class GetFeatureInfoDlg
                                 Label2.Text = "Pronto"
                             Case "ITA"
                                 Label2.Text = "Pronto"
+                            Case "CHS", "CHT"
+                                Label2.Text = "就绪"
                         End Select
                     Case 1
                         Label2.Text = "Ready"
@@ -477,6 +542,9 @@ Public Class GetFeatureInfoDlg
                         Label2.Text = "Pronto"
                     Case 5
                         Label2.Text = "Pronto"
+                    Case 6
+                        Label2.Text = "就绪"
+
                 End Select
                 Panel4.Visible = True
                 Panel7.Visible = False
@@ -555,6 +623,8 @@ Public Class GetFeatureInfoDlg
                             cPropValue.Text = "Nenhum valor foi definido. Se o item selecionado tiver subitens, expanda-o."
                         Case "ITA"
                             cPropValue.Text = "Non è stato definito alcun valore. Se l'elemento selezionato ha delle sotto voci, espandilo."
+                        Case "CHS", "CHT"
+                            cPropValue.Text = "尚未定义值。如果所选项包含子项，请将其展开。"
                     End Select
                 Case 1
                     cPropValue.Text = "No value has been defined. If the selected item has subitems, expand it."
@@ -566,6 +636,9 @@ Public Class GetFeatureInfoDlg
                     cPropValue.Text = "Nenhum valor foi definido. Se o item selecionado tiver subitens, expanda-o."
                 Case 5
                     cPropValue.Text = "Non è stato definito alcun valore. Se l'elemento selezionato ha delle sotto voci, espandilo."
+                Case 6
+                    cPropValue.Text = "尚未定义值。如果所选项包含子项，请将其展开。"
+
             End Select
         End If
     End Sub

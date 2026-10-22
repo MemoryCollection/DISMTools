@@ -158,6 +158,20 @@ Public Class FfuSplit
                         CheckBox1.Text = "Controlla l'integrità dell'immagine"
                         OpenFileDialog1.Title = "Specificare il file FFU di origine da dividere:"
                         SaveFileDialog1.Title = "Specificare la posizione di destinazione delle immagini divise:"
+                    Case "CHS", "CHT"
+                        Text = "拆分 FFU 映像"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "要拆分的源映像："
+                        Label3.Text = "拆分后的目标映像的名称和路径："
+                        Label4.Text = "拆分映像的最大大小（MB）："
+                        Label5.Text = "请注意，为容纳映像中的大文件，拆分后的映像文件可能大于指定值"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "浏览..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        CheckBox1.Text = "检查映像完整性"
+                        OpenFileDialog1.Title = "指定要拆分的源 FFU 文件："
+                        SaveFileDialog1.Title = "指定拆分映像的目标位置："
                 End Select
             Case 1
                 Text = "Split FFU images"
@@ -229,6 +243,21 @@ Public Class FfuSplit
                 CheckBox1.Text = "Controlla l'integrità dell'immagine"
                 OpenFileDialog1.Title = "Specificare il file FFU di origine da dividere:"
                 SaveFileDialog1.Title = "Specificare la posizione di destinazione delle immagini divise:"
+            Case 6
+                Text = "拆分 FFU 映像"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "要拆分的源映像："
+                Label3.Text = "拆分后的目标映像的名称和路径："
+                Label4.Text = "拆分映像的最大大小（MB）："
+                Label5.Text = "请注意，为容纳映像中的大文件，拆分后的映像文件可能大于指定值"
+                Button1.Text = "浏览..."
+                Button2.Text = "浏览..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                CheckBox1.Text = "检查映像完整性"
+                OpenFileDialog1.Title = "指定要拆分的源 FFU 文件："
+                SaveFileDialog1.Title = "指定拆分映像的目标位置："
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

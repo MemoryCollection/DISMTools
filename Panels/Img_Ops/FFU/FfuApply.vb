@@ -106,6 +106,9 @@ Public Class FfuApply
                         Case "ITA"
                             MsgBox("Specificare un file FFU di origine. In questo modo sarà possibile utilizzare i file SFU per una successiva applicazione di immagini", vbOKOnly + vbCritical, "Applica un'immagine")
                             ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SFU"
+                        Case "CHS", "CHT"
+                            MsgBox("请指定源 FFU 文件。这样您就可以使用 SFU 文件进行后续映像应用", vbOKOnly + vbCritical, "应用映像")
+                            ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SFU 文件"
                     End Select
                 Case 1
                     MsgBox("Please specify a source FFU file. This will let you use the SFU files for later image application", vbOKOnly + vbCritical, "Apply an image")
@@ -122,6 +125,10 @@ Public Class FfuApply
                 Case 5
                     MsgBox("Specificare un file FFU di origine. In questo modo sarà possibile utilizzare i file SFU per una successiva applicazione di immagini", vbOKOnly + vbCritical, "Applica un'immagine")
                     ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SFU"
+                Case 6
+                    MsgBox("请指定源 FFU 文件。这样您就可以使用 SFU 文件进行后续映像应用", vbOKOnly + vbCritical, "应用映像")
+                    ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SFU 文件"
+
             End Select
             Beep()
             Exit Sub
@@ -146,6 +153,8 @@ Public Class FfuApply
                         ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SFU"
                     Case "ITA"
                         ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SFU"
+                    Case "CHS", "CHT"
+                        ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SFU 文件"
                 End Select
             Case 1
                 ToolStripStatusLabel1.Text = "This naming pattern returns " & ListBox1.Items.Count & " SFU files"
@@ -157,6 +166,9 @@ Public Class FfuApply
                 ToolStripStatusLabel1.Text = "Este padrão de nomenclatura devolve " & ListBox1.Items.Count & " ficheiros SFU"
             Case 5
                 ToolStripStatusLabel1.Text = "Questo modello di denominazione restituisce " & ListBox1.Items.Count & " file SFU"
+            Case 6
+                ToolStripStatusLabel1.Text = "此命名模式将返回" & ListBox1.Items.Count & " 个 SFU 文件"
+
         End Select
         If ListBox1.Items.Count <= 0 Then Beep()
     End Sub
@@ -198,6 +210,8 @@ Public Class FfuApply
                         ToolStripStatusLabel1.Text = "Especifique o padrão de nomenclatura dos ficheiros SFU"
                     Case "ITA"
                         ToolStripStatusLabel1.Text = "Specificare il modello di denominazione dei file SFU"
+                    Case "CHS", "CHT"
+                        ToolStripStatusLabel1.Text = "请指定 SFU 文件的命名模式"
                 End Select
             Case 1
                 ToolStripStatusLabel1.Text = "Please specify the naming pattern of the SFU files"
@@ -209,6 +223,9 @@ Public Class FfuApply
                 ToolStripStatusLabel1.Text = "Especifique o padrão de nomenclatura dos ficheiros SFU"
             Case 5
                 ToolStripStatusLabel1.Text = "Specificare il modello di denominazione dei file SFU"
+            Case 6
+                ToolStripStatusLabel1.Text = "请指定 SFU 文件的命名模式"
+
         End Select
         If MainForm.SourceImg = "N/A" Or Not File.Exists(MainForm.SourceImg) Or MainForm.OnlineManagement Or MainForm.OfflineManagement Then
             UseMountedImgBtn.Enabled = False

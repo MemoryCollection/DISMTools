@@ -179,6 +179,38 @@ Public Class GetImgInfoDlg
                         ListView1.Columns(0).Text = "Indice"
                         ListView1.Columns(1).Text = "Nome immagine"
                         OpenFileDialog1.Title = "Specifica l'immagine di cui verificare le informazioni"
+                    Case "CHS", "CHT"
+                        Text = "获取映像信息"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "要从中获取信息的映像文件："
+                        Label3.Text = "映像文件的索引列表："
+                        Label22.Text = "映像版本："
+                        Label24.Text = "映像名称："
+                        Label26.Text = "映像说明："
+                        Label31.Text = "映像大小："
+                        Label41.Text = "是否支持 WIMBoot？"
+                        Label43.Text = "体系结构："
+                        Label47.Text = "HAL："
+                        Label33.Text = "Service Pack 内部版本："
+                        Label28.Text = "Service Pack 级别："
+                        Label30.Text = "安装类型："
+                        Label39.Text = "版本："
+                        Label45.Text = "产品类型："
+                        Label5.Text = "产品套件："
+                        Label7.Text = "系统根目录："
+                        Label9.Text = "文件数："
+                        Label11.Text = "日期："
+                        Label13.Text = "已安装的语言："
+                        Label36.Text = "映像信息"
+                        Label37.Text = "在左侧列表视图中选择一个索引，即可在此查看其信息"
+                        RadioButton1.Text = "当前已挂载的映像"
+                        RadioButton2.Text = "其他映像"
+                        Button1.Text = "浏览..."
+                        Button2.Text = "保存..."
+                        Button3.Text = "选择..."
+                        ListView1.Columns(0).Text = "索引"
+                        ListView1.Columns(1).Text = "映像名称"
+                        OpenFileDialog1.Title = "指定要从中获取信息的映像"
                 End Select
             Case 1
                 Text = "Get image information"
@@ -340,6 +372,39 @@ Public Class GetImgInfoDlg
                 ListView1.Columns(0).Text = "Indice"
                 ListView1.Columns(1).Text = "Nome immagine"
                 OpenFileDialog1.Title = "Specifica l'immagine di cui verificare le informazioni"
+            Case 6
+                Text = "获取映像信息"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "要从中获取信息的映像文件："
+                Label3.Text = "映像文件的索引列表："
+                Label22.Text = "映像版本："
+                Label24.Text = "映像名称："
+                Label26.Text = "映像说明："
+                Label31.Text = "映像大小："
+                Label41.Text = "是否支持 WIMBoot？"
+                Label43.Text = "体系结构："
+                Label47.Text = "HAL："
+                Label33.Text = "Service Pack 内部版本："
+                Label28.Text = "Service Pack 级别："
+                Label30.Text = "安装类型："
+                Label39.Text = "版本："
+                Label45.Text = "产品类型："
+                Label5.Text = "产品套件："
+                Label7.Text = "系统根目录："
+                Label9.Text = "文件数："
+                Label11.Text = "日期："
+                Label13.Text = "已安装的语言："
+                Label36.Text = "映像信息"
+                Label37.Text = "在左侧列表视图中选择一个索引，即可在此查看其信息"
+                RadioButton1.Text = "当前已挂载的映像"
+                RadioButton2.Text = "其他映像"
+                Button1.Text = "浏览..."
+                Button2.Text = "保存..."
+                Button3.Text = "选择..."
+                ListView1.Columns(0).Text = "索引"
+                ListView1.Columns(1).Text = "映像名称"
+                OpenFileDialog1.Title = "指定要从中获取信息的映像"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -412,6 +477,8 @@ Public Class GetImgInfoDlg
                             msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                         Case "ITA"
                             msg = "Impossibile verificare informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                        Case "CHS", "CHT"
+                            msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
                     End Select
                 Case 1
                     msg = "Could not gather information of this image file. Reason:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
@@ -423,6 +490,9 @@ Public Class GetImgInfoDlg
                     msg = "Não foi possível recolher informações sobre este ficheiro de imagem. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
                 Case 5
                     msg = "Impossibile verificare informazioni sull'immagine. Motivo:" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & " (HRESULT " & Hex(ex.HResult) & ")"
+                Case 6
+                    msg = "无法获取此映像文件的信息。原因：" & CrLf & CrLf & ex.ToString() & " - " & ex.Message & "（HRESULT " & Hex(ex.HResult) & ")"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
         Finally

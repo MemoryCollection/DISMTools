@@ -80,6 +80,20 @@ Public Class MountedImgMgr
                         Button4.Text = "Aprire la directory di montaggio"
                         Button5.Text = "Rimuovere le immagini del volume..."
                         Button6.Text = "Carica nel progetto"
+                    Case "CHS", "CHT"
+                        Text = "已挂载映像管理器"
+                        Label1.Text = "以下是本系统中已挂载映像的概览。您可以查看其信息并执行一些基本任务。不过，若要使用本程序完整执行映像操作，需要将挂载目录加载到项目中："
+                        ListView1.Columns(0).Text = "映像文件"
+                        ListView1.Columns(1).Text = "索引"
+                        ListView1.Columns(2).Text = "挂载目录"
+                        ListView1.Columns(3).Text = "状态"
+                        ListView1.Columns(4).Text = "读写权限？"
+                        Button1.Text = "卸载映像"
+                        Button2.Text = "重新加载服务"
+                        Button3.Text = "启用写入权限"
+                        Button4.Text = "打开挂载目录"
+                        Button5.Text = "删除卷映像..."
+                        Button6.Text = "加载到项目"
                 End Select
             Case 1
                 Text = "Mounted image manager"
@@ -151,6 +165,21 @@ Public Class MountedImgMgr
                 Button4.Text = "Aprire la directory di montaggio"
                 Button5.Text = "Rimuovere le immagini del volume..."
                 Button6.Text = "Carica nel progetto"
+            Case 6
+                Text = "已挂载映像管理器"
+                Label1.Text = "以下是本系统中已挂载映像的概览。您可以查看其信息并执行一些基本任务。不过，若要使用本程序完整执行映像操作，需要将挂载目录加载到项目中："
+                ListView1.Columns(0).Text = "映像文件"
+                ListView1.Columns(1).Text = "索引"
+                ListView1.Columns(2).Text = "挂载目录"
+                ListView1.Columns(3).Text = "状态"
+                ListView1.Columns(4).Text = "读写权限？"
+                Button1.Text = "卸载映像"
+                Button2.Text = "重新加载服务"
+                Button3.Text = "启用写入权限"
+                Button4.Text = "打开挂载目录"
+                Button5.Text = "删除卷映像..."
+                Button6.Text = "加载到项目"
+
         End Select
         CheckForIllegalCrossThreadCalls = False
         BackColor = CurrentTheme.SectionBackgroundColor
@@ -199,6 +228,8 @@ Public Class MountedImgMgr
                                             Button2.Text = "Recarregar o serviço"
                                         Case "ITA"
                                             Button2.Text = "Ricarica servizio"
+                                        Case "CHS", "CHT"
+                                            Button2.Text = "重新加载服务"
                                     End Select
                                 Case 1
                                     Button2.Text = "Reload servicing"
@@ -210,6 +241,9 @@ Public Class MountedImgMgr
                                     Button2.Text = "Recarregar o serviço"
                                 Case 5
                                     Button2.Text = "Ricarica servizio"
+                                Case 6
+                                    Button2.Text = "重新加载服务"
+
                             End Select
                         Case DismMountStatus.Invalid
                             Select Case MainForm.Language
@@ -225,6 +259,8 @@ Public Class MountedImgMgr
                                             Button2.Text = "Reparação do armazém de componentes"
                                         Case "ITA"
                                             Button2.Text = "Ripara il magazzino dei componenti"
+                                        Case "CHS", "CHT"
+                                            Button2.Text = "修复组件存储"
                                     End Select
                                 Case 1
                                     Button2.Text = "Repair component store"
@@ -236,6 +272,9 @@ Public Class MountedImgMgr
                                     Button2.Text = "Reparação do armazém de componentes"
                                 Case 5
                                     Button2.Text = "Ripara il magazzino dei componenti"
+                                Case 6
+                                    Button2.Text = "修复组件存储"
+
                             End Select
                     End Select
                 Else

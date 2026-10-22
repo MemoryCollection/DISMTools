@@ -37,6 +37,10 @@ Public Class MountOpDirCreationDialog
                         Label1.Text = "Vuoi creare la directory di montaggio?"
                         OK_Button.Text = "Sì"
                         Cancel_Button.Text = "No"
+                    Case "CHS", "CHT"
+                        Label1.Text = "是否要创建挂载目录？"
+                        OK_Button.Text = "是"
+                        Cancel_Button.Text = "否"
                 End Select
             Case 1
                 Label1.Text = "Do you want to create the mount directory?"
@@ -58,6 +62,11 @@ Public Class MountOpDirCreationDialog
                 Label1.Text = "Vuoi creare la directory di montaggio?"
                 OK_Button.Text = "Sì"
                 Cancel_Button.Text = "No"
+            Case 6
+                Label1.Text = "是否要创建挂载目录？"
+                OK_Button.Text = "是"
+                Cancel_Button.Text = "否"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

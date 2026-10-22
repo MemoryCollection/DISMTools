@@ -32,6 +32,8 @@ Public Class RemProvAppxPackage
                             MsgBox("Especifique os pacotes AppX a remover e tente novamente.", vbOKOnly + vbCritical, "Remover pacotes AppX aprovisionados")
                         Case "ITA"
                             MsgBox("Specificare i pacchetti AppX da rimuovere e riprovare", vbOKOnly + vbCritical, "Rimuovere i pacchetti AppX in dotazione")
+                        Case "CHS", "CHT"
+                            MsgBox("请指定要删除的 AppX 程序包，然后重试。", vbOKOnly + vbCritical, "删除预配的 AppX 程序包")
                     End Select
                 Case 1
                     MsgBox("Please specify AppX packages to remove and try again.", vbOKOnly + vbCritical, "Remove provisioned AppX packages")
@@ -43,6 +45,9 @@ Public Class RemProvAppxPackage
                     MsgBox("Especifique os pacotes AppX a remover e tente novamente.", vbOKOnly + vbCritical, "Remover pacotes AppX aprovisionados")
                 Case 5
                     MsgBox("Specificare i pacchetti AppX da rimuovere e riprovare", vbOKOnly + vbCritical, "Rimuovere i pacchetti AppX in dotazione")
+                Case 6
+                    MsgBox("请指定要删除的 AppX 程序包，然后重试。", vbOKOnly + vbCritical, "删除预配的 AppX 程序包")
+
             End Select
             Exit Sub
         Else
@@ -91,6 +96,8 @@ Public Class RemProvAppxPackage
                                             msg = "A caraterística Área de Trabalho (DesktopExperience) tem de ser ativada para remover pacotes AppX nas imagens do Windows Server Core/Nano Server." & CrLf & CrLf & "Ative esta caraterística, arranque para a imagem e tente novamente."
                                         Case "ITA"
                                             msg = "Le caratteristiche di Esperienza del Desktop (DesktopExperience) devono essere abilitate per rimuovere i pacchetti AppX nelle immagini di Windows Server Core/Nano Server." & CrLf & CrLf & "Abilitate questa caratteristica, avviate l'immagine e riprovate"
+                                        Case "CHS", "CHT"
+                                            msg = "要在 Windows Server Core/Nano Server 映像中删除 AppX 程序包，需要启用桌面体验（DesktopExperience）功能。" & CrLf & CrLf & "请启用此功能，启动到该映像，然后重试。"
                                     End Select
                                 Case 1
                                     msg = "The Desktop Experience (DesktopExperience) feature needs to be enabled in order to remove AppX packages in Windows Server Core/Nano Server images." & CrLf & CrLf & "Enable this feature, boot to the image, and try again."
@@ -102,6 +109,9 @@ Public Class RemProvAppxPackage
                                     msg = "A caraterística Área de Trabalho (DesktopExperience) tem de ser ativada para remover pacotes AppX nas imagens do Windows Server Core/Nano Server." & CrLf & CrLf & "Ative esta caraterística, arranque para a imagem e tente novamente."
                                 Case 5
                                     msg = "Le caratteristiche di Esperienza del Desktop (DesktopExperience) devono essere abilitate per rimuovere i pacchetti AppX nelle immagini di Windows Server Core/Nano Server." & CrLf & CrLf & "Abilitate questa caratteristica, avviate l'immagine e riprovate"
+                                Case 6
+                                    msg = "要在 Windows Server Core/Nano Server 映像中删除 AppX 程序包，需要启用桌面体验（DesktopExperience）功能。" & CrLf & CrLf & "请启用此功能，启动到该映像，然后重试。"
+
                             End Select
                             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
                             Exit Sub
@@ -253,6 +263,17 @@ Public Class RemProvAppxPackage
                         ListView1.Columns(3).Text = "ID risorsa"
                         ListView1.Columns(4).Text = "Versione"
                         ListView1.Columns(5).Text = "Registrato a qualche utente?"
+                    Case "CHS", "CHT"
+                        Text = "删除预配的 AppX 程序包"
+                        ImageTaskHeader1.ItemText = Text
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        ListView1.Columns(0).Text = "程序包名称"
+                        ListView1.Columns(1).Text = "应用程序显示名称"
+                        ListView1.Columns(2).Text = "体系结构"
+                        ListView1.Columns(3).Text = "资源 ID"
+                        ListView1.Columns(4).Text = "版本"
+                        ListView1.Columns(5).Text = "是否已注册到任何用户？"
                 End Select
             Case 1
                 Text = "Remove provisioned AppX packages"
@@ -309,6 +330,18 @@ Public Class RemProvAppxPackage
                 ListView1.Columns(3).Text = "ID risorsa"
                 ListView1.Columns(4).Text = "Versione"
                 ListView1.Columns(5).Text = "Registrato a qualche utente?"
+            Case 6
+                Text = "删除预配的 AppX 程序包"
+                ImageTaskHeader1.ItemText = Text
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                ListView1.Columns(0).Text = "程序包名称"
+                ListView1.Columns(1).Text = "应用程序显示名称"
+                ListView1.Columns(2).Text = "体系结构"
+                ListView1.Columns(3).Text = "资源 ID"
+                ListView1.Columns(4).Text = "版本"
+                ListView1.Columns(5).Text = "是否已注册到任何用户？"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

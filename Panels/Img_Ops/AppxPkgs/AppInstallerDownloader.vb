@@ -87,6 +87,16 @@ Public Class AppInstallerDownloader
                         downETALbl.Text = "Tempo stimato rimanente: sconosciuto"
                         Cancel_Button.Text = "Annullare"
                         Label3.Text = "Attendere..."
+                    Case "CHS", "CHT"
+                        Text = "正在下载应用程序包..."
+                        Label1.Text = "请稍候，DISMTools 正在下载应用程序包以添加到此映像。这可能需要一些时间，具体取决于你的网络连接速度。"
+                        StatusLbl.Text = "请稍候..."
+                        GroupBox1.Text = "传输详情"
+                        Label2.Text = "下载 URL："
+                        downSpdLbl.Text = "下载速度：未知"
+                        downETALbl.Text = "预计剩余时间：未知"
+                        Cancel_Button.Text = "取消"
+                        Label3.Text = "请稍候..."
                 End Select
             Case 1
                 Text = "Downloading application package..."
@@ -281,6 +291,8 @@ Public Class AppInstallerDownloader
                         progress = "Descarregar o pacote da aplicação principal... (" & BytesToReadableSize(e.BytesReceived) & " de " & BytesToReadableSize(e.TotalBytesToReceive) & " descarregados)"
                     Case "ITA"
                         progress = "Scaricamento del pacchetto dell'applicazione principale... (" & BytesToReadableSize(e.BytesReceived) & " di " & BytesToReadableSize(e.TotalBytesToReceive) & " scaricato)"
+                    Case "CHS", "CHT"
+                        progress = "正在下载主应用程序包...（" & BytesToReadableSize(e.BytesReceived) & " of " & BytesToReadableSize(e.TotalBytesToReceive) & " downloaded)"
                 End Select
             Case 1
                 progress = "Downloading main application package... (" & BytesToReadableSize(e.BytesReceived) & " of " & BytesToReadableSize(e.TotalBytesToReceive) & " downloaded)"
@@ -292,6 +304,9 @@ Public Class AppInstallerDownloader
                 progress = "Descarregar o pacote da aplicação principal... (" & BytesToReadableSize(e.BytesReceived) & " de " & BytesToReadableSize(e.TotalBytesToReceive) & " descarregados)"
             Case 5
                 progress = "Scaricamento del pacchetto dell'applicazione principale... (" & BytesToReadableSize(e.BytesReceived) & " di " & BytesToReadableSize(e.TotalBytesToReceive) & " scaricato)"
+            Case 6
+                progress = "正在下载主应用程序包...（" & BytesToReadableSize(e.BytesReceived) & " of " & BytesToReadableSize(e.TotalBytesToReceive) & " downloaded)"
+
         End Select
         downSpd = CLng(Math.Round(e.BytesReceived / sw.Elapsed.TotalSeconds, 2))
         If e.TotalBytesToReceive > 0 Then
@@ -340,6 +355,9 @@ Public Class AppInstallerDownloader
                     Case "ITA"
                         downSpdLbl.Text = "Velocità di scaricamento: " & BytesToReadableSize(downSpd) & "/s"
                         downETALbl.Text = "Tempo stimato rimanente: " & time.ToString("m\:ss") & " secondi"
+                    Case "CHS", "CHT"
+                        downSpdLbl.Text = "下载速度：" & BytesToReadableSize(downSpd) & "/s"
+                        downETALbl.Text = "预计剩余时间：" & time.ToString("m\:ss") & " 秒"
                 End Select
             Case 1
                 downSpdLbl.Text = "Download speed: " & BytesToReadableSize(downSpd) & "/s"

@@ -48,6 +48,12 @@ Public Class SingleImageIndexError
                         LinkLabel1.Text = "Per saperne di più sugli indici di un'immagine o su alcune sue proprietà specifiche, andare su " & Quote & "Comandi > Gestione immagini > Ottieni informazioni sull'immagine" & Quote & ", oppure fare clic qui"
                         LinkLabel1.LinkArea = New LinkArea(176, 3)
                         OK_Button.Text = "OK"
+                    Case "CHS", "CHT"
+                        Label1.Text = "此映像似乎只有一个索引"
+                        Label2.Text = "无法切换到其他索引。如果希望保存映像更改，可以使用一个新的独立索引来完成。"
+                        LinkLabel1.Text = "要详细了解映像的索引或其某些特定属性，请转到" & Quote & "命令 > 映像管理 > 获取映像信息" & Quote & "，或单击此处"
+                        LinkLabel1.LinkArea = New LinkArea(150, 4)
+                        OK_Button.Text = "确定"
                 End Select
             Case 1
                 Label1.Text = "This image seems to have only one index"
@@ -79,6 +85,13 @@ Public Class SingleImageIndexError
                 LinkLabel1.Text = "Per saperne di più sugli indici di un'immagine o su alcune sue proprietà specifiche, andare su " & Quote & "Comandi > Gestione immagini > Ottieni informazioni sull'immagine" & Quote & ", oppure fare clic qui"
                 LinkLabel1.LinkArea = New LinkArea(176, 3)
                 OK_Button.Text = "OK"
+            Case 6
+                Label1.Text = "此映像似乎只有一个索引"
+                Label2.Text = "无法切换到其他索引。如果希望保存映像更改，可以使用一个新的独立索引来完成。"
+                LinkLabel1.Text = "要详细了解映像的索引或其某些特定属性，请转到" & Quote & "命令 > 映像管理 > 获取映像信息" & Quote & "，或单击此处"
+                LinkLabel1.LinkArea = New LinkArea(150, 4)
+                OK_Button.Text = "确定"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

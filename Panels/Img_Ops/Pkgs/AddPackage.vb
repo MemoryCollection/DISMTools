@@ -153,6 +153,8 @@ Public Class AddPackageDlg
                         Label4.Text = "A analisar o diretório em busca de pacotes. Aguarde..."
                     Case "ITA"
                         Label4.Text = "Scansione della directory per i pacchetti. Attendere..."
+                    Case "CHS", "CHT"
+                        Label4.Text = "正在扫描目录以查找程序包。请稍候..."
                 End Select
             Case 1
                 Label4.Text = "Scanning directory for packages. Please wait..."
@@ -230,6 +232,8 @@ Public Class AddPackageDlg
                             Label4.Text = "Esta pasta não contém quaisquer pacotes. Utilize uma origem diferente e tente novamente"
                         Case "ITA"
                             Label4.Text = "Questa cartella non contiene pacchetti. Utilizzare un'altra origine e riprovare"
+                        Case "CHS", "CHT"
+                            Label4.Text = "此文件夹不包含任何程序包。请使用其他源并重试"
                     End Select
                 Case 1
                     Label4.Text = "This folder does not contain any packages. Please use a different source and try again"
@@ -259,6 +263,8 @@ Public Class AddPackageDlg
                             Label4.Text = "Esta pasta contém " & CheckedListBox1.Items.Count & " pacote" & If(CheckedListBox1.Items.Count = 1, ".", "s.")
                         Case "ITA"
                             Label4.Text = "Questa cartella contiene " & CheckedListBox1.Items.Count & " pacchett" & If(CheckedListBox1.Items.Count = 1, "o.", "i.")
+                        Case "CHS", "CHT"
+                            Label4.Text = "此文件夹包含 " & CheckedListBox1.Items.Count & " package" & If(CheckedListBox1.Items.Count = 1, ".", "s.")
                     End Select
                 Case 1
                     Label4.Text = "This folder contains " & CheckedListBox1.Items.Count & " package" & If(CheckedListBox1.Items.Count = 1, ".", "s.")
@@ -375,6 +381,25 @@ Public Class AddPackageDlg
                         FolderBrowserDialog1.Description = "Specificare la cartella contenente i pacchetti CAB o MSU:"
                         GroupBox1.Text = "Pacchetti"
                         GroupBox2.Text = "Opzioni"
+                    Case "CHS", "CHT"
+                        Text = "添加程序包"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "程序包源："
+                        Label3.Text = "程序包操作："
+                        Button1.Text = "浏览..."
+                        Button2.Text = "全选"
+                        Button3.Text = "全不选"
+                        Button4.Text = "添加更新清单..."
+                        Cancel_Button.Text = "取消"
+                        OK_Button.Text = "确定"
+                        RadioButton1.Text = "递归扫描文件夹以查找程序包"
+                        RadioButton2.Text = "选择要添加的程序包："
+                        CheckBox1.Text = "忽略适用性检查（不建议）"
+                        CheckBox2.Text = "如果存在挂起的联机操作，则跳过程序包安装"
+                        CheckBox3.Text = "添加程序包后提交映像"
+                        FolderBrowserDialog1.Description = "指定包含 CAB 或 MSU 程序包的文件夹："
+                        GroupBox1.Text = "程序包"
+                        GroupBox2.Text = "选项"
                 End Select
             Case 1
                 Text = "Add packages"
@@ -512,6 +537,8 @@ Public Class AddPackageDlg
                             Label4.Text = "Especifique um diretório onde estão localizados os ficheiros CAB ou MSU."
                         Case "ITA"
                             Label4.Text = "Specificare una directory in cui si trovano i file CAB o MSU"
+                        Case "CHS", "CHT"
+                            Label4.Text = "请指定包含 CAB 或 MSU 文件的目录。"
                     End Select
                 Case 1
                     Label4.Text = "Please specify a directory where CAB or MSU files are located."

@@ -113,6 +113,14 @@ Public Class SetOSUninstWindow
                         Label3.Text = "Numero di giorni necessari per tornare alla vecchia versione di Windows:"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Text = "设置操作系统卸载窗口"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "默认情况下，在操作系统更新之后，您有 10 天时间回滚到以前的 Windows 版本。不过，如果您希望稍后恢复到旧的操作系统版本，可以更改此设置。" & CrLf & CrLf & _
+                                      "请使用数字滑块增加或减少可恢复到旧 Windows 版本的天数。该值必须介于 2 到 60 之间。"
+                        Label3.Text = "可以恢复到旧 Windows 版本的天数："
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Set operating system uninstall window"
@@ -154,6 +162,15 @@ Public Class SetOSUninstWindow
                 Label3.Text = "Numero di giorni necessari per tornare alla vecchia versione di Windows:"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Text = "设置操作系统卸载窗口"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "默认情况下，在操作系统更新之后，您有 10 天时间回滚到以前的 Windows 版本。不过，如果您希望稍后恢复到旧的操作系统版本，可以更改此设置。" & CrLf & CrLf & _
+                              "请使用数字滑块增加或减少可恢复到旧 Windows 版本的天数。该值必须介于 2 到 60 之间。"
+                Label3.Text = "可以恢复到旧 Windows 版本的天数："
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         ' Get the uninstall window from the registry first
         Try

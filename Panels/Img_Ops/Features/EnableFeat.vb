@@ -91,6 +91,11 @@ Public Class EnableFeat
                                             CheckBox2.Checked = True
                                             Button2.PerformClick()
                                         End If
+                                    Case "CHS", "CHT"
+                                        If MsgBox("此映像中的某些功能需要指定源才能启用。指定的源对此操作无效。" & CrLf & CrLf & If(RichTextBox1.Text = "", "请指定有效的源，然后重试。", "请确保该源在文件系统中存在，然后重试。"), vbOKOnly + vbCritical, "启用功能") = MsgBoxResult.Ok Then
+                                            CheckBox2.Checked = True
+                                            Button2.PerformClick()
+                                        End If
                                 End Select
                             Case 1
                                 If MsgBox("Some features in this image require specifying a source for them to be enabled. The specified source is not valid for this operation." & CrLf & CrLf & If(RichTextBox1.Text = "", "Please specify a valid source and try again.", "Please make sure the source exists in the file system and try again."), vbOKOnly + vbCritical, "Enable features") = MsgBoxResult.Ok Then
@@ -117,6 +122,12 @@ Public Class EnableFeat
                                     CheckBox2.Checked = True
                                     Button2.PerformClick()
                                 End If
+                            Case 6
+                                If MsgBox("此映像中的某些功能需要指定源才能启用。指定的源对此操作无效。" & CrLf & CrLf & If(RichTextBox1.Text = "", "请指定有效的源，然后重试。", "请确保该源在文件系统中存在，然后重试。"), vbOKOnly + vbCritical, "启用功能") = MsgBoxResult.Ok Then
+                                    CheckBox2.Checked = True
+                                    Button2.PerformClick()
+                                End If
+
                         End Select
                     Else
 
@@ -149,6 +160,8 @@ Public Class EnableFeat
                                     MsgBox("A origem especificada não é válida. Por favor, especifique uma origem válida e tente novamente", vbOKOnly + vbCritical, "Ativar características")
                                 Case "ITA"
                                     MsgBox("La fonte specificata non è valida. Specificare un'origine valida e riprovare", vbOKOnly + vbCritical, "Abilita funzioni")
+                                Case "CHS", "CHT"
+                                    MsgBox("指定的源无效。请指定有效的源，然后重试", vbOKOnly + vbCritical, "启用功能")
                             End Select
                         Case 1
                             MsgBox("The specified source is not valid. Please specify a valid source and try again", vbOKOnly + vbCritical, "Enable features")
@@ -160,6 +173,9 @@ Public Class EnableFeat
                             MsgBox("A origem especificada não é válida. Por favor, especifique uma origem válida e tente novamente", vbOKOnly + vbCritical, "Ativar características")
                         Case 5
                             MsgBox("La fonte specificata non è valida. Specificare un'origine valida e riprovare", vbOKOnly + vbCritical, "Abilita funzioni")
+                        Case 6
+                            MsgBox("指定的源无效。请指定有效的源，然后重试", vbOKOnly + vbCritical, "启用功能")
+
                     End Select
                     Exit Sub
                 Else
@@ -325,6 +341,26 @@ Public Class EnableFeat
                         ListView1.Columns(0).Text = "Nome della funzione"
                         ListView1.Columns(1).Text = "Stato"
                         FolderBrowserDialog1.Description = "Specificare una cartella che fungerà da origine delle caratteristiche:"
+                    Case "CHS", "CHT"
+                        Text = "启用功能"
+                        ImageTaskHeader1.ItemText = Text
+                        Label3.Text = "程序包名称："
+                        Label4.Text = "功能源："
+                        Button1.Text = "查找..."
+                        Button2.Text = "浏览..."
+                        Button3.Text = "从组策略检测"
+                        Cancel_Button.Text = "取消"
+                        OK_Button.Text = "确定"
+                        GroupBox1.Text = "功能"
+                        GroupBox2.Text = "选项"
+                        CheckBox1.Text = "为功能指定父程序包名称"
+                        CheckBox2.Text = "指定功能源"
+                        CheckBox3.Text = "启用所有父功能"
+                        CheckBox4.Text = "联机映像请访问 Windows Update"
+                        CheckBox5.Text = "启用功能后提交映像"
+                        ListView1.Columns(0).Text = "功能名称"
+                        ListView1.Columns(1).Text = "状态"
+                        FolderBrowserDialog1.Description = "指定将作为功能源的文件夹："
                 End Select
             Case 1
                 Text = "Enable features"
@@ -426,6 +462,27 @@ Public Class EnableFeat
                 ListView1.Columns(0).Text = "Nome della funzione"
                 ListView1.Columns(1).Text = "Stato"
                 FolderBrowserDialog1.Description = "Specificare una cartella che fungerà da origine delle caratteristiche:"
+            Case 6
+                Text = "启用功能"
+                ImageTaskHeader1.ItemText = Text
+                Label3.Text = "程序包名称："
+                Label4.Text = "功能源："
+                Button1.Text = "查找..."
+                Button2.Text = "浏览..."
+                Button3.Text = "从组策略检测"
+                Cancel_Button.Text = "取消"
+                OK_Button.Text = "确定"
+                GroupBox1.Text = "功能"
+                GroupBox2.Text = "选项"
+                CheckBox1.Text = "为功能指定父程序包名称"
+                CheckBox2.Text = "指定功能源"
+                CheckBox3.Text = "启用所有父功能"
+                CheckBox4.Text = "联机映像请访问 Windows Update"
+                CheckBox5.Text = "启用功能后提交映像"
+                ListView1.Columns(0).Text = "功能名称"
+                ListView1.Columns(1).Text = "状态"
+                FolderBrowserDialog1.Description = "指定将作为功能源的文件夹："
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

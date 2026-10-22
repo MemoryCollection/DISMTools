@@ -42,6 +42,11 @@ Public Class ImgWinVistaIncompatibilityDialog
                         Label2.Text = "Né questo programma né DISM supportano la manutenzione delle immagini di Windows Vista. DISM è destinato a gestire immagini di Windows 7 o più recenti. È ancora possibile montare le immagini di Windows Vista, ma tutte le opzioni saranno disabilitate." & CrLf & CrLf & "Se si desidera comunque eseguire la manutenzione di un'immagine di Windows Vista, consultare l'argomento " & Quote & "Compatibilità con le versioni precedenti di Windows" & Quote & " nella documentazione della Guida in linea." & CrLf & CrLf & "Si desidera continuare?"
                         OK_Button.Text = "Sì"
                         Cancel_Button.Text = "No"
+                    Case "CHS", "CHT"
+                        Label1.Text = "程序无法维护 Windows Vista 映像"
+                        Label2.Text = "本程序和 DISM 均不支持维护 Windows Vista 映像。DISM 用于维护 Windows 7 或更新的映像。您仍可以挂载 Windows Vista 映像，但所有选项都将被禁用。" & CrLf & CrLf & "如果您仍要维护 Windows Vista 映像，请参阅" & Quote & "与旧版 Windows 的兼容性" & Quote & " 主题。" & CrLf & CrLf & "是否要继续？"
+                        OK_Button.Text = "是"
+                        Cancel_Button.Text = "否"
                 End Select
             Case 1
                 Label1.Text = "The program can't service Windows Vista images"
@@ -68,6 +73,12 @@ Public Class ImgWinVistaIncompatibilityDialog
                 Label2.Text = "Né questo programma né DISM supportano la manutenzione delle immagini di Windows Vista. DISM è destinato a gestire immagini di Windows 7 o più recenti. È ancora possibile montare le immagini di Windows Vista, ma tutte le opzioni saranno disabilitate." & CrLf & CrLf & "Se si desidera comunque eseguire la manutenzione di un'immagine di Windows Vista, consultare l'argomento " & Quote & "Compatibilità con le versioni precedenti di Windows" & Quote & " nella documentazione della Guida in linea." & CrLf & CrLf & "Si desidera continuare?"
                 OK_Button.Text = "Sì"
                 Cancel_Button.Text = "No"
+            Case 6
+                Label1.Text = "程序无法维护 Windows Vista 映像"
+                Label2.Text = "本程序和 DISM 均不支持维护 Windows Vista 映像。DISM 用于维护 Windows 7 或更新的映像。您仍可以挂载 Windows Vista 映像，但所有选项都将被禁用。" & CrLf & CrLf & "如果您仍要维护 Windows Vista 映像，请参阅" & Quote & "与旧版 Windows 的兼容性" & Quote & " 主题。" & CrLf & CrLf & "是否要继续？"
+                OK_Button.Text = "是"
+                Cancel_Button.Text = "否"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

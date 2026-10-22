@@ -42,6 +42,11 @@ Public Class ImgConversionSuccessDialog
                         Label2.Text = "L'immagine specificata è stata convertita con successo nel formato di destinazione. Per comodità, è possibile aprire l'Esplora file per vedere dove si trova l'immagine di destinazione." & CrLf & CrLf & "Si desidera aprire la directory in cui è memorizzata l'immagine di destinazione?"
                         OK_Button.Text = "Sì"
                         Cancel_Button.Text = "No"
+                    Case "CHS", "CHT"
+                        Label1.Text = "映像已成功转换"
+                        Label2.Text = "指定的映像已成功转换为目标格式。为方便起见，可以为您打开文件资源管理器以查看目标映像的位置。" & CrLf & CrLf & "是否要打开存储目标映像的目录？"
+                        OK_Button.Text = "是"
+                        Cancel_Button.Text = "否"
                 End Select
             Case 1
                 Label1.Text = "The image has been successfully converted"
@@ -68,6 +73,12 @@ Public Class ImgConversionSuccessDialog
                 Label2.Text = "L'immagine specificata è stata convertita con successo nel formato di destinazione. Per comodità, è possibile aprire l'Esplora file per vedere dove si trova l'immagine di destinazione." & CrLf & CrLf & "Si desidera aprire la directory in cui è memorizzata l'immagine di destinazione?"
                 OK_Button.Text = "Sì"
                 Cancel_Button.Text = "No"
+            Case 6
+                Label1.Text = "映像已成功转换"
+                Label2.Text = "指定的映像已成功转换为目标格式。为方便起见，可以为您打开文件资源管理器以查看目标映像的位置。" & CrLf & CrLf & "是否要打开存储目标映像的目录？"
+                OK_Button.Text = "是"
+                Cancel_Button.Text = "否"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

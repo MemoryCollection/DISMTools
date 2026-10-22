@@ -27,6 +27,8 @@ Public Class PkgParentNameLookupDlg
                             MsgBox("Especifique um nome de pacote e tente novamente.", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Nomes dos pacotes instalados")
                         Case "ITA"
                             MsgBox("Specificare il nome di un pacchetto e riprovare", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Nomi dei pacchetti installati")
+                        Case "CHS", "CHT"
+                            MsgBox("请指定程序包名称，然后重试。", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "已安装的程序包名称")
                     End Select
                 Case 1
                     MsgBox("Please specify a package name, and try again.", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Installed package names")
@@ -38,6 +40,9 @@ Public Class PkgParentNameLookupDlg
                     MsgBox("Especifique um nome de pacote e tente novamente.", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Nomes dos pacotes instalados")
                 Case 5
                     MsgBox("Specificare il nome di un pacchetto e riprovare", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Nomi dei pacchetti installati")
+                Case 6
+                    MsgBox("请指定程序包名称，然后重试。", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "已安装的程序包名称")
+
             End Select
             Exit Sub
         ElseIf Not ListBox1.Items.Contains(TextBox1.Text) Then
@@ -55,6 +60,8 @@ Public Class PkgParentNameLookupDlg
                             MsgBox("O nome do pacote especificado não parece estar na imagem. Especifique uma entrada disponível e tente novamente", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Nomes dos pacotes instalados")
                         Case "ITA"
                             MsgBox("Il nome del pacchetto specificato non sembra essere presente nell'immagine. Si prega di specificare una voce disponibile e di riprovare", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Nomi di pacchetti installati")
+                        Case "CHS", "CHT"
+                            MsgBox("指定的程序包名称似乎不在映像中。请指定可用的条目，然后重试", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "已安装的程序包名称")
                     End Select
                 Case 1
                     MsgBox("The specified package name does not seem to be in the image. Please specify an available entry, and try again", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Installed package names")
@@ -66,6 +73,9 @@ Public Class PkgParentNameLookupDlg
                     MsgBox("O nome do pacote especificado não parece estar na imagem. Especifique uma entrada disponível e tente novamente", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Nomes dos pacotes instalados")
                 Case 5
                     MsgBox("Il nome del pacchetto specificato non sembra essere presente nell'immagine. Si prega di specificare una voce disponibile e di riprovare", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "Nomi di pacchetti installati")
+                Case 6
+                    MsgBox("指定的程序包名称似乎不在映像中。请指定可用的条目，然后重试", MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, "已安装的程序包名称")
+
             End Select
             Exit Sub
         Else
@@ -128,6 +138,13 @@ Public Class PkgParentNameLookupDlg
                         Label3.Text = "Ottenere i nomi dei pacchetti. Attendere prego..."
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Text = "已安装的程序包名称"
+                        Label1.Text = "已挂载映像中已安装程序包的名称："
+                        Label2.Text = "父程序包名称："
+                        Label3.Text = "正在获取程序包名称。请稍候..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Installed package names"
@@ -164,6 +181,14 @@ Public Class PkgParentNameLookupDlg
                 Label3.Text = "Ottenere i nomi dei pacchetti. Attendere prego..."
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Text = "已安装的程序包名称"
+                Label1.Text = "已挂载映像中已安装程序包的名称："
+                Label2.Text = "父程序包名称："
+                Label3.Text = "正在获取程序包名称。请稍候..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

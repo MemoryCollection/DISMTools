@@ -42,6 +42,8 @@
                                 driverInboxString = "Sim"
                             Case "ITA"
                                 driverInboxString = "Sì"
+                            Case "CHS", "CHT"
+                                driverInboxString = "是"
                         End Select
                     Case 1
                         driverInboxString = "Yes"
@@ -53,6 +55,9 @@
                         driverInboxString = "Sim"
                     Case 5
                         driverInboxString = "Sì"
+                    Case 6
+                        driverInboxString = "是"
+
                 End Select
             Else
                 Select Case LangCode
@@ -68,6 +73,8 @@
                                 driverInboxString = "Não"
                             Case "ITA"
                                 driverInboxString = "No"
+                            Case "CHS", "CHT"
+                                driverInboxString = "否"
                         End Select
                     Case 1
                         driverInboxString = "No"
@@ -79,6 +86,9 @@
                         driverInboxString = "Não"
                     Case 5
                         driverInboxString = "No"
+                    Case 6
+                        driverInboxString = "否"
+
                 End Select
             End If
 

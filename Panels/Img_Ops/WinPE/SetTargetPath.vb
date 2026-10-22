@@ -51,6 +51,8 @@ Public Class SetPETargetPath
                             msg = "O local de destino tem de ter pelo menos 3 caracteres e não mais de 32 caracteres"
                         Case "ITA"
                             msg = "Il percorso di destinazione deve essere di almeno 3 caratteri e non più lungo di 32 caratteri"
+                        Case "CHS", "CHT"
+                            msg = "目标路径必须至少 3 个字符且不超过 32 个字符"
                     End Select
                 Case 1
                     msg = "The target path must be at least 3 characters and no longer than 32 characters"
@@ -62,6 +64,9 @@ Public Class SetPETargetPath
                     msg = "O local de destino tem de ter pelo menos 3 caracteres e não mais de 32 caracteres"
                 Case 5
                     msg = "Il percorso di destinazione deve essere di almeno 3 caratteri e non più lungo di 32 caratteri"
+                Case 6
+                    msg = "目标路径必须至少 3 个字符且不超过 32 个字符"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -81,6 +86,8 @@ Public Class SetPETargetPath
                             msg = "O local de destino deve começar com uma letra diferente de A ou B"
                         Case "ITA"
                             msg = "Il percorso di destinazione deve iniziare con una lettera diversa da A o B"
+                        Case "CHS", "CHT"
+                            msg = "目标路径必须以 A 或 B 以外的字母开头"
                     End Select
                 Case 1
                     msg = "The target path must start with any letter other than A or B"
@@ -92,6 +99,9 @@ Public Class SetPETargetPath
                     msg = "O local de destino deve começar com uma letra diferente de A ou B"
                 Case 5
                     msg = "Il percorso di destinazione deve iniziare con una lettera diversa da A o B"
+                Case 6
+                    msg = "目标路径必须以 A 或 B 以外的字母开头"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -111,6 +121,8 @@ Public Class SetPETargetPath
                             msg = "Uma letra de unidade deve ser seguida de :"
                         Case "ITA"
                             msg = "Una lettera di unità deve essere seguita da :"
+                        Case "CHS", "CHT"
+                            msg = "驱动器号后面必须跟冒号"
                     End Select
                 Case 1
                     msg = "A drive letter must be followed by :"
@@ -122,6 +134,9 @@ Public Class SetPETargetPath
                     msg = "Uma letra de unidade deve ser seguida de :"
                 Case 5
                     msg = "Una lettera di unità deve essere seguita da :"
+                Case 6
+                    msg = "驱动器号后面必须跟冒号"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -141,6 +156,8 @@ Public Class SetPETargetPath
                             msg = "A localização de destino tem de ser absoluta e não pode conter elementos relativos"
                         Case "ITA"
                             msg = "Il percorso di destinazione deve essere assoluto e non deve contenere elementi relativi"
+                        Case "CHS", "CHT"
+                            msg = "目标路径必须是绝对路径，且不能包含相对元素"
                     End Select
                 Case 1
                     msg = "The target path must be absolute, and must not contain relative elements"
@@ -152,6 +169,9 @@ Public Class SetPETargetPath
                     msg = "A localização de destino tem de ser absoluta e não pode conter elementos relativos"
                 Case 5
                     msg = "Il percorso di destinazione deve essere assoluto e non deve contenere elementi relativi"
+                Case 6
+                    msg = "目标路径必须是绝对路径，且不能包含相对元素"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -171,6 +191,8 @@ Public Class SetPETargetPath
                             msg = "A localização de destino não pode conter espaços ou aspas"
                         Case "ITA"
                             msg = "Il percorso di destinazione non deve contenere spazi o virgolette"
+                        Case "CHS", "CHT"
+                            msg = "目标路径不能包含空格或引号"
                     End Select
                 Case 1
                     msg = "The target path must not contain spaces or quotation marks"
@@ -182,6 +204,9 @@ Public Class SetPETargetPath
                     msg = "A localização de destino não pode conter espaços ou aspas"
                 Case 5
                     msg = "Il percorso di destinazione non deve contenere spazi o virgolette"
+                Case 6
+                    msg = "目标路径不能包含空格或引号"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -251,6 +276,13 @@ Public Class SetPETargetPath
                         Label3.Text = "Percorso di destinazione:"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Text = "设置 Windows PE 目标路径"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "目标路径是用于启动到该环境时复制 Windows PE 文件的目录。请指定目标路径，然后单击「确定」。"
+                        Label3.Text = "目标路径："
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Set Windows PE target path"
@@ -287,6 +319,14 @@ Public Class SetPETargetPath
                 Label3.Text = "Percorso di destinazione:"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Text = "设置 Windows PE 目标路径"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "目标路径是用于启动到该环境时复制 Windows PE 文件的目录。请指定目标路径，然后单击「确定」。"
+                Label3.Text = "目标路径："
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

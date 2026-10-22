@@ -56,6 +56,8 @@ Public Class ImgIndexSwitch
                         PleaseWaitDialog.Label2.Text = "Obter índices de imagem..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Ottenere gli indici delle immagini..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取映像索引..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting image indexes..."
@@ -67,6 +69,9 @@ Public Class ImgIndexSwitch
                 PleaseWaitDialog.Label2.Text = "Obter índices de imagem..."
             Case 5
                 PleaseWaitDialog.Label2.Text = "Ottenere gli indici delle immagini..."
+            Case 6
+                PleaseWaitDialog.Label2.Text = "正在获取映像索引..."
+
         End Select
         PleaseWaitDialog.ShowDialog(Me)
         MainForm.StartMountedImageDetector()
@@ -140,6 +145,18 @@ Public Class ImgIndexSwitch
                         GroupBox1.Text = "Indici"
                         RadioButton1.Text = "Salva le modifiche all'indice"
                         RadioButton2.Text = "Smonta scartando le modifiche"
+                    Case "CHS", "CHT"
+                        Text = "切换映像索引"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "映像："
+                        Label3.Text = "卸载源索引时应执行什么操作？"
+                        Label4.Text = "要挂载的目标索引："
+                        Label6.Text = "此索引已挂载"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        GroupBox1.Text = "索引"
+                        RadioButton1.Text = "将更改保存到索引"
+                        RadioButton2.Text = "卸载并放弃更改"
                 End Select
             Case 1
                 Text = "Switch image indexes"
@@ -201,6 +218,19 @@ Public Class ImgIndexSwitch
                 GroupBox1.Text = "Indici"
                 RadioButton1.Text = "Salva le modifiche all'indice"
                 RadioButton2.Text = "Smonta scartando le modifiche"
+            Case 6
+                Text = "切换映像索引"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "映像："
+                Label3.Text = "卸载源索引时应执行什么操作？"
+                Label4.Text = "要挂载的目标索引："
+                Label6.Text = "此索引已挂载"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                GroupBox1.Text = "索引"
+                RadioButton1.Text = "将更改保存到索引"
+                RadioButton2.Text = "卸载并放弃更改"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

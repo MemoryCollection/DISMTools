@@ -42,6 +42,11 @@ Public Class OrphanedMountedImgDialog
                         Label2.Text = "Il progetto che è stato caricato contiene un'immagine orfana (un'immagine che deve essere rimontata)" & CrLf & "L'immagine verrà rimontata quando si fa clic su " & Quote & "OK" & Quote & ". Questa operazione non dovrebbe influire sulle modifiche apportate all'immagine e non dovrebbe richiedere molto tempo." & CrLf & CrLf & "NOTA: se si fa clic su " & Quote & "Cancel" & Quote & ", il progetto verrà scaricato"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Label1.Text = "此映像需要重新加载服务会话"
+                        Label2.Text = "已加载的项目包含孤立映像（需要重新挂载的映像）" & CrLf & "单击后，映像将被重新挂载" & Quote & "确定" & Quote & "。这不会影响您对映像所做的修改，也不会耗时太久。" & CrLf & CrLf & "注意：如果单击" & Quote & "取消" & Quote & "，项目将被卸载"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Label1.Text = "This image needs a servicing session reload"
@@ -68,6 +73,12 @@ Public Class OrphanedMountedImgDialog
                 Label2.Text = "Il progetto che è stato caricato contiene un'immagine orfana (un'immagine che deve essere rimontata)" & CrLf & "L'immagine verrà rimontata quando si fa clic su " & Quote & "OK" & Quote & ". Questa operazione non dovrebbe influire sulle modifiche apportate all'immagine e non dovrebbe richiedere molto tempo." & CrLf & CrLf & "NOTA: se si fa clic su " & Quote & "Cancel" & Quote & ", il progetto verrà scaricato"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Label1.Text = "此映像需要重新加载服务会话"
+                Label2.Text = "已加载的项目包含孤立映像（需要重新挂载的映像）" & CrLf & "单击后，映像将被重新挂载" & Quote & "确定" & Quote & "。这不会影响您对映像所做的修改，也不会耗时太久。" & CrLf & CrLf & "注意：如果单击" & Quote & "取消" & Quote & "，项目将被卸载"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

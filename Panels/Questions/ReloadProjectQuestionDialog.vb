@@ -42,6 +42,11 @@ Public Class ReloadProjectQuestionDialog
                         Label2.Text = "L'immagine caricata in questo progetto non è più disponibile. Questo può accadere se è stata smontata da un programma esterno. Per questo motivo, il progetto deve essere ricaricato. Fare clic su " & Quote & "OK" & Quote & " per ricaricare il progetto." & CrLf & CrLf & "NOTA: se si fa clic su " & Quote & "Annulla" & Quote & ", il progetto verrà scaricato"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Label1.Text = "此映像已不可用"
+                        Label2.Text = "此项目中加载的映像已不可用。如果映像被外部程序卸载，就可能发生这种情况。因此，需要重新加载项目。请单击" & Quote & "确定" & Quote & " 以重新加载此项目。" & CrLf & CrLf & "注意：如果单击" & Quote & "取消" & Quote & "，项目将被卸载"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Label1.Text = "This image is no longer available"
@@ -68,6 +73,12 @@ Public Class ReloadProjectQuestionDialog
                 Label2.Text = "L'immagine caricata in questo progetto non è più disponibile. Questo può accadere se è stata smontata da un programma esterno. Per questo motivo, il progetto deve essere ricaricato. Fare clic su " & Quote & "OK" & Quote & " per ricaricare il progetto." & CrLf & CrLf & "NOTA: se si fa clic su " & Quote & "Annulla" & Quote & ", il progetto verrà scaricato"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Label1.Text = "此映像已不可用"
+                Label2.Text = "此项目中加载的映像已不可用。如果映像被外部程序卸载，就可能发生这种情况。因此，需要重新加载项目。请单击" & Quote & "确定" & Quote & " 以重新加载此项目。" & CrLf & CrLf & "注意：如果单击" & Quote & "取消" & Quote & "，项目将被卸载"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

@@ -24,6 +24,8 @@ Public Class OneDriveExclusionDlg
                         Label3.Text = "As pastas do OneDrive dos utilizadores foram excluídas e serão adicionadas à lista de configuração."
                     Case "ITA"
                         Label3.Text = "Le cartelle OneDrive dell'utente sono state escluse e saranno aggiunte all'elenco configurazione"
+                    Case "CHS", "CHT"
+                        Label3.Text = "用户 OneDrive 文件夹已被排除，并将添加到配置列表。"
                 End Select
             Case 1
                 Label3.Text = "User OneDrive folders have been excluded and will be added to the configuration list."
@@ -35,6 +37,9 @@ Public Class OneDriveExclusionDlg
                 Label3.Text = "As pastas do OneDrive dos utilizadores foram excluídas e serão adicionadas à lista de configuração."
             Case 5
                 Label3.Text = "Le cartelle OneDrive dell'utente sono state escluse e saranno aggiunte all'elenco configurazione"
+            Case 6
+                Label3.Text = "用户 OneDrive 文件夹已被排除，并将添加到配置列表。"
+
         End Select
         Refresh()
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
@@ -70,6 +75,8 @@ Public Class OneDriveExclusionDlg
                                 Label3.Text = "Excluir pastas do OneDrive dos utilizadores..."
                             Case "ITA"
                                 Label3.Text = "Esclusione cartelle OneDrive utente..."
+                            Case "CHS", "CHT"
+                                Label3.Text = "正在排除用户 OneDrive 文件夹..."
                         End Select
                     Case 1
                         Label3.Text = "Excluding user OneDrive folders..."
@@ -81,6 +88,9 @@ Public Class OneDriveExclusionDlg
                         Label3.Text = "Excluir pastas do OneDrive dos utilizadores..."
                     Case 5
                         Label3.Text = "Esclusione cartelle OneDrive utente..."
+                    Case 6
+                        Label3.Text = "正在排除用户 OneDrive 文件夹..."
+
                 End Select
                 Refresh()
                 ' Go through all User folders and exclude all OneDrive folders
@@ -161,6 +171,16 @@ Public Class OneDriveExclusionDlg
                         OK_Button.Text = "Escludi"
                         Cancel_Button.Text = "Annulla"
                         FolderBrowserDialog1.Description = "Scegli un percorso che contenga le cartelle dell'utente:"
+                    Case "CHS", "CHT"
+                        Text = "排除用户 OneDrive 文件夹"
+                        Label1.Text = "此工具可帮助您在正在编辑的配置列表中排除用户 OneDrive 文件夹。只需指定要应用该配置列表文件的路径，然后单击「排除」。" & CrLf & CrLf & _
+                                      "注意：运行此工具并排除用户 OneDrive 文件夹后，不应将配置列表用于此处指定映像以外的其他映像。如果要在其他映像上使用该配置列表，请删除配置列表中的用户 OneDrive 文件夹，然后重新运行此工具。"
+                        Label2.Text = "要排除 OneDrive 文件夹的路径："
+                        Label3.Text = "准备好后，请单击「排除」。"
+                        Button1.Text = "浏览..."
+                        OK_Button.Text = "排除"
+                        Cancel_Button.Text = "取消"
+                        FolderBrowserDialog1.Description = "选择包含用户文件夹的路径："
                 End Select
             Case 1
                 Text = "Exclude user OneDrive folders"
@@ -212,6 +232,17 @@ Public Class OneDriveExclusionDlg
                 OK_Button.Text = "Escludi"
                 Cancel_Button.Text = "Annulla"
                 FolderBrowserDialog1.Description = "Scegli un percorso che contenga le cartelle dell'utente:"
+            Case 6
+                Text = "排除用户 OneDrive 文件夹"
+                Label1.Text = "此工具可帮助您在正在编辑的配置列表中排除用户 OneDrive 文件夹。只需指定要应用该配置列表文件的路径，然后单击「排除」。" & CrLf & CrLf & _
+                              "注意：运行此工具并排除用户 OneDrive 文件夹后，不应将配置列表用于此处指定映像以外的其他映像。如果要在其他映像上使用该配置列表，请删除配置列表中的用户 OneDrive 文件夹，然后重新运行此工具。"
+                Label2.Text = "要排除 OneDrive 文件夹的路径："
+                Label3.Text = "准备好后，请单击「排除」。"
+                Button1.Text = "浏览..."
+                OK_Button.Text = "排除"
+                Cancel_Button.Text = "取消"
+                FolderBrowserDialog1.Description = "选择包含用户文件夹的路径："
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

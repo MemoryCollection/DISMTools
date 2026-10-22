@@ -59,6 +59,14 @@ Public Class MUMAdditionDialog
                         Button1.Text = "Sfoglia..."
                         Cancel_Button.Text = "Annullare"
                         OK_Button.Text = "OK"
+                    Case "CHS", "CHT"
+                        Text = "添加更新清单"
+                        Label1.Text = "此对话框允许您将 Microsoft 更新清单 (MUM) 文件添加到目标映像。每次只能指定一个。" & CrLf & CrLf &
+                            "请注意，此功能仅供高级使用，可能会影响目标 Windows 映像。"
+                        Label2.Text = "要添加的清单文件路径："
+                        Button1.Text = "浏览..."
+                        Cancel_Button.Text = "取消"
+                        OK_Button.Text = "确定"
                 End Select
             Case 1
                 Text = "Add update manifest"
@@ -100,6 +108,15 @@ Public Class MUMAdditionDialog
                 Button1.Text = "Sfoglia..."
                 Cancel_Button.Text = "Annullare"
                 OK_Button.Text = "OK"
+            Case 6
+                Text = "添加更新清单"
+                Label1.Text = "此对话框允许您将 Microsoft 更新清单 (MUM) 文件添加到目标映像。每次只能指定一个。" & CrLf & CrLf &
+                    "请注意，此功能仅供高级使用，可能会影响目标 Windows 映像。"
+                Label2.Text = "要添加的清单文件路径："
+                Button1.Text = "浏览..."
+                Cancel_Button.Text = "取消"
+                OK_Button.Text = "确定"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

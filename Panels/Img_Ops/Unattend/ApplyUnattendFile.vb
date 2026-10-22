@@ -27,6 +27,8 @@ Public Class ApplyUnattendFile
                             msg = "Ou não foi especificado nenhum ficheiro de resposta não assistida ou o ficheiro especificado não existe. Verifique se ele existe e tente novamente."
                         Case "ITA"
                             msg = "Non è stato specificato alcun file di risposta non presidiato oppure il file specificato non esiste. Verificare che esista e riprovare."
+                        Case "CHS", "CHT"
+                            msg = "未指定无人参与应答文件，或指定的文件不存在。请确认其存在，然后重试。"
                     End Select
                 Case 1
                     msg = "Either no unattended answer file has been specified or the specified file does not exist. Please verify that it exists, and try again."
@@ -38,6 +40,9 @@ Public Class ApplyUnattendFile
                     msg = "Ou não foi especificado nenhum ficheiro de resposta não assistida ou o ficheiro especificado não existe. Verifique se ele existe e tente novamente."
                 Case 5
                     msg = "Non è stato specificato alcun file di risposta non presidiato oppure il file specificato non esiste. Verificare che esista e riprovare."
+                Case 6
+                    msg = "未指定无人参与应答文件，或指定的文件不存在。请确认其存在，然后重试。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbCritical, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -103,6 +108,13 @@ Public Class ApplyUnattendFile
                         Button1.Text = "Sfoglia..."
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Text = "应用无人参与应答文件"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "应答文件："
+                        Button1.Text = "浏览..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Apply unattended answer file"
@@ -139,6 +151,14 @@ Public Class ApplyUnattendFile
                 Button1.Text = "Sfoglia..."
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Text = "应用无人参与应答文件"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "应答文件："
+                Button1.Text = "浏览..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

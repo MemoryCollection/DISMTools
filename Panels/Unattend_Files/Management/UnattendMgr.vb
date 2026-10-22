@@ -61,6 +61,8 @@ Public Class UnattendMgr
                                 errorMsg = "A localização da pasta não existe"
                             Case "ITA"
                                 errorMsg = "Il percorso della cartella non esiste"
+                            Case "CHS", "CHT"
+                                errorMsg = "文件夹路径不存在"
                         End Select
                     Case 1
                         errorMsg = "The folder path does not exist"
@@ -72,6 +74,9 @@ Public Class UnattendMgr
                         errorMsg = "A localização da pasta não existe"
                     Case 5
                         errorMsg = "Il percorso della cartella non esiste"
+                    Case 6
+                        errorMsg = "文件夹路径不存在"
+
                 End Select
                 Throw New Exception(errorMsg)
             End If
@@ -95,6 +100,8 @@ Public Class UnattendMgr
                                 errorMsg = "Pesquisa concluída sem elementos encontrados"
                             Case "ITA"
                                 errorMsg = "La ricerca si è conclusa con nessun elemento trovato"
+                            Case "CHS", "CHT"
+                                errorMsg = "搜索结束，未找到任何元素"
                         End Select
                     Case 1
                         errorMsg = "Search concluded with no elements found"
@@ -106,6 +113,9 @@ Public Class UnattendMgr
                         errorMsg = "Pesquisa concluída sem elementos encontrados"
                     Case 5
                         errorMsg = "La ricerca si è conclusa con nessun elemento trovato"
+                    Case 6
+                        errorMsg = "搜索结束，未找到任何元素"
+
                 End Select
                 Throw New Exception(errorMsg)
             End If
@@ -196,6 +206,17 @@ Public Class UnattendMgr
                         ListView1.Columns(1).Text = "Creato"
                         ListView1.Columns(2).Text = "Ultima modifica"
                         ListView1.Columns(3).Text = "Ultimo accesso"
+                    Case "CHS", "CHT"
+                        Text = "无人参与应答文件管理器"
+                        Label1.Text = "项目路径："
+                        Button1.Text = "浏览..."
+                        Button2.Text = "打开文件"
+                        Button3.Text = "打开文件所在位置"
+                        Button4.Text = "应用到映像..."
+                        ListView1.Columns(0).Text = "文件名"
+                        ListView1.Columns(1).Text = "创建时间"
+                        ListView1.Columns(2).Text = "上次修改时间"
+                        ListView1.Columns(3).Text = "上次访问时间"
                 End Select
             Case 1
                 Text = "Unattended answer file manager"
@@ -252,6 +273,18 @@ Public Class UnattendMgr
                 ListView1.Columns(1).Text = "Creato"
                 ListView1.Columns(2).Text = "Ultima modifica"
                 ListView1.Columns(3).Text = "Ultimo accesso"
+            Case 6
+                Text = "无人参与应答文件管理器"
+                Label1.Text = "项目路径："
+                Button1.Text = "浏览..."
+                Button2.Text = "打开文件"
+                Button3.Text = "打开文件所在位置"
+                Button4.Text = "应用到映像..."
+                ListView1.Columns(0).Text = "文件名"
+                ListView1.Columns(1).Text = "创建时间"
+                ListView1.Columns(2).Text = "上次修改时间"
+                ListView1.Columns(3).Text = "上次访问时间"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

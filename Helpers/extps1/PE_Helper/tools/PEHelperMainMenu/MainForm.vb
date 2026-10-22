@@ -105,6 +105,22 @@ Public Class MainForm
                 LinkLabel9.Text = "Copia l'immagine di avvio sul server WDS..."
                 ExitLink.Text = "Esci"
                 pxeServerPortSwitcherMessage = "Tenere premuto il tasto SHIFT per modificare la porta da utilizzare per questo server PXE Helper"
+            Case "CHS", "CHT"
+                RestartMessage = "这将重启您的计算机。请确保已将计算机配置为通过安装介质启动。是否要重启？"
+                ProcessExitCodeMessage = "进程已退出，代码为 0x{0}：" & CrLf & CrLf & "{1}"
+                Label1.Text = "您想做什么？"
+                Label3.Text = "为网络安装启动 PXE 辅助服务器"
+                LinkLabel1.Text = "安装操作系统"
+                LinkLabel2.Text = "重启到安装介质"
+                LinkLabel3.Text = "为网络安装启动 PXE 辅助服务器"
+                LinkLabel4.Text = "准备系统以捕获映像"
+                LinkLabel5.Text = "上一步"
+                LinkLabel6.Text = "浏览此光盘的内容"
+                LinkLabel7.Text = "为 FOG 启动 PXE 辅助服务器"
+                LinkLabel8.Text = "为 Windows 部署服务启动 PXE 辅助服务器"
+                LinkLabel9.Text = "将启动映像复制到 WDS 服务器..."
+                ExitLink.Text = "退出"
+                pxeServerPortSwitcherMessage = "按住 SHIFT 可更改此 PXE 辅助服务器使用的端口"
         End Select
     End Sub
 

@@ -114,6 +114,9 @@
                         Case "ITA"
                             Label1.Text = "Raccolta informazioni sull'immagine..."
                             Label3.Text = "Il completamento di questi processi può richiedere del tempo"
+                        Case "CHS", "CHT"
+                            Label1.Text = "正在收集映像信息..."
+                            Label3.Text = "这些进程可能需要一些时间才能完成"
                     End Select
                 Case 1
                     Label1.Text = "Gathering image information..."
@@ -130,6 +133,10 @@
                 Case 5
                     Label1.Text = "Raccolta informazioni sull'immagine..."
                     Label3.Text = "Il completamento di questi processi può richiedere del tempo"
+                Case 6
+                    Label1.Text = "正在收集映像信息..."
+                    Label3.Text = "这些进程可能需要一些时间才能完成"
+
             End Select
             BackColor = CurrentTheme.BackgroundColor
             ForeColor = CurrentTheme.ForegroundColor

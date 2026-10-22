@@ -80,6 +80,9 @@ Public Class MigrationForm
             Case "ITA"
                 Label1.Text = "Attendi mentre DISMTools converte il vecchio file impostazioni per farlo funzionare con questa versione. L'operazione potrebbe richiedere del tempo."
                 Label2.Text = "Attendi..."
+            Case "CHS", "CHT"
+                Label1.Text = "请稍候，DISMTools 正在迁移您的旧设置文件以在此版本上使用。这可能需要一些时间。"
+                Label2.Text = "请稍候..."
         End Select
         Refresh()
         BackgroundWorker1.RunWorkerAsync()

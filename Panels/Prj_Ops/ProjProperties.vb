@@ -395,6 +395,42 @@ Public Class ProjProperties
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
                         LinkLabel2.Text = "Molte proprietà non possono essere visualizzate perché l'immagine non è ancora stata montata. Una volta montata, le informazioni dettagliate saranno mostrate qui. Fare clic qui per montare un'immagine"
+                    Case "CHS", "CHT"
+                        Label4.Text = "正在获取项目和映像信息。请稍候..."
+                        Label5.Text = "名称："
+                        Label6.Text = "位置："
+                        Label7.Text = "创建日期："
+                        Label8.Text = "项目 GUID："
+                        Label13.Text = "挂载目录："
+                        Label14.Text = "映像索引："
+                        Label15.Text = "映像文件："
+                        Label20.Text = "项目中是否存在映像？"
+                        Label22.Text = "映像状态："
+                        Label25.Text = "版本："
+                        Label27.Text = "名称："
+                        Label29.Text = "描述："
+                        Label31.Text = "大小："
+                        Label33.Text = "是否支持 WIMBoot？"
+                        Label35.Text = "体系结构："
+                        Label39.Text = "Service Pack 内部版本："
+                        Label41.Text = "Service Pack 级别："
+                        Label43.Text = "版本："
+                        Label45.Text = "产品类型："
+                        Label47.Text = "产品套件："
+                        Label49.Text = "系统根目录："
+                        Label51.Text = "目录数："
+                        Label53.Text = "文件数："
+                        Label55.Text = "创建日期："
+                        Label57.Text = "修改日期："
+                        Label58.Text = "已安装的语言："
+                        Label60.Text = "文件格式："
+                        Label62.Text = "映像读写权限："
+                        RecoverButton.Text = "恢复"
+                        RemountImgBtn.Text = "重新加载"
+                        RWRemountBtn.Text = "以写入权限重新挂载"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        LinkLabel2.Text = "由于尚未挂载映像，许多属性无法查看。挂载后，详细信息将在此显示。单击此处挂载映像"
                 End Select
             Case 1
                 Label4.Text = "Getting project and image information. Please wait..."
@@ -576,6 +612,43 @@ Public Class ProjProperties
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
                 LinkLabel2.Text = "Molte proprietà non possono essere visualizzate perché l'immagine non è ancora stata montata. Una volta montata, le informazioni dettagliate saranno mostrate qui. Fare clic qui per montare un'immagine"
+            Case 6
+                Label4.Text = "正在获取项目和映像信息。请稍候..."
+                Label5.Text = "名称："
+                Label6.Text = "位置："
+                Label7.Text = "创建时间和日期："
+                Label8.Text = "项目 GUID："
+                Label13.Text = "挂载目录："
+                Label14.Text = "映像索引："
+                Label15.Text = "映像文件："
+                Label20.Text = "项目中是否存在映像？"
+                Label22.Text = "映像状态："
+                Label25.Text = "版本："
+                Label27.Text = "名称："
+                Label29.Text = "描述："
+                Label31.Text = "大小："
+                Label33.Text = "是否支持 WIMBoot？"
+                Label35.Text = "体系结构："
+                Label39.Text = "Service Pack 内部版本："
+                Label41.Text = "Service Pack 级别："
+                Label43.Text = "版本："
+                Label45.Text = "产品类型："
+                Label47.Text = "产品套件："
+                Label49.Text = "系统根目录："
+                Label51.Text = "目录数："
+                Label53.Text = "文件数："
+                Label55.Text = "创建日期："
+                Label57.Text = "修改日期："
+                Label58.Text = "已安装的语言："
+                Label60.Text = "文件格式："
+                Label62.Text = "映像读写权限："
+                RecoverButton.Text = "恢复"
+                RemountImgBtn.Text = "重新加载"
+                RWRemountBtn.Text = "以写入权限重新挂载"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                LinkLabel2.Text = "由于尚未挂载映像，许多属性无法查看。挂载后，详细信息将在此显示。单击此处挂载映像"
+
         End Select
         Select Case MainForm.Language
             Case 0
@@ -590,6 +663,8 @@ Public Class ProjProperties
                         ImageTaskHeader1.ItemText = "Propriedades"
                     Case "ITA"
                         ImageTaskHeader1.ItemText = "Proprietà"
+                    Case "CHS", "CHT"
+                        ImageTaskHeader1.ItemText = "属性"
                 End Select
             Case 1
                 ImageTaskHeader1.ItemText = "Properties"
@@ -601,6 +676,9 @@ Public Class ProjProperties
                 ImageTaskHeader1.ItemText = "Propriedades"
             Case 5
                 ImageTaskHeader1.ItemText = "Proprietà"
+            Case 6
+                ImageTaskHeader1.ItemText = "属性"
+
         End Select
         ' Set program colors
         ImageTaskHeader1.SetColors()
@@ -661,6 +739,8 @@ Public Class ProjProperties
                             Label19.Text = "Sim"
                         Case "ITA"
                             Label19.Text = "Sì"
+                        Case "CHS", "CHT"
+                            Label19.Text = "是"
                     End Select
                 Case 1
                     Label19.Text = "Yes"
@@ -672,6 +752,9 @@ Public Class ProjProperties
                     Label19.Text = "Sim"
                 Case 5
                     Label19.Text = "Sì"
+                Case 6
+                    Label19.Text = "是"
+
             End Select
             DetectImageProperties()
             If imgMountedName.Text = "<undefined>" Then
@@ -738,6 +821,8 @@ Public Class ProjProperties
                             Label19.Text = "Não"
                         Case "ITA"
                             Label19.Text = "No"
+                        Case "CHS", "CHT"
+                            Label19.Text = "否"
                     End Select
                 Case 1
                     Label19.Text = "No"
@@ -749,6 +834,9 @@ Public Class ProjProperties
                     Label19.Text = "Não"
                 Case 5
                     Label19.Text = "No"
+                Case 6
+                    Label19.Text = "否"
+
             End Select
             Select Case MainForm.Language
                 Case 0
@@ -873,6 +961,30 @@ Public Class ProjProperties
                             imgModification.Text = "Non disponibile"
                             imgFormat.Text = "Non disponibile"
                             imgRW.Text = "Non disponibile"
+                        Case "CHS", "CHT"
+                            imgMountDir.Text = "不可用"
+                            imgIndex.Text = "不可用"
+                            imgName.Text = "不可用"
+                            imgMountedStatus.Text = "不可用"
+                            imgVersion.Text = "不可用"
+                            imgMountedName.Text = "不可用"
+                            imgMountedDesc.Text = "不可用"
+                            imgSize.Text = "不可用"
+                            imgWimBootStatus.Text = "不可用"
+                            imgArch.Text = "不可用"
+                            imgHal.Text = "不可用"
+                            imgSPBuild.Text = "不可用"
+                            imgSPLvl.Text = "不可用"
+                            imgEdition.Text = "不可用"
+                            imgPType.Text = "不可用"
+                            imgPSuite.Text = "不可用"
+                            imgSysRoot.Text = "不可用"
+                            imgDirs.Text = "不可用"
+                            imgFiles.Text = "不可用"
+                            imgCreation.Text = "不可用"
+                            imgModification.Text = "不可用"
+                            imgFormat.Text = "不可用"
+                            imgRW.Text = "不可用"
                     End Select
                 Case 1
                     imgMountDir.Text = "Not available"
@@ -994,6 +1106,31 @@ Public Class ProjProperties
                     imgModification.Text = "Non disponibile"
                     imgFormat.Text = "Non disponibile"
                     imgRW.Text = "Non disponibile"
+                Case 6
+                    imgMountDir.Text = "不可用"
+                    imgIndex.Text = "不可用"
+                    imgName.Text = "不可用"
+                    imgMountedStatus.Text = "不可用"
+                    imgVersion.Text = "不可用"
+                    imgMountedName.Text = "不可用"
+                    imgMountedDesc.Text = "不可用"
+                    imgSize.Text = "不可用"
+                    imgWimBootStatus.Text = "不可用"
+                    imgArch.Text = "不可用"
+                    imgHal.Text = "不可用"
+                    imgSPBuild.Text = "不可用"
+                    imgSPLvl.Text = "不可用"
+                    imgEdition.Text = "不可用"
+                    imgPType.Text = "不可用"
+                    imgPSuite.Text = "不可用"
+                    imgSysRoot.Text = "不可用"
+                    imgDirs.Text = "不可用"
+                    imgFiles.Text = "不可用"
+                    imgCreation.Text = "不可用"
+                    imgModification.Text = "不可用"
+                    imgFormat.Text = "不可用"
+                    imgRW.Text = "不可用"
+
             End Select
             Panel3.Visible = True
             Label4.Visible = False

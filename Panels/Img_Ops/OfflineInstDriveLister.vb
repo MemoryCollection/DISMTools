@@ -132,6 +132,20 @@ Public Class OfflineInstDriveLister
                         Button1.Text = "Aggiorna"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
+                    Case "CHS", "CHT"
+                        Text = "选择磁盘"
+                        Label1.Text = "要开始执行脱机安装管理，请选择下方列表中显示的磁盘。此列表每分钟自动更新，或在您单击「刷新」按钮时更新。"
+                        ListView1.Columns(0).Text = "驱动器号"
+                        ListView1.Columns(1).Text = "驱动器标卷"
+                        ListView1.Columns(2).Text = "驱动器类型"
+                        ListView1.Columns(3).Text = "总大小"
+                        ListView1.Columns(4).Text = "可用剩余空间"
+                        ListView1.Columns(5).Text = "驱动器格式"
+                        ListView1.Columns(6).Text = "是否包含 Windows？"
+                        ListView1.Columns(7).Text = "Windows 版本"
+                        Button1.Text = "刷新"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Choose a disk"
@@ -203,6 +217,21 @@ Public Class OfflineInstDriveLister
                 Button1.Text = "Aggiorna"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annullare"
+            Case 6
+                Text = "选择磁盘"
+                Label1.Text = "要开始执行脱机安装管理，请选择下方列表中显示的磁盘。此列表每分钟自动更新，或在您单击「刷新」按钮时更新。"
+                ListView1.Columns(0).Text = "驱动器号"
+                ListView1.Columns(1).Text = "驱动器标卷"
+                ListView1.Columns(2).Text = "驱动器类型"
+                ListView1.Columns(3).Text = "总大小"
+                ListView1.Columns(4).Text = "可用剩余空间"
+                ListView1.Columns(5).Text = "驱动器格式"
+                ListView1.Columns(6).Text = "是否包含 Windows？"
+                ListView1.Columns(7).Text = "Windows 版本"
+                Button1.Text = "刷新"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

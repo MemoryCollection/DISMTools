@@ -217,6 +217,25 @@ Public Class ImgUMount
                         UMountOperations(1) = "Scartare le modifiche e smontare"
                         GroupBox1.Text = "Montare la directory"
                         GroupBox2.Text = "Opzioni aggiuntive"
+                    Case "CHS", "CHT"
+                        Text = "卸载映像"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "请指定卸载此映像的选项："
+                        Label3.Text = "挂载目录："
+                        Label4.Text = "挂载目录："
+                        Label7.Text = "卸载操作："
+                        CheckBox1.Text = "检查映像完整性"
+                        CheckBox2.Text = "将更改追加到其他索引"
+                        Button1.Text = "选择..."
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        FolderBrowserDialog1.Description = "请指定挂载目录："
+                        RadioButton1.Text = "已加载到项目中"
+                        RadioButton2.Text = "位于其他位置"
+                        UMountOperations(0) = "保存更改并卸载"
+                        UMountOperations(1) = "放弃更改并卸载"
+                        GroupBox1.Text = "挂载目录"
+                        GroupBox2.Text = "附加选项"
                 End Select
             Case 1
                 Text = "Unmount an image"
@@ -313,6 +332,26 @@ Public Class ImgUMount
                 UMountOperations(1) = "Scartare le modifiche e smontare"
                 GroupBox1.Text = "Montare la directory"
                 GroupBox2.Text = "Opzioni aggiuntive"
+            Case 6
+                Text = "卸载映像"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "请指定卸载此映像的选项："
+                Label3.Text = "挂载目录："
+                Label4.Text = "挂载目录："
+                Label7.Text = "卸载操作："
+                CheckBox1.Text = "检查映像完整性"
+                CheckBox2.Text = "将更改追加到其他索引"
+                Button1.Text = "选择..."
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                FolderBrowserDialog1.Description = "请指定挂载目录："
+                RadioButton1.Text = "已加载到项目中"
+                RadioButton2.Text = "位于其他位置"
+                UMountOperations(0) = "保存更改并卸载"
+                UMountOperations(1) = "放弃更改并卸载"
+                GroupBox1.Text = "挂载目录"
+                GroupBox2.Text = "附加选项"
+
         End Select
         ComboBox1.Items.AddRange(UMountOperations)
         ComboBox1.SelectedIndex = 0

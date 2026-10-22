@@ -35,6 +35,8 @@ Public Class ImgIndexDelete
                             MsgBox("Seleccione as imagens de volume a remover desta imagem e tente novamente.", vbOKOnly + vbCritical, "Remover uma imagem de volume")
                         Case "ITA"
                             MsgBox("Selezionare le immagini del volume da rimuovere da questa immagine e riprovare", vbOKOnly + vbCritical, "Rimuovere un'immagine del volume")
+                        Case "CHS", "CHT"
+                            MsgBox("请选择要从此映像中删除的卷映像，然后重试。", vbOKOnly + vbCritical, "删除卷映像")
                     End Select
                 Case 1
                     MsgBox("Please select volume images to remove from this image, and try again.", vbOKOnly + vbCritical, "Remove a volume image")
@@ -46,6 +48,9 @@ Public Class ImgIndexDelete
                     MsgBox("Seleccione as imagens de volume a remover desta imagem e tente novamente.", vbOKOnly + vbCritical, "Remover uma imagem de volume")
                 Case 5
                     MsgBox("Selezionare le immagini del volume da rimuovere da questa immagine e riprovare", vbOKOnly + vbCritical, "Rimuovere un'immagine del volume")
+                Case 6
+                    MsgBox("请选择要从此映像中删除的卷映像，然后重试。", vbOKOnly + vbCritical, "删除卷映像")
+
             End Select
             Exit Sub
         End If
@@ -68,6 +73,8 @@ Public Class ImgIndexDelete
                             msg = "O programa detectou que esta imagem está montada. Para remover imagens de volume de um ficheiro, este tem de ser desmontado. Pode voltar a montá-la mais tarde, se quiser." & CrLf & CrLf & "Tenha em atenção que isto irá desmontar a imagem sem guardar as alterações. Certifique-se de que todas as suas alterações foram guardadas antes de continuar." & CrLf & CrLf & "Deseja desmontar esta imagem?"
                         Case "ITA"
                             msg = "Il programma ha rilevato che questa immagine è montata. Per rimuovere le immagini di volume da un file, è necessario smontarlo. È possibile rimontarla in seguito, se si desidera." & CrLf & CrLf & "Si noti che questa operazione smonterà l'immagine senza salvare le modifiche. Assicurarsi che tutte le modifiche siano state salvate prima di procedere." & CrLf & CrLf & "Si desidera smontare questa immagine?"
+                        Case "CHS", "CHT"
+                            msg = "程序检测到此映像已挂载。要从文件中删除卷映像，需要先将其卸载。如有需要，您可以稍后重新挂载。" & CrLf & CrLf & "请注意，此操作将在不保存更改的情况下卸载映像。继续之前请确保已保存所有更改。" & CrLf & CrLf & "是否要卸载此映像？"
                     End Select
                 Case 1
                     msg = "The program has detected that this image is mounted. In order to remove volume images from a file, it needs to be unmounted. You can remount it later, if you want." & CrLf & CrLf & "Do note that this will unmount the image without saving changes. Make sure all your changes have been saved before proceeding." & CrLf & CrLf & "Do you want to unmount this image?"
@@ -79,6 +86,9 @@ Public Class ImgIndexDelete
                     msg = "O programa detectou que esta imagem está montada. Para remover imagens de volume de um ficheiro, este tem de ser desmontado. Pode voltar a montá-la mais tarde, se quiser." & CrLf & CrLf & "Tenha em atenção que isto irá desmontar a imagem sem guardar as alterações. Certifique-se de que todas as suas alterações foram guardadas antes de continuar." & CrLf & CrLf & "Deseja desmontar esta imagem?"
                 Case 5
                     msg = "Il programma ha rilevato che questa immagine è montata. Per rimuovere le immagini di volume da un file, è necessario smontarlo. È possibile rimontarla in seguito, se si desidera." & CrLf & CrLf & "Si noti che questa operazione smonterà l'immagine senza salvare le modifiche. Assicurarsi che tutte le modifiche siano state salvate prima di procedere." & CrLf & CrLf & "Si desidera smontare questa immagine?"
+                Case 6
+                    msg = "程序检测到此映像已挂载。要从文件中删除卷映像，需要先将其卸载。如有需要，您可以稍后重新挂载。" & CrLf & CrLf & "请注意，此操作将在不保存更改的情况下卸载映像。继续之前请确保已保存所有更改。" & CrLf & CrLf & "是否要卸载此映像？"
+
             End Select
             If MsgBox(msg, vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.Yes Then
                 Dim mountedImage As WindowsImage = MainForm.MountedImageList.FirstOrDefault(Function(image) image.ImageFile = TextBox1.Text)
@@ -222,6 +232,22 @@ Public Class ImgIndexDelete
                         ListView2.Columns(0).Text = "Indice"
                         ListView2.Columns(1).Text = "Nome dell'immagine"
                         GroupBox1.Text = "Immagini volume"
+                    Case "CHS", "CHT"
+                        Text = "删除卷映像"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "源映像："
+                        Label3.Text = "请在左侧标记要删除的卷映像。之后的映像将使用右侧显示的索引"
+                        Label4.Text = "正在从映像获取索引。请稍候..."
+                        Button1.Text = "浏览..."
+                        Button2.Text = "使用已挂载的映像"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        CheckBox1.Text = "检查映像完整性"
+                        ListView1.Columns(0).Text = "索引"
+                        ListView1.Columns(1).Text = "映像名称"
+                        ListView2.Columns(0).Text = "索引"
+                        ListView2.Columns(1).Text = "映像名称"
+                        GroupBox1.Text = "卷映像"
                 End Select
             Case 1
                 Text = "Remove a volume image"
@@ -303,6 +329,23 @@ Public Class ImgIndexDelete
                 ListView2.Columns(0).Text = "Indice"
                 ListView2.Columns(1).Text = "Nome dell'immagine"
                 GroupBox1.Text = "Immagini volume"
+            Case 6
+                Text = "删除卷映像"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "源映像："
+                Label3.Text = "请在左侧标记要删除的卷映像。之后的映像将使用右侧显示的索引"
+                Label4.Text = "正在从映像获取索引。请稍候..."
+                Button1.Text = "浏览..."
+                Button2.Text = "使用已挂载的映像"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+                CheckBox1.Text = "检查映像完整性"
+                ListView1.Columns(0).Text = "索引"
+                ListView1.Columns(1).Text = "映像名称"
+                ListView2.Columns(0).Text = "索引"
+                ListView2.Columns(1).Text = "映像名称"
+                GroupBox1.Text = "卷映像"
+
         End Select
         If MainForm.SourceImg = "N/A" Or Not File.Exists(MainForm.SourceImg) Or MainForm.OnlineManagement Or MainForm.OfflineManagement Then Button2.Enabled = False Else Button2.Enabled = True
         ImageTaskHeader1.SetColors()
@@ -373,6 +416,8 @@ Public Class ImgIndexDelete
                             MsgBox("Esta imagem contém apenas 1 índice. Não é possível remover imagens de volume deste ficheiro", vbOKOnly + vbExclamation, "Remover uma imagem de volume")
                         Case "ITA"
                             MsgBox("Questa immagine contiene solo 1 indice. Non è possibile rimuovere le immagini del volume da questo file", vbOKOnly + vbExclamation, "Rimuovere un'immagine del volume")
+                        Case "CHS", "CHT"
+                            MsgBox("此映像仅包含 1 个索引。无法从此文件中删除卷映像", vbOKOnly + vbExclamation, "删除卷映像")
                     End Select
                 Case 1
                     MsgBox("This image only contains 1 index. You can't remove volume images from this file", vbOKOnly + vbExclamation, "Remove a volume image")
@@ -384,6 +429,9 @@ Public Class ImgIndexDelete
                     MsgBox("Esta imagem contém apenas 1 índice. Não é possível remover imagens de volume deste ficheiro", vbOKOnly + vbExclamation, "Remover uma imagem de volume")
                 Case 5
                     MsgBox("Questa immagine contiene solo 1 indice. Non è possibile rimuovere le immagini del volume da questo file", vbOKOnly + vbExclamation, "Rimuovere un'immagine del volume")
+                Case 6
+                    MsgBox("此映像仅包含 1 个索引。无法从此文件中删除卷映像", vbOKOnly + vbExclamation, "删除卷映像")
+
             End Select
             Label4.Visible = False
             OK_Button.Enabled = False

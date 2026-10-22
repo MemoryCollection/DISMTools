@@ -82,6 +82,8 @@ Public Class SetImageKey
                             msg = "As imagens do Windows PE não podem ser actualizadas para edições superiores."
                         Case "ITA"
                             msg = "Le immagini di Windows PE non possono essere aggiornate a edizioni superiori."
+                        Case "CHS", "CHT"
+                            msg = "Windows PE 映像无法升级到更高的版本。"
                     End Select
                 Case 1
                     msg = "Windows PE images cannot be upgraded to higher editions."
@@ -93,6 +95,9 @@ Public Class SetImageKey
                     msg = "As imagens do Windows PE não podem ser actualizadas para edições superiores."
                 Case 5
                     msg = "Le immagini di Windows PE non possono essere aggiornate a edizioni superiori."
+                Case 6
+                    msg = "Windows PE 映像无法升级到更高的版本。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbInformation, Text)
             Return False
@@ -147,6 +152,14 @@ Public Class SetImageKey
                         Button1.Text = "Convalida chiave"
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annulla"
+                    Case "CHS", "CHT"
+                        Text = "设置产品密钥"
+                        ImageTaskHeader1.ItemText = Text
+                        Label1.Text = "输入要为此 Windows 映像设置的产品密钥（包括连字符）："
+                        Label2.Text = "如果要检查产品密钥对此 Windows 映像是否有效，请单击「验证密钥」。这还会检查密钥的语法。"
+                        Button1.Text = "验证密钥"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
                 End Select
             Case 1
                 Text = "Set product key"
@@ -188,6 +201,15 @@ Public Class SetImageKey
                 Button1.Text = "Convalida chiave"
                 OK_Button.Text = "OK"
                 Cancel_Button.Text = "Annulla"
+            Case 6
+                Text = "设置产品密钥"
+                ImageTaskHeader1.ItemText = Text
+                Label1.Text = "输入要为此 Windows 映像设置的产品密钥（包括连字符）："
+                Label2.Text = "如果要检查产品密钥对此 Windows 映像是否有效，请单击「验证密钥」。这还会检查密钥的语法。"
+                Button1.Text = "验证密钥"
+                OK_Button.Text = "确定"
+                Cancel_Button.Text = "取消"
+
         End Select
         ImageTaskHeader1.SetColors()
         BackColor = CurrentTheme.SectionBackgroundColor

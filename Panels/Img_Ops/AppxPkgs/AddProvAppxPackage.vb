@@ -53,6 +53,8 @@ Public Class AddProvAppxPackage
                             MsgBox("Especifique pacotes AppX embalados ou não embalados e tente novamente.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                         Case "ITA"
                             MsgBox("Specificare i pacchetti AppX imballati o non imballati e riprovare.", vbOKOnly + vbCritical, "Aggiungere i pacchetti AppX approvvigionati")
+                        Case "CHS", "CHT"
+                            MsgBox("请指定打包或未打包的 AppX 程序包，然后重试。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
                     End Select
                 Case 1
                     MsgBox("Please specify packed or unpacked AppX packages and try again.", vbOKOnly + vbCritical, "Add provisioned AppX packages")
@@ -64,6 +66,9 @@ Public Class AddProvAppxPackage
                     MsgBox("Especifique pacotes AppX embalados ou não embalados e tente novamente.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                 Case 5
                     MsgBox("Specificare i pacchetti AppX imballati o non imballati e riprovare.", vbOKOnly + vbCritical, "Aggiungere i pacchetti AppX approvvigionati")
+                Case 6
+                    MsgBox("请指定打包或未打包的 AppX 程序包，然后重试。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
+
             End Select
             Exit Sub
         Else
@@ -110,6 +115,8 @@ Public Class AddProvAppxPackage
                                         MsgBox("Por favor, especifique um ficheiro de licença e tente novamente. Também pode continuar sem um, mas isso pode comprometer a imagem.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                                     Case "ITA"
                                         MsgBox("Specificare un file di licenza e riprovare. È possibile continuare anche senza, ma ciò potrebbe compromettere l'immagine", vbOKOnly + vbCritical, "Aggiungere i pacchetti AppX approvvigionati")
+                                    Case "CHS", "CHT"
+                                        MsgBox("请指定许可证文件，然后重试。您也可以在没有许可证文件的情况下继续，但这可能会影响映像。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
                                 End Select
                             Case 1
                                 MsgBox("Please specify a license file and try again. You can also continue without one, but this may compromise the image.", vbOKOnly + vbCritical, "Add provisioned AppX packages")
@@ -121,6 +128,9 @@ Public Class AddProvAppxPackage
                                 MsgBox("Por favor, especifique um ficheiro de licença e tente novamente. Também pode continuar sem um, mas isso pode comprometer a imagem.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                             Case 5
                                 MsgBox("Specificare un file di licenza e riprovare. È possibile continuare anche senza, ma ciò potrebbe compromettere l'immagine", vbOKOnly + vbCritical, "Aggiungere i pacchetti AppX approvvigionati")
+                            Case 6
+                                MsgBox("请指定许可证文件，然后重试。您也可以在没有许可证文件的情况下继续，但这可能会影响映像。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
+
                         End Select
                         Exit Sub
                     ElseIf Not File.Exists(TextBox1.Text) Then
@@ -138,6 +148,8 @@ Public Class AddProvAppxPackage
                                         MsgBox("O ficheiro de licença especificado não foi encontrado. Certifique-se de que existe no local especificado e tente novamente.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                                     Case "ITA"
                                         MsgBox("Il file di licenza specificato non è stato trovato. Assicuratevi che esista nella posizione specificata e riprovate", vbOKOnly + vbCritical, "Aggiungi pacchetti AppX approvvigionati")
+                                    Case "CHS", "CHT"
+                                        MsgBox("指定的许可证文件不存在。请确保其位于指定位置，然后重试。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
                                 End Select
                             Case 1
                                 MsgBox("The license file specified was not found. Make sure it exists on the specified location and try again.", vbOKOnly + vbCritical, "Add provisioned AppX packages")
@@ -149,6 +161,9 @@ Public Class AddProvAppxPackage
                                 MsgBox("O ficheiro de licença especificado não foi encontrado. Certifique-se de que existe no local especificado e tente novamente.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                             Case 5
                                 MsgBox("Il file di licenza specificato non è stato trovato. Assicuratevi che esista nella posizione specificata e riprovate", vbOKOnly + vbCritical, "Aggiungi pacchetti AppX approvvigionati")
+                            Case 6
+                                MsgBox("指定的许可证文件不存在。请确保其位于指定位置，然后重试。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
+
                         End Select
                         Exit Sub
                     Else
@@ -179,6 +194,8 @@ Public Class AddProvAppxPackage
                                         MsgBox("Especifique um ficheiro de dados personalizado e tente novamente. Também pode continuar sem um.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                                     Case "ITA"
                                         MsgBox("Specificare un file di dati personalizzato e riprovare. È possibile continuare anche senza", vbOKOnly + vbCritical, "Aggiungere pacchetti AppX approvvigionati")
+                                    Case "CHS", "CHT"
+                                        MsgBox("请指定自定义数据文件，然后重试。您也可以在没有该文件的情况下继续。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
                                 End Select
                             Case 1
                                 MsgBox("Please specify a custom data file and try again. You can also continue without one.", vbOKOnly + vbCritical, "Add provisioned AppX packages")
@@ -190,6 +207,9 @@ Public Class AddProvAppxPackage
                                 MsgBox("Especifique um ficheiro de dados personalizado e tente novamente. Também pode continuar sem um.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                             Case 5
                                 MsgBox("Specificare un file di dati personalizzato e riprovare. È possibile continuare anche senza", vbOKOnly + vbCritical, "Aggiungere pacchetti AppX approvvigionati")
+                            Case 6
+                                MsgBox("请指定自定义数据文件，然后重试。您也可以在没有该文件的情况下继续。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
+
                         End Select
                         Exit Sub
                     ElseIf Not File.Exists(TextBox2.Text) Then
@@ -207,6 +227,8 @@ Public Class AddProvAppxPackage
                                         MsgBox("O ficheiro de dados personalizado especificado não foi encontrado. Certifique-se de que existe na localização especificada e tente novamente.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                                     Case "ITA"
                                         MsgBox("Il file di dati personalizzati specificato non è stato trovato. Assicurarsi che esista nella posizione specificata e riprovare", vbOKOnly + vbCritical, "Aggiungere pacchetti AppX approvvigionati")
+                                    Case "CHS", "CHT"
+                                        MsgBox("指定的自定义数据文件不存在。请确保其位于指定位置，然后重试。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
                                 End Select
                             Case 1
                                 MsgBox("The custom data file specified was not found. Make sure it exists on the specified location and try again.", vbOKOnly + vbCritical, "Add provisioned AppX packages")
@@ -218,6 +240,9 @@ Public Class AddProvAppxPackage
                                 MsgBox("O ficheiro de dados personalizado especificado não foi encontrado. Certifique-se de que existe na localização especificada e tente novamente.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                             Case 5
                                 MsgBox("Il file di dati personalizzati specificato non è stato trovato. Assicurarsi che esista nella posizione specificata e riprovare", vbOKOnly + vbCritical, "Aggiungere pacchetti AppX approvvigionati")
+                            Case 6
+                                MsgBox("指定的自定义数据文件不存在。请确保其位于指定位置，然后重试。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
+
                         End Select
                         Exit Sub
                     Else
@@ -480,6 +505,41 @@ Public Class AddProvAppxPackage
                         CheckBox3.Text = "File di licenza:"
                         CheckBox4.Text = "Rendi l'applicazione disponibile per tutte le regioni"
                         UnpackedAppxFolderFBD.Description = "Specificare una cartella contenente i file AppX scompattati:"
+                    Case "CHS", "CHT"
+                        Text = "添加预配的 AppX 程序包"
+                        ImageTaskHeader1.ItemText = Text
+                        Label2.Text = "请使用下方按钮添加打包或未打包的 AppX 程序包，或将其拖放到下方列表视图中："
+                        Label3.Text = "AppX 程序包可能需要一些依赖项才能正确安装。如果需要，您现在可以指定依赖项列表："
+                        Label4.Text = "存根首选项："
+                        Label5.Text = "要指定多个应用区域，请用分号 (;) 分隔"
+                        Label6.Text = "在列表视图中选择一个条目，以显示应用详细信息并配置添加设置"
+                        Button1.Text = "添加文件"
+                        Button2.Text = "添加文件夹"
+                        Button3.Text = "删除所有条目"
+                        Button4.Text = "删除所有依赖项"
+                        Button5.Text = "删除依赖项"
+                        Button6.Text = "添加依赖项..."
+                        Button7.Text = "浏览..."
+                        Button8.Text = "浏览..."
+                        Button9.Text = "删除所选条目"
+                        Cancel_Button.Text = "取消"
+                        OK_Button.Text = "确定"
+                        CheckBox1.Text = "自定义数据文件："
+                        CheckBox2.Text = "添加 AppX 程序包后提交映像"
+                        CustomDataFileOFD.Title = "指定自定义数据文件"
+                        GroupBox2.Text = "AppX 依赖项"
+                        GroupBox3.Text = "AppX 区域"
+                        LicenseFileOFD.Title = "指定许可证文件"
+                        LinkLabel1.Text = "应用区域需采用 ISO 3166-1 Alpha 2 或 Alpha-3 代码形式。要了解这些代码，请单击此处"
+                        LinkLabel1.LinkArea = New LinkArea(108, 10)
+                        ListView1.Columns(0).Text = "文件/文件夹"
+                        ListView1.Columns(1).Text = "类型"
+                        ListView1.Columns(2).Text = "应用程序名称"
+                        ListView1.Columns(3).Text = "应用程序发布者"
+                        ListView1.Columns(4).Text = "应用程序版本"
+                        CheckBox3.Text = "许可证文件："
+                        CheckBox4.Text = "使应用在所有区域可用"
+                        UnpackedAppxFolderFBD.Description = "请指定包含未打包 AppX 文件的文件夹："
                 End Select
             Case 1
                 Text = "Add provisioned AppX packages"
@@ -656,6 +716,42 @@ Public Class AddProvAppxPackage
                 CheckBox3.Text = "File di licenza:"
                 CheckBox4.Text = "Rendi l'applicazione disponibile per tutte le regioni"
                 UnpackedAppxFolderFBD.Description = "Specificare una cartella contenente i file AppX scompattati:"
+            Case 6
+                Text = "添加预配的 AppX 程序包"
+                ImageTaskHeader1.ItemText = Text
+                Label2.Text = "请使用下方按钮添加打包或未打包的 AppX 程序包，或将其拖放到下方列表视图中："
+                Label3.Text = "AppX 程序包可能需要一些依赖项才能正确安装。如果需要，您现在可以指定依赖项列表："
+                Label4.Text = "存根首选项："
+                Label5.Text = "要指定多个应用区域，请用分号 (;) 分隔"
+                Label6.Text = "在列表视图中选择一个条目，以显示应用详细信息并配置添加设置"
+                Button1.Text = "添加文件"
+                Button2.Text = "添加文件夹"
+                Button3.Text = "删除所有条目"
+                Button4.Text = "删除所有依赖项"
+                Button5.Text = "删除依赖项"
+                Button6.Text = "添加依赖项..."
+                Button7.Text = "浏览..."
+                Button8.Text = "浏览..."
+                Button9.Text = "删除所选条目"
+                Cancel_Button.Text = "取消"
+                OK_Button.Text = "确定"
+                CheckBox1.Text = "自定义数据文件："
+                CheckBox2.Text = "添加 AppX 程序包后提交映像"
+                CustomDataFileOFD.Title = "指定自定义数据文件"
+                GroupBox2.Text = "AppX 依赖项"
+                GroupBox3.Text = "AppX 区域"
+                LicenseFileOFD.Title = "指定许可证文件"
+                LinkLabel1.Text = "应用区域需采用 ISO 3166-1 Alpha 2 或 Alpha-3 代码形式。要了解这些代码，请单击此处"
+                LinkLabel1.LinkArea = New LinkArea(108, 10)
+                ListView1.Columns(0).Text = "文件/文件夹"
+                ListView1.Columns(1).Text = "类型"
+                ListView1.Columns(2).Text = "应用程序名称"
+                ListView1.Columns(3).Text = "应用程序发布者"
+                ListView1.Columns(4).Text = "应用程序版本"
+                CheckBox3.Text = "许可证文件："
+                CheckBox4.Text = "使应用在所有区域可用"
+                UnpackedAppxFolderFBD.Description = "请指定包含未打包 AppX 文件的文件夹："
+
         End Select
         Select Case MainForm.Language
             Case 0
@@ -680,6 +776,10 @@ Public Class AddProvAppxPackage
                         StubPreferences(0) = "Non configurare le preferenze di stub"
                         StubPreferences(1) = "Installa l'applicazione come pacchetto stub"
                         StubPreferences(2) = "Installa l'applicazione come pacchetto completo"
+                    Case "CHS", "CHT"
+                        StubPreferences(0) = "不配置存根首选项"
+                        StubPreferences(1) = "将应用程序安装为存根程序包"
+                        StubPreferences(2) = "将应用程序安装为完整程序包"
                 End Select
             Case 1
                 StubPreferences(0) = "Do not configure stub preference"
@@ -701,6 +801,11 @@ Public Class AddProvAppxPackage
                 StubPreferences(0) = "Non configurare le preferenze di stub"
                 StubPreferences(1) = "Installa l'applicazione come pacchetto stub"
                 StubPreferences(2) = "Installa l'applicazione come pacchetto completo"
+            Case 6
+                StubPreferences(0) = "不配置存根首选项"
+                StubPreferences(1) = "将应用程序安装为存根程序包"
+                StubPreferences(2) = "将应用程序安装为完整程序包"
+
         End Select
         ComboBox1.Items.AddRange(StubPreferences)
         ImageTaskHeader1.SetColors()
@@ -1107,6 +1212,8 @@ Public Class AddProvAppxPackage
                             msg = "O pacote:" & CrLf & CrLf & Package & CrLf & CrLf & "é um pacote de aplicações encriptadas. Nem o DISMTools nem o DISM suportam a adição destes tipos de aplicações. Se quiser adicioná-lo, pode fazê-lo depois de a imagem ser aplicada e inicializada."
                         Case "ITA"
                             msg = "Il pacchetto:" & CrLf & CrLf & Package & CrLf & CrLf & "è un pacchetto di applicazioni criptate. Né DISMTools né DISM supportano l'aggiunta di questi tipi di applicazioni. Se si desidera aggiungerlo, è possibile farlo dopo che l'immagine è stata applicata e avviata."
+                        Case "CHS", "CHT"
+                            msg = "该程序包：" & CrLf & CrLf & Package & CrLf & CrLf & "是加密的应用程序包。DISMTools 和 DISM 均不支持添加此类应用程序。如果希望添加，可以在应用映像并启动后再进行操作。"
                     End Select
                 Case 1
                     msg = "The package:" & CrLf & CrLf & Package & CrLf & CrLf & "is an encrypted application package. Neither DISMTools nor DISM support adding these application types. If you'd like to add it, you can do so, after the image is applied and booted to."
@@ -1118,6 +1225,9 @@ Public Class AddProvAppxPackage
                     msg = "O pacote:" & CrLf & CrLf & Package & CrLf & CrLf & "é um pacote de aplicações encriptadas. Nem o DISMTools nem o DISM suportam a adição destes tipos de aplicações. Se quiser adicioná-lo, pode fazê-lo depois de a imagem ser aplicada e inicializada."
                 Case 5
                     msg = "Il pacchetto:" & CrLf & CrLf & Package & CrLf & CrLf & "è un pacchetto di applicazioni criptate. Né DISMTools né DISM supportano l'aggiunta di questi tipi di applicazioni. Se si desidera aggiungerlo, è possibile farlo dopo che l'immagine è stata applicata e avviata."
+                Case 6
+                    msg = "该程序包：" & CrLf & CrLf & Package & CrLf & CrLf & "是加密的应用程序包。DISMTools 和 DISM 均不支持添加此类应用程序。如果希望添加，可以在应用映像并启动后再进行操作。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbExclamation, ImageTaskHeader1.ItemText)
             Exit Sub
@@ -1271,6 +1381,8 @@ Public Class AddProvAppxPackage
                                 MsgBox("Esta pasta não parece conter uma estrutura de pacotes AppX. Não será adicionada à lista", vbOKOnly + vbExclamation, "Adicionar pacotes AppX provisionados")
                             Case "ITA"
                                 MsgBox("Questa cartella non sembra contenere una struttura di pacchetti AppX. Non verrà aggiunta all'elenco", vbOKOnly + vbExclamation, "Aggiungi pacchetti AppX approvvigionati")
+                            Case "CHS", "CHT"
+                                MsgBox("此文件夹似乎不包含 AppX 程序包结构。它不会被添加到列表中", vbOKOnly + vbExclamation, "添加预配的 AppX 程序包")
                         End Select
                     Case 1
                         MsgBox("This folder doesn't seem to contain an AppX package structure. It will not be added to the list", vbOKOnly + vbExclamation, "Add provisioned AppX packages")
@@ -1282,6 +1394,9 @@ Public Class AddProvAppxPackage
                         MsgBox("Esta pasta não parece conter uma estrutura de pacotes AppX. Não será adicionada à lista", vbOKOnly + vbExclamation, "Adicionar pacotes AppX provisionados")
                     Case 5
                         MsgBox("Questa cartella non sembra contenere una struttura di pacchetti AppX. Non verrà aggiunta all'elenco", vbOKOnly + vbExclamation, "Aggiungi pacchetti AppX approvvigionati")
+                    Case 6
+                        MsgBox("此文件夹似乎不包含 AppX 程序包结构。它不会被添加到列表中", vbOKOnly + vbExclamation, "添加预配的 AppX 程序包")
+
                 End Select
                 Exit Sub
             End If
@@ -1484,6 +1599,8 @@ Public Class AddProvAppxPackage
                                     msg = "O pacote que pretende adicionar já foi adicionado à lista, mas vem de um programador ou editor diferente." & CrLf & CrLf & "Tenha em atenção que as aplicações redistribuídas por programadores ou editores terceiros podem causar danos na imagem do Windows." & CrLf & CrLf & "Pretende substituir a entrada na lista pelo pacote especificado?"
                                 Case "ITA"
                                     msg = "Il pacchetto che si desidera aggiungere è già stato aggiunto all'elenco, ma proviene da uno sviluppatore o da un editore diverso." & CrLf & CrLf & "Si noti che le applicazioni ridistribuite da editori o sviluppatori di terze parti possono causare danni all'immagine di Windows." & CrLf & CrLf & "Si desidera sostituire la voce nell'elenco con il pacchetto specificato?"
+                                Case "CHS", "CHT"
+                                    msg = "要添加的程序包已在列表中，但它来自其他开发人员或发布者。" & CrLf & CrLf & "请注意，由第三方发布者或开发人员重新分发的应用可能会损坏 Windows 映像。" & CrLf & CrLf & "是否要用指定的程序包替换列表中的条目？"
                             End Select
                         Case 1
                             msg = "The package you want to add is already added to the list, but it comes from a different developer or publisher." & CrLf & CrLf & "Do note that applications redistributed by third-party publishers or developers can cause damage to the Windows image." & CrLf & CrLf & "Do you want to replace the entry in the list with the package specified?"
@@ -1495,6 +1612,9 @@ Public Class AddProvAppxPackage
                             msg = "O pacote que pretende adicionar já foi adicionado à lista, mas vem de um programador ou editor diferente." & CrLf & CrLf & "Tenha em atenção que as aplicações redistribuídas por programadores ou editores terceiros podem causar danos na imagem do Windows." & CrLf & CrLf & "Pretende substituir a entrada na lista pelo pacote especificado?"
                         Case 5
                             msg = "Il pacchetto che si desidera aggiungere è già stato aggiunto all'elenco, ma proviene da uno sviluppatore o da un editore diverso." & CrLf & CrLf & "Si noti che le applicazioni ridistribuite da editori o sviluppatori di terze parti possono causare danni all'immagine di Windows." & CrLf & CrLf & "Si desidera sostituire la voce nell'elenco con il pacchetto specificato?"
+                        Case 6
+                            msg = "要添加的程序包已在列表中，但它来自其他开发人员或发布者。" & CrLf & CrLf & "请注意，由第三方发布者或开发人员重新分发的应用可能会损坏 Windows 映像。" & CrLf & CrLf & "是否要用指定的程序包替换列表中的条目？"
+
                     End Select
                     If MsgBox(msg, vbYesNo + vbExclamation, ImageTaskHeader1.ItemText) = MsgBoxResult.Yes Then
                         DynaLog.LogMessage("Changing packages...")
@@ -1559,6 +1679,8 @@ Public Class AddProvAppxPackage
                                     msg = "O pacote que pretende adicionar já foi adicionado à lista, mas contém uma versão mais recente." & CrLf & CrLf & "Pretende substituir a entrada na lista pelo pacote atualizado especificado?"
                                 Case "ITA"
                                     msg = "Il pacchetto che si desidera aggiungere è già stato aggiunto all'elenco, ma contiene una versione più recente." & CrLf & CrLf & "Si desidera sostituire la voce nell'elenco con il pacchetto aggiornato specificato?"
+                                Case "CHS", "CHT"
+                                    msg = "要添加的程序包已在列表中，但它包含更新的版本。" & CrLf & CrLf & "是否要用指定的更新程序包替换列表中的条目？"
                             End Select
                         Case 1
                             msg = "The package you want to add is already added to the list, but it contains a newer version." & CrLf & CrLf & "Do you want to replace the entry in the list with the updated package specified?"
@@ -1570,6 +1692,9 @@ Public Class AddProvAppxPackage
                             msg = "O pacote que pretende adicionar já foi adicionado à lista, mas contém uma versão mais recente." & CrLf & CrLf & "Pretende substituir a entrada na lista pelo pacote atualizado especificado?"
                         Case 5
                             msg = "Il pacchetto che si desidera aggiungere è già stato aggiunto all'elenco, ma contiene una versione più recente." & CrLf & CrLf & "Si desidera sostituire la voce nell'elenco con il pacchetto aggiornato specificato?"
+                        Case 6
+                            msg = "要添加的程序包已在列表中，但它包含更新的版本。" & CrLf & CrLf & "是否要用指定的更新程序包替换列表中的条目？"
+
                     End Select
                     If MsgBox(msg, vbYesNo + vbQuestion, ImageTaskHeader1.ItemText) = MsgBoxResult.Yes Then
                         DynaLog.LogMessage("Updating package to add...")
@@ -1780,6 +1905,8 @@ Public Class AddProvAppxPackage
                                     MsgBox("Não foi possível obter os activos do logótipo da loja de aplicações deste pacote - não é possível ler do manifesto", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                                 Case "ITA"
                                     MsgBox("Impossibile ottenere le risorse del logo dell'application store da questo pacchetto - non è possibile leggere dal manifest", vbOKOnly + vbCritical, "Aggiungere pacchetti AppX approvvigionati")
+                                Case "CHS", "CHT"
+                                    MsgBox("无法从此程序包获取应用商店徽标素材 - 无法读取清单", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
                             End Select
                         Case 1
                             MsgBox("Could not get application store logo assets from this package - cannot read from manifest", vbOKOnly + vbCritical, "Add provisioned AppX packages")
@@ -1791,6 +1918,9 @@ Public Class AddProvAppxPackage
                             MsgBox("Não foi possível obter os activos do logótipo da loja de aplicações deste pacote - não é possível ler do manifesto", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                         Case 5
                             MsgBox("Impossibile ottenere le risorse del logo dell'application store da questo pacchetto - non è possibile leggere dal manifest", vbOKOnly + vbCritical, "Aggiungere pacchetti AppX approvvigionati")
+                        Case 6
+                            MsgBox("无法从此程序包获取应用商店徽标素材 - 无法读取清单", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
+
                     End Select
                 End If
             Else
@@ -2095,6 +2225,9 @@ Public Class AddProvAppxPackage
                     Case "ITA"
                         Label7.Text = "Selezione multiple"
                         Label8.Text = "Visualizza le proprietà comuni di tutte le applicazioni selezionate"
+                    Case "CHS", "CHT"
+                        Label7.Text = "多项选择"
+                        Label8.Text = "查看所有所选应用的公共属性"
                 End Select
             Case 1
                 Label7.Text = "Multiple selection"
@@ -2111,6 +2244,10 @@ Public Class AddProvAppxPackage
             Case 5
                 Label7.Text = "Selezione multiple"
                 Label8.Text = "Visualizza le proprietà comuni di tutte le applicazioni selezionate"
+            Case 6
+                Label7.Text = "多项选择"
+                Label8.Text = "查看所有所选应用的公共属性"
+
         End Select
         DynaLog.LogMessage("Detecting common properties with the Elements...")
         Label9.Visible = False
@@ -2264,6 +2401,8 @@ Public Class AddProvAppxPackage
                             .Text = "Pré-visualização"
                         Case "ITA"
                             .Text = "Anteprima"
+                        Case "CHS", "CHT"
+                            .Text = "预览"
                     End Select
                 Case 1
                     .Text = "Preview"
@@ -2275,6 +2414,9 @@ Public Class AddProvAppxPackage
                     .Text = "Pré-visualização"
                 Case 5
                     .Text = "Anteprima"
+                Case 6
+                    .Text = "预览"
+
             End Select
             With LogoAssetPreview
                 .Parent = LogoAssetPopupForm
@@ -2455,6 +2597,8 @@ Public Class AddProvAppxPackage
                                     msg = "O seguinte diretório:" & CrLf & Quote & PackageFile & Quote & CrLf & "contém pacotes de aplicações. Deseja processá-los também?" & CrLf & CrLf & "NOTA: esta operação irá analisar este diretório recursivamente, pelo que poderá demorar mais tempo a ser concluída"
                                 Case "ITA"
                                     msg = "La seguente cartella:" & CrLf & Quote & PackageFile & Quote & CrLf & "contiene pacchetti di applicazioni. Si desidera elaborare anche questi?" & CrLf & CrLf & "NOTA: la scansione di questa cartella avverrà in modo ricorsivo, pertanto il completamento dell'operazione potrebbe richiedere più tempo"
+                                Case "CHS", "CHT"
+                                    msg = "以下目录：" & CrLf & Quote & PackageFile & Quote & CrLf & "包含应用程序包。是否也要处理它们？" & CrLf & CrLf & "注意：这将递归扫描此目录，因此操作可能需要较长时间才能完成"
                             End Select
                         Case 1
                             msg = "The following directory:" & CrLf & Quote & PackageFile & Quote & CrLf & "contains application packages. Do you want to process them as well?" & CrLf & CrLf & "NOTE: this will scan this directory recursively, so it may take longer for this operation to complete"
@@ -2466,6 +2610,9 @@ Public Class AddProvAppxPackage
                             msg = "O seguinte diretório:" & CrLf & Quote & PackageFile & Quote & CrLf & "contém pacotes de aplicações. Deseja processá-los também?" & CrLf & CrLf & "NOTA: esta operação irá analisar este diretório recursivamente, pelo que poderá demorar mais tempo a ser concluída"
                         Case 5
                             msg = "La seguente cartella:" & CrLf & Quote & PackageFile & Quote & CrLf & "contiene pacchetti di applicazioni. Si desidera elaborare anche questi?" & CrLf & CrLf & "NOTA: la scansione di questa cartella avverrà in modo ricorsivo, pertanto il completamento dell'operazione potrebbe richiedere più tempo"
+                        Case 6
+                            msg = "以下目录：" & CrLf & Quote & PackageFile & Quote & CrLf & "包含应用程序包。是否也要处理它们？" & CrLf & CrLf & "注意：这将递归扫描此目录，因此操作可能需要较长时间才能完成"
+
                     End Select
                     If MsgBox(msg, vbYesNo + vbQuestion, ImageTaskHeader1.ItemText) = MsgBoxResult.Yes Then
                         DynaLog.LogMessage("The user has accepted the question.")
@@ -2504,6 +2651,8 @@ Public Class AddProvAppxPackage
                                 MsgBox("O ficheiro que foi deixado aqui não é um pacote de aplicações.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                             Case "ITA"
                                 MsgBox("Il file che è stato scaricato qui non è un pacchetto dell'applicazione", vbOKOnly + vbCritical, "Aggiungere i pacchetti AppX approvvigionati")
+                            Case "CHS", "CHT"
+                                MsgBox("拖放到此处的文件不是应用程序包。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
                         End Select
                     Case 1
                         MsgBox("The file that has been dropped here isn't an application package.", vbOKOnly + vbCritical, "Add provisioned AppX packages")
@@ -2515,6 +2664,9 @@ Public Class AddProvAppxPackage
                         MsgBox("O ficheiro que foi deixado aqui não é um pacote de aplicações.", vbOKOnly + vbCritical, "Adicionar pacotes AppX provisionados")
                     Case 5
                         MsgBox("Il file che è stato scaricato qui non è un pacchetto dell'applicazione", vbOKOnly + vbCritical, "Aggiungere i pacchetti AppX approvvigionati")
+                    Case 6
+                        MsgBox("拖放到此处的文件不是应用程序包。", vbOKOnly + vbCritical, "添加预配的 AppX 程序包")
+
                 End Select
             End If
         Next

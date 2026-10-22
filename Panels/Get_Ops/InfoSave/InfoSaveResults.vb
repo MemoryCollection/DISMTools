@@ -48,6 +48,11 @@ Public Class InfoSaveResults
                         Label1.Text = "Il rapporto è stato salvato nella posizione specificata e il suo contenuto viene visualizzato sottostante."
                         Button1.Text = "OK"
                         Button2.Text = "Salva rapporto..."
+                    Case "CHS", "CHT"
+                        Text = "映像信息报告结果"
+                        Label1.Text = "报告已保存到您指定的位置，其内容将在下方显示。"
+                        Button1.Text = "确定"
+                        Button2.Text = "保存报告..."
                 End Select
             Case 1
                 Text = "Image information report results"
@@ -74,6 +79,12 @@ Public Class InfoSaveResults
                 Label1.Text = "Il rapporto è stato salvato nella posizione specificata e il suo contenuto viene visualizzato sottostante."
                 Button1.Text = "OK"
                 Button2.Text = "Salva rapporto..."
+            Case 6
+                Text = "映像信息报告结果"
+                Label1.Text = "报告已保存到您指定的位置，其内容将在下方显示。"
+                Button1.Text = "确定"
+                Button2.Text = "保存报告..."
+
         End Select
         BackColor = CurrentTheme.SectionBackgroundColor
         ForeColor = CurrentTheme.ForegroundColor

@@ -890,6 +890,9 @@ Public Class MainForm
                             Case "ITA"
                                 titleMsg = "Attenzione ai temi personalizzati"
                                 msg = "DISMTools ha rilevato che in questo sistema è stato impostato un tema personalizzato. Alcuni temi personalizzati fanno sì che il programma non abbia un aspetto corretto, quindi si consiglia di passare al tema predefinito."
+                            Case "CHS", "CHT"
+                                titleMsg = "注意自定义主题"
+                                msg = "DISMTools 检测到系统已设置自定义主题。某些自定义主题会导致程序显示异常，建议切换到默认主题。"
                         End Select
                     Case 1
                         titleMsg = "Beware of custom themes"
@@ -906,6 +909,10 @@ Public Class MainForm
                     Case 5
                         titleMsg = "Attenzione ai temi personalizzati"
                         msg = "DISMTools ha rilevato che in questo sistema è stato impostato un tema personalizzato. Alcuni temi personalizzati fanno sì che il programma non abbia un aspetto corretto, quindi si consiglia di passare al tema predefinito."
+                    Case 6
+                        titleMsg = "注意自定义主题"
+                        msg = "DISMTools 检测到系统已设置自定义主题。某些自定义主题会导致程序显示异常，建议切换到默认主题。"
+
                 End Select
                 MsgBox(msg, vbOKOnly + vbExclamation, titleMsg)
             Else
@@ -1178,6 +1185,17 @@ Public Class MainForm
                             NoIPStr = "Non connesso a una rete"
                             ManualIPStr = "Manuale"
                             DHCPStr = "Automatico (assegnato da DHCP)"
+                        Case "CHS", "CHT"
+                            BuildStr = "内部版本"
+                            SysMemStr = "系统内存"
+                            CurDiskStr = "已使用，总计"
+                            NoDomStr = "不属于域"
+                            DomainStr = "属于域"
+                            BDCStr = "备份域控制器"
+                            PDCStr = "主域控制器"
+                            NoIPStr = "未连接到网络"
+                            ManualIPStr = "手动"
+                            DHCPStr = "自动（由 DHCP 分配）"
                     End Select
                 Case 1
                     BuildStr = "build"
@@ -1234,6 +1252,18 @@ Public Class MainForm
                     NoIPStr = "Non connesso a una rete"
                     ManualIPStr = "Manuale"
                     DHCPStr = "Automatico (assegnato da DHCP)"
+                Case 6
+                    BuildStr = "内部版本"
+                    SysMemStr = "系统内存"
+                    CurDiskStr = "已使用，总计"
+                    NoDomStr = "不属于域"
+                    DomainStr = "属于域"
+                    BDCStr = "备份域控制器"
+                    PDCStr = "主域控制器"
+                    NoIPStr = "未连接到网络"
+                    ManualIPStr = "手动"
+                    DHCPStr = "自动（由 DHCP 分配）"
+
             End Select
 
             ' Computer Information
@@ -1406,6 +1436,8 @@ Public Class MainForm
                         UpdateLink.Text = "Verificar actualizações..."
                     Case "ITA"
                         UpdateLink.Text = "Verifica aggiornamenti..."
+                    Case "CHS", "CHT"
+                        UpdateLink.Text = "正在检查更新…"
                 End Select
             Case 1
                 UpdateLink.Text = "Checking for updates..."
@@ -1467,6 +1499,9 @@ Public Class MainForm
                                 Case "ITA"
                                     UpdateLink.Text = "È disponibile una nuova versione da scaricare e installare. Fare clic qui per saperne di più"
                                     UpdateLink.LinkArea = New LinkArea(60, 32)
+                                Case "CHS", "CHT"
+                                    UpdateLink.Text = "有新版本可供下载和安装。点击此处了解详情"
+                                    UpdateLink.LinkArea = New LinkArea(58, 24)
                             End Select
                         Case 1
                             UpdateLink.Text = "A new version is available for download and installation. Click here to learn more"
@@ -1519,6 +1554,8 @@ Public Class MainForm
                             Label50.Text = "Não"
                         Case "ITA"
                             Label50.Text = "No"
+                        Case "CHS", "CHT"
+                            Label50.Text = "否"
                     End Select
                 Case 1
                     Label50.Text = "No"
@@ -1549,6 +1586,8 @@ Public Class MainForm
                             Label50.Text = "Sim"
                         Case "ITA"
                             Label50.Text = "Sì"
+                        Case "CHS", "CHT"
+                            Label50.Text = "是"
                     End Select
                 Case 1
                     Label50.Text = "Yes"
@@ -2157,6 +2196,8 @@ Public Class MainForm
                         progressLabel = "Processos em curso"
                     Case "ITA"
                         progressLabel = "Processi in corso"
+                    Case "CHS", "CHT"
+                        progressLabel = "正在运行的进程"
                 End Select
             Case 1
                 progressLabel = "Running processes"
@@ -2168,6 +2209,9 @@ Public Class MainForm
                 progressLabel = "Processos em curso"
             Case 5
                 progressLabel = "Processi in corso"
+            Case 6
+                progressLabel = "正在运行的进程"
+
         End Select
         ImgBW.ReportProgress(0)
         If GatherBasicInfo Then
@@ -2185,6 +2229,8 @@ Public Class MainForm
                             progressLabel = "Obter informações básicas sobre a imagem..."
                         Case "ITA"
                             progressLabel = "Verifica informazioni elementari immagine..."
+                        Case "CHS", "CHT"
+                            progressLabel = "正在获取映像基本信息..."
                     End Select
                 Case 1
                     progressLabel = "Getting basic image information..."
@@ -2196,6 +2242,9 @@ Public Class MainForm
                     progressLabel = "Obter informações básicas sobre a imagem..."
                 Case 5
                     progressLabel = "Verifica informazioni principali dell'immagine..."
+                Case 6
+                    progressLabel = "正在获取映像基本信息..."
+
             End Select
             ImgBW.ReportProgress(progressMin + progressDivs)
             GetBasicImageInfo(OnlineMode, OfflineMode)
@@ -2229,6 +2278,8 @@ Public Class MainForm
                                 progressLabel = "Obter informações avançadas sobre a imagem..."
                             Case "ITA"
                                 progressLabel = "Verifica informazioni avanzate immagine..."
+                            Case "CHS", "CHT"
+                                progressLabel = "正在获取映像高级信息..."
                         End Select
                     Case 1
                         progressLabel = "Getting advanced image information..."
@@ -2240,6 +2291,9 @@ Public Class MainForm
                         progressLabel = "Obter informações avançadas sobre a imagem..."
                     Case 5
                         progressLabel = "Verifica informazioni dettagliate dell'immagine..."
+                    Case 6
+                        progressLabel = "正在获取映像高级信息..."
+
                 End Select
                 ImgBW.ReportProgress(progressMin + progressDivs)
                 GetAdvancedImageInfo(OnlineMode, OfflineMode)
@@ -2318,6 +2372,8 @@ Public Class MainForm
                                 progressLabel = "Obter pacotes de imagem..."
                             Case "ITA"
                                 progressLabel = "Verifica pacchetti immagine..."
+                            Case "CHS", "CHT"
+                                progressLabel = "正在获取映像程序包..."
                         End Select
                     Case 1
                         progressLabel = "Getting image packages..."
@@ -2329,6 +2385,9 @@ Public Class MainForm
                         progressLabel = "Obter pacotes de imagem..."
                     Case 5
                         progressLabel = "Ricerca pacchetti immagine..."
+                    Case 6
+                        progressLabel = "正在获取映像程序包..."
+
                 End Select
                 ImgBW.ReportProgress(20)
                 GetImagePackages(OnlineMode)
@@ -2350,6 +2409,8 @@ Public Class MainForm
                                 progressLabel = "Obter características de imagem..."
                             Case "ITA"
                                 progressLabel = "Verifica funzionalità immagini..."
+                            Case "CHS", "CHT"
+                                progressLabel = "正在获取映像功能..."
                         End Select
                     Case 1
                         progressLabel = "Getting image features..."
@@ -2361,6 +2422,9 @@ Public Class MainForm
                         progressLabel = "Obter características de imagem..."
                     Case 5
                         progressLabel = "Verifica funzionalità immagine..."
+                    Case 6
+                        progressLabel = "正在获取映像功能..."
+
                 End Select
                 ImgBW.ReportProgress(progressMin + progressDivs)
                 GetImageFeatures(OnlineMode)
@@ -2386,6 +2450,8 @@ Public Class MainForm
                                         progressLabel = "Obter pacotes AppX provisionados por imagem (aplicações de estilo Metro)..."
                                     Case "ITA"
                                         progressLabel = "Verifica pacchetti AppX immagine (applicazioni in stile Metro)..."
+                                    Case "CHS", "CHT"
+                                        progressLabel = "正在获取映像预配的 AppX 程序包（Metro 风格应用）..."
                                 End Select
                             Case 1
                                 progressLabel = "Getting image provisioned AppX packages (Metro-style applications)..."
@@ -2397,6 +2463,9 @@ Public Class MainForm
                                 progressLabel = "Obter pacotes AppX provisionados por imagem (aplicações de estilo Metro)..."
                             Case 5
                                 progressLabel = "Ricerca pacchetti AppX immagine (applicazioni in stile Metro)..."
+                            Case 6
+                                progressLabel = "正在获取映像预配的 AppX 程序包（Metro 风格应用）..."
+
                         End Select
                         ImgBW.ReportProgress(progressMin + progressDivs)
                         GetImageAppxPackages(OnlineMode)
@@ -2428,6 +2497,8 @@ Public Class MainForm
                                         progressLabel = "Obter capacidades de imagem..."
                                     Case "ITA"
                                         progressLabel = "Verifica funzionalità su richiesta dell'immagine (capacità)..."
+                                    Case "CHS", "CHT"
+                                        progressLabel = "正在获取映像的按需功能（功能包）..."
                                 End Select
                             Case 1
                                 progressLabel = "Getting image Features on Demand (capabilities)..."
@@ -2439,6 +2510,9 @@ Public Class MainForm
                                 progressLabel = "Obter capacidades de imagem..."
                             Case 5
                                 progressLabel = "Verifica funzionalità su richiesta dell'immagine (capacità)..."
+                            Case 6
+                                progressLabel = "正在获取映像的按需功能（功能包）..."
+
                         End Select
                         ImgBW.ReportProgress(progressMin + progressDivs)
                         GetImageCapabilities(OnlineMode)
@@ -2466,6 +2540,8 @@ Public Class MainForm
                                 progressLabel = "Obter controladores de imagem..."
                             Case "ITA"
                                 progressLabel = "Verifica driver dispositivo immagine..."
+                            Case "CHS", "CHT"
+                                progressLabel = "正在获取映像驱动程序..."
                         End Select
                     Case 1
                         progressLabel = "Getting image drivers..."
@@ -2477,6 +2553,9 @@ Public Class MainForm
                         progressLabel = "Obter controladores de imagem..."
                     Case 5
                         progressLabel = "Ricerca driver immagine..."
+                    Case 6
+                        progressLabel = "正在获取映像驱动程序..."
+
                 End Select
                 ImgBW.ReportProgress(progressMin + progressDivs)
                 GetImageDrivers(OnlineMode)
@@ -2500,6 +2579,8 @@ Public Class MainForm
                                 progressLabel = "Obter pacotes de imagem..."
                             Case "ITA"
                                 progressLabel = "Verifica pacchetti immagine..."
+                            Case "CHS", "CHT"
+                                progressLabel = "正在获取映像程序包..."
                         End Select
                     Case 1
                         progressLabel = "Getting image packages..."
@@ -2511,6 +2592,9 @@ Public Class MainForm
                         progressLabel = "Obter pacotes de imagem..."
                     Case 5
                         progressLabel = "Ricerca pacchetti immagine..."
+                    Case 6
+                        progressLabel = "正在获取映像程序包..."
+
                 End Select
                 ImgBW.ReportProgress(20)
                 GetImagePackages(OnlineMode)
@@ -2529,6 +2613,8 @@ Public Class MainForm
                                 progressLabel = "Obter características de imagem..."
                             Case "ITA"
                                 progressLabel = "Verifica funzionalità immagini..."
+                            Case "CHS", "CHT"
+                                progressLabel = "正在获取映像功能..."
                         End Select
                     Case 1
                         progressLabel = "Getting image features..."
@@ -2540,6 +2626,9 @@ Public Class MainForm
                         progressLabel = "Obter características de imagem..."
                     Case 5
                         progressLabel = "Verifica funzionalità immagine..."
+                    Case 6
+                        progressLabel = "正在获取映像功能..."
+
                 End Select
                 ImgBW.ReportProgress(progressMin + progressDivs)
                 GetImageFeatures(OnlineMode)
@@ -2561,6 +2650,8 @@ Public Class MainForm
                                     progressLabel = "Obter pacotes AppX provisionados por imagem (aplicações de estilo Metro)..."
                                 Case "ITA"
                                     progressLabel = "Verifica pacchetti AppX immagine (applicazioni in stile Metro)..."
+                                Case "CHS", "CHT"
+                                    progressLabel = "正在获取映像预配的 AppX 程序包（Metro 风格应用）..."
                             End Select
                         Case 1
                             progressLabel = "Getting image provisioned AppX packages (Metro-style applications)..."
@@ -2572,6 +2663,9 @@ Public Class MainForm
                             progressLabel = "Obter pacotes AppX provisionados por imagem (aplicações de estilo Metro)..."
                         Case 5
                             progressLabel = "Ricerca pacchetti AppX immagine (applicazioni in stile Metro)..."
+                        Case 6
+                            progressLabel = "正在获取映像预配的 AppX 程序包（Metro 风格应用）..."
+
                     End Select
                     ImgBW.ReportProgress(progressMin + progressDivs)
                     GetImageAppxPackages(OnlineMode)
@@ -2597,6 +2691,8 @@ Public Class MainForm
                                     progressLabel = "Obter capacidades de imagem..."
                                 Case "ITA"
                                     progressLabel = "Verifica funzionalità su richiesta immagine (capacità)..."
+                                Case "CHS", "CHT"
+                                    progressLabel = "正在获取映像的按需功能（功能包）..."
                             End Select
                         Case 1
                             progressLabel = "Getting image Features on Demand (capabilities)..."
@@ -2608,6 +2704,9 @@ Public Class MainForm
                             progressLabel = "Obter capacidades de imagem..."
                         Case 5
                             progressLabel = "Verifica funzionalità su richiesta immagine (capacità)..."
+                        Case 6
+                            progressLabel = "正在获取映像的按需功能（功能包）..."
+
                     End Select
                     ImgBW.ReportProgress(progressMin + progressDivs)
                     GetImageCapabilities(OnlineMode)
@@ -2630,6 +2729,8 @@ Public Class MainForm
                                 progressLabel = "Obter controladores de imagem..."
                             Case "ITA"
                                 progressLabel = "Ricerca driver immagine..."
+                            Case "CHS", "CHT"
+                                progressLabel = "正在获取映像驱动程序..."
                         End Select
                     Case 1
                         progressLabel = "Getting image drivers..."
@@ -2641,6 +2742,9 @@ Public Class MainForm
                         progressLabel = "Obter controladores de imagem..."
                     Case 5
                         progressLabel = "Ricerca driver immagine..."
+                    Case 6
+                        progressLabel = "正在获取映像驱动程序..."
+
                 End Select
                 ImgBW.ReportProgress(progressMin + progressDivs)
                 GetImageDrivers(OnlineMode)
@@ -2660,6 +2764,8 @@ Public Class MainForm
                             progressLabel = "Execução de tarefas pendentes. Isto pode demorar algum tempo..."
                         Case "ITA"
                             progressLabel = "Esecuzione di attività in sospeso. Questa operazione potrebbe richiedere del tempo..."
+                        Case "CHS", "CHT"
+                            progressLabel = "正在执行挂起的任务。这可能需要一些时间..."
                     End Select
                 Case 1
                     progressLabel = "Running pending tasks. This may take some time..."
@@ -2671,6 +2777,9 @@ Public Class MainForm
                     progressLabel = "Execução de tarefas pendentes. Isto pode demorar algum tempo..."
                 Case 5
                     progressLabel = "Esecuzione di attività in sospeso. Questa operazione potrebbe richiedere del tempo..."
+                Case 6
+                    progressLabel = "正在执行挂起的任务。这可能需要一些时间..."
+
             End Select
             ImgBW.ReportProgress(99)
             DynaLog.LogMessage("Determining whether or not OS package information processes remain. Do them if they do remain...")
@@ -2755,6 +2864,10 @@ Public Class MainForm
                             Label41.Text = "(Installazione attiva)"
                             Label47.Text = "(Installazione attiva)"
                             Label49.Text = "(Installazione attiva)"
+                        Case "CHS", "CHT"
+                            Label41.Text = "(联机安装)"
+                            Label47.Text = "(联机安装)"
+                            Label49.Text = "(联机安装)"
                     End Select
                 Case 1
                     Label41.Text = "(Online installation)"
@@ -2828,6 +2941,11 @@ Public Class MainForm
                             Label46.Text = "(Installazione offline)"
                             Label47.Text = "(Installazione offline)"
                             Label49.Text = "(Installazione offline)"
+                        Case "CHS", "CHT"
+                            Label41.Text = "(脱机安装)"
+                            Label46.Text = "(脱机安装)"
+                            Label47.Text = "(脱机安装)"
+                            Label49.Text = "(脱机安装)"
                     End Select
                 Case 1
                     Label41.Text = "(Offline installation)"
@@ -6361,6 +6479,310 @@ Public Class MainForm
                         Language = 1
                         ChangeLangs(Language)
                         Exit Sub
+                    Case "CHS", "CHT"
+                        ' Top-level menu items
+                        FileToolStripMenuItem.Text = If(Options.CheckBox9.Checked, "文件(&F)".ToUpper(), "文件(&F)")
+                        ProjectToolStripMenuItem.Text = If(Options.CheckBox9.Checked, "项目(&P)".ToUpper(), "项目(&P)")
+                        CommandsToolStripMenuItem.Text = If(Options.CheckBox9.Checked, "命令(&M)".ToUpper(), "命令(&M)")
+                        ToolsToolStripMenuItem.Text = If(Options.CheckBox9.Checked, "工具(&T)".ToUpper(), "工具(&T)")
+                        HelpToolStripMenuItem.Text = If(Options.CheckBox9.Checked, "帮助(&H)".ToUpper(), "帮助(&H)")
+                        InvalidSettingsTSMI.Text = "检测到无效设置"
+                        ' Submenu items
+                        ' Menu - File
+                        NewProjectToolStripMenuItem.Text = "新建项目(&N)..."
+                        OpenExistingProjectToolStripMenuItem.Text = "打开现有项目(&O)"
+                        ManageOnlineInstallationToolStripMenuItem.Text = "管理联机安装(&M)"
+                        ManageOfflineInstallationToolStripMenuItem.Text = "管理脱机安装(&F)..."
+                        RecentProjectsListMenu.Text = "最近的项目"
+                        SaveProjectToolStripMenuItem.Text = "保存项目(&S)..."
+                        SaveProjectasToolStripMenuItem.Text = "项目另存为(&A)..."
+                        ExitToolStripMenuItem.Text = "退出(&X)"
+                        ' Menu - Project
+                        ViewProjectFilesInFileExplorerToolStripMenuItem.Text = "在文件资源管理器中查看项目文件"
+                        UnloadProjectToolStripMenuItem.Text = "卸载项目..."
+                        SwitchImageIndexesToolStripMenuItem.Text = "切换映像索引..."
+                        ProjectPropertiesToolStripMenuItem.Text = "项目属性"
+                        ImagePropertiesToolStripMenuItem.Text = "映像属性"
+                        ' Menu - Commands
+                        ImageManagementToolStripMenuItem.Text = "映像管理"
+                        OSPackagesToolStripMenuItem.Text = "操作系统程序包"
+                        ProvisioningPackagesToolStripMenuItem.Text = "预配包"
+                        AppPackagesToolStripMenuItem.Text = "AppX 程序包"
+                        AppPatchesToolStripMenuItem.Text = "应用程序 (MSP) 维护"
+                        DefaultAppAssociationsToolStripMenuItem.Text = "默认应用关联"
+                        LanguagesAndRegionSettingsToolStripMenuItem.Text = "语言和区域设置"
+                        CapabilitiesToolStripMenuItem.Text = "功能包"
+                        WindowsEditionsToolStripMenuItem.Text = "Windows 版本"
+                        DriversToolStripMenuItem.Text = "驱动程序"
+                        UnattendedAnswerFilesToolStripMenuItem.Text = "无人参与应答文件"
+                        WindowsPEServicingToolStripMenuItem.Text = "Windows PE 维护"
+                        OSUninstallToolStripMenuItem.Text = "操作系统卸载"
+                        ReservedStorageToolStripMenuItem.Text = "保留存储"
+                        ' Menu - Commands - Image management
+                        AppendImage.Text = "将捕获目录附加到映像..."
+                        ApplyFFU.Text = "应用 FFU 或 SFU 文件..."
+                        ApplyImage.Text = "应用 WIM 或 SWM 文件..."
+                        CaptureCustomImage.Text = "将增量更改捕获到文件..."
+                        CaptureFFU.Text = "将分区捕获到 FFU 文件..."
+                        CaptureImage.Text = "将驱动器的映像捕获到 WIM 文件..."
+                        CleanupMountpoints.Text = "从损坏的映像中删除资源..."
+                        CommitImage.Text = "将更改应用到映像..."
+                        DeleteImage.Text = "从 WIM 文件中删除卷映像..."
+                        ExportImage.Text = "导出映像..."
+                        GetImageInfo.Text = "获取映像信息..."
+                        GetWIMBootEntry.Text = "获取 WIMBoot 配置项..."
+                        ListImage.Text = "列出映像中的文件和目录..."
+                        MountImage.Text = "挂载映像..."
+                        OptimizeFFU.Text = "优化 FFU 文件..."
+                        OptimizeImage.Text = "优化映像..."
+                        RemountImage.Text = "重新挂载映像以进行维护..."
+                        SplitFFU.Text = "将 FFU 文件拆分为 SFU 文件..."
+                        SplitImage.Text = "将 WIM 文件拆分为 SWM 文件..."
+                        UnmountImage.Text = "卸载映像..."
+                        UpdateWIMBootEntry.Text = "更新 WIMBoot 配置项..."
+                        ApplySiloedPackage.Text = "应用隔离的预配包..."
+                        ' Menu - Commands - OS packages
+                        GetPackages.Text = "获取程序包信息..."
+                        AddPackage.Text = "添加程序包..."
+                        RemovePackage.Text = "删除程序包..."
+                        GetFeatures.Text = "获取功能信息..."
+                        EnableFeature.Text = "启用功能..."
+                        DisableFeature.Text = "禁用功能..."
+                        CleanupImage.Text = "执行清理或恢复操作..."
+                        SaveImageInformationToolStripMenuItem.Text = "保存映像信息..."
+                        ' Menu - Commands - Provisioning packages
+                        AddProvisioningPackage.Text = "添加预配包..."
+                        GetProvisioningPackageInfo.Text = "获取预配包信息..."
+                        ApplyCustomDataImage.Text = "应用自定义数据映像..."
+                        ' Menu - Commands - App packages
+                        GetProvisionedAppxPackages.Text = "获取 AppX 程序包信息..."
+                        AddProvisionedAppxPackage.Text = "添加预配的 AppX 程序包..."
+                        RemoveProvisionedAppxPackage.Text = "删除 AppX 程序包的预配..."
+                        OptimizeProvisionedAppxPackages.Text = "优化已预配的程序包..."
+                        SetProvisionedAppxDataFile.Text = "将自定义数据文件添加到 AppX 程序包..."
+                        ' Menu - Commands - App (MSP) servicing
+                        CheckAppPatch.Text = "获取应用程序修补程序信息..."
+                        GetAppPatchInfo.Text = "获取详细的应用程序修补程序信息..."
+                        GetAppPatches.Text = "获取已安装应用程序修补程序的基本信息..."
+                        GetAppInfo.Text = "获取详细的 Windows Installer (*.msi) 应用程序信息..."
+                        GetApps.Text = "获取 Windows Installer (*.msi) 应用程序的基本信息..."
+                        ' Menu - Commands - Default app associations
+                        ExportDefaultAppAssociations.Text = "导出默认应用程序关联..."
+                        GetDefaultAppAssociations.Text = "获取默认应用程序关联信息..."
+                        ImportDefaultAppAssociations.Text = "导入默认应用程序关联..."
+                        RemoveDefaultAppAssociations.Text = "删除默认应用程序关联..."
+                        ' Menu - Commands - Languages and regional settings
+                        GetIntl.Text = "获取国际设置和语言..."
+                        SetUILang.Text = "设置 UI 语言..."
+                        SetUILangFallback.Text = "设置默认 UI 回退语言..."
+                        SetSysUILang.Text = "设置系统首选 UI 语言..."
+                        SetSysLocale.Text = "设置系统区域设置..."
+                        SetUserLocale.Text = "设置用户区域设置..."
+                        SetInputLocale.Text = "设置输入区域设置..."
+                        SetAllIntl.Text = "设置 UI 语言和区域设置..."
+                        SetTimeZone.Text = "设置默认时区..."
+                        SetSKUIntlDefaults.Text = "设置默认语言和区域设置..."
+                        SetLayeredDriver.Text = "设置分层驱动程序..."
+                        GenLangINI.Text = "生成 Lang.ini 文件..."
+                        SetSetupUILang.Text = "设置默认安装程序语言..."
+                        ' Menu - Commands - Capabilities
+                        AddCapability.Text = "添加功能包..."
+                        ExportSource.Text = "将功能包导出到存储库..."
+                        GetCapabilities.Text = "获取功能包信息..."
+                        RemoveCapability.Text = "删除功能包..."
+                        ' Menu - Commands - Windows editions
+                        GetCurrentEdition.Text = "获取当前版本..."
+                        GetTargetEditions.Text = "获取升级目标..."
+                        SetEdition.Text = "升级映像..."
+                        SetProductKey.Text = "设置产品密钥..."
+                        ' Menu - Commands - Drivers
+                        GetDrivers.Text = "获取驱动程序信息..."
+                        AddDriver.Text = "添加驱动程序..."
+                        RemoveDriver.Text = "删除驱动程序..."
+                        ExportDriver.Text = "导出驱动程序包..."
+                        ImportDriver.Text = "导入驱动程序包..."
+                        ' Menu - Commands - Unattended answer files
+                        ApplyUnattend.Text = "应用无人参与应答文件..."
+                        ' Menu - Commands - Windows PE servicing
+                        GetPESettings.Text = "获取设置..."
+                        SetScratchSpace.Text = "设置临时空间..."
+                        SetTargetPath.Text = "设置目标路径..."
+                        ' Menu - Commands - OS uninstall
+                        GetOSUninstallWindow.Text = "获取卸载时间窗口..."
+                        InitiateOSUninstall.Text = "启动卸载..."
+                        RemoveOSUninstall.Text = "删除回退能力..."
+                        SetOSUninstallWindow.Text = "设置卸载时间窗口..."
+                        ' Menu - Commands - Reserved storage
+                        SetReservedStorageState.Text = "设置保留存储状态..."
+                        GetReservedStorageState.Text = "获取保留存储状态..."
+                        ' Menu - Commands - Microsoft Edge
+                        AddEdge.Text = "添加 Edge..."
+                        AddEdgeBrowser.Text = "添加 Edge 浏览器..."
+                        AddEdgeWebView.Text = "添加 Edge WebView..."
+                        ' Menu - Tools
+                        ImageConversionToolStripMenuItem.Text = "映像转换"
+                        MergeSWM.Text = "合并 SWM 文件..."
+                        RemountImageWithWritePermissionsToolStripMenuItem.Text = "以写入权限重新挂载映像"
+                        CommandShellToolStripMenuItem.Text = "命令控制台"
+                        UnattendedAnswerFileManagerToolStripMenuItem.Text = "无人参与应答文件管理器"
+                        UnattendedAnswerFileCreatorToolStripMenuItem.Text = "无人参与应答文件创建器"
+                        RegCplToolStripMenuItem.Text = "管理映像注册表配置单元..."
+                        WebResourcesToolStripMenuItem.Text = "Web 资源"
+                        LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "下载语言和可选功能 ISO..."
+                        LanguagesAndFODWin10ToolStripMenuItem.Text = "下载 Windows 10 的语言和功能按需 (FOD) 光盘..."
+                        ReportManagerToolStripMenuItem.Text = "报告管理器"
+                        MountedImageManagerTSMI.Text = "已挂载映像管理器"
+                        CreateDiscImageToolStripMenuItem.Text = "创建光盘映像..."
+                        CreateTestingEnvironmentToolStripMenuItem.Text = "创建测试环境..."
+                        WimScriptEditorCommand.Text = "配置列表编辑器"
+                        OptionsToolStripMenuItem.Text = "选项"
+                        ' Menu - Help
+                        HelpTopicsToolStripMenuItem.Text = "帮助主题"
+                        AboutDISMToolsToolStripMenuItem.Text = "关于 DISMTools"
+                        ' Menu - Invalid settings
+                        ISFix.Text = "更多信息"
+                        ISHelp.Text = "这是什么？"
+                        ' Menu - DevState
+                        ReportFeedbackToolStripMenuItem.Text = "报告反馈（在 Web 浏览器中打开）"
+                        ' Menu - Contributions
+                        ContributeToTheHelpSystemToolStripMenuItem.Text = "为帮助系统贡献力量"
+                        ' Menu - Tour Server
+                        TourActionsTSMI.Text = "导览操作"
+                        ServerStatusTSMI.Text = String.Format("导览服务器正在端口 {0} 上运行", tourServer.GetTcpPort())
+                        RestartDTTourTSMI.Text = "重新开始导览"
+                        StopDTTourServerTSMI.Text = "停止导览服务器"
+                        ' Start Panel
+                        LabelHeader1.Text = "开始"
+                        Label10.Text = "最近的项目"
+                        NewProjLink.Text = "新建项目..."
+                        ExistingProjLink.Text = "打开现有项目..."
+                        OnlineInstMgmt.Text = "管理联机安装"
+                        OfflineInstMgmt.Text = "管理脱机安装..."
+                        RecentRemoveLink.Text = "删除条目"
+                        ' ToolStrip buttons
+                        ToolStripButton1.Text = "关闭选项卡"
+                        ToolStripButton2.Text = "保存项目"
+                        ToolStripButton3.Text = "卸载项目"
+                        ToolStripButton3.ToolTipText = "从本程序卸载项目"
+                        ToolStripButton4.Text = "显示进度窗口"
+                        RefreshViewTSB.Text = "刷新视图"
+                        ExpandCollapseTSB.Text = "展开"
+                        UpdateLink.Text = "有新版本可供下载和安装。点击此处了解详情"
+                        UpdateLink.LinkArea = New LinkArea(58, 24)
+                        ' Pop-up context menus
+                        PkgBasicInfo.Text = "获取基本信息（所有程序包）"
+                        PkgDetailedInfo.Text = "获取详细信息（特定程序包）"
+                        CommitAndUnmountTSMI.Text = "提交更改并卸载映像"
+                        DiscardAndUnmountTSMI.Text = "放弃更改并卸载映像"
+                        UnmountSettingsToolStripMenuItem.Text = "卸载设置..."
+                        ViewPackageDirectoryToolStripMenuItem.Text = "查看程序包目录"
+                        GetImageFileInformationToolStripMenuItem.Text = "获取映像文件信息..."
+                        SaveCompleteImageInformationToolStripMenuItem.Text = "保存完整映像信息..."
+                        CreateDiscImageWithThisFileToolStripMenuItem.Text = "使用此文件创建光盘映像..."
+                        ' OpenFileDialogs and FolderBrowsers
+                        OpenFileDialog1.Title = "指定要加载的项目文件"
+                        LocalMountDirFBD.Description = "请指定要加载到此项目的挂载目录："
+                        If Not ImgBW.IsBusy And areBackgroundProcessesDone Then
+                            BGProcDetails.Label2.Text = "映像处理已完成"
+                        End If
+                        MenuDesc.Text = "就绪"
+                        ' Tree view context menu
+                        AccessDirectoryToolStripMenuItem.Text = "访问目录"
+                        UnloadProjectToolStripMenuItem1.Text = "卸载项目"
+                        CopyDeploymentToolsToolStripMenuItem.Text = "复制部署工具"
+                        OfAllArchitecturesToolStripMenuItem.Text = "所有体系结构"
+                        OfSelectedArchitectureToolStripMenuItem.Text = "所选体系结构"
+                        ForX86ArchitectureToolStripMenuItem.Text = "适用于 x86 体系结构"
+                        ForAmd64ArchitectureToolStripMenuItem.Text = "适用于 AMD64 体系结构"
+                        ForARMArchitectureToolStripMenuItem.Text = "适用于 ARM 体系结构"
+                        ForARM64ArchitectureToolStripMenuItem.Text = "适用于 ARM64 体系结构"
+                        ImageOperationsToolStripMenuItem.Text = "映像操作"
+                        MountImageToolStripMenuItem.Text = "挂载映像..."
+                        UnmountImageToolStripMenuItem.Text = "卸载映像..."
+                        RemoveVolumeImagesToolStripMenuItem.Text = "删除卷映像..."
+                        SwitchImageIndexesToolStripMenuItem1.Text = "切换映像索引..."
+                        UnattendedAnswerFilesToolStripMenuItem1.Text = "无人参与应答文件"
+                        ManageToolStripMenuItem.Text = "管理"
+                        CreationWizardToolStripMenuItem.Text = "创建"
+                        ScratchDirectorySettingsToolStripMenuItem.Text = "配置临时目录"
+                        ManageReportsToolStripMenuItem.Text = "管理报告"
+                        AddToolStripMenuItem.Text = "添加"
+                        NewFileToolStripMenuItem.Text = "新建文件..."
+                        ExistingFileToolStripMenuItem.Text = "现有文件..."
+                        ' Context menu of AppX information dialog
+                        SaveResourceToolStripMenuItem.Text = "保存资源..."
+                        CopyToolStripMenuItem.Text = "复制资源"
+                        ' Context menu of AppX addition dialog
+                        MicrosoftAppsToolStripMenuItem.Text = "访问 Microsoft 应用网站"
+                        MicrosoftStoreGenerationProjectToolStripMenuItem.Text = "访问 Microsoft Store 生成项目网站"
+                        AppxDownloadHelpToolStripMenuItem.Text = "如何获取应用程序？"
+                        ' New design
+                        GreetingLabel.Text = "欢迎使用此维护会话"
+                        LinkLabel12.Text = "项目"
+                        LinkLabel13.Text = "映像"
+                        Label54.Text = "名称："
+                        Label51.Text = "位置："
+                        Label53.Text = "是否已挂载映像？"
+                        LinkLabel14.Text = "点击此处挂载映像"
+                        Label55.Text = "项目任务"
+                        LinkLabel15.Text = "查看项目属性"
+                        LinkLabel16.Text = "在文件资源管理器中打开"
+                        LinkLabel17.Text = "卸载项目"
+                        Label59.Text = "尚未挂载任何映像"
+                        Label58.Text = "需要挂载映像才能查看其信息"
+                        Label57.Text = "选择"
+                        LinkLabel21.Text = "挂载映像..."
+                        LinkLabel18.Text = "选择已挂载的映像..."
+                        Label39.Text = "映像索引："
+                        Label43.Text = "挂载点："
+                        Label45.Text = "版本："
+                        Label42.Text = "名称："
+                        Label40.Text = "描述："
+                        Label56.Text = "映像任务"
+                        LinkLabel20.Text = "查看映像属性"
+                        LinkLabel19.Text = "卸载映像"
+                        GroupBox4.Text = "映像操作"
+                        Button26.Text = "挂载映像..."
+                        Button27.Text = "提交当前更改"
+                        Button28.Text = "提交并卸载映像"
+                        Button29.Text = "卸载映像并放弃更改"
+                        Button25.Text = "重新加载维护会话"
+                        Button24.Text = "切换映像索引..."
+                        Button30.Text = "应用映像..."
+                        Button31.Text = "捕获映像..."
+                        Button32.Text = "删除卷映像..."
+                        Button33.Text = "保存完整映像信息..."
+                        GroupBox5.Text = "程序包操作"
+                        Button36.Text = "添加程序包..."
+                        Button34.Text = "获取程序包信息..."
+                        Button38.Text = "保存已安装程序包信息..."
+                        Button35.Text = "删除程序包..."
+                        Button37.Text = "执行组件存储维护和清理..."
+                        GroupBox6.Text = "功能操作"
+                        Button41.Text = "启用功能..."
+                        Button39.Text = "获取功能信息..."
+                        Button42.Text = "保存功能信息..."
+                        Button40.Text = "禁用功能..."
+                        GroupBox7.Text = "AppX 程序包操作"
+                        Button44.Text = "添加 AppX 程序包..."
+                        Button45.Text = "获取应用信息..."
+                        Button46.Text = "保存已安装的 AppX 程序包信息..."
+                        Button43.Text = "删除 AppX 程序包..."
+                        GroupBox8.Text = "功能包操作"
+                        Button48.Text = "添加功能包..."
+                        Button49.Text = "获取功能包信息..."
+                        Button50.Text = "保存功能包信息..."
+                        Button47.Text = "删除功能包..."
+                        GroupBox9.Text = "驱动程序操作"
+                        Button53.Text = "添加驱动程序包..."
+                        Button52.Text = "获取驱动程序信息..."
+                        Button54.Text = "保存已安装的驱动程序信息..."
+                        Button51.Text = "删除驱动程序..."
+                        GroupBox10.Text = "Windows PE 操作"
+                        Button55.Text = "获取配置"
+                        Button56.Text = "保存配置..."
+                        Button57.Text = "设置目标路径..."
+                        Button58.Text = "设置临时空间..."
                 End Select
             Case 1
                 DynaLog.LogMessage("Language code is 1. Switching to English...")
@@ -8179,6 +8601,12 @@ Public Class MainForm
                             Label41.Text = "(Installazione online)"
                             Label47.Text = "(Installazione online)"
                             Label49.Text = "(Installazione online)"
+                        Case "CHS", "CHT"
+                            Label50.Text = If(IsImageMounted, "是", "否")
+                            Text = "联机安装 - DISMTools"
+                            Label41.Text = "(联机安装)"
+                            Label47.Text = "(联机安装)"
+                            Label49.Text = "(联机安装)"
                     End Select
                 Case 1
                     Label50.Text = If(IsImageMounted, "Yes", "No")
@@ -8254,6 +8682,13 @@ Public Class MainForm
                             Label46.Text = "(Installazione offline)"
                             Label47.Text = "(Installazione offline)"
                             Label49.Text = "(Installazione offline)"
+                        Case "CHS", "CHT"
+                            Label50.Text = If(IsImageMounted, "是", "否")
+                            Text = "脱机安装 - DISMTools"
+                            Label41.Text = "(脱机安装)"
+                            Label46.Text = "(脱机安装)"
+                            Label47.Text = "(脱机安装)"
+                            Label49.Text = "(脱机安装)"
                     End Select
                 Case 1
                     Label50.Text = If(IsImageMounted, "Yes", "No")
@@ -8397,6 +8832,25 @@ Public Class MainForm
                         LinkLabel32.Text = "Riprova"
                         LinkLabel33.Text = "Riprova"
                         LinkLabel34.Text = "Ulteriori informazioni"
+                    Case "CHS", "CHT"
+                        ChangeComputerNameLink.Text = "重命名"
+                        Label1.Text = "域成员身份："
+                        Label2.Text = "工作组/域："
+                        Label3.Text = "IP 地址配置："
+                        Label4.Text = "浏览并开始使用"
+                        Label5.Text = "保持最新"
+                        Label9.Text = "每日小知识"
+                        LinkLabel27.Text = "了解此版本中的新增功能"
+                        LinkLabel28.Text = "DISMTools 和映像维护入门"
+                        LinkLabel29.Text = "管理当前安装"
+                        LinkLabel30.Text = "管理外部 Windows 安装"
+                        Label12.Text = "通过观看视频学习"
+                        Label6.Text = "无法加载视频内容。"
+                        Label7.Text = "无法加载新闻源。"
+                        LinkLabel31.Text = "了解更多"
+                        LinkLabel32.Text = "重试"
+                        LinkLabel33.Text = "重试"
+                        LinkLabel34.Text = "了解更多"
                 End Select
             Case 1
                 ChangeComputerNameLink.Text = "Rename"
@@ -8552,6 +9006,8 @@ Public Class MainForm
                                 msg = "O painel de controlo do registo de imagens tem de ser fechado antes de carregar projectos."
                             Case "ITA"
                                 msg = "Prima di caricare i progetti il pannello di controllo del registro immagini deve essere chiuso."
+                            Case "CHS", "CHT"
+                                msg = "加载项目前需要先关闭映像注册表控制面板。"
                         End Select
                     Case 1
                         msg = "The image registry control panel needs to be closed before loading projects."
@@ -8563,6 +9019,9 @@ Public Class MainForm
                         msg = "O painel de controlo do registo de imagens tem de ser fechado antes de carregar projectos."
                     Case 5
                         msg = "Il pannello di controllo del registro immagini deve essere chiuso prima di caricare i progetti."
+                    Case 6
+                        msg = "加载项目前需要先关闭映像注册表控制面板。"
+
                 End Select
                 MsgBox(msg, vbOKOnly + vbExclamation, Text)
                 Exit Sub
@@ -8600,6 +9059,8 @@ Public Class MainForm
                                 PleaseWaitDialog.Label2.Text = "Carregar projeto: " & Quote & prjName & Quote
                             Case "ITA"
                                 PleaseWaitDialog.Label2.Text = "Caricamento progetto: " & Quote & prjName & Quote
+                            Case "CHS", "CHT"
+                                PleaseWaitDialog.Label2.Text = "正在加载项目：" & Quote & prjName & Quote
                         End Select
                     Case 1
                         PleaseWaitDialog.Label2.Text = "Loading project: " & Quote & prjName & Quote
@@ -8709,6 +9170,8 @@ Public Class MainForm
                                         PleaseWaitDialog.Label2.Text = "Carregar projeto: " & Quote & prjName & Quote
                                     Case "ITA"
                                         PleaseWaitDialog.Label2.Text = "Caricamento progetto: " & Quote & prjName & Quote
+                                    Case "CHS", "CHT"
+                                        PleaseWaitDialog.Label2.Text = "正在加载项目：" & Quote & prjName & Quote
                                 End Select
                             Case 1
                                 PleaseWaitDialog.Label2.Text = "Loading project: " & Quote & prjName & Quote
@@ -8881,6 +9344,8 @@ Public Class MainForm
                                     PleaseWaitDialog.Label2.Text = "Carregar projeto: " & Quote & prjName & Quote
                                 Case "ITA"
                                     PleaseWaitDialog.Label2.Text = "Caricamento progetto: " & Quote & prjName & Quote
+                                Case "CHS", "CHT"
+                                    PleaseWaitDialog.Label2.Text = "正在加载项目：" & Quote & prjName & Quote
                             End Select
                         Case 1
                             PleaseWaitDialog.Label2.Text = "Loading project: " & Quote & prjName & Quote
@@ -9175,6 +9640,8 @@ Public Class MainForm
                             msg = "Os processos em segundo plano ainda estão a recolher informações sobre esta imagem. Deseja cancelá-los?"
                         Case "ITA"
                             msg = "I processi in background stanno ancora raccogliendo informazioni sull'immagine. Vuoi annullarli?"
+                        Case "CHS", "CHT"
+                            msg = "后台进程仍在收集此映像的信息。是否要取消它们？"
                     End Select
                 Case 1
                     msg = "Background processes are still gathering information about this image. Do you want to cancel them?"
@@ -9186,6 +9653,9 @@ Public Class MainForm
                     msg = "Os processos em segundo plano ainda estão a recolher informações sobre esta imagem. Deseja cancelá-los?"
                 Case 5
                     msg = "I processi in background stanno ancora raccogliendo informazioni sull'immagine. Si desidera annullarli?"
+                Case 6
+                    msg = "后台进程仍在收集此映像的信息。是否要取消它们？"
+
             End Select
             If MsgBox(msg, vbYesNo + vbQuestion, Text) = MsgBoxResult.Yes Then
                 DynaLog.LogMessage("Cancelling background processes...")
@@ -9207,6 +9677,8 @@ Public Class MainForm
                             MenuDesc.Text = "Cancelamento de processos em segundo plano. Por favor, aguarde..."
                         Case "ITA"
                             MenuDesc.Text = "Annullamento dei processi in background..."
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "正在取消后台进程。请稍候..."
                     End Select
                 Case 1
                     MenuDesc.Text = "Cancelling background processes. Please wait..."
@@ -9240,6 +9712,8 @@ Public Class MainForm
                             MenuDesc.Text = "Pronto"
                         Case "ITA"
                             MenuDesc.Text = "Pronto"
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "就绪"
                     End Select
                 Case 1
                     MenuDesc.Text = "Ready"
@@ -9373,6 +9847,8 @@ Public Class MainForm
                         Text = "Instalação em linha - DISMTools"
                     Case "ITA"
                         Text = "Installazione online - DISMTools"
+                    Case "CHS", "CHT"
+                        Text = "联机安装 - DISMTools"
                 End Select
             Case 1
                 Text = "Online installation - DISMTools"
@@ -9384,6 +9860,9 @@ Public Class MainForm
                 Text = "Instalação em linha - DISMTools"
             Case 5
                 Text = "Installazione attiva - DISMTools"
+            Case 6
+                Text = "联机安装 - DISMTools"
+
         End Select
         OnlineManagement = True
         ' Initialize background processes
@@ -9403,6 +9882,8 @@ Public Class MainForm
                         Label50.Text = "Sim"
                     Case "ITA"
                         Label50.Text = "Sì"
+                    Case "CHS", "CHT"
+                        Label50.Text = "是"
                 End Select
             Case 1
                 Label50.Text = "Yes"
@@ -9449,6 +9930,9 @@ Public Class MainForm
                     Case "ITA"
                         Label41.Text = "(Installazione online)"
                         Label44.Text = "(Installazione online)"
+                    Case "CHS", "CHT"
+                        Label41.Text = "(联机安装)"
+                        Label44.Text = "(联机安装)"
                 End Select
             Case 1
                 Label41.Text = "(Online installation)"
@@ -9500,6 +9984,8 @@ Public Class MainForm
                                 msg = "O painel de controlo do registo de imagens tem de ser fechado antes de carregar este modo."
                             Case "ITA"
                                 msg = "Prima di caricare questa modalità il pannello di controllo del registro immagini deve essere chiuso."
+                            Case "CHS", "CHT"
+                                msg = "加载此模式前需要先关闭映像注册表控制面板。"
                         End Select
                     Case 1
                         msg = "The image registry control panel needs to be closed before loading this mode."
@@ -9511,6 +9997,9 @@ Public Class MainForm
                         msg = "O painel de controlo do registo de imagens tem de ser fechado antes de carregar este modo."
                     Case 5
                         msg = "Prima di caricare questa modalità Il pannello di controllo del registro immagini deve essere chiuso."
+                    Case 6
+                        msg = "加载此模式前需要先关闭映像注册表控制面板。"
+
                 End Select
                 MsgBox(msg, vbOKOnly + vbExclamation, Text)
                 Exit Sub
@@ -9532,6 +10021,8 @@ Public Class MainForm
                         Text = "Instalação offline - DISMTools"
                     Case "ITA"
                         Text = "Installazione offline - DISMTools"
+                    Case "CHS", "CHT"
+                        Text = "脱机安装 - DISMTools"
                 End Select
             Case 1
                 Text = "Offline installation - DISMTools"
@@ -9543,6 +10034,9 @@ Public Class MainForm
                 Text = "Instalação offline - DISMTools"
             Case 5
                 Text = "Installazione offline - DISMTools"
+            Case 6
+                Text = "脱机安装 - DISMTools"
+
         End Select
         OfflineManagement = True
         ' Initialize background processes
@@ -9562,6 +10056,8 @@ Public Class MainForm
                         Label50.Text = "Sim"
                     Case "ITA"
                         Label50.Text = "Sì"
+                    Case "CHS", "CHT"
+                        Label50.Text = "是"
                 End Select
             Case 1
                 Label50.Text = "Yes"
@@ -9608,6 +10104,9 @@ Public Class MainForm
                     Case "ITA"
                         Label41.Text = "(Installazione offline)"
                         Label44.Text = "(Installazione offline)"
+                    Case "CHS", "CHT"
+                        Label41.Text = "(脱机安装)"
+                        Label44.Text = "(脱机安装)"
                 End Select
             Case 1
                 Label41.Text = "(Offline installation)"
@@ -9653,6 +10152,8 @@ Public Class MainForm
                             msg = "Os processos em segundo plano ainda estão a recolher informações sobre esta imagem. Deseja cancelá-los?"
                         Case "ITA"
                             msg = "I processi in background stanno ancora raccogliendo informazioni sull'immagine. Vuoi annullarli?"
+                        Case "CHS", "CHT"
+                            msg = "后台进程仍在收集此映像的信息。是否要取消它们？"
                     End Select
                 Case 1
                     msg = "Background processes are still gathering information about this image. Do you want to cancel them?"
@@ -9664,6 +10165,9 @@ Public Class MainForm
                     msg = "Os processos em segundo plano ainda estão a recolher informações sobre esta imagem. Deseja cancelá-los?"
                 Case 5
                     msg = "I processi in background stanno ancora raccogliendo informazioni sull'immagine. Vuoi annullarli?"
+                Case 6
+                    msg = "后台进程仍在收集此映像的信息。是否要取消它们？"
+
             End Select
             If MsgBox(msg, vbYesNo + vbQuestion, Text) = MsgBoxResult.Yes Then
                 DynaLog.LogMessage("Cancelling background processes...")
@@ -9685,6 +10189,8 @@ Public Class MainForm
                             MenuDesc.Text = "Cancelamento de processos em segundo plano. Por favor, aguarde..."
                         Case "ITA"
                             MenuDesc.Text = "Annullamento dei processi in background..."
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "正在取消后台进程。请稍候..."
                     End Select
                 Case 1
                     MenuDesc.Text = "Cancelling background processes. Please wait..."
@@ -9718,6 +10224,8 @@ Public Class MainForm
                             MenuDesc.Text = "Pronto"
                         Case "ITA"
                             MenuDesc.Text = "Pronto"
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "就绪"
                     End Select
                 Case 1
                     MenuDesc.Text = "Ready"
@@ -9753,6 +10261,8 @@ Public Class MainForm
                         Label50.Text = "Sim"
                     Case "ITA"
                         Label50.Text = "Sì"
+                    Case "CHS", "CHT"
+                        Label50.Text = "是"
                 End Select
             Case 1
                 Label50.Text = "Yes"
@@ -9813,6 +10323,8 @@ Public Class MainForm
                             msg = "Os processos em segundo plano ainda estão a recolher informações sobre esta imagem. Deseja cancelá-los?"
                         Case "ITA"
                             msg = "I processi in background stanno ancora raccogliendo informazioni sull'immagine. Vuoi annullarli?"
+                        Case "CHS", "CHT"
+                            msg = "后台进程仍在收集此映像的信息。是否要取消它们？"
                     End Select
                 Case 1
                     msg = "Background processes are still gathering information about this image. Do you want to cancel them?"
@@ -9824,6 +10336,9 @@ Public Class MainForm
                     msg = "Os processos em segundo plano ainda estão a recolher informações sobre esta imagem. Deseja cancelá-los?"
                 Case 5
                     msg = "I processi in background stanno ancora raccogliendo informazioni sull'immagine. Vuoi annullarli?"
+                Case 6
+                    msg = "后台进程仍在收集此映像的信息。是否要取消它们？"
+
             End Select
             If MsgBox(msg, vbYesNo + vbQuestion, Text) = MsgBoxResult.Yes Then
                 DynaLog.LogMessage("Cancelling background processes...")
@@ -9845,6 +10360,8 @@ Public Class MainForm
                             MenuDesc.Text = "Cancelamento de processos em segundo plano. Por favor, aguarde..."
                         Case "ITA"
                             MenuDesc.Text = "Annullamento dei processi in background..."
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "正在取消后台进程。请稍候..."
                     End Select
                 Case 1
                     MenuDesc.Text = "Cancelling background processes. Please wait..."
@@ -9878,6 +10395,8 @@ Public Class MainForm
                             MenuDesc.Text = "Pronto"
                         Case "ITA"
                             MenuDesc.Text = "Pronto"
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "就绪"
                     End Select
                 Case 1
                     MenuDesc.Text = "Ready"
@@ -9913,6 +10432,8 @@ Public Class MainForm
                         Label50.Text = "Sim"
                     Case "ITA"
                         Label50.Text = "Sì"
+                    Case "CHS", "CHT"
+                        Label50.Text = "是"
                 End Select
             Case 1
                 Label50.Text = "Yes"
@@ -9972,6 +10493,8 @@ Public Class MainForm
                             Label50.Text = "Sim"
                         Case "ITA"
                             Label50.Text = "Sì"
+                        Case "CHS", "CHT"
+                            Label50.Text = "是"
                     End Select
                 Case 1
                     Label50.Text = "Yes"
@@ -10116,6 +10639,17 @@ Public Class MainForm
                             prjTreeView.Nodes("parent").Nodes.Add("unattend_xml", "File risposte non presidiate")
                             prjTreeView.Nodes("parent").Nodes.Add("scr_temp", "Cartella temporanea")
                             prjTreeView.Nodes("parent").Nodes.Add("reports", "Rapporti progetto")
+                        Case "CHS", "CHT"
+                            prjTreeView.Nodes.Add("parent", "项目：" & Quote & MainProjNameNode & Quote)
+                            prjTreeView.Nodes("parent").Nodes.Add("dandi", "ADK 部署工具")
+                            prjTreeView.Nodes("parent").Nodes("dandi").Nodes.Add("dandi_x86", "部署工具 (x86)")
+                            prjTreeView.Nodes("parent").Nodes("dandi").Nodes.Add("dandi_amd64", "部署工具 (AMD64)")
+                            prjTreeView.Nodes("parent").Nodes("dandi").Nodes.Add("dandi_arm", "部署工具 (ARM)")
+                            prjTreeView.Nodes("parent").Nodes("dandi").Nodes.Add("dandi_arm64", "部署工具 (ARM64)")
+                            prjTreeView.Nodes("parent").Nodes.Add("mount", "挂载点")
+                            prjTreeView.Nodes("parent").Nodes.Add("unattend_xml", "无人参与应答文件")
+                            prjTreeView.Nodes("parent").Nodes.Add("scr_temp", "暂存目录")
+                            prjTreeView.Nodes("parent").Nodes.Add("reports", "项目报告")
                     End Select
                 Case 1
                     prjTreeView.Nodes.Add("parent", "Project: " & Quote & MainProjNameNode & Quote)
@@ -10172,6 +10706,18 @@ Public Class MainForm
                     prjTreeView.Nodes("parent").Nodes.Add("unattend_xml", "File di risposta non presidiati")
                     prjTreeView.Nodes("parent").Nodes.Add("scr_temp", "Directory temporanea")
                     prjTreeView.Nodes("parent").Nodes.Add("reports", "Rapporti del progetto")
+                Case 6
+                    prjTreeView.Nodes.Add("parent", "项目：" & Quote & MainProjNameNode & Quote)
+                    prjTreeView.Nodes("parent").Nodes.Add("dandi", "ADK 部署工具")
+                    prjTreeView.Nodes("parent").Nodes("dandi").Nodes.Add("dandi_x86", "部署工具 (x86)")
+                    prjTreeView.Nodes("parent").Nodes("dandi").Nodes.Add("dandi_amd64", "部署工具 (AMD64)")
+                    prjTreeView.Nodes("parent").Nodes("dandi").Nodes.Add("dandi_arm", "部署工具 (ARM)")
+                    prjTreeView.Nodes("parent").Nodes("dandi").Nodes.Add("dandi_arm64", "部署工具 (ARM64)")
+                    prjTreeView.Nodes("parent").Nodes.Add("mount", "挂载点")
+                    prjTreeView.Nodes("parent").Nodes.Add("unattend_xml", "无人参与应答文件")
+                    prjTreeView.Nodes("parent").Nodes.Add("scr_temp", "暂存目录")
+                    prjTreeView.Nodes("parent").Nodes.Add("reports", "项目报告")
+
             End Select
             prjTreeView.ExpandAll()
         Catch ex As Exception
@@ -10459,6 +11005,8 @@ Public Class MainForm
                         MenuDesc.Text = "Pronto"
                     Case "ITA"
                         MenuDesc.Text = "Pronto"
+                    Case "CHS", "CHT"
+                        MenuDesc.Text = "就绪"
                 End Select
             Case 1
                 MenuDesc.Text = "Ready"
@@ -10487,6 +11035,8 @@ Public Class MainForm
                             MenuDesc.Text = "Cancelamento de processos em segundo plano. Por favor, aguarde..."
                         Case "ITA"
                             MenuDesc.Text = "Annullamento dei processi in background..."
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "正在取消后台进程。请稍候..."
                     End Select
                 Case 1
                     MenuDesc.Text = "Cancelling background processes. Please wait..."
@@ -10518,6 +11068,8 @@ Public Class MainForm
                         MenuDesc.Text = "Pronto"
                     Case "ITA"
                         MenuDesc.Text = "Pronto"
+                    Case "CHS", "CHT"
+                        MenuDesc.Text = "就绪"
                 End Select
             Case 1
                 MenuDesc.Text = "Ready"
@@ -10546,6 +11098,8 @@ Public Class MainForm
                             MenuDesc.Text = "Cancelamento de processos em segundo plano. Por favor, aguarde..."
                         Case "ITA"
                             MenuDesc.Text = "Annullamento dei processi in background..."
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "正在取消后台进程。请稍候..."
                     End Select
                 Case 1
                     MenuDesc.Text = "Cancelling background processes. Please wait..."
@@ -11152,6 +11706,8 @@ Public Class MainForm
                         ProjProperties.ImageTaskHeader1.ItemText = "Propriedades"
                     Case "ITA"
                         ProjProperties.ImageTaskHeader1.ItemText = "Proprietà"
+                    Case "CHS", "CHT"
+                        ProjProperties.ImageTaskHeader1.ItemText = "属性"
                 End Select
             Case 1
                 ProjProperties.ImageTaskHeader1.ItemText = "Properties"
@@ -11163,6 +11719,9 @@ Public Class MainForm
                 ProjProperties.ImageTaskHeader1.ItemText = "Propriedades"
             Case 5
                 ProjProperties.ImageTaskHeader1.ItemText = "Proprietà"
+            Case 6
+                ProjProperties.ImageTaskHeader1.ItemText = "属性"
+
         End Select
         If Environment.OSVersion.Version.Major = 10 Then
             ProjProperties.Text = ""
@@ -11188,6 +11747,8 @@ Public Class MainForm
                         ProjProperties.ImageTaskHeader1.ItemText = "Propriedades"
                     Case "ITA"
                         ProjProperties.ImageTaskHeader1.ItemText = "Proprietà"
+                    Case "CHS", "CHT"
+                        ProjProperties.ImageTaskHeader1.ItemText = "属性"
                 End Select
             Case 1
                 ProjProperties.ImageTaskHeader1.ItemText = "Properties"
@@ -11199,6 +11760,9 @@ Public Class MainForm
                 ProjProperties.ImageTaskHeader1.ItemText = "Propriedades"
             Case 5
                 ProjProperties.ImageTaskHeader1.ItemText = "Proprietà"
+            Case 6
+                ProjProperties.ImageTaskHeader1.ItemText = "属性"
+
         End Select
         If Environment.OSVersion.Version.Major = 10 Then
             ProjProperties.Text = ""
@@ -11424,6 +11988,9 @@ Public Class MainForm
                             Case "ITA"
                                 ExpandCollapseTSB.Text = "Minimizza"
                                 ExpandToolStripMenuItem.Text = "Minimizza elemento"
+                            Case "CHS", "CHT"
+                                ExpandCollapseTSB.Text = "折叠"
+                                ExpandToolStripMenuItem.Text = "折叠项"
                         End Select
                     Case 1
                         ExpandCollapseTSB.Text = "Collapse"
@@ -11464,6 +12031,9 @@ Public Class MainForm
                             Case "ITA"
                                 ExpandCollapseTSB.Text = "Espandi"
                                 ExpandToolStripMenuItem.Text = "Espandi elemento"
+                            Case "CHS", "CHT"
+                                ExpandCollapseTSB.Text = "展开"
+                                ExpandToolStripMenuItem.Text = "展开项"
                         End Select
                     Case 1
                         ExpandCollapseTSB.Text = "Expand"
@@ -11513,6 +12083,9 @@ Public Class MainForm
                             Case "ITA"
                                 ExpandCollapseTSB.Text = "Minimizza"
                                 ExpandToolStripMenuItem.Text = "Minimizza elemento"
+                            Case "CHS", "CHT"
+                                ExpandCollapseTSB.Text = "折叠"
+                                ExpandToolStripMenuItem.Text = "折叠项"
                         End Select
                     Case 1
                         ExpandCollapseTSB.Text = "Collapse"
@@ -11553,6 +12126,9 @@ Public Class MainForm
                             Case "ITA"
                                 ExpandCollapseTSB.Text = "Espandi"
                                 ExpandToolStripMenuItem.Text = "Espandi elemento"
+                            Case "CHS", "CHT"
+                                ExpandCollapseTSB.Text = "展开"
+                                ExpandToolStripMenuItem.Text = "展开项"
                         End Select
                     Case 1
                         ExpandCollapseTSB.Text = "Expand"
@@ -11594,6 +12170,9 @@ Public Class MainForm
                         Case "ITA"
                             ExpandCollapseTSB.Text = "Espandi"
                             ExpandToolStripMenuItem.Text = "Espandi elemento"
+                        Case "CHS", "CHT"
+                            ExpandCollapseTSB.Text = "展开"
+                            ExpandToolStripMenuItem.Text = "展开项"
                     End Select
                 Case 1
                     ExpandCollapseTSB.Text = "Expand"
@@ -11638,6 +12217,9 @@ Public Class MainForm
                         Case "ITA"
                             ExpandCollapseTSB.Text = "Minimizzae"
                             ExpandToolStripMenuItem.Text = "Minimizza elemento"
+                        Case "CHS", "CHT"
+                            ExpandCollapseTSB.Text = "折叠"
+                            ExpandToolStripMenuItem.Text = "折叠项"
                     End Select
                 Case 1
                     ExpandCollapseTSB.Text = "Collapse"
@@ -11678,6 +12260,9 @@ Public Class MainForm
                         Case "ITA"
                             ExpandCollapseTSB.Text = "Espandi"
                             ExpandToolStripMenuItem.Text = "Espandi elemento"
+                        Case "CHS", "CHT"
+                            ExpandCollapseTSB.Text = "展开"
+                            ExpandToolStripMenuItem.Text = "展开项"
                     End Select
                 Case 1
                     ExpandCollapseTSB.Text = "Expand"
@@ -11853,6 +12438,8 @@ Public Class MainForm
                         progressLabel = "Os processos de imagem foram concluídos"
                     Case "ITA"
                         progressLabel = "I processi dell'immagine sono stati completati"
+                    Case "CHS", "CHT"
+                        progressLabel = "映像处理已完成"
                 End Select
             Case 1
                 progressLabel = "Image processes have completed"
@@ -11864,6 +12451,9 @@ Public Class MainForm
                 progressLabel = "Os processos de imagem foram concluídos"
             Case 5
                 progressLabel = "I processi dell'immagine sono stati completati"
+            Case 6
+                progressLabel = "映像处理已完成"
+
         End Select
         BGProcDetails.Label2.Text = progressLabel
         BGProcDetails.ProgressBar1.Value = BGProcDetails.ProgressBar1.Maximum
@@ -12436,6 +13026,8 @@ Public Class MainForm
                             MsgBox("Não foi possível descarregar o verificador de actualizações. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "Verificar actualizações")
                         Case "ITA"
                             MsgBox("Non è stato possibile scaricare il programma di controllo degli aggiornamenti. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "Verifica aggiornamenti")
+                        Case "CHS", "CHT"
+                            MsgBox("无法下载更新检查器。原因：" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "检查更新")
                     End Select
                 Case 1
                     MsgBox("We couldn't download the update checker. Reason:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "Check for updates")
@@ -12447,6 +13039,9 @@ Public Class MainForm
                     MsgBox("Não foi possível descarregar o verificador de actualizações. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "Verificar actualizações")
                 Case 5
                     MsgBox("Non è stato possibile scaricare il programma di controllo degli aggiornamenti. Motivo:" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "Verifica aggiornamenti")
+                Case 6
+                    MsgBox("无法下载更新检查器。原因：" & CrLf & ex.Status.ToString(), vbOKOnly + vbCritical, "检查更新")
+
             End Select
             Exit Sub
         End Try
@@ -12539,6 +13134,8 @@ Public Class MainForm
                                                     MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                                 Case "ITA"
                                                     MenuDesc.Text = "Preparazione copia strumenti implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                                Case "CHS", "CHT"
+                                                    MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
                                             End Select
                                         Case 1
                                             MenuDesc.Text = "Preparing to copy deployment tools..." & If(adkCopyArg = 0, " (architecture " & archIntg & " of 4)", "")
@@ -12550,6 +13147,9 @@ Public Class MainForm
                                             MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                         Case 5
                                             MenuDesc.Text = "Preparazione alla copia degli strumenti di implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                        Case 6
+                                            MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
+
                                     End Select
                                     CurrentFileInt = 0
                                     For Each folder In My.Computer.FileSystem.GetDirectories(Environment.GetFolderPath(If(Environment.Is64BitOperatingSystem, Environment.SpecialFolder.ProgramFilesX86, Environment.SpecialFolder.ProgramFiles)) & "\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\" & arches(x), FileIO.SearchOption.SearchAllSubDirectories)
@@ -12580,6 +13180,8 @@ Public Class MainForm
                                             MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                         Case "ITA"
                                             MenuDesc.Text = "Preparazione copia strumenti implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                        Case "CHS", "CHT"
+                                            MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
                                     End Select
                                 Case 1
                                     MenuDesc.Text = "Preparing to copy deployment tools..." & If(adkCopyArg = 0, " (architecture " & archIntg & " of 4)", "")
@@ -12591,6 +13193,9 @@ Public Class MainForm
                                     MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                 Case 5
                                     MenuDesc.Text = "Preparazione alla copia degli strumenti di implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                Case 6
+                                    MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
+
                             End Select
                             Dim CurrentFileInt As Integer = 0
                             For Each folder In My.Computer.FileSystem.GetDirectories(Environment.GetFolderPath(If(Environment.Is64BitOperatingSystem, Environment.SpecialFolder.ProgramFilesX86, Environment.SpecialFolder.ProgramFiles)) & "\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\x86", FileIO.SearchOption.SearchAllSubDirectories)
@@ -12619,6 +13224,8 @@ Public Class MainForm
                                             MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                         Case "ITA"
                                             MenuDesc.Text = "Preparazione copia strumenti implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                        Case "CHS", "CHT"
+                                            MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
                                     End Select
                                 Case 1
                                     MenuDesc.Text = "Preparing to copy deployment tools..." & If(adkCopyArg = 0, " (architecture " & archIntg & " of 4)", "")
@@ -12630,6 +13237,9 @@ Public Class MainForm
                                     MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                 Case 5
                                     MenuDesc.Text = "Preparazione alla copia degli strumenti di implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                Case 6
+                                    MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
+
                             End Select
                             Dim CurrentFileInt As Integer = 0
                             For Each folder In My.Computer.FileSystem.GetDirectories(Environment.GetFolderPath(If(Environment.Is64BitOperatingSystem, Environment.SpecialFolder.ProgramFilesX86, Environment.SpecialFolder.ProgramFiles)) & "\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64", FileIO.SearchOption.SearchAllSubDirectories)
@@ -12658,6 +13268,8 @@ Public Class MainForm
                                             MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                         Case "ITA"
                                             MenuDesc.Text = "Preparazione copia strumenti implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                        Case "CHS", "CHT"
+                                            MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
                                     End Select
                                 Case 1
                                     MenuDesc.Text = "Preparing to copy deployment tools..." & If(adkCopyArg = 0, " (architecture " & archIntg & " of 4)", "")
@@ -12669,6 +13281,9 @@ Public Class MainForm
                                     MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                 Case 5
                                     MenuDesc.Text = "Preparazione alla copia degli strumenti di implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                Case 6
+                                    MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
+
                             End Select
                             Dim CurrentFileInt As Integer = 0
                             For Each folder In My.Computer.FileSystem.GetDirectories(Environment.GetFolderPath(If(Environment.Is64BitOperatingSystem, Environment.SpecialFolder.ProgramFilesX86, Environment.SpecialFolder.ProgramFiles)) & "\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\arm", FileIO.SearchOption.SearchAllSubDirectories)
@@ -12697,6 +13312,8 @@ Public Class MainForm
                                             MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                         Case "ITA"
                                             MenuDesc.Text = "Preparazione copia strumenti implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                        Case "CHS", "CHT"
+                                            MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
                                     End Select
                                 Case 1
                                     MenuDesc.Text = "Preparing to copy deployment tools..." & If(adkCopyArg = 0, " (architecture " & archIntg & " of 4)", "")
@@ -12708,6 +13325,9 @@ Public Class MainForm
                                     MenuDesc.Text = "Preparar a cópia das ferramentas de implantação..." & If(adkCopyArg = 0, " (arquitetura " & archIntg & " de 4)", "")
                                 Case 5
                                     MenuDesc.Text = "Preparazione alla copia degli strumenti di implementazione..." & If(adkCopyArg = 0, " (architettura " & archIntg & " di 4)", "")
+                                Case 6
+                                    MenuDesc.Text = "正在准备复制部署工具..." & If(adkCopyArg = 0, "（体系结构 " & archIntg & " of 4)", "")
+
                             End Select
                             Dim CurrentFileInt As Integer = 0
                             For Each folder In My.Computer.FileSystem.GetDirectories(Environment.GetFolderPath(If(Environment.Is64BitOperatingSystem, Environment.SpecialFolder.ProgramFilesX86, Environment.SpecialFolder.ProgramFiles)) & "\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\arm64", FileIO.SearchOption.SearchAllSubDirectories)
@@ -12782,6 +13402,8 @@ Public Class MainForm
                                 MenuDesc.Text = "As ferramentas de implementação foram copiadas para o projeto com sucesso"
                             Case "ITA"
                                 MenuDesc.Text = "Copia strumenti di distribuzione nel progetto completata"
+                            Case "CHS", "CHT"
+                                MenuDesc.Text = "部署工具已成功复制到项目"
                         End Select
                     Case 1
                         MenuDesc.Text = "Deployment tools were copied to the project successfully"
@@ -12810,6 +13432,8 @@ Public Class MainForm
                                 MenuDesc.Text = "As ferramentas de implantação não estão presentes neste sistema"
                             Case "ITA"
                                 MenuDesc.Text = "In questo sistema non sono presenti gli strumenti di implementazione"
+                            Case "CHS", "CHT"
+                                MenuDesc.Text = "此系统上未提供部署工具"
                         End Select
                     Case 1
                         MenuDesc.Text = "Deployment tools aren't present on this system"
@@ -12839,6 +13463,8 @@ Public Class MainForm
                             MenuDesc.Text = "Não foi possível copiar as ferramentas de implantação"
                         Case "ITA"
                             MenuDesc.Text = "Non è stato possibile copiare gli strumenti di implementazione"
+                        Case "CHS", "CHT"
+                            MenuDesc.Text = "无法复制部署工具"
                     End Select
                 Case 1
                     MenuDesc.Text = "Deployment tools could not be copied"
@@ -12875,6 +13501,8 @@ Public Class MainForm
                                 MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (" & currentArch & ", " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                             Case "ITA"
                                 MenuDesc.Text = "Copia strumenti implementazione per l'architettura (" & currentArch & ", " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                            Case "CHS", "CHT"
+                                MenuDesc.Text = "正在复制部署工具，体系结构（" & currentArch & ", " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
                         End Select
                     Case 1
                         MenuDesc.Text = "Copying deployment tools for architecture (" & currentArch & ", " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architecture " & archIntg & " of 4)...", ")...")
@@ -12886,6 +13514,9 @@ Public Class MainForm
                         MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (" & currentArch & ", " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                     Case 5
                         MenuDesc.Text = "Copia strumenti implementazione per l'architettura (" & currentArch & ", " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                    Case 6
+                        MenuDesc.Text = "正在复制部署工具，体系结构（" & currentArch & ", " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
+
                 End Select
             Case 1
                 Select Case Language
@@ -12901,6 +13532,8 @@ Public Class MainForm
                                 MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (x86, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                             Case "ITA"
                                 MenuDesc.Text = "Copia strumenti implementazione per l'architettura (x86, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                            Case "CHS", "CHT"
+                                MenuDesc.Text = "正在复制部署工具，体系结构（x86，" & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
                         End Select
                     Case 1
                         MenuDesc.Text = "Copying deployment tools for architecture (x86, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architecture " & archIntg & " of 4)...", ")...")
@@ -12912,6 +13545,9 @@ Public Class MainForm
                         MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (x86, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                     Case 5
                         MenuDesc.Text = "Copia strumenti implementazione per l'architettura (x86, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                    Case 6
+                        MenuDesc.Text = "正在复制部署工具，体系结构（x86，" & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
+
                 End Select
             Case 2
                 Select Case Language
@@ -12927,6 +13563,8 @@ Public Class MainForm
                                 MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (amd64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                             Case "ITA"
                                 MenuDesc.Text = "Copia strumenti implementazione per l'architettura (amd64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                            Case "CHS", "CHT"
+                                MenuDesc.Text = "正在复制部署工具，体系结构（amd64，" & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
                         End Select
                     Case 1
                         MenuDesc.Text = "Copying deployment tools for architecture (amd64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architecture " & archIntg & " of 4)...", ")...")
@@ -12938,6 +13576,9 @@ Public Class MainForm
                         MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (amd64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                     Case 5
                         MenuDesc.Text = "Copia strumenti implementazione per l'architettura (amd64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                    Case 6
+                        MenuDesc.Text = "正在复制部署工具，体系结构（amd64，" & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
+
                 End Select
             Case 3
                 Select Case Language
@@ -12953,6 +13594,8 @@ Public Class MainForm
                                 MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (arm, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                             Case "ITA"
                                 MenuDesc.Text = "Copia strumenti implementazione per l'architettura (arm, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                            Case "CHS", "CHT"
+                                MenuDesc.Text = "正在复制部署工具，体系结构（arm，" & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
                         End Select
                     Case 1
                         MenuDesc.Text = "Copying deployment tools for architecture (arm, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architecture " & archIntg & " of 4)...", ")...")
@@ -12964,6 +13607,9 @@ Public Class MainForm
                         MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (arm, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                     Case 5
                         MenuDesc.Text = "Copia strumenti implementazione per l'architettura (arm, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                    Case 6
+                        MenuDesc.Text = "正在复制部署工具，体系结构（arm，" & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
+
                 End Select
             Case 4
                 Select Case Language
@@ -12979,6 +13625,8 @@ Public Class MainForm
                                 MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (arm64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                             Case "ITA"
                                 MenuDesc.Text = "Copia strumenti implementazione per l'architettura (arm64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                            Case "CHS", "CHT"
+                                MenuDesc.Text = "正在复制部署工具，体系结构（arm64，" & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
                         End Select
                     Case 1
                         MenuDesc.Text = "Copying deployment tools for architecture (arm64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architecture " & archIntg & " of 4)...", ")...")
@@ -12990,6 +13638,9 @@ Public Class MainForm
                         MenuDesc.Text = "Cópia das ferramentas de implementação para a arquitetura (arm64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", arquitetura " & archIntg & " de 4)...", ")...")
                     Case 5
                         MenuDesc.Text = "Copia strumenti implementazione per l'architettura (arm64, " & e.ProgressPercentage & "%" & If(adkCopyArg = 0, ", architettura " & archIntg & " di 4)...", ")...")
+                    Case 6
+                        MenuDesc.Text = "正在复制部署工具，体系结构（arm64，" & e.ProgressPercentage & "%" & If(adkCopyArg = 0, "，体系结构 " & archIntg & "，共 4 项）...", ")...")
+
                 End Select
         End Select
     End Sub
@@ -13185,6 +13836,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter pacotes de controladores instalados..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica pacchetti driver installati..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取已安装的驱动程序包..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting installed driver packages..."
@@ -13246,6 +13899,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter os nomes das características e o seu estado..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica nomi e stato funzionalità..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取功能名称及其状态..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting feature names and their state..."
@@ -13316,6 +13971,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter os nomes das capacidades e o seu estado..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica nomi capacità e relativo stato..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取功能包名称及其状态..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting capability names and their state..."
@@ -13355,6 +14012,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter nomes de pacotes..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica nomi pacchetti..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取程序包名称..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting package names..."
@@ -13425,6 +14084,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter nomes de pacotes..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica nomi pacchetti..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取程序包名称..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting package names..."
@@ -13479,6 +14140,9 @@ Public Class MainForm
                         Case "ITA"
                             Notifications.BalloonTipText = "La risorsa è stata salvata nella posizione specificata"
                             Notifications.BalloonTipTitle = "Il salvataggio è stato completato correttamente"
+                        Case "CHS", "CHT"
+                            Notifications.BalloonTipText = "资源已保存到您指定的位置"
+                            Notifications.BalloonTipTitle = "保存成功"
                     End Select
                 Case 1
                     Notifications.BalloonTipText = "The asset has been saved to the location you specified"
@@ -13495,6 +14159,10 @@ Public Class MainForm
                 Case 5
                     Notifications.BalloonTipText = "La risorsa è stata salvata nella posizione specificata"
                     Notifications.BalloonTipTitle = "Il salvataggio è è stato completato correttamente"
+                Case 6
+                    Notifications.BalloonTipText = "资源已保存到您指定的位置"
+                    Notifications.BalloonTipTitle = "保存成功"
+
             End Select
             Notifications.ShowBalloonTip(3000)
         Catch ex As Exception
@@ -13528,6 +14196,9 @@ Public Class MainForm
                         Case "ITA"
                             Notifications.BalloonTipText = "La risorsa è stata copiata negli appunti"
                             Notifications.BalloonTipTitle = "Copia completata"
+                        Case "CHS", "CHT"
+                            Notifications.BalloonTipText = "资源已复制到剪贴板"
+                            Notifications.BalloonTipTitle = "复制成功"
                     End Select
                 Case 1
                     Notifications.BalloonTipText = "The asset has been copied to the clipboard"
@@ -13544,6 +14215,10 @@ Public Class MainForm
                 Case 5
                     Notifications.BalloonTipText = "La risorsa è stata copiata negli appunti"
                     Notifications.BalloonTipTitle = "Copia riuscita"
+                Case 6
+                    Notifications.BalloonTipText = "资源已复制到剪贴板"
+                    Notifications.BalloonTipTitle = "复制成功"
+
             End Select
             Notifications.ShowBalloonTip(3000)
         Catch ex As Exception
@@ -13679,6 +14354,8 @@ Public Class MainForm
                         ProjProperties.ImageTaskHeader1.ItemText = "Propriedades"
                     Case "ITA"
                         ProjProperties.ImageTaskHeader1.ItemText = "Proprietà"
+                    Case "CHS", "CHT"
+                        ProjProperties.ImageTaskHeader1.ItemText = "属性"
                 End Select
             Case 1
                 ProjProperties.ImageTaskHeader1.ItemText = "Properties"
@@ -13690,6 +14367,9 @@ Public Class MainForm
                 ProjProperties.ImageTaskHeader1.ItemText = "Propriedades"
             Case 5
                 ProjProperties.ImageTaskHeader1.ItemText = "Proprietà"
+            Case 6
+                ProjProperties.ImageTaskHeader1.ItemText = "属性"
+
         End Select
         If Environment.OSVersion.Version.Major = 10 Then
             ProjProperties.Text = ""
@@ -13761,6 +14441,8 @@ Public Class MainForm
                         ProjProperties.ImageTaskHeader1.ItemText = "Propriedades"
                     Case "ITA"
                         ProjProperties.ImageTaskHeader1.ItemText = "Proprietà"
+                    Case "CHS", "CHT"
+                        ProjProperties.ImageTaskHeader1.ItemText = "属性"
                 End Select
             Case 1
                 ProjProperties.ImageTaskHeader1.ItemText = "Properties"
@@ -13772,6 +14454,9 @@ Public Class MainForm
                 ProjProperties.ImageTaskHeader1.ItemText = "Propriedades"
             Case 5
                 ProjProperties.ImageTaskHeader1.ItemText = "Proprietà"
+            Case 6
+                ProjProperties.ImageTaskHeader1.ItemText = "属性"
+
         End Select
         If Environment.OSVersion.Version.Major = 10 Then
             ProjProperties.Text = ""
@@ -13940,6 +14625,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter nomes de pacotes..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica nomi pacchetti..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取程序包名称..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting package names..."
@@ -14013,6 +14700,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter os nomes das características e o seu estado..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica nomi e stato funzionalità..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取功能名称及其状态..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting feature names and their state..."
@@ -14118,6 +14807,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter nomes de pacotes..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica nomi pacchetti..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取程序包名称..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting package names..."
@@ -14214,6 +14905,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter os nomes das capacidades e o seu estado..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica nomi capacità e relativo stato..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取功能包名称及其状态..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting capability names and their state..."
@@ -14276,6 +14969,8 @@ Public Class MainForm
                         PleaseWaitDialog.Label2.Text = "Obter pacotes de controladores instalados..."
                     Case "ITA"
                         PleaseWaitDialog.Label2.Text = "Verifica pacchetti driver installati..."
+                    Case "CHS", "CHT"
+                        PleaseWaitDialog.Label2.Text = "正在获取已安装的驱动程序包..."
                 End Select
             Case 1
                 PleaseWaitDialog.Label2.Text = "Getting installed driver packages..."
@@ -15554,6 +16249,8 @@ Public Class MainForm
                                 msg = "Este painel de controlo não está disponível em instalações activas."
                             Case "ITA"
                                 msg = "Questo pannello di controllo non è disponibile nelle installazioni attive."
+                            Case "CHS", "CHT"
+                                msg = "此控制面板在活动安装中不可用。"
                         End Select
                     Case 1
                         msg = "This control panel is not available on active installations."
@@ -15565,6 +16262,9 @@ Public Class MainForm
                         msg = "Este painel de controlo não está disponível em instalações activas."
                     Case 5
                         msg = "Questo pannello di controllo non è disponibile nelle installazioni attive."
+                    Case 6
+                        msg = "此控制面板在活动安装中不可用。"
+
                 End Select
                 MsgBox(msg, vbOKOnly + vbCritical, Text)
             End If
@@ -15583,6 +16283,8 @@ Public Class MainForm
                             msg = "É necessário carregar um projeto ou modo para gerir as colmeias de registo."
                         Case "ITA"
                             msg = "Per gestire la struttura del registro è necessario caricare un progetto o una modalità."
+                        Case "CHS", "CHT"
+                            msg = "需要加载项目或模式才能管理注册表配置单元。"
                     End Select
                 Case 1
                     msg = "You need to load a project or mode to manage registry hives."
@@ -15594,6 +16296,9 @@ Public Class MainForm
                     msg = "É necessário carregar um projeto ou modo para gerir as colmeias de registo."
                 Case 5
                     msg = "Per gestire la struttura del registro è necessario caricare un progetto o una modalità."
+                Case 6
+                    msg = "需要加载项目或模式才能管理注册表配置单元。"
+
             End Select
             MsgBox(msg, vbOKOnly + vbExclamation, Text)
         End If
@@ -15723,6 +16428,8 @@ Public Class MainForm
                                 msg &= CrLf & "As imagens do Windows PE não podem ser atualizadas para edições superiores."
                             Case "ITA"
                                 msg &= CrLf & "Le immagini Windows PE non possono essere aggiornate a edizioni superiori."
+                            Case "CHS", "CHT"
+                                msg &= CrLf & "Windows PE 映像无法升级到更高的版本。"
                         End Select
                     Case 1
                         msg &= CrLf & "Windows PE images cannot be upgraded to higher editions."
@@ -15734,6 +16441,9 @@ Public Class MainForm
                         msg &= CrLf & "As imagens do Windows PE não podem ser atualizadas para edições superiores."
                     Case 5
                         msg &= CrLf & "Le immagini Windows PE non possono essere aggiornate a edizioni superiori."
+                    Case 6
+                        msg &= CrLf & "Windows PE 映像无法升级到更高的版本。"
+
                 End Select
             Else
                 DynaLog.LogMessage("Image edition is not WindowsPE. This is not a Windows PE image.")
@@ -15797,6 +16507,8 @@ Public Class MainForm
                                     msg = "Se tiver uma chave de produto adequada, pode atualizar esta imagem do Windows para uma das seguintes edições:" & CrLf & CrLf
                                 Case "ITA"
                                     msg = "Se disponi di un codice prodotto adeguato, è possibile aggiornare questa immagine di Windows ad una delle seguenti edizioni:" & CrLf & CrLf
+                                Case "CHS", "CHT"
+                                    msg = "如果您有合适的产品密钥，可以将此 Windows 映像升级为以下版本之一：" & CrLf & CrLf
                             End Select
                         Case 1
                             msg = "If you have a suitable product key, you can upgrade this Windows image to one of the following editions:" & CrLf & CrLf
@@ -15808,6 +16520,9 @@ Public Class MainForm
                             msg = "Se tiver uma chave de produto adequada, pode atualizar esta imagem do Windows para uma das seguintes edições:" & CrLf & CrLf
                         Case 5
                             msg = "Se disponi di un codice prodotto adeguato, è possibile aggiornare questa immagine di Windows ad una delle seguenti edizioni:" & CrLf & CrLf
+                        Case 6
+                            msg = "如果您有合适的产品密钥，可以将此 Windows 映像升级为以下版本之一：" & CrLf & CrLf
+
                     End Select
                     For Each targetEdition In targetEditions
                         msg &= "- " & targetEdition & CrLf
@@ -15828,6 +16543,8 @@ Public Class MainForm
                                     msg = "Esta imagem não pode ser actualizada para edições superiores porque está na sua edição mais elevada"
                                 Case "ITA"
                                     msg = "Questa immagine non può essere aggiornata ad edizioni superiori perché è già l'edizione più alta"
+                                Case "CHS", "CHT"
+                                    msg = "此映像已处于最高版本，无法再升级"
                             End Select
                         Case 1
                             msg = "This image cannot be upgraded to higher editions because it is in its highest edition"
@@ -15839,6 +16556,9 @@ Public Class MainForm
                             msg = "Esta imagem não pode ser actualizada para edições superiores porque está na sua edição mais elevada"
                         Case 5
                             msg = "Questa immagine non può essere aggiornata ad edizioni superiori perché è già  l'edizione più alta"
+                        Case 6
+                            msg = "此映像已处于最高版本，无法再升级"
+
                     End Select
                 End If
             End Using
@@ -15860,6 +16580,8 @@ Public Class MainForm
                                 msg = "As imagens do Windows PE não podem ser actualizadas para edições superiores."
                             Case "ITA"
                                 msg = "Le immagini di Windows PE non possono essere aggiornate ad edizioni superiori."
+                            Case "CHS", "CHT"
+                                msg = "Windows PE 映像无法升级到更高的版本。"
                         End Select
                     Case 1
                         msg = "Windows PE images cannot be upgraded to higher editions."
@@ -15871,6 +16593,9 @@ Public Class MainForm
                         msg = "As imagens do Windows PE não podem ser actualizadas para edições superiores."
                     Case 5
                         msg = "Le immagini di Windows PE non possono essere aggiornate ad edizioni superiori."
+                    Case 6
+                        msg = "Windows PE 映像无法升级到更高的版本。"
+
                 End Select
             Else
                 msg = ex.ToString()

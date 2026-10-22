@@ -84,6 +84,19 @@ Public Class RegistryControlPanel
                         Label8.Text = "Percorso nel registro di sistema:"
                         Button5.Text = "Sfoglia..."
                         GroupBox1.Text = "Carica l'alveare personalizzato"
+                    Case "CHS", "CHT"
+                        Text = "映像注册表配置单元"
+                        LoadButtonText = "加载"
+                        UnloadButtonText = "卸载"
+                        OpenButtonText = "打开"
+                        Label1.Text = "此工具可让您在此指定的映像注册表配置单元加载到本地系统。这样您就可以修改 Windows 映像中存储的配置。自定义完配置单元中的某个项后，也可以在此卸载它："
+                        ' Labels 2-4 don't change
+                        Label5.Text = "NTUSER.DAT（默认用户）"
+                        Label6.Text = "如果要加载其他注册表配置单元，请指定其路径并单击「加载」："
+                        Label7.Text = "配置单元位置："
+                        Label8.Text = "注册表中的路径："
+                        Button5.Text = "浏览..."
+                        GroupBox1.Text = "加载自定义配置单元"
                 End Select
             Case 1
                 Text = "Image registry hives"
@@ -150,6 +163,20 @@ Public Class RegistryControlPanel
                 Label8.Text = "Percorso nel registro di sistema:"
                 Button5.Text = "Sfoglia..."
                 GroupBox1.Text = "Carica l'alveare personalizzato"
+            Case 6
+                Text = "映像注册表配置单元"
+                LoadButtonText = "加载"
+                UnloadButtonText = "卸载"
+                OpenButtonText = "打开"
+                Label1.Text = "此工具可让您在此指定的映像注册表配置单元加载到本地系统。这样您就可以修改 Windows 映像中存储的配置。自定义完配置单元中的某个项后，也可以在此卸载它："
+                ' Labels 2-4 don't change
+                Label5.Text = "NTUSER.DAT（默认用户）"
+                Label6.Text = "如果要加载其他注册表配置单元，请指定其路径并单击「加载」："
+                Label7.Text = "配置单元位置："
+                Label8.Text = "注册表中的路径："
+                Button5.Text = "浏览..."
+                GroupBox1.Text = "加载自定义配置单元"
+
         End Select
         Button1.Text = OpenButtonText
         Button2.Text = OpenButtonText
@@ -316,6 +343,8 @@ Public Class RegistryControlPanel
                         msg = "As colmeias do registo têm de ser descarregadas para fechar esta janela. Deseja descarregá-las agora?"
                     Case "ITA"
                         msg = "Gli alveari del registro devono essere scaricati per chiudere questa finestra. Volete scaricarli ora?"
+                    Case "CHS", "CHT"
+                        msg = "关闭此窗口前需要卸载注册表配置单元。是否现在卸载？"
                 End Select
             Case 1
                 msg = "The registry hives need to be unloaded to close this window. Do you want to unload them now?"
@@ -327,6 +356,9 @@ Public Class RegistryControlPanel
                 msg = "As colmeias do registo têm de ser descarregadas para fechar esta janela. Deseja descarregá-las agora?"
             Case 5
                 msg = "Gli alveari del registro devono essere scaricati per chiudere questa finestra. Volete scaricarli ora?"
+            Case 6
+                msg = "关闭此窗口前需要卸载注册表配置单元。是否现在卸载？"
+
         End Select
         If LoadedHives > 0 Or CustomHiveLoaded Then
             DynaLog.LogMessage("Registry hives were loaded and need to be unloaded before closing the control panel.")
@@ -357,6 +389,8 @@ Public Class RegistryControlPanel
                                 msg = "Algumas colmeias não puderam ser descarregadas. Por favor, descarregue-as antes de fechar esta janela."
                             Case "ITA"
                                 msg = "Non è stato possibile scaricare alcune arnie. Si prega di scaricarle prima di chiudere questa finestra."
+                            Case "CHS", "CHT"
+                                msg = "部分配置单元无法卸载。请在关闭此窗口前卸载它们。"
                         End Select
                     Case 1
                         msg = "Some hives could not be unloaded. Please unload them before closing this window."
@@ -368,6 +402,9 @@ Public Class RegistryControlPanel
                         msg = "Algumas colmeias não puderam ser descarregadas. Por favor, descarregue-as antes de fechar esta janela."
                     Case 5
                         msg = "Non è stato possibile scaricare alcune arnie. Si prega di scaricarle prima di chiudere questa finestra."
+                    Case 6
+                        msg = "部分配置单元无法卸载。请在关闭此窗口前卸载它们。"
+
                 End Select
                 MsgBox(msg, vbOKOnly + vbCritical, Text)
                 e.Cancel = True
