@@ -1,0 +1,141 @@
+name: Create Nightly Portable Build
+
+# 构建绿色便携版（免安装）：产出 DISMTools.zip，根目录直接是 DISMTools.exe 及运行所需的
+# bin/、docs/、tools/、runtimes/、videos/、AutoUnattend/ 等目录，解压即用。
+# 包内附带一个名为 "portable" 的标记文件，程序会自动把设置写入 settings.ini 而不是注册表，
+# 这也是 DISMTools 自带更新器识别便携版、下载 DISMTools.zip 的依据。
+
+on:
+  push:
+    branches:
+      - dt_prerel_*
+      - dt_rel*
+    paths-ignore:
+      - '**/README.md'
+      - 'res/**'
+  workflow_dispatch:
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build-runspace:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }}
+        submodules: 'true'
+    - name: Set up MSBuild
+      uses: microsoft/Setup-MSBuild@v2
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v2
+    - name: Prepare NuGet packages
+      run: |
+        .\nugetpkgprep.bat
+        nuget restore packages.config -PackagesDirectory packages
+      continue-on-error: false
+    - name: Build (portable)
+      shell: pwsh
+      run: |
+        $root = (Get-Location).Path
+        $solutionDir = "$root\"
+        $targetDir = "$root\bin\Debug\"
+        Write-Output "=== Building BDELib dependency ==="
+        msbuild Tools\BDELib\BDELib.vbproj /p:Configuration=Debug /p:Platform=AnyCPU 2>&1 | ForEach-Object {
+          Write-Output $_
+          if ($_ -match "error|BC[0-9]{4}") { Write-Output "::error::$_" }
+        }
+        if ($LASTEXITCODE -ne 0) { throw "BDELib build failed (exit $LASTEXITCODE)" }
+        if (-not (Test-Path "bin\Debug\BDELib.dll")) {
+          New-Item -ItemType Directory -Force -Path "bin\Debug" | Out-Null
+          Copy-Item "Tools\BDELib\bin\Debug\BDELib.dll" "bin\Debug\BDELib.dll" -Force
+        }
+        Write-Output "=== Building DISMTools (portable only, no setup compiler) ==="
+        # PortableOnly=Yes 只跳过 Inno Setup 编译，依赖补齐与 Installer\files 载荷照常生成
+        msbuild DISMTools.vbproj /p:Configuration=Debug /p:DeployOnBuild=true /p:PortableOnly=Yes /p:SolutionDir=$solutionDir /p:ProjectDir=$solutionDir /p:TargetDir=$targetDir 2>&1 | ForEach-Object {
+          Write-Output $_
+          if ($_ -match "error|BC[0-9]{4}|exited with code") { Write-Output "::error::$_" }
+        }
+        if ($LASTEXITCODE -ne 0) { throw "DISMTools build failed (exit $LASTEXITCODE)" }
+        if (-not (Test-Path (Join-Path $targetDir 'DISMTools.exe'))) {
+          throw "Build output not found: ${targetDir}DISMTools.exe"
+        }
+    - name: Assemble portable package
+      shell: pwsh
+      run: |
+        $targetDir = Join-Path (Get-Location).Path 'bin\Debug'
+        $stage     = Join-Path (Get-Location).Path 'portable_payload'
+        $zipPath   = Join-Path (Get-Location).Path 'DISMTools.zip'
+
+        if (Test-Path $stage) { Remove-Item $stage -Recurse -Force }
+        New-Item -ItemType Directory -Force -Path $stage | Out-Null
+
+        # 源码树里的 "portable" 标记会被 PostBuildEvent 复制进输出目录；这里再兜底一次，
+        # 保证解压后即为便携版（设置写入 settings.ini）。
+        if (-not (Test-Path (Join-Path $targetDir 'portable'))) {
+          New-Item -ItemType File -Path (Join-Path $targetDir 'portable') -Force | Out-Null
+        }
+
+        # 排除调试符号、VS 临时文件与运行期产生的临时目录，其余完整打包
+        robocopy $targetDir $stage /E /NFL /NDL /NJH /NJS /NC /NS /NP `
+          /XF *.pdb *.tmp *.log *.vshost.exe *.vshost.exe.config `
+          /XD temp scratch logs .vs obj | Out-Null
+        if ($LASTEXITCODE -ge 8) { throw "robocopy failed with exit code $LASTEXITCODE" }
+
+        $exe = Join-Path $stage 'DISMTools.exe'
+        if (-not (Test-Path $exe)) { throw "DISMTools.exe missing from the staged payload" }
+        if (-not (Test-Path (Join-Path $stage 'portable'))) {
+          New-Item -ItemType File -Path (Join-Path $stage 'portable') -Force | Out-Null
+        }
+
+        if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
+        try { Add-Type -AssemblyName System.IO.Compression.FileSystem -ErrorAction Stop } catch { }
+        if ('System.IO.Compression.ZipFile' -as [type]) {
+          # includeBaseDirectory = false -> 压缩包根目录直接是 exe 与各子目录，
+          # 与 DISMTools 自带更新器的解压逻辑保持一致。
+          [System.IO.Compression.ZipFile]::CreateFromDirectory(
+            $stage, $zipPath,
+            [System.IO.Compression.CompressionLevel]::Optimal, $false)
+        } else {
+          Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zipPath -CompressionLevel Optimal -Force
+        }
+
+        $zip = Get-Item $zipPath
+        Write-Output ("Packaged {0:N1} MB -> {1}" -f ($zip.Length / 1MB), $zip.Name)
+        $files = Get-ChildItem $stage -Recurse -File
+        Write-Output ("Payload: {0} files, {1:N1} MB uncompressed" -f $files.Count, (($files | Measure-Object Length -Sum).Sum / 1MB))
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-result
+        path: ${{ github.workspace }}\DISMTools.zip
+        if-no-files-found: error
+  upload-portable:
+    runs-on: ubuntu-latest
+    needs: build-runspace
+    # 构建产物直接发布到当前仓库的 GitHub Release（使用仓库自带 GITHUB_TOKEN，
+    # 不依赖任何外部仓库或部署密钥）。
+    permissions:
+      contents: write
+    steps:
+      - name: Grab Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-result
+          path: ./downloaded_artifacts
+      - name: Publish portable build to this repository
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: nightly-${{ github.ref_name }}
+        run: |
+          set -e
+          ls -l ./downloaded_artifacts
+          # 覆盖发布：先删除同名 release 与 tag（不存在时忽略）
+          gh release delete "$TAG" --repo "${{ github.repository }}" --yes --cleanup-tag || true
+          gh release create "$TAG" ./downloaded_artifacts/DISMTools.zip \
+            --repo "${{ github.repository }}" \
+            --title "Nightly portable build (${{ github.ref_name }})" \
+            --notes "绿色便携版（免安装）。下载 DISMTools.zip 解压到任意目录，直接运行 DISMTools.exe 即可；设置会保存在程序目录的 settings.ini 中。"$'\n\n'"分支: ${{ github.ref_name }} | 提交: ${{ github.sha }}" \
+            --prerelease
+          echo "::notice::便携版已发布到 https://github.com/${{ github.repository }}/releases/tag/$TAG"

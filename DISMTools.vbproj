@@ -2257,6 +2257,11 @@ SET ISPREVIEW="No"
 SET GEN_INSTALLER="Yes"
 SET COPY_DOCS="Yes"
 SET CREATE_SAMPLE_USERDATA="Yes"
+:: Portable-only builds still need the prepared payload in "Installer\files" (the
+:: dependency check and the file copy below), but they do not need the setup
+:: compiler. Pass /p:PortableOnly=Yes to skip only the Inno Setup step.
+SET PORTABLE_ONLY="No"
+IF NOT "$(PortableOnly)"=="" SET PORTABLE_ONLY="$(PortableOnly)"
 ECHO Generating program structure...
 IF EXIST "$(SolutionDir)portable" (
 	COPY "$(SolutionDir)portable" . /Y
@@ -2413,12 +2418,16 @@ IF %25GEN_INSTALLER%25=="Yes" (
 	IF NOT EXIST "$(SolutionDir)Installer\files" (md "$(SolutionDir)Installer\files")
 	XCOPY "$(TargetDir)*.*" "$(SolutionDir)Installer\files" /cehyi
 	IF EXIST "$(SolutionDir)Installer\files\VS*.tmp" (del "$(SolutionDir)Installer\files\VS*.tmp" /f /q)
-	IF EXIST "$(SolutionDir)Installer\iscc.exe" (
-		echo Building the installer...
-		"$(SolutionDir)Installer\iscc.exe" "$(SolutionDir)Installer\dt.iss"
+	IF %25PORTABLE_ONLY%25=="Yes" (
+		echo Portable-only build requested. Skipping the setup compiler; the prepared payload stays in the "Installer\files" directory.
 	) ELSE (
-		echo Warning: the installer compiler could not be found. Deleting temporary setup files...
-		rd "$(SolutionDir)Installer\files" /s /q
+		IF EXIST "$(SolutionDir)Installer\iscc.exe" (
+			echo Building the installer...
+			"$(SolutionDir)Installer\iscc.exe" "$(SolutionDir)Installer\dt.iss"
+		) ELSE (
+			echo Warning: the installer compiler could not be found. Deleting temporary setup files...
+			rd "$(SolutionDir)Installer\files" /s /q
+		)
 	)
 )</PostBuildEvent>
   </PropertyGroup>

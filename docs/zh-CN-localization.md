@@ -39,10 +39,10 @@ feature=功能、capability=功能包、driver=驱动程序、provisioning=预�
 
 原 `nugetpkgprep.bat` 依赖仓库内的 `pkgsrc.zip`（LFS 大文件）来填充 `packages/` 目录，
 但本地化提交中该文件被排除，导致 CI 中 `packages/` 为空、`CheckMissingDlls.ps1` 复制
-`System.Net.Http` 等 DLL 时失败。已将 CI 改为在 `create-nightly-installer.yaml` 中通过
+`System.Net.Http` 等 DLL 时失败。已将 CI 改为在 `create-nightly-portable.yaml` 中通过
 `nuget restore packages.config` 直接从 NuGet 还原依赖，构建不再依赖 LFS 压缩包，可复现且更标准。
 
-> 构建诊断：若 `Generate installer` 步骤失败，工作流会把 `CheckMissingDlls.ps1` 的异常与
+> 构建诊断：若 `Build (portable)` 步骤失败，工作流会把 `CheckMissingDlls.ps1` 的异常与
 > `msbuild` 的错误行以 `::error::` 注解输出，便于定位是依赖缺失还是 VB 编译错误。
 >
 > `BDELib.dll` 是 `Tools/BDELib` 工程的产物（被 `DISMTools.vbproj` 以 ProjectReference 引用）。
@@ -57,16 +57,54 @@ VB 编译器（Roslyn）把 **U+201C/U+201D（全角引号）也视为字符串�
 > 其他修复：`DriverManualFilePicker.vb` 的多行字符串（`& CrLf & _` 续行）曾被注入脚本截断，
 > 导致 `BC30201`；已改为完整的两行续行写法。
 
-## 构建结果
+## 构建结果：绿色便携版
 
-`Create Nightly Installer` 的 `build-runspace` 作业已在 GitHub Actions 上**编译成功**，
-证明中文 `Case 6` 注入未破坏 VB 语法结构。
+`Create Nightly Portable Build` 的 `build-runspace` 作业在 GitHub Actions 上编译，
+产出**绿色便携版** `DISMTools.zip`，证明中文 `Case 6` 注入未破坏 VB 语法结构。
 
-`upload-installer` 作业已改为**发布到本仓库**：使用仓库自带的 `GITHUB_TOKEN`
-（`permissions: contents: write`）创建/覆盖 `nightly-<分支名>` 的 GitHub Release 并附上
-`dt_setup.exe`，不再依赖外部仓库 `dt-nightly-installers` 与 `SSH_DEPLOY_KEY`/`API_TOKEN_GITHUB`。
+### 为什么是便携版而不是安装包
+
+免安装版不需要 Inno Setup 编译，产物就是一个 zip：解压到任意目录，双击
+`DISMTools.exe` 即可运行。压缩包根目录直接是 exe 与 `bin/`、`docs/`、`tools/`、
+`runtimes/`、`videos/`、`AutoUnattend/` 等目录，没有外层包裹目录。
+
+关键在于包内那个名为 `portable` 的标记文件：程序用
+
+```vb
+If File.Exists(Application.StartupPath & "\portable") Then
+```
+
+判断是否为便携模式，是则把设置写进程序目录的 `settings.ini`，而不是注册表。
+`DISMTools` 自带的更新器也用同一标记区分下载目标（便携版取 `DISMTools.zip`，
+安装版取 `dt_setup.exe`），见 `Updater/DISMTools-UCS/MainForm.vb`。
+
+### 本地也能只出便携版
+
+`PostBuildEvent` 增加了一个开关属性，只跳过 setup 编译器，依赖补齐与
+`Installer\files` 载荷照常生成：
+
+```bat
+msbuild DISMTools.vbproj /p:Configuration=Debug /p:PortableOnly=Yes
+```
+
+不传该属性时行为与上游完全一致（仍然调用 `iscc.exe` 生成安装包）。
+
+### 发布
+
+`upload-portable` 作业用仓库自带的 `GITHUB_TOKEN`（`permissions: contents: write`）
+创建/覆盖 `nightly-<分支名>` 的 GitHub Release，附件为 `DISMTools.zip`，不再依赖外部仓库
+`dt-nightly-installers` 或 `SSH_DEPLOY_KEY` / `API_TOKEN_GITHUB`。
 若仓库的 Actions 工作流权限为只读，需在 Settings → Actions → General → Workflow permissions
 中改为 "Read and write permissions"。
+
+### CI 踩过的坑
+
+| 现象 | 原因 | 处理 |
+| --- | --- | --- |
+| `packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll` 不存在 | `nugetpkgprep.bat` 依赖 `pkgsrc.zip`（Git LFS 对象，未随源码提交） | 增加 `nuget restore packages.config -PackagesDirectory packages` |
+| `BC2017: could not find library 'bin\Debug\BDELib.dll'` | `BDELib` 是 ProjectReference，需先行构建 | 先 `msbuild Tools\BDELib\BDELib.vbproj` 再拷贝 DLL |
+| `BC30205 End of statement expected` | Roslyn 把 `“ ”` 当字符串定界符 | 中译统一改用 `「 」` |
+| `BC30321: 'Case' cannot follow a 'Case Else'` | 注入器把 `Case 6` 追加在 `Case Else` 之后 | 注入器改为插在 `Case Else` 之前 |
 
 ## 覆盖面（第二轮补全）
 
