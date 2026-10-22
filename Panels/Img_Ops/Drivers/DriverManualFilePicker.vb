@@ -28,12 +28,14 @@ Public Class DriverManualFilePicker
                             Case "FRA" : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "Fichier"}))
                             Case "PTB", "PTG" : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "Ficheiro"}))
                             Case "ITA" : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "File"}))
+                            Case "CHS", "CHT" : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "文件"}))
                         End Select
                     Case 1 : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "File"}))
                     Case 2 : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "Archivo"}))
                     Case 3 : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "Fichier"}))
                     Case 4 : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "Ficheiro"}))
                     Case 5 : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "File"}))
+                    Case 6 : AddDrivers.ListView1.Items.Add(New ListViewItem(New String() {Item.Text, "文件"}))
                 End Select
             Next
         End If
@@ -83,6 +85,12 @@ Public Class DriverManualFilePicker
                         OK_Button.Text = "OK"
                         Cancel_Button.Text = "Annullare"
                         Button1.Text = "Aggiorna"
+                    Case "CHS", "CHT"
+                        Text = "在目录中选择驱动程序文件"
+                        Label1.Text = "以下是您指定目录中所有驱动程序的递归列表。请从该列表中选择要添加的驱动程序，然后单击“确定”。"
+                        OK_Button.Text = "确定"
+                        Cancel_Button.Text = "取消"
+                        Button1.Text = "刷新"
                 End Select
             Case 1
                 Text = "Choose driver files in directory"
@@ -115,7 +123,8 @@ Public Class DriverManualFilePicker
                 Cancel_Button.Text = "Annullare"
                 Button1.Text = "Aggiorna"
             Case 6
-                Label1.Text = "以下是指定目录中所有驱动程序的递归列表。从此列表中，选择要添加的驱动程序并点击“确定”。"
+                Text = "在目录中选择驱动程序文件"
+                Label1.Text = "以下是您指定目录中所有驱动程序的递归列表。请从该列表中选择要添加的驱动程序，然后单击“确定”。"
                 OK_Button.Text = "确定"
                 Cancel_Button.Text = "取消"
                 Button1.Text = "刷新"
@@ -141,12 +150,14 @@ Public Class DriverManualFilePicker
                     Case "FRA" : Label2.Text = "Scannage du répertoire en cours..."
                     Case "PTB", "PTG" : Label2.Text = "Pesquisar diretório..."
                     Case "ITA" : Label2.Text = "Scansione della cartella..."
+                    Case "CHS", "CHT" : Label2.Text = "正在扫描目录..."
                 End Select
             Case 1 : Label2.Text = "Scanning directory..."
             Case 2 : Label2.Text = "Escaneando directorio..."
             Case 3 : Label2.Text = "Scannage du répertoire en cours..."
             Case 4 : Label2.Text = "Pesquisar diretório..."
             Case 5 : Label2.Text = "Scansione della cartella..." 
+            Case 6 : Label2.Text = "正在扫描目录..."
         End Select
         For Each DrvFile In Directory.GetFiles(DriverDir, "*.inf", SearchOption.AllDirectories)
             InfFiles.Add(DrvFile)
@@ -174,6 +185,9 @@ Public Class DriverManualFilePicker
                     Case "ITA"
                         Label2.Text = "Scansione della directory completata." & CrLf & _
                                       "File driver trovati: " & ListView1.Items.Count
+                    Case "CHS", "CHT"
+                        Label2.Text = "目录扫描完成。" & CrLf & _
+                                      "找到的驱动程序文件：" & ListView1.Items.Count
                 End Select
             Case 1
                 Label2.Text = "Directory scan complete." & CrLf & _
@@ -192,6 +206,7 @@ Public Class DriverManualFilePicker
                               "File driver trovati: " & ListView1.Items.Count
             Case 6
                 Label2.Text = "目录扫描完成。" & CrLf & _
+                              "找到的驱动程序文件：" & ListView1.Items.Count
         End Select
     End Sub
 
