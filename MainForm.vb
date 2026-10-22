@@ -6475,10 +6475,6 @@ Public Class MainForm
                         Button56.Text = "Salva configurazione..."
                         Button57.Text = "Imposta percorso destinazione..."
                         Button58.Text = "Imposta spazio temporaneo..."
-                    Case Else
-                        Language = 1
-                        ChangeLangs(Language)
-                        Exit Sub
                     Case "CHS", "CHT"
                         ' Top-level menu items
                         FileToolStripMenuItem.Text = If(Options.CheckBox9.Checked, "文件(&F)".ToUpper(), "文件(&F)")
@@ -6783,6 +6779,10 @@ Public Class MainForm
                         Button56.Text = "保存配置..."
                         Button57.Text = "设置目标路径..."
                         Button58.Text = "设置临时空间..."
+                    Case Else
+                        Language = 1
+                        ChangeLangs(Language)
+                        Exit Sub
                 End Select
             Case 1
                 DynaLog.LogMessage("Language code is 1. Switching to English...")
