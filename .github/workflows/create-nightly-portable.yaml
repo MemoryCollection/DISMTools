@@ -44,7 +44,7 @@ jobs:
         Write-Output "=== Building BDELib dependency ==="
         msbuild Tools\BDELib\BDELib.vbproj /p:Configuration=Debug /p:Platform=AnyCPU 2>&1 | ForEach-Object {
           Write-Output $_
-          if ($_ -match "error|BC[0-9]{4}") { Write-Output "::error::$_" }
+          if ($_ -match ':\s*error\s+[A-Za-z]+\d+') { Write-Output "::error::$_" }
         }
         if ($LASTEXITCODE -ne 0) { throw "BDELib build failed (exit $LASTEXITCODE)" }
         if (-not (Test-Path "bin\Debug\BDELib.dll")) {
@@ -55,7 +55,7 @@ jobs:
         # PortableOnly=Yes 只跳过 Inno Setup 编译，依赖补齐与 Installer\files 载荷照常生成
         msbuild DISMTools.vbproj /p:Configuration=Debug /p:DeployOnBuild=true /p:PortableOnly=Yes /p:SolutionDir=$solutionDir /p:ProjectDir=$solutionDir /p:TargetDir=$targetDir 2>&1 | ForEach-Object {
           Write-Output $_
-          if ($_ -match "error|BC[0-9]{4}|exited with code") { Write-Output "::error::$_" }
+          if ($_ -match ':\s*error\s+[A-Za-z]+\d+') { Write-Output "::error::$_" }
         }
         if ($LASTEXITCODE -ne 0) { throw "DISMTools build failed (exit $LASTEXITCODE)" }
         if (-not (Test-Path (Join-Path $targetDir 'DISMTools.exe'))) {
@@ -81,7 +81,12 @@ jobs:
         robocopy $targetDir $stage /E /NFL /NDL /NJH /NJS /NC /NS /NP `
           /XF *.pdb *.tmp *.log *.vshost.exe *.vshost.exe.config `
           /XD temp scratch logs .vs obj | Out-Null
-        if ($LASTEXITCODE -ge 8) { throw "robocopy failed with exit code $LASTEXITCODE" }
+        # robocopy 的退出码 0~7 都代表成功（1 = 有文件被复制）；
+        # 必须立刻把它清掉，否则 GitHub 在脚本末尾执行 exit $LASTEXITCODE 会把这一步判为失败。
+        $rc = $LASTEXITCODE
+        Write-Output "robocopy exit code: $rc"
+        if ($rc -ge 8) { throw "robocopy failed with exit code $rc" }
+        $global:LASTEXITCODE = 0
 
         $exe = Join-Path $stage 'DISMTools.exe'
         if (-not (Test-Path $exe)) { throw "DISMTools.exe missing from the staged payload" }
